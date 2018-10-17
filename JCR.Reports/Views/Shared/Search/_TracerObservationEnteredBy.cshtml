@@ -1,0 +1,58 @@
+﻿@model JCR.Reports.Models.SearchList
+<div id="tracersobsenteredby">
+    <h6><b>Updated By</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("TracersObsEnteredBy")
+          .DataTextField("UserName")
+          .DataValueField("UserID")
+          .Placeholder("Select Entered By")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+                  .BindTo(Model.TracersObsEnteredBy)
+                          .AutoClose(false)
+        //  .ValuePrimitive(false)
+                           .Events(e =>
+                            {
+                                e.Select("onTracersObsEnteredBySelect");
+                            })
+          .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracersObsEnteredBy");
+       // removedeleteoption("TracersObsEnteredBy");
+    });
+    //function onTracersObsEnteredByClose(e) {
+    //    removedeleteoption("TracersObsEnteredBy");
+    //}
+    function onTracersObsEnteredBySelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.UserName === "All") {
+            $('#TracersObsEnteredBy').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+
+  
+</script>
+
+
+
+
+
+
+
+
+
+

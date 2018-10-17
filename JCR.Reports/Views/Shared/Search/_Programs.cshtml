@@ -1,0 +1,144 @@
+﻿@using JCR.Reports.Common;
+@using System.Linq;
+@model IEnumerable<JCR.Reports.Models.Program>
+@{
+    int selectedSite;
+    string selectedSiteName;
+    int programID;
+    int CertificationItemID;
+    string programName;
+    // check session
+    if (AppSession.HasValidSession)
+    {
+        selectedSite = AppSession.SelectedSiteId;
+        selectedSiteName = AppSession.SelectedSiteName;
+        programID = AppSession.SelectedProgramId;
+        programName = AppSession.SelectedProgramName;
+        CertificationItemID = AppSession.SelectedCertificationItemID;
+    }
+    else
+    {
+        throw new Exception("Invalid Session");
+    }
+}
+
+@Html.Hidden("UserProgram", programID)
+@Html.Hidden("UserCertificationItemID", CertificationItemID)
+@Html.Hidden("UserProgramName", programName)
+<ul class="nav navbar-right navDrpDwn" style="width:98%;padding:0px !important;" id="programSelect">
+    <li class="active" style="height:inherit; line-height: normal;">
+        <a class="dropdown-toggle siteDropdwnHeaderAnchor" data-toggle="dropdown" aria-expanded="false" id="programDropdwnLnk" href="#">
+            <span>@AppSession.SelectedProgramName</span>
+            <div>
+                <span class="caret caret-large"></span>
+            </div>
+        </a>
+        <ul class="dropdown-menu programDropDown" style="white-space:nowrap;" role="menu" aria-labelledby="dLabel">
+            <li>
+                <div id="divPrgDropDown" class="dropdown dropdown-accordion" data-accordion="#accordion" style="max-height: 450px; overflow-x: hidden; overflow-y: auto">
+                    <div class="panel-group" id="accordion">
+                        @if (Model.Any(x => x.ProductID == (int)WebConstants.ProductEnum.Accreditation))
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-target="#Accred" id="AccredHeader" aria-expanded="true" data-toggle="collapse" data-parent="#accordion" href="javascript:void(0);" onclick='AccordionOpenClose("AccredHeader");'>
+                                            <i class="caret caret-large caretInverse progSelectArrowSpacing" id="AccredHeaderIcon"></i>
+                                            Accreditation
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse in" id="Accred" aria-expanded="true">
+                                    <div class="panel-body">
+                                        @foreach (var item in Model.Where(prg => prg.ProductID == 1).ToList())
+                                        {
+                                            <div class="programElement text-left">
+                                                <a class="disabled-link" onclick='onProgramChange("@selectedSite","@selectedSiteName", "@item.ProgramID", "@item.ProgramName","@item.TracersAccess")'>@item.ProgramName</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.Any(x => x.ProductID == (int)WebConstants.ProductEnum.Certification))
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-target="#cert" id="CertHeader" data-toggle="collapse" data-parent="#accordion" onclick='AccordionOpenClose("CertHeader");'>
+                                            <i class="caret caret-large caretInverse progSelectArrowSpacing" id="CertHeaderIcon"></i>
+                                            Certification
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse in" id="cert">
+                                    <div class="panel-body">
+                                        @foreach (var item in Model.Where(prg => prg.ProductID == 2 && prg.AdvCertFlag == null).ToList())
+                                        {
+                                            <div class="programElement text-left">
+                                                <a class="disabled-link" onclick='onProgramChange("@selectedSite","@selectedSiteName", "@item.ProgramID", "@item.ProgramName" , "@item.TracersAccess")'>@item.ProgramName</a>
+                                            </div>
+                                        }
+                                        @if (Model.Any(x => x.ProductID == (int)WebConstants.ProductEnum.Certification && x.AdvCertFlag == "Y"))
+                                        {
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a class="advDis" data-target="#advdis" id="AdvDisHeader" data-toggle="collapse" data-parent="#accordion" onclick="AccordionOpenClose('AdvDisHeader');">
+                                                            <i class="caret caret-large caretInverse progSelectArrowSpacing" id="AdvDisHeaderIcon"></i>
+                                                            Advance Disease
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-collapse collapse" id="advdis">
+                                                    <div class="panel-body">
+                                                        @foreach (var item in Model.Where(prg => prg.ProductID == 2 && prg.AdvCertFlag == "Y").ToList())
+                                                        {
+                                                            <div class="programElement text-left">
+                                                                <a class="disabled-link" onclick='onProgramChange("@selectedSite","@selectedSiteName", "@item.ProgramID", "@item.ProgramName" , "@item.TracersAccess", "@item.AdvCertListTypeID")'>@item.ProgramName</a>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+    // Collapse accordion every time dropdown is shown
+    $('.dropdown-accordion').on('show.bs.dropdown', function (event) {
+        var accordion = $(this).find($(this).data('accordion'));
+        accordion.find('.panel-collapse.in').collapse('hide');
+    });
+
+    // Prevent dropdown to be closed when we click on an accordion link
+    $('.dropdown-accordion').on('click', 'a[data-toggle="collapse"]', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    })
+
+    function AccordionOpenClose(accordion) {
+        var bIsOpen = $($('#' + accordion).attr('data-target')).hasClass("collapse in");
+        if (bIsOpen == true) {
+            $($('#' + accordion).attr('data-target')).collapse('hide');
+            //$($('#' + accordion).attr('data-target')).removeClass("in");
+            $('#' + accordion + 'Icon').removeClass("caretInverse");
+        }
+        else {
+            $($('#' + accordion).attr('data-target')).collapse('show');
+            //$($('#' + accordion).attr('data-target')).addClass("in");
+            $('#' + accordion + 'Icon').addClass("caretInverse");
+            if (accordion == 'AdvDisHeader')
+                $('#divPrgDropDown').animate({ scrollTop: 600 }, 'fast');
+        }
+    }
+</script>

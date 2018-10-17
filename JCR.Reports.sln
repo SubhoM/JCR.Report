@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCR.Reports", "JCR.Reports\JCR.Reports.csproj", "{A4661CCD-714C-4E21-9886-F88BD918965F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCR.ReportsTests", "JCR.ReportsTests\JCR.ReportsTests.csproj", "{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportViewerForMvc", "ReportViewerForMvc\ReportViewerForMvc.csproj", "{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0978645E-391D-42EE-A64B-A0AAFD0644D4}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Deploy|Any CPU = Deploy|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4661CCD-714C-4E21-9886-F88BD918965F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4661CCD-714C-4E21-9886-F88BD918965F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4661CCD-714C-4E21-9886-F88BD918965F}.Deploy|Any CPU.ActiveCfg = Deploy|Any CPU
+		{A4661CCD-714C-4E21-9886-F88BD918965F}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
+		{A4661CCD-714C-4E21-9886-F88BD918965F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4661CCD-714C-4E21-9886-F88BD918965F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}.Deploy|Any CPU.ActiveCfg = Deploy|Any CPU
+		{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
+		{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C1FC97-B0C0-4F15-974E-F65E6BC90998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}.Deploy|Any CPU.ActiveCfg = Deploy|Any CPU
+		{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
+		{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F6A951-ECE3-4BDD-BE20-0F7FFD944695}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://jcrdevteam2012.jcaho.net:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ReportViewerForMvc\\ReportViewerForMvc.csproj
+		SccProjectName1 = ReportViewerForMvc
+		SccLocalPath1 = ReportViewerForMvc
+		SccProjectUniqueName2 = JCR.Reports\\JCR.Reports.csproj
+		SccProjectName2 = JCR.Reports
+		SccLocalPath2 = JCR.Reports
+		SccProjectUniqueName3 = JCR.ReportsTests\\JCR.ReportsTests.csproj
+		SccProjectName3 = JCR.ReportsTests
+		SccLocalPath3 = JCR.ReportsTests
+	EndGlobalSection
+EndGlobal

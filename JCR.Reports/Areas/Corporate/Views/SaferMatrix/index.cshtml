@@ -1,0 +1,149 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.CorporateSearchList
+
+@{
+    ViewBag.Title = "Safer Matrix Report";
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch content-fluid">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+
+        <div class="row PaddingTop10" id="grpByRow">
+            <div class="col-xs-offset-4 col-xs-4 text-left" style="padding:0;">
+                <b>Group By at Program level</b>
+                <input type="radio" name="grpBy" value="Site" checked>By Site
+                <input type="radio" name="grpBy" value="Chapter" >By Chapter
+            </div>
+        </div>
+
+        <div class="row PaddingTop10">
+
+            @*Column 1*@
+
+            <div class="col-xs-3">
+                <div id="divMultiSiteProgram"></div>
+                <div id="divMultiSiteChapter"></div>
+                <div id="divMultiSiteStandard"></div>
+                <div id="divMultiSiteEP"></div>
+                <div class="text-left">
+                    <h6 id="typeOfObservationAlert"><i>*Select Chapter to display Standard.<br />*Select Standard to display EP.</i></h6>
+                </div>
+            </div>
+            <br /><br />
+
+
+            @*Column 2 *@
+            <div class="col-xs-4" style="margin-top:-30px;">
+                @Html.Partial("Search/_ScoringPeriod")<br /><br />
+            </div>
+
+            @*Column 3*@
+            <div class="col-xs-2 checkbox text-left" style="padding-left:60px;padding-top:0;padding-right:0;margin-top:0">
+                <b>Score Type</b><br /><br />
+                <label id="IScore"><input id="IScoreCheckbox" name="scoretype" style="float: left;" type="radio" value="1">Individual Score</label><br />
+                <label id="PScore"><input id="PScoreCheckbox" name="scoretype" style="float: left;" type="radio" value="2">Preliminary Score</label><br />
+                <label id="FScore"><input id="FScoreCheckbox" name="scoretype" style="float: left;" type="radio" value="3" checked>Final Score</label><br />
+                <label id="CScore"><input id="CScoreCheckbox" name="scoretype" style="float: left;" type="radio" value="4" >Mock Survey Score</label><br /><br />
+
+            </div>
+
+            <div class="col-xs-3  checkbox text-left">
+                <b>Question Criteria</b><br /><br />
+                <label id="FSAGraph"><input id="FSAGraphCheckbox" style="float: left;" type="checkbox" value="">Only Include FSA EPs </label>
+                
+            </div>
+
+        </div>
+
+    </div>
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div id="loadChartView" class="col-md-12">
+
+        </div>
+        <div id="LoadDetailView" class="col-md-12">
+
+        </div>
+    </div>
+
+
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("SiteSelector_SelectedHCOIDs")
+    @Html.Hidden("hdnReportActionID", 53)
+}
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Corporate/Views/SaferMatrix/SaferMatrix.js")
+
+
+<script type="text/javascript">
+    $(window).load(function () {
+        if ($('#hdnSitesCount').val() == 1) {
+            LoadReportParameters($('#hdnSingleSiteID').val());
+            IsSingleSite(true);
+        }
+        else {
+            IsSingleSite(false);
+        }
+    });
+</script>
+
+<style type="text/css">
+    /*.ui-progressbar.beginning .ui-progressbar-value {
+        background: #5bb346;
+    }*/
+    .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .k-state-selected .k-progressbar .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .progress {
+        margin-bottom: 0px;
+    }
+
+    .k-progress-status-wrap, .k-rtl .k-progressbar-reverse.k-progressbar-horizontal .k-progress-status-wrap {
+        text-align: left;
+        color: white;
+    }
+
+    .myHoverClass tbody tr:hover {
+        background: #c4ddfc;
+    }
+
+    .modal-header .close {
+        margin-top: 2px;
+    }
+
+    .modal-header {
+        text-align: center;
+    }
+
+    #divdaterange {
+        margin-top: -36px;
+    }
+
+    #divrangeobs {
+        margin-top: -15px;
+    }
+</style>
+

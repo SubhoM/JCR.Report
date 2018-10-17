@@ -1,0 +1,70 @@
+﻿@model JCR.Reports.ViewModels.SearchViewModel
+    <div id="divSearchbyReports">
+       <h6><b>Report Name</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("SearchbyReports")
+                  .DataTextField("ERReportName")
+                  .DataValueField("ERReportID")
+          .Placeholder("Select Reports")
+          .Filter(FilterType.Contains)
+                  .BindTo(Model.ERReportList)
+          .AutoClose(false)
+                   .Events(e =>
+                    {
+                        e.Select("onRptSelect");
+                    })
+                  .Value("-1")   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("SearchbyReports");
+       // removedeleteoption("SearchbyReports");
+    });
+    //function onRptClose(e) {
+    //    removedeleteoption("SearchbyReports");
+    //}
+   
+   
+    function onRptSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+       
+        if (dataItem.ERReportName === "All") {
+            $('#SearchbyReports').data("kendoMultiSelect").value([]);
+        
+        } else if (jQuery.inArray("-1", values)) {
+           values = $.grep(values, function (value) {
+               return value !== -1;
+            });
+                  
+            if (values == "") { this.value(values); }
+         }
+       
+      
+    }
+   
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

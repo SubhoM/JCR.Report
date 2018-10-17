@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JCR.Reports.DataModel.IdentifiedUser>
+<div id="multisiteIdentifiedBy">
+    <h6><b>Identified By</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+            .Name("IdentifiedBy")
+            .DataTextField("FullName")
+            .DataValueField("UserID")
+            .Placeholder("Select Assigned To")
+            .Filter(FilterType.Contains)
+            .HighlightFirst(true)
+            .BindTo(Model)
+            .AutoClose(false)
+            .Events(e =>
+            {
+                e.Change("onIdentifiedByChange").Select("onIdentifiedBySelect");
+            })
+            .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("IdentifiedBy");
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

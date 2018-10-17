@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBMEdition01_ModelStoreContainer" CdmEntityContainer="DBMEdition01_Entities">
+    <FunctionImportMapping FunctionImportName="GetSelectSitesByUser" FunctionName="DBMEdition01_Model.Store.usmSelectSitesByUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.Site">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="AMPAccess" ColumnName="AMPAccess" />
+          <ScalarProperty Name="SiteFullName" ColumnName="SiteFullName" />
+          <ScalarProperty Name="IsCorporateAccess" ColumnName="IsCorporateAccess" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetHcoIDs" FunctionName="DBMEdition01_Model.Store.usmReportGetHcoIDs" />
+    <FunctionImportMapping FunctionImportName="GetCorpUsersBySite" FunctionName="DBMEdition01_Model.Store.usmGetCorpUsersBySite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportCumulative" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportCumulative">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportCumulative_Result">
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="CorporateFinalScoreID" ColumnName="CorporateFinalScoreID" />
+          <ScalarProperty Name="CorporateFinalScoredByUserID" ColumnName="CorporateFinalScoredByUserID" />
+          <ScalarProperty Name="StandardSortOrder" ColumnName="StandardSortOrder" />
+          <ScalarProperty Name="FSA" ColumnName="FSA" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+          <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="ScoreType" ColumnName="ScoreType" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSaferMatrixData" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportCumulative">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixData">
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="CorporateFinalScoreID" ColumnName="CorporateFinalScoreID" />
+          <ScalarProperty Name="CorporateFinalScoredByUserID" ColumnName="CorporateFinalScoredByUserID" />
+          <ScalarProperty Name="StandardSortOrder" ColumnName="StandardSortOrder" />
+          <ScalarProperty Name="FSA" ColumnName="FSA" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+          <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="ScoreType" ColumnName="ScoreType" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportSummary" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportSummary_Result">
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="VerticalScoreID" ColumnName="VerticalScoreID" />
+          <ScalarProperty Name="HorizontalScoreID" ColumnName="HorizontalScoreID" />
+          <ScalarProperty Name="EPs" ColumnName="EPs" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSaferMatrixSummary" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixSummary">
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="VerticalScoreID" ColumnName="VerticalScoreID" />
+          <ScalarProperty Name="HorizontalScoreID" ColumnName="HorizontalScoreID" />
+          <ScalarProperty Name="EPs" ColumnName="EPs" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportSummaryBySite" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryBySite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportSummaryBySite_Result">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="EPs" ColumnName="EPs" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSaferMatrixSummaryBySite" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryBySite">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixSummaryBySite">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="EPs" ColumnName="EPs" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportSummaryByChapter" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryByChapter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportSummaryByChapter_Result">
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="EPs" ColumnName="EPs" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSaferMatrixSummaryByChapter" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryByChapter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixSummaryByChapter">
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="EPs" ColumnName="EPs" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_UserWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_UserWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_UserData">
+          <ScalarProperty Name="AxisKey" ColumnName="AxisKey" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="EPCount" ColumnName="EPCount" />
+          <ScalarProperty Name="ScoreCompleteCount" ColumnName="ScoreCompleteCount" />
+          <ScalarProperty Name="ScoreCompletePercentage" ColumnName="ScoreCompletePercentage" />
+          <ScalarProperty Name="ScoreNotCompleteCount" ColumnName="ScoreNotCompleteCount" />
+          <ScalarProperty Name="ScoreNotCompletePercentage" ColumnName="ScoreNotCompletePercentage" />
+          <ScalarProperty Name="ScorePastDueDateCount" ColumnName="ScorePastDueDateCount" />
+          <ScalarProperty Name="ScorePastDueDatePercentage" ColumnName="ScorePastDueDatePercentage" />
+          <ScalarProperty Name="SiteFullName" ColumnName="SiteFullName" />
+          <ScalarProperty Name="ReportHCOID" ColumnName="ReportHCOID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSafterMap" FunctionName="DBMEdition01_Model.Store.usmMSGetSaferMap">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.SafterMap">
+          <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+          <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+          <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserSitesByProduct" FunctionName="DBMEdition01_Model.Store.usmGetUserSitesByProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.UserSiteByProduct">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="HcoID" ColumnName="HcoID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRFIFindingbyProgram" FunctionName="DBMEdition01_Model.Store.usmReportGetRFIbyProgram">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIProgramFinding">
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+          <ScalarProperty Name="PSCount" ColumnName="PSCount" />
+          <ScalarProperty Name="FSCount" ColumnName="FSCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRFIFindingbyChapter" FunctionName="DBMEdition01_Model.Store.usmReportGetChapterRFICumulative">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIChapterFinding">
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+          <ScalarProperty Name="PSCount" ColumnName="PSCount" />
+          <ScalarProperty Name="FSCount" ColumnName="FSCount" />
+          <ScalarProperty Name="TotalPercen" ColumnName="TotalPercen" />
+          <ScalarProperty Name="CumulativePerc" ColumnName="CumulativePerc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRFIFindingByStandard" FunctionName="DBMEdition01_Model.Store.usmReportGetStandardRFICumulative">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIStandardFinding">
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+          <ScalarProperty Name="PSCount" ColumnName="PSCount" />
+          <ScalarProperty Name="FSCount" ColumnName="FSCount" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="CumulativePerc" ColumnName="CumulativePerc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserInfo" FunctionName="DBMEdition01_Model.Store.usmERSelectUserbyUserID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="UserLogonID" ColumnName="UserLogonID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserGUID" ColumnName="UserGUID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCorpFindingByChapter" FunctionName="DBMEdition01_Model.Store.usmCorpChapterReportCumulative">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpChapterFinding">
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="FindingCount" ColumnName="FindingCount" />
+          <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="CumulativePercentage" ColumnName="CumulativePercentage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCorpFindingByEP" FunctionName="DBMEdition01_Model.Store.usmCorpEPReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpEPFinding">
+          <ScalarProperty Name="HCO_ID" ColumnName="HCO_ID" />
+          <ScalarProperty Name="Region_Name" ColumnName="Region_Name" />
+          <ScalarProperty Name="Site_State" ColumnName="Site_State" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="Hospital_Name" ColumnName="Hospital_Name" />
+          <ScalarProperty Name="ProgramSettingName" ColumnName="ProgramSettingName" />
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="FSARequired" ColumnName="FSARequired" />
+          <ScalarProperty Name="TJCScore" ColumnName="TJCScore" />
+          <ScalarProperty Name="TJCScoreLikelihood" ColumnName="TJCScoreLikelihood" />
+          <ScalarProperty Name="TJCScoreScope" ColumnName="TJCScoreScope" />
+          <ScalarProperty Name="TJCSurveyDate" ColumnName="TJCSurveyDate" />
+          <ScalarProperty Name="TJCFinding" ColumnName="TJCFinding" />
+          <ScalarProperty Name="CorpScore" ColumnName="CorpScore" />
+          <ScalarProperty Name="CorpScoreLikelihood" ColumnName="CorpScoreLikelihood" />
+          <ScalarProperty Name="CorpScoreScope" ColumnName="CorpScoreScope" />
+          <ScalarProperty Name="Mock_Survey_Finding" ColumnName="Mock_Survey_Finding" />
+          <ScalarProperty Name="Mock_Survey_Recommendation" ColumnName="Mock_Survey_Recommendation" />
+          <ScalarProperty Name="MockSurveyDate" ColumnName="MockSurveyDate" />
+          <ScalarProperty Name="MSTeamLead" ColumnName="MSTeamLead" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="ComplaintByDate" ColumnName="ComplaintByDate" />
+          <ScalarProperty Name="MSStatus" ColumnName="MSStatus" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCorpFindingByProgram" FunctionName="DBMEdition01_Model.Store.usmCorpProgramReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpProgramFinding">
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="FindingCount" ColumnName="FindingCount" />
+          <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCorpFindingByStandard" FunctionName="DBMEdition01_Model.Store.usmCorpStandardReportCumulative">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpStandardFinding">
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="FindingCount" ColumnName="FindingCount" />
+          <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="CumulativePercentage" ColumnName="CumulativePercentage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUserAssignedToSiteIDAndAssignment" FunctionName="DBMEdition01_Model.Store.usmReportGetUserAssignedToSiteIDAndAssignment">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignedToUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_StandardWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_StandardWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_StandardData">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="EPCount" ColumnName="EPCount" />
+          <ScalarProperty Name="ScoreCompleteCount" ColumnName="ScoreCompleteCount" />
+          <ScalarProperty Name="ScoreCompletePercentage" ColumnName="ScoreCompletePercentage" />
+          <ScalarProperty Name="ScoreNotCompleteCount" ColumnName="ScoreNotCompleteCount" />
+          <ScalarProperty Name="ScoreNotCompletePercentage" ColumnName="ScoreNotCompletePercentage" />
+          <ScalarProperty Name="ScorePastDueDateCount" ColumnName="ScorePastDueDateCount" />
+          <ScalarProperty Name="ScorePastDueDatePercentage" ColumnName="ScorePastDueDatePercentage" />
+          <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_EPWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_EPWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_EPData">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="Chapter" ColumnName="Chapter" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="ScoreType" ColumnName="ScoreType" />
+          <ScalarProperty Name="ScoreValue" ColumnName="ScoreValue" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+          <ScalarProperty Name="EPText" ColumnName="EPText" />
+          <ScalarProperty Name="ScoredBy" ColumnName="ScoredBy" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_ChapterWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_ChapterWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_ChapterData">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="EPCount" ColumnName="EPCount" />
+          <ScalarProperty Name="ScoreCompleteCount" ColumnName="ScoreCompleteCount" />
+          <ScalarProperty Name="ScoreCompletePercentage" ColumnName="ScoreCompletePercentage" />
+          <ScalarProperty Name="ScoreNotCompleteCount" ColumnName="ScoreNotCompleteCount" />
+          <ScalarProperty Name="ScoreNotCompletePercentage" ColumnName="ScoreNotCompletePercentage" />
+          <ScalarProperty Name="ScorePastDueDateCount" ColumnName="ScorePastDueDateCount" />
+          <ScalarProperty Name="ScorePastDueDatePercentage" ColumnName="ScorePastDueDatePercentage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetChapter" FunctionName="DBMEdition01_Model.Store.usmReportGetChaptersBySiteAndProgram">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.Chapter">
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProgrambySites" FunctionName="DBMEdition01_Model.Store.usmReportGetProgrambySites">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.Programs">
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="AdvCertFlag" ColumnName="AdvCertFlag" />
+          <ScalarProperty Name="AdvCertListTypeID" ColumnName="AdvCertListTypeID" />
+          <ScalarProperty Name="CertProgramName" ColumnName="CertProgramName" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="BaseProgramID" ColumnName="BaseProgramID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStandardsByProgramsChapters" FunctionName="DBMEdition01_Model.Store.usmReportGetStandardsByProgramChapters">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.Standard">
+          <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetEPExcelDetails" FunctionName="DBMEdition01_Model.Store.usmReportEPScoringExcel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.EpExcelDetails">
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="TJCProgramID" ColumnName="TJCProgramID" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="EPText" ColumnName="EPText" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="FSA" ColumnName="FSA" />
+          <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+          <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+          <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+          <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+          <ScalarProperty Name="CopText" ColumnName="CopText" />
+          <ScalarProperty Name="ChapterName" ColumnName="ChapterName" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRFIFindingByEP" FunctionName="DBMEdition01_Model.Store.usmReportGetEPRFI">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIEPFinding">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="ProgramServiceID" ColumnName="ProgramServiceID" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="HCO_ID" ColumnName="HCO_ID" />
+          <ScalarProperty Name="Program" ColumnName="Program" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+          <ScalarProperty Name="Chapter" ColumnName="Chapter" />
+          <ScalarProperty Name="Standard" ColumnName="Standard" />
+          <ScalarProperty Name="EP" ColumnName="EP" />
+          <ScalarProperty Name="OrgFindings" ColumnName="OrgFindings" />
+          <ScalarProperty Name="PlanOfAction" ColumnName="PlanOfAction" />
+          <ScalarProperty Name="CompliantByDate" ColumnName="CompliantByDate" />
+          <ScalarProperty Name="SustainmentPlan" ColumnName="SustainmentPlan" />
+          <ScalarProperty Name="InternalNotes" ColumnName="InternalNotes" />
+          <ScalarProperty Name="TJCScore" ColumnName="TJCScore" />
+          <ScalarProperty Name="TJCSAFERScoreLikelihood" ColumnName="TJCSAFERScoreLikelihood" />
+          <ScalarProperty Name="TJCSAFERScoreScope" ColumnName="TJCSAFERScoreScope" />
+          <ScalarProperty Name="TJCScoreDate" ColumnName="TJCScoreDate" />
+          <ScalarProperty Name="TJCFinding" ColumnName="TJCFinding" />
+          <ScalarProperty Name="PreliminaryScore" ColumnName="PreliminaryScore" />
+          <ScalarProperty Name="PreliminarySAFERScoreLikelihood" ColumnName="PreliminarySAFERScoreLikelihood" />
+          <ScalarProperty Name="PreliminarySAFERScoreScope" ColumnName="PreliminarySAFERScoreScope" />
+          <ScalarProperty Name="PreliminaryScoreDate" ColumnName="PreliminaryScoreDate" />
+          <ScalarProperty Name="FinalScore" ColumnName="FinalScore" />
+          <ScalarProperty Name="FinalSAFERScoreLikelihood" ColumnName="FinalSAFERScoreLikelihood" />
+          <ScalarProperty Name="FinalSAFERScoreScope" ColumnName="FinalSAFERScoreScope" />
+          <ScalarProperty Name="FinalScoreDate" ColumnName="FinalScoreDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetLicenseDetailsForCMS" FunctionName="DBMEdition01_Model.Store.usmGetLicenseDetailsForCMS" />
+    <FunctionImportMapping FunctionImportName="GetCoPsByProgramID" FunctionName="DBMEdition01_Model.Store.usmReportGetCoPsByProgramID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CoP">
+          <ScalarProperty Name="CopID" ColumnName="CopID" />
+          <ScalarProperty Name="CopName" ColumnName="CopName" />
+          <ScalarProperty Name="CopSortOrder" ColumnName="CopSortOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTagsByProgramIDAndCoPID" FunctionName="DBMEdition01_Model.Store.usmReportGetTagsByProgramIDAndCoPID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.Tag">
+          <ScalarProperty Name="TagID" ColumnName="TagID" />
+          <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+          <ScalarProperty Name="TagSortOrder" ColumnName="TagSortOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCMSProgramsBySiteID" FunctionName="DBMEdition01_Model.Store.usmReportGetCMSProgramsBySiteID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CMSProgram">
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCMSSitesByProgramID" FunctionName="DBMEdition01_Model.Store.usmReportGetCMSSitesByProgramID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CMSSite">
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetIdentifiedUsers" FunctionName="DBMEdition01_Model.Store.usmReportGetIdentifiedUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.IdentifiedUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCMSComplianceExcel" FunctionName="DBMEdition01_Model.Store.usmReportCMSComplianceExcel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.CMSComplianceExcel">
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="CmsStandardID" ColumnName="CmsStandardID" />
+          <ScalarProperty Name="TagID" ColumnName="TagID" />
+          <ScalarProperty Name="CopID" ColumnName="CopID" />
+          <ScalarProperty Name="ElementID" ColumnName="ElementID" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="CopStandardName" ColumnName="CopStandardName" />
+          <ScalarProperty Name="ConcatenatedText" ColumnName="ConcatenatedText" />
+          <ScalarProperty Name="ComplianceValue" ColumnName="ComplianceValue" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="Manner" ColumnName="Manner" />
+          <ScalarProperty Name="DateIdentified" ColumnName="DateIdentified" />
+          <ScalarProperty Name="IdentifiedBy" ColumnName="IdentifiedBy" />
+          <ScalarProperty Name="AutoCitationText" ColumnName="AutoCitationText" />
+          <ScalarProperty Name="OrgCMSFindings" ColumnName="OrgCMSFindings" />
+          <ScalarProperty Name="POC" ColumnName="POC" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="CSF" ColumnName="CSF" />
+          <ScalarProperty Name="LinkedDocumentList" ColumnName="LinkedDocumentList" />
+          <ScalarProperty Name="TagSortOrder" ColumnName="TagSortOrder" />
+          <ScalarProperty Name="CopSortOrder" ColumnName="CopSortOrder" />
+          <ScalarProperty Name="ElementSortOrder" ColumnName="ElementSortOrder" />
+          <ScalarProperty Name="TJCStandard" ColumnName="TJCStandard" />
+          <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+          <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="AutoCitationTagText" ColumnName="AutoCitationTagText" />
+          <ScalarProperty Name="CopStandard" ColumnName="CopStandard" />
+          <ScalarProperty Name="AutoCitationSortOrder" ColumnName="AutoCitationSortOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetLicenseDetailsForCMSByUser" FunctionName="DBMEdition01_Model.Store.usmGetLicenseDetailsForCMSByUser" />
+    <FunctionImportMapping FunctionImportName="GetStickyDates" FunctionName="DBMEdition01_Model.Store.usmReport_GetStickyDates">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.StickyDate">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="ScoreAnalyzerStartDate" ColumnName="ScoreAnalyzerStartDate" />
+          <ScalarProperty Name="ScoreAnalyzerEndDate" ColumnName="ScoreAnalyzerEndDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetMockSurveysBySites" FunctionName="DBMEdition01_Model.Store.usmSelectMockSurveysBySites">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.MockSurvey">
+          <ScalarProperty Name="MockSurveyID" ColumnName="MockSurveyID" />
+          <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetScoredByUsers" FunctionName="DBMEdition01_Model.Store.usmReportGetScoredByUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.ScoredByUser">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReportEPScoringReportFinalMockSurveySummary" FunctionName="DBMEdition01_Model.Store.usmReportEPScoringReportFinalMockSurveySummary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.EPScoringReportFinalMockSurveySummary">
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReportEPScoringReportFinalMockSurveyDetail" FunctionName="DBMEdition01_Model.Store.usmReportEPScoringReportFinalMockSurveyDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.EPScoringReportFinalMockSurveyDetail">
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="EPText" ColumnName="EPText" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+          <ScalarProperty Name="FSA" ColumnName="FSA" />
+          <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+          <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+          <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="MockSurveyFindings" ColumnName="MockSurveyFindings" />
+          <ScalarProperty Name="MockSurveyRecommendations" ColumnName="MockSurveyRecommendations" />
+          <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+          <ScalarProperty Name="COPID" ColumnName="COPID" />
+          <ScalarProperty Name="DeemedService" ColumnName="DeemedService" />
+          <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+          <ScalarProperty Name="RequirementName" ColumnName="RequirementName" />
+          <ScalarProperty Name="CopText" ColumnName="CopText" />
+          <ScalarProperty Name="AssignmentText" ColumnName="AssignmentText" />
+          <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReportEPAssignmentScoringDetail" FunctionName="DBMEdition01_Model.Store.usmReportEPAssignmentScoringDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.EPAssignmentScoringDetail">
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="EPText" ColumnName="EPText" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="AssignedToFullName" ColumnName="AssignedToFullName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+          <ScalarProperty Name="FSA" ColumnName="FSA" />
+          <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+          <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+          <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+          <ScalarProperty Name="COPID" ColumnName="COPID" />
+          <ScalarProperty Name="DeemedService" ColumnName="DeemedService" />
+          <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+          <ScalarProperty Name="RequirementName" ColumnName="RequirementName" />
+          <ScalarProperty Name="CopText" ColumnName="CopText" />
+          <ScalarProperty Name="AssignmentText" ColumnName="AssignmentText" />
+          <ScalarProperty Name="ScoreTypeSortOrder" ColumnName="ScoreTypeSortOrder" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReportEPAssignmentScoringSummary" FunctionName="DBMEdition01_Model.Store.usmReportEPAssignmentScoringSummary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.EPAssignmentScoringSummary">
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="AssignedToFullName" ColumnName="AssignedToFullName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReportComprehensiveScoringDetail" FunctionName="DBMEdition01_Model.Store.usmReportComprehensiveScoringDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBMEdition01_Model.ComprehensiveScoringDetail">
+          <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+          <ScalarProperty Name="EPText" ColumnName="EPText" />
+          <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+          <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+          <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+          <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+          <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+          <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+          <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+          <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+          <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+          <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+          <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+          <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+          <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+          <ScalarProperty Name="Scope" ColumnName="Scope" />
+          <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+          <ScalarProperty Name="FSA" ColumnName="FSA" />
+          <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+          <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+          <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+          <ScalarProperty Name="Findings" ColumnName="Findings" />
+          <ScalarProperty Name="POA" ColumnName="POA" />
+          <ScalarProperty Name="MOS" ColumnName="MOS" />
+          <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+          <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+          <ScalarProperty Name="MockSurveyFindings" ColumnName="MockSurveyFindings" />
+          <ScalarProperty Name="MockSurveyRecommendations" ColumnName="MockSurveyRecommendations" />
+          <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+          <ScalarProperty Name="COPID" ColumnName="COPID" />
+          <ScalarProperty Name="DeemedService" ColumnName="DeemedService" />
+          <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+          <ScalarProperty Name="RequirementName" ColumnName="RequirementName" />
+          <ScalarProperty Name="CopText" ColumnName="CopText" />
+          <ScalarProperty Name="AssignmentText" ColumnName="AssignmentText" />
+          <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,68 @@
+﻿@model JCR.Reports.Models.SearchList
+@{
+    var OrgRanking3Nametext = Model.hasRanking3 == true ? @Model.OrgRanking3Name + ", " : "";
+    var OrgRanking2Nametext = Model.hasRanking2 == true ? @Model.OrgRanking2Name + ", " : "";
+    string inactivetext = "Include Inactive " + OrgRanking3Nametext + OrgRanking2Nametext + "Department.";
+}
+<div id="inactiveCheckbox" class="checkbox" >
+    <label id="Orgtypelabel" ><input id="Orgtypecheckbox" type="checkbox" style="float: left; margin-top:1px;" value="" onclick="onInactiveCheckChange();">@inactivetext</label>
+</div> 
+<script>
+
+    function onInactiveCheckChange() {
+        $(".loading").show();
+        var searchinputset = SetSearchCriteria();
+
+        deptselectedlist = $("#OrgDepartment").data("kendoMultiSelect").value();
+        if ($("#OrgBuilding").data("kendoMultiSelect")) { buildselectedlist = $("#OrgBuilding").data("kendoMultiSelect").value(); }
+        if ($("#OrgCampus").data("kendoMultiSelect")) { campselectedlist = $("#OrgCampus").data("kendoMultiSelect").value(); }
+        PreserveSelectedList = true;
+    
+        var searchinputset3 = searchinputset;
+        searchinputset3.OrgTypeLevel2IDs = "";
+        searchinputset3.OrgTypeLevel3IDs = "";
+        searchinputset3.OrgTypeLevel1IDs = "";
+        var searchinputset2 = searchinputset;
+        var searchinputset1 = searchinputset;
+    
+
+        orglevel3update(searchinputset3);
+
+        if ($("#OrgCampus").data("kendoMultiSelect")) { campselectedlist = $("#OrgCampus").data("kendoMultiSelect").value(); }
+        searchinputset2.OrgTypeLevel3IDs = campselectedlist.toString();
+        searchinputset2.OrgTypeLevel2IDs = "";
+        orglevel2update(searchinputset2);
+
+        if ($("#OrgBuilding").data("kendoMultiSelect")) { buildselectedlist = $("#OrgBuilding").data("kendoMultiSelect").value(); }
+        if ($("#OrgCampus").data("kendoMultiSelect")) { campselectedlist = $("#OrgCampus").data("kendoMultiSelect").value(); }
+        searchinputset1.OrgTypeLevel3IDs = campselectedlist.toString();
+        searchinputset1.OrgTypeLevel2IDs = buildselectedlist.toString();
+        orglevel1update(searchinputset1);
+
+        //$.ajax({
+        //    async: false,
+        //    url: orglevel3update(searchinputset3)
+        //}).done(function () {
+        //    if ($("#OrgCampus").data("kendoMultiSelect")) { campselectedlist = $("#OrgCampus").data("kendoMultiSelect").value(); }
+        //    searchinputset2.OrgTypeLevel3IDs = campselectedlist.toString();
+        //    searchinputset2.OrgTypeLevel2IDs = "";
+        //    $.ajax({
+        //        async: false,
+        //        url: orglevel2update(searchinputset2)
+        //    }).done(function () {
+        //        if ($("#OrgBuilding").data("kendoMultiSelect")) { buildselectedlist = $("#OrgBuilding").data("kendoMultiSelect").value(); }
+        //        if ($("#OrgCampus").data("kendoMultiSelect")) { campselectedlist = $("#OrgCampus").data("kendoMultiSelect").value(); }
+        //        searchinputset3.OrgTypeLevel3IDs = campselectedlist.toString();
+        //        searchinputset3.OrgTypeLevel2IDs = buildselectedlist.toString();
+                
+        //        $.ajax({
+        //            async: false,
+        //            url: orglevel1update(searchinputset1)
+        //        }).done(function () { PreserveSelectedList = false; })
+        //    })
+        //});
+        
+    }
+</script>
+
+

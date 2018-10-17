@@ -1,0 +1,287 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.CorporateSearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch content-fluid">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <br />
+                <b>Report Level:</b>
+                <input type="radio" checked="checked" value="Summary" id="SummaryReport" name="ReportLevelChange">Summary
+                <input type="radio" value="Detail" id="DetailReport" name="ReportLevelChange">Detail
+                <input type="radio" value="ExcelView" id="ExcelViewReport" name="ReportLevelChange">Excel View
+                &nbsp;&nbsp;<label id="IncludeCMS" style="font-weight:normal;"><input id="IncludeCMSCheckbox" name="IncludeCMSCheckbox" style="float: left; margin: 0px;" type="checkbox" value="FilterBy">Include CMS Crosswalk</label>
+            </div>
+        </div>
+        <div class="row" style="height:20px"></div>
+        <div class="row">
+            <div class="col-xs-3">
+                <div id="divMultiSiteProgram"></div>
+                <div id="divMultiSiteChapter"></div>
+                <div id="divMultiSiteStandard"></div>
+                <div class="text-left">
+                    <h6 id="typeOfObservationAlert"><i>*Select Chapter to display Standard.</i></h6>
+                </div>
+            </div>
+            <div class="col-xs-4 checkbox text-left" id="divEPScores">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="row">
+                            <b>Score Type</b>
+                        </div>
+                        <div class="row">
+                            <label id="FScore"><input id="FScoreCheckbox" name="FScoreCheckbox" style="float: left;" type="checkbox" value="3" checked="checked">Final Score</label>
+                        </div>
+                        <div class="row">
+                            <label id="IScore"><input id="IScoreCheckbox" name="IScoreCheckbox" style="float: left;" type="checkbox" value="1">Individual Score</label>
+                        </div>
+                        <div class="row">
+                            <label id="PScore"><input id="PScoreCheckbox" name="PScoreCheckbox" style="float: left;" type="checkbox" value="2">Preliminary Score</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <b>Scored By</b>
+                            <div id="divMultiSiteEpScoredBy"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="divScoringPeriod">@Html.Partial("Search/_ScoringPeriod")</div>
+            </div>
+            <div class="col-xs-2 checkbox text-left" id="divEPScoreValues">
+                <div class="row">
+                    <b>Score Value</b><input type="radio" value="ScoreValue" id="ScoreValue" style="float: left;" name="rdScoreValue" checked="checked">
+                    <fieldset id="fsScoreVlues" class="fieldset">
+                        <label style="font-weight:normal;"><input id="SatisfactoryCheckbox" name="nmSatisfactoryCheckbox" type="checkbox" value="2" checked="checked">Satisfactory</label><br />
+                        <label style="font-weight:normal;"><input id="InsufficientCheckbox" name="nmInsufficientCheckbox" type="checkbox" value="0" checked="checked">Insufficient</label><br />
+                        <label style="font-weight:normal;"><input id="NACheckbox" name="nmNACheckbox" type="checkbox" value="6" checked="checked">Not Applicable</label><br />
+                        <label id="lblNotScored"><input id="NotScored" name="nmNotScored" type="checkbox" value="99">Include EPs Not Scored</label>
+                    </fieldset>
+                </div>
+                <div class="row" style="padding-top: 89px;">
+                    <input type="radio" value="NotScoredInPeriod" id="NotScoredInPeriod" style="float: left;" name="rdScoreValue"><label id="lblEPsNotScoredInPeriod">Show all EPs Not Scored in Time Period</label>
+                    <div style="float: left; padding: 5px 0 0 25px;"><span class="warningText">* This can be used only when a date range is defined.</span></div>
+                </div>
+            </div>
+            <div class="col-xs-3 checkbox text-left" id="divEPScoringFilters">
+                <div class="row">
+                    <b>Filter By</b>
+                </div>
+                <div class="row">
+                    <label id="FsaEps" style="font-weight:normal;"><input id="FsaEpsCheckbox" style="float: left;" type="checkbox" value="FilterBy">Only Include FSA EPs</label><br />
+                </div>
+                <div class="row">
+                    <label id="DocRequired" style="font-weight:normal;"><input id="DocRequiredCheckbox" style="float: left;" type="checkbox" value="FilterBy">Documentation Required</label><br />
+                </div>
+                <div class="row">
+                    <label id="ChangedEps" style="font-weight:normal;"><input id="ChangedEpsCheckbox" style="float: left;" type="checkbox" value="FilterBy">New/Changed EPs</label><br /><br /><br />
+                </div>
+                <div class="row" style="height: 17px;margin-top: -8px;">
+                    <b>Documentation</b>
+                </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td class="DocumentationDropDownStyle">
+                                <div id="divPlanOfAction"></div>
+                            </td>
+                            <td>
+                                Plan of Action
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td class="DocumentationDropDownStyle">
+                                <div id="divOrgFindings"></div>
+                            </td>
+                            <td>
+                                Org Findings
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td class="DocumentationDropDownStyle">
+                                <div id="divOrgNotes"></div>
+                            </td>
+                            <td>
+                                Internal Notes
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td class="DocumentationDropDownStyle">
+                                <div id="divLinkedDocs"></div>
+                            </td>
+                            <td>
+                                Linked Documents
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="panel panel-default" id="divL1tag" style="border-color: #428bca !important; width:100%; display: none;">
+        <div class="row" id="divExportToExcel">
+            <div class="col-xs-12">
+                <table style="width:100%; margin: 5px;">
+                    <tr>
+                        <td style="width:25%;" align="left">
+                            @(Html.Kendo().Button()
+                                    .Name("exportoexcel")
+                                    .HtmlAttributes(new { type = "button", @class = "k-button" })
+                                            .Content("<span class='k-icon k-i-excel'></span><span>&nbsp;</span><span class='glyphfontsize'>Export to Excel</span>")
+                            )
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="loadrdlc" class="col-md-12" style="padding-left: 0;"></div>
+                <div id="loadExcelGrid" style="display: none; cursor: pointer;" class="myHoverClass"></div>
+            </div>
+        </div>
+    </div>
+    <div id="divDetail" style="display: none; cursor: default;"></div>
+
+    <script type="text/x-kendo-template" id="DocumentTemplate">
+        <div id="details-container" style="width: 98%;">
+            <dl>
+                <dt class="row text-center"><b>#if (HCOID == null) {# SiteID:#= SiteID ##} else {# HCOID:#= HCOID # #}#/#=ProgramCode#: #= StandardLabel #/EP:#= EPLabel #</b></dt>
+                <dt><br /><u><b>Organizational Findings</b></u>#if (Findings == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=Findings#</span> #}# </dt>
+                <dt><br /><u><b>Plan of Action</b></u>#if (POA == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=POA#</span> #}# </dt>
+                <dt><br /><u><b>Sustainment Plan</b></u>#if (MOS == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=MOS#</span> #}# </dt>
+                <dt><br /><u><b>Internal Notes</b></u>#if (OrgNotes == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=OrgNotes#</span> #}# </dt>
+                <dt><br /><u><b>Plan of Action Compliant Date</b></u>#if (CompliantDate == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=CompliantDate#</span> #}# </dt>
+                <dt><br /><u><b>Linked Documents</b></u>#if (DocumentList == null) {# #=''# #} else {#<br /><span style="font-weight: normal; white-space: pre-wrap;">#= DocumentList #</span> #}# </dt>
+
+                <dt class="row text-center"><button type="button" id="btnPrint" class="btn btn-primary" onclick="javascript: OnPrintDocumentation();"> Print Content </button></dt>
+            </dl>
+        </div>
+    </script>
+
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("SiteSelector_SelectedHCOIDs")
+    @Html.Hidden("hdnReportActionID", 49)
+}
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Corporate/Views/EPScoring/EPScoring.js")
+@Url.Script("~/Areas/Corporate/Scripts/EPScoringData.js")
+
+<style type="text/css">
+    /*.ui-progressbar.beginning .ui-progressbar-value {
+        background: #5bb346;
+    }*/
+    .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .k-state-selected .k-progressbar .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .progress {
+        margin-bottom: 0px;
+    }
+
+    .k-progress-status-wrap, .k-rtl .k-progressbar-reverse.k-progressbar-horizontal .k-progress-status-wrap {
+        text-align: left;
+        color: white;
+    }
+
+    .myHoverClass tbody tr:hover {
+        background: #c4ddfc;
+    }
+
+    .modal-header .close {
+        margin-top: 2px;
+    }
+
+    .modal-header {
+        text-align: center;
+    }
+
+    #SPDateLabel {
+        margin-left: -15px;
+    }
+
+    .DocumentationDropDownStyle {
+        width: 150px;
+        padding: 2px 12px 2px 2px;
+    }
+
+    /*#divMultiSiteProgram .k-multiselect-wrap .k-button .k-select {
+        display: none;
+    }*/
+
+    #divPlanOfAction_taglist .k-select,
+    #divOrgFindings_taglist .k-select,
+    #divOrgNotes_taglist .k-select,
+    #divLinkedDocs_taglist .k-select {
+        display: none;
+    }
+</style>
+
+<style type="text/css">
+    @@media print {
+        body > * {
+            display: none !important;
+        }
+
+        body > .k-window {
+            display: block !important;
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: auto !important;
+            height: auto !important;
+            border-width: 0;
+            box-shadow: none !important;
+        }
+
+        .k-window .k-window-titlebar, #btnPrint {
+            display: none;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    $(window).load(function () {
+        if ($('#hdnSitesCount').val() == 1)
+        { LoadReportParameters(); }
+
+    });
+</script>

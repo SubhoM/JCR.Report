@@ -1,0 +1,34 @@
+﻿<div id="includeMinTracerComCheckbox" class="checkbox" style="margin-left:20px;margin-top:0px">
+    <input id="minimaltracerCompValuebox" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="mintracerCompcheckboxChange();">
+    Only include less than 
+    @(Html.Kendo().NumericTextBox<int>()
+        .Name("mintracervalue")
+        .Min(0)
+        .Max(100)
+        .HtmlAttributes(new { style = "width:50px;" })
+        .Value(100)
+        .Spinners(false)
+    .Decimals(0)
+    .Format("#")
+    .Enable(false)
+    ) % compliance
+</div>
+
+
+
+<script type="text/javascript">
+    function mintracerCompcheckboxChange() {
+        var numerictextbox = $("#mintracervalue").data("kendoNumericTextBox");
+
+        if ($('#minimaltracerCompValuebox').is(':checked')) {
+            numerictextbox.enable(true);
+        }
+        else {
+            numerictextbox.enable(false);
+            //numerictextbox.value(100);
+        }
+    }
+</script>
+
+
+

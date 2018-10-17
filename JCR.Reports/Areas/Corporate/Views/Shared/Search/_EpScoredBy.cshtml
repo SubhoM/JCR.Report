@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<JCR.Reports.DataModel.ScoredByUser>
+<div id="multisiteEpScoredBy">
+    <h6><b></b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("MultiSiteEpScoredBy")
+                          .DataTextField("UserName")
+                          .DataValueField("UserID")
+          .Placeholder("Select User")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .HtmlAttributes(new { style = "width:210px" })
+          .BindTo(Model)
+        .AutoClose(false)
+                   .Events(e =>
+                   {
+                       e.Change("onMSScoredByChange").Select("onMSScoredBySelect");
+                   })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("MultiSiteEpScoredBy");
+
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

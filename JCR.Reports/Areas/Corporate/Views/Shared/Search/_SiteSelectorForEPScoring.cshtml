@@ -1,0 +1,40 @@
+﻿
+@model List<int>
+@using JCR.Reports.Common;
+
+@{
+                // _SiteSelectorSite: partial view to display checkbox and site name
+                //
+                // Used as the format for Checkbox and Site Name and Address display
+                //
+                // A list of site ids to display are used.  Site Id's must be accessible to the
+                // logged on user.
+                //
+
+                string margin = ViewBag.SiteMargin;
+
+                foreach (var siteID in Model)
+                {
+                    var site = AppSession.Sites.Where(s => s.SiteID == siteID && s.IsAMPAccess == 1).FirstOrDefault();
+                    var defaultSiteID = AppSession.SelectedSiteId;
+                    if (site != null)
+                    {
+            <div class="site" style="margin-left: @margin; padding: 0px; display: none; width:860px;">
+                @{
+                    var sid = "siteitem_" + site.SiteID.ToString();
+                    var sitelabel = site.SiteFullName;
+                    if (site.SiteID == defaultSiteID)
+                    {
+                        <input class="sitecheck" type="radio" checked="checked" data-value="@site.SiteID.ToString()" data-name="@site.SiteName" name="radiosite" id="@sid" value="@site.SiteID.ToString()" data-isCorporateAccess="@site.IsCorporateAccess.ToString()" />
+                    }
+                    else
+                    {
+                        <input class="sitecheck" type="radio" data-value="@site.SiteID.ToString()" data-name="@site.SiteName" name="radiosite" id="@sid" value="@site.SiteID.ToString()" data-isCorporateAccess="@site.IsCorporateAccess.ToString()" />
+                    }
+                    <label class="sitelabel" style="font-family: Verdana, Geneva, sans-serif;color:navy;" data-value="@sid">@sitelabel</label>
+        }
+            </div>
+                        }
+                    }
+}
+

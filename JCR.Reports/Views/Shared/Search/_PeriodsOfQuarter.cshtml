@@ -1,0 +1,18 @@
+﻿@{
+    List<SelectListItem> lstPeriodOfQuarter;
+    // check session
+
+    lstPeriodOfQuarter = new List<SelectListItem>();
+    for (int d = 1; d <= 92; d++)
+    {
+        lstPeriodOfQuarter.Add(new SelectListItem { Value = d.ToString(), Text = d.ToString() });
+    }
+}
+@(Html.Kendo().DropDownList()
+    .Name("PeriodOfQuarter")
+    .DataTextField("Text")
+    .DataValueField("Value")
+    .BindTo(lstPeriodOfQuarter)
+    .HtmlAttributes(new { style = "width: 63px" })
+    .Value("1")
+)

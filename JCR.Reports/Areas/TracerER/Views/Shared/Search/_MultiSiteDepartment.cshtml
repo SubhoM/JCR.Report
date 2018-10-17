@@ -1,0 +1,46 @@
+﻿@model JCR.Reports.Models.ERSearchList
+<div id="multisitedepartment">
+    <h6><b>Department</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+            .Name("DepartmentList")
+            .DataTextField("DepartmentName")
+            .DataValueField("DepartmentID")
+            .Placeholder("Select Department")
+            .Filter(FilterType.Contains)
+            .HighlightFirst(true)
+            .BindTo(Model.DepartmentLists)
+            .ValuePrimitive(false)
+            .AutoClose(false)
+            .Events(e =>
+            {
+                e.Select("onMultiDepartmentSelect");
+            })
+            .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("DepartmentList");
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

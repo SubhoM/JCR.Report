@@ -1,0 +1,299 @@
+﻿@using JCR.Reports.Common;
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+@Url.Script("~/Scripts/Common/Email.js")
+<link href="~/Content/jquery-ui-1.10.4.custom-mod.css" rel="stylesheet" />
+@{
+    // _Layout: Shared Master view that contains session validation,
+    // custome message box, timeout warning, and loading box features
+    string userEmail;
+    string fullname;
+    string selectedSiteName;
+    // check session
+    if (AppSession.HasValidSession)
+    {
+        userEmail = AppSession.EmailAddress;
+        fullname = String.Format("{0} {1}", AppSession.FirstName, AppSession.LastName);
+        selectedSiteName = AppSession.SelectedSiteName;
+    }
+    else
+    {
+        // Response.Redirect("~/Transfer/Index");
+        throw new Exception("Invalid Session");
+    }
+
+
+}
+<div id="EmailForm" class="EmailForm">
+    @using (Html.BeginForm())
+    {
+    <div class="row " style=" margin-right:35px; margin-left:10px;">
+        <div id="email_error_msg" class="email_error_msg">
+            <div id="emailerror_msg" class=" col-xs-12 alert alert-info alert-dismissible emailerror_msg" role="alert" style="display:none;">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <div id="email_msg" class="email_msg"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-xs-offset-3 col-xs-1">
+        </div>
+        <div class="col-xs-7">
+            <span style="font-weight:normal">Use a semi-colon (;) to separate email addresses.</span>
+
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-3 col-xs-1">
+
+            <div class="pull-right">
+                @Html.Label("Email To:")
+            </div>
+        </div>
+        <div class="col-xs-7">
+            <textarea id="EmailToMaskedTextbox" spellcheck="false" class="form-control EmailToMaskedTextbox emailFields" name="Email To" rows="1" required data-email-msg='Enter valid "To" addresses separated by semi-colon (;)' placeholder="abc@example.com;xyz@etc.com"></textarea>
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-3 col-xs-1">
+            <div class="pull-right">
+                @Html.Label("Cc:")
+            </div>
+
+        </div>
+        <div class="col-xs-7">
+            <textarea id="EmailCCMaskedTextbox" spellcheck="false" class="form-control EmailCCMaskedTextbox emailFields" name="EmailCCMaskedTextbox" rows="1" data-email-msg='Enter valid "Cc" addresses separated by semi-colon (;)' placeholder="abc@example.com;xyz@etc.com"></textarea>
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-3 col-xs-1">
+            <div class="pull-right">
+                @Html.Label("Bcc: ")
+            </div>
+        </div>
+        <div class="col-xs-7">
+            <textarea id="EmailBCCMaskedTextbox" spellcheck="false" name="EmailBCCMaskedTextbox" class="form-control EmailBCCMaskedTextbox emailFields" rows="1" data-email-msg='Enter valid "Bcc" addresses separated by semi-colon (;)' placeholder="abc@example.com;xyz@etc.com"></textarea>
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-3 col-xs-1 ">
+            <div class="pull-right">
+                @Html.Label("Subject:")
+            </div>
+        </div>
+        <div class="col-xs-7 ">
+            <textarea id="EmailSubjectMaskedTextbox" spellcheck="false" class="form-control EmailSubjectMaskedTextbox emailFields" maxlength="500" name="Subject" required rows="1"></textarea>
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-3 col-xs-1">
+            <div class="pull-right">
+                @Html.Label("Comment:")
+            </div>
+        </div>
+        <div class="col-xs-7">
+            <textarea id="EmailCommentMaskedTextbox" spellcheck="false" class="form-control EmailCommentMaskedTextbox" rows="3" style="width:65%"></textarea>
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-5 col-xs-7">
+            @(Html.Kendo().Button()
+                            .Name("EmailButton")
+                        .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton EmailButton" })
+                        .Content("<span class='glyphicon glyphicon-envelope'></span><span>&nbsp;</span><span class='glyphfontsize'>Send</span>")
+            )
+            @*@(Html.Kendo().Button()
+                            .Name("CancelEmailButton")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                        .Content("<span class='glyphicon glyphicon-remove'></span><span>&nbsp;</span><span class='glyphfontsize'>Cancel</span>")
+                            .Events(events => events.Click("closeEmailSlide"))
+                )*@
+            @(Html.Kendo().Button()
+                            .Name("ResetEmailButton")
+                        .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton ResetEmailButton" })
+                        .Content("<span class='glyphicon glyphicon-refresh'></span><span>&nbsp;</span><span class='glyphfontsize'>Reset</span>")
+                            .Events(events => events.Click("resetEmailInputs"))
+            )
+        </div>
+    </div>
+
+
+
+    @Html.Hidden("SendEmail", Url.Action("SendReportEmail", "Email"))
+    @Html.Hidden("SendExcelEmail", Url.Action("SendExcelEmail", "Email"))
+
+    }
+
+</div>
+@* style specific to this view *@
+<style>
+    span.k-tooltip {
+        margin-left: 6px;
+    }
+
+    .ui-autocomplete {
+        max-height: 50px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 502;
+    }
+
+    .k-tooltip-validation.k-widget {
+        background-color: black;
+        color: white;
+    }
+</style>
+@* main script *@
+<script type="text/javascript">
+    @*$(document).ready(function () {
+        $("#EmailToMaskedTextbox").val("@userEmail" + "; ");
+    });*@
+
+    function resetEmailInputs(sender, e) {
+        create_email_error_elem();
+
+        $("#EmailCCMaskedTextbox").val("");
+        $("#EmailBCCMaskedTextbox").val("");
+        $("#EmailCommentMaskedTextbox").val("");
+        $("#EmailToMaskedTextbox").val("@userEmail" + "; ");
+
+        SetEmailSubject();
+        var resetvalidator = $("#EmailForm").kendoValidator().data("kendoValidator");
+        resetvalidator.hideMessages();
+
+        InitializeKendoValidator();
+    }
+
+    var excelgeneratedfromEmailview = false;
+    $(document).ready(function () {
+        InitializeKendoValidator();
+        $("#EmailToMaskedTextbox").val("@userEmail" + "; ");
+        SetEmailSubject();
+
+        $(".close").click(function () {
+            $("#showerror_msg").hide();
+        });
+
+        $("#EmailButton").click(function () {
+            $(".loading").show();
+            create_error_elem();
+            create_email_error_elem();
+            var validator = $("#EmailForm").data("kendoValidator");
+
+            if (!validator.validate()) {
+                var txtsubject = $("#EmailSubjectMaskedTextbox").val();
+                var txttoemail = $("#EmailToMaskedTextbox").val();
+                var errorMessage = '';
+                if (txtsubject === "" && txttoemail === "") {
+                    errorMessage = "Email To & Subject are required.";
+                }
+                else if (validator._errors["Email To"] != null && validator._errors["Email To"] != "") {
+                    errorMessage = validator._errors["Email To"];
+                }
+                else if (validator._errors.EmailCCMaskedTextbox != null && validator._errors.EmailCCMaskedTextbox != "") {
+                    errorMessage = validator._errors.EmailCCMaskedTextbox;
+                }
+                else if (validator._errors.EmailBCCMaskedTextbox != null && validator._errors.EmailBCCMaskedTextbox != "") {
+                    errorMessage = validator._errors.EmailBCCMaskedTextbox;
+                }
+                else if (txtsubject === "") {
+                    errorMessage = "Subject is required.";
+                }
+                ShowEmailStatus(errorMessage, 'failure');
+                $(".loading").hide();
+            }
+
+            else if (!ValidateData(8000)) {
+                $('#slideSearch').slideDown(750);
+                SetButtonClass("btnSearchCriteria", "btn-primary")
+                closeSlide("btnEmail", "slideEmail");
+                setposition();
+                //Invoke the Tooltip logic again to fix the bootstrap tooltip positioning issue
+                //for invisible elements while toggling between Email and Criteria
+                ValidateData(8000);
+                $(".loading").hide();
+            }
+
+            else {
+
+                var AttachmentLocation = [];
+                AttachmentLocation[0] = "";
+                AttachmentLocation[1] = "";
+                var searchset =
+               {
+                   To: $("#EmailToMaskedTextbox").val().substr($("#EmailToMaskedTextbox").val().trim().length - 1).toString() != ";" ? $("#EmailToMaskedTextbox").val() : $("#EmailToMaskedTextbox").val().trim().slice(0, -1),
+                   CC: $("#EmailCCMaskedTextbox").val().substr($("#EmailCCMaskedTextbox").val().trim().length - 1).toString() != ";" ? $("#EmailCCMaskedTextbox").val() : $("#EmailCCMaskedTextbox").val().trim().slice(0, -1),
+                   BCC: $("#EmailBCCMaskedTextbox").val().substr($("#EmailBCCMaskedTextbox").val().trim().length - 1).toString() != ";" ? $("#EmailBCCMaskedTextbox").val() : $("#EmailBCCMaskedTextbox").val().trim().slice(0, -1),
+                   Subject: $("#EmailSubjectMaskedTextbox").val(),
+                   Comments: $("#EmailCommentMaskedTextbox").val(),
+                   Title: $("#ReportTitle").html(),
+                   Attachment: "",
+                   MultipleAttachment: hasExcelSecondGrid == true ? ExcelSecondGridName != "" ? true : false : false,
+                   AttachmentLocation: AttachmentLocation
+               }
+                //if selection criteria is for excel view
+                // first check excel view report allready generated or not.
+                //if not generate the excel view
+                SearchSetEmailData(searchset);
+                // new function to send email from each report
+                ERSendEmail();
+
+
+
+            }
+
+        })
+
+        function SearchSetEmailData(searchset) {
+            sessionStorage.setItem('searchsetemailsession', JSON.stringify(searchset));
+        }
+
+        function CreateExcel(GridName) {
+            $("#" + GridName).getKendoGrid().saveAsExcel();
+        }
+
+
+    });
+
+
+    function SetEmailSubject() {                
+        if ($('#hdnPageID').val() == 14) 
+            $("#EmailSubjectMaskedTextbox").val("AMP: " + $("#ReportTitle").html());        
+        else {
+            if ($("#UserProgramName").length > 0)
+                $("#EmailSubjectMaskedTextbox").val("Tracers: " + $("#ReportTitle").html() + " - " + $("#UserProgramName").val());
+            else
+                $("#EmailSubjectMaskedTextbox").val("Tracers: " + $("#ReportTitle").html());
+        }        
+    }
+
+    var SendEmailtracers = $("#SendEmail").val();
+    var SendExcelEmail = $("#SendExcelEmail").val();
+
+    //Initializes the Kendo validator
+    function InitializeKendoValidator() {
+        var container = $("#EmailForm");
+        kendo.init(container);
+        container.kendoValidator({
+            rules: {
+                email: function (input) {
+                    if (input.is("[data-email-msg]") && input.val() != "") {
+                        if (input.val().trim() == "") { return false; }
+                        var textval = input.val().trim();
+                        var emails = textval.split(/[;]+/);
+                        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                        for (i = 0; i < emails.length; i++) {
+                            if (!pattern.test(emails[i].trim()) && emails[i].trim() != "") {
+                                return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+            }
+        });
+    }
+
+</script>

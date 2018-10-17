@@ -1,0 +1,27 @@
+﻿@model  List<JCR.Reports.DataModel.MockSurvey>
+
+@(Html.Kendo().MultiSelect()
+                  .Name("MockSurveyNameList")
+                  .DataTextField("MockSurveyName")
+                  .DataValueField("MockSurveyID")
+                  .Placeholder("Select Mock Survey")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model)
+                    .Events(e =>
+                    {
+                        e.Select("onMockSurveySelect");
+                    })
+                  .AutoClose(false)
+                .Value("-1")
+)
+
+<script>
+
+    $(document).ready(function () {
+        addarrowtomultiselect("MockSurveyNameList");
+    });
+
+
+
+</script>

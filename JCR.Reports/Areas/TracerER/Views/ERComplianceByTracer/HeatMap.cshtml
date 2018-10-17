@@ -1,0 +1,105 @@
+﻿@using JCR.Reports.Models
+@{
+    var tracerDictionary = ViewBag.Header as Dictionary<string, int?>;
+    <script type="text/javascript">
+        var tracerscat =  @Html.Raw(Json.Encode(ViewBag.Header));
+    </script>
+}
+<div class="panel panel-default " id="divL1tag" style="border-color:#428bca !important; width:100%;">
+    <div id="resultHeatMap">
+        @(Html.Kendo().Grid<JCR.Reports.Models.Tracers>()
+                    .Name("gridHeatMap")
+                .Columns(columns =>
+                {
+                    columns.Bound(e => e.TracerCategoryName);
+                })
+                .Scrollable()
+                .AutoBind(true)
+                .ClientDetailTemplateId("template")
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .ServerOperation(false)
+                    .PageSize(10)
+                    .Read(read => read.Action("HierarchyBinding_Category", "ERComplianceByTracer").Data("additionalData"))
+                    .Sort(sort => sort.Add("TracerCategoryName").Ascending())
+                )
+                .Events(events => events.DataBound("dataBound"))
+                .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 10, 20, 50 }))
+        )
+        <script id="template" type="text/kendo-tmpl">
+            @(Html.Kendo().Grid<JCR.Reports.Areas.TracerER.ViewModels.CompliaceByTracerHeatMap>()
+            .Name("gridHeatMap_#=TracerCategoryID#")
+            .ToolBar(tools => tools.Excel())
+            .Excel(excel => excel
+                                    .AllPages(true)
+                                    .FileName("UHS Tracer Compliance Dashboard_#=TracerCategoryName#.xlsx")
+                                    .Filterable(true)
+                                    .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                            )
+            .Columns(col =>
+            {
+                col.Bound(p => p.SiteName).Title("Facility").Locked(true).Lockable(false).Width(300).HeaderHtmlAttributes(new { style = "text-align:center" });
+                var tList = tracerDictionary.Select(x => x.Key).ToList();
+                for (int i = 0; i < tList.Count; i++)
+                {
+                    string c = tList[i].ToString();
+                    col.Group(g => g.Title(c).HeaderHtmlAttributes(new { style = "text-align:center" }).
+                        Columns(tracerwise =>
+                        {
+                            tracerwise.Bound(p => p.SitewiseTracer[i].ScheduleCompliance).Width(90).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                            tracerwise.Bound(p => p.SitewiseTracer[i].TracerCompliance).Width(90).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                        }));
+                }
+            })
+                    .DataSource(dataSource => dataSource // Configure the grid data source
+                                                .Ajax() // Specify that ajax binding is used
+                                                .ServerOperation(false)
+                                                .Model(m =>
+                                                {
+                                                    m.Field(p => p.SiteName);
+                                                    var tList = tracerDictionary.Select(x => x.Key).ToList();
+                                                    for (int i = 0; i < tList.Count; i++)
+                                                    {
+                                                        m.Field(p => p.SitewiseTracer[i].ScheduleCompliance);
+                                                        m.Field(p => p.SitewiseTracer[i].TracerCompliance);
+                                                    }
+                                                })
+                                                .Events(e => e.Error("error_handler").RequestEnd("OnRequestEnd"))
+                                                .Read(read => read.Action("TracerComplianceHeatMap", "ERComplianceByTracer").Data("additionalData")) // Set the action method which will return the data in JSON format
+                                                .PageSize(20))
+            .Events(e => e.DataBound("onHeatMapDataBound").DataBinding("onHeatMapDatabinding").ExcelExport("HeatMapExcelExport"))
+            .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 }))
+            .Resizable(resizable => resizable.Columns(true))
+            .Sortable()
+            .Scrollable(sc => sc.Height(400))
+            .ToClientTemplate()
+            )
+        </script>
+
+    </div>
+
+</div>
+
+<style>
+    #resultHeatMap {
+        display: block;
+    }
+</style>
+<script type="text/javascript">
+            $(document).ready(function () {
+
+                var windowHeight = $(window).height() * .75;
+
+                //if(windowHeight > 750)
+                //    $('#gridMTB').addClass("viewHeight");
+                //else
+                //    $('#gridMTB').addClass("setHeight");
+                $(".k-grid-content").css("min-height", "450px");
+                $(".k-grid-content").css("height", windowHeight + "px");
+            });
+
+</script>

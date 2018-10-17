@@ -1,0 +1,143 @@
+﻿<div id="divdaterange">
+    <div>
+        <h6>
+            <b><label id="DateLabel">Observation Date</label></b>
+        </h6>
+    </div>
+    <div id="divrangeobs" style="text-align: left; ">
+        <input type="radio" name="DateRange" value="custom" id="custom">Custom
+        <br>
+        <div id="last30days">
+            <input type="radio" name="DateRange" value="last30days">Last 30 days
+            <br>
+        </div>
+        <div id="lastmonth">
+            <input type="radio" name="DateRange" value="lastmonth">Last month
+            <br>
+        </div>
+        <input type="radio" name="DateRange" value="lastquarter">Last quarter
+        <br>
+        <input type="radio" name="DateRange" value="lastsixmonths">Last 6 months
+        <br>
+        <input type="radio" name="DateRange" value="last12months">Last 12 months
+    </div>
+</div>
+<script>
+
+    $("input[name=DateRange]:radio").change(dateRangeRadioChange);
+
+    function dateRangeRadioChange(selectedObservationValue, isRecurrenceSave) {
+        var StartDateCtrl = $("#ObsstartDate").data("kendoDatePicker");
+        var EndDateCtrl = $("#ObsEndDate").data("kendoDatePicker");
+        var dateRangeselected = $('input[name=DateRange]:checked').val();
+        if (dateRangeselected != null && (typeof isRecurrenceSave === 'undefined')) {
+            switch (dateRangeselected) {
+                case "last30days":
+                    StartDateCtrl.value(moment().subtract(30, 'days').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'days').format('L'));
+                    break;
+                case "lastmonth":
+                    StartDateCtrl.value(moment().subtract(1, 'months').startOf('month').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                    break;
+                case "lastquarter":
+                    StartDateCtrl.value(moment().subtract(1, 'quarters').startOf('quarter').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'quarters').endOf('quarter').format('L'));
+                    break;
+                case "lastsixmonths":
+                    StartDateCtrl.value(moment().subtract(6, 'months').startOf('month').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                    break;
+                case "last12months":
+                    StartDateCtrl.value(moment().subtract(12, 'months').startOf('month').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                    break;
+                default:
+            }
+        }
+        else {
+            if (selectedObservationValue != null) {
+                var observationDate = selectedObservationValue.toString();
+                var observationValue = observationDate.split(",");
+                var dateValue = observationValue[0];
+                var dayValue = observationValue[1];
+                if (dateValue != "0")
+                {
+                    if (observationDate.indexOf(',') > -1) {
+                        if (dateValue != "") {
+                            StartDateCtrl.value(moment().subtract(dateValue, dayValue).startOf(dayValue).format('L'));
+                            EndDateCtrl.value(moment().subtract(1, dayValue).endOf(dayValue).format('L'));
+                        }
+                        else {
+                            $("#ObsstartDate").data("kendoDatePicker").value("");
+                            $("#ObsEndDate").data("kendoDatePicker").value("");
+                        }
+                    }
+                    else {
+                        switch (selectedObservationValue) {
+                            case "last30days":
+                                StartDateCtrl.value(moment().subtract(30, 'days').format('L'));
+                                EndDateCtrl.value(moment().subtract(1, 'days').format('L'));
+                                break;
+                            case "lastmonth":
+                                StartDateCtrl.value(moment().subtract(1, 'months').startOf('month').format('L'));
+                                EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                                break;
+                            case "lastquarter":
+                                StartDateCtrl.value(moment().subtract(1, 'quarters').startOf('quarter').format('L'));
+                                EndDateCtrl.value(moment().subtract(1, 'quarters').endOf('quarter').format('L'));
+                                break;
+                            case "lastsixmonths":
+                                StartDateCtrl.value(moment().subtract(6, 'months').startOf('month').format('L'));
+                                EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                                break;
+                            case "last12months":
+                                StartDateCtrl.value(moment().subtract(12, 'months').startOf('month').format('L'));
+                                EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                                break;
+                            default:
+                                var observationDateValue = selectedObservationValue.toString();
+                                var frequencyValue = observationDateValue.split(/\d+/g);
+                                var dateValue = observationDateValue.match(/\d+/g).toString();
+                                var dayValue = frequencyValue[1].toString();
+                                StartDateCtrl.value(moment().subtract(dateValue, dayValue).startOf(dayValue).format('L'));
+                                EndDateCtrl.value(moment().subtract(1, dayValue).endOf(dayValue).format('L'));
+                        }
+                    }
+                }
+                else
+                {
+                    $('input[name=DateRange]').prop('checked', false);
+                    $("#ObsstartDate").data("kendoDatePicker").value("");
+                    $("#ObsEndDate").data("kendoDatePicker").value("");
+                }
+            }
+        }
+    }
+
+    //Resets the date fields
+    function ResetCriteriaDates() {
+        $('input[name=DateRange]').prop('checked', false);
+        $("#ObsstartDate").data("kendoDatePicker").value("");
+        $("#ObsEndDate").data("kendoDatePicker").value("");
+
+        $('#divrangeobs input').removeAttr("disabled");
+        $('#ObservationDate input').removeAttr("disabled");
+        $('#ObsstartDate').data('kendoDatePicker').enable(true);
+        $('#ObsEndDate').data('kendoDatePicker').enable(true);
+        if (loadparameters === "MonthlyQuestionBreakdown" || loadparameters === "MonthlyTracerBreakdown" || loadparameters === "TracerDepartmentAssignment")
+        {
+            $('input:radio[name="DateRange"][value="custom"]').prop("checked", true);
+            $("#ObsEndDate").data("kendoDatePicker").value(moment().format('L'));
+            $("#ObsstartDate").data("kendoDatePicker").value(moment().subtract(12, 'months').format('L'));
+        }
+    }
+
+    $(document).ready(function () {
+        //  $('input:radio[name*="DateRange"][value*="lastquarter"]').prop('checked', true);
+        setTimeout(dateRangeRadioChange, 100);
+        //dateRangeRadioChange();
+
+    });
+
+</script>

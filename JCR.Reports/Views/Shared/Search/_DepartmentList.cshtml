@@ -1,0 +1,74 @@
+﻿@model JCR.Reports.Models.SearchList
+@{
+
+    // initial level checks
+    bool hasranking1 = Model.hasRanking1;
+    
+    <input type="hidden" name="OrgRanking1Name" id="OrgRanking1Name" value="@Model.OrgRanking1Name" />
+    
+}
+<div id="tracerorgdepartment">
+    @{
+
+        //if (@hasranking1)
+        //{
+            string ranking1name = Model.OrgRanking1Name;
+
+            @*<h6><b>@ranking1name</b></h6>*@
+        <h6><b>Department</b></h6>
+            <div class="margintop">
+
+                @(Html.Kendo().MultiSelect()
+          .Name("OrgDepartment")
+                  .DataTextField("OrganizationTitle")
+                  .DataValueField("OrganizationID")
+          .Placeholder("Select Department")
+          .Filter(FilterType.Contains)
+          //.HighlightFirst(true)
+          .AutoClose(false)
+            .HtmlAttributes(new { @class = "myClass" })
+          .BindTo(Model.DepartmentLists)
+                     .Events(e =>
+                                    {
+                                        e.Select("OrgDepartmentTypeSelect");
+                                    })
+                .Value("-1")
+
+                )
+            </div>
+
+        @*}
+        else
+        {
+        <script> $("#inactiveCheckbox").html("");</script>
+        }*@
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("OrgDepartment");
+      //  removedeleteoption("OrgDepartment");
+    });
+    //function onlevel1Close(e) {
+    //    removedeleteoption("OrgDepartment");
+    //}
+    function OrgDepartmentTypeSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+    
+        if (dataItem.OrganizationTitle === "All") {
+            $('#OrgDepartment').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+        //setTimeout(function () {
+        //    var container = e.sender.wrapper.children(".k-multiselect-wrap");
+        //    container.scrollTop(container[0].scrollHeight);
+        //});
+    }
+</script>
+
+

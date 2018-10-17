@@ -1,0 +1,40 @@
+﻿<label for="EmailTo" style="font-size:small">Email To:</label>
+@(Html.Kendo().Button()
+                            .Name("EmailButton")
+                                        .HtmlAttributes(new { type = "button", @class = "glyphicon glyphicon-envelope", style = "background-color: aliceBlue" })
+
+)
+@(Html.Kendo().MaskedTextBox()
+                      .Name("EmailToMaskedTextbox")
+                      
+                      .Events(events => events.Change("isValidEmailAddress"))
+)
+
+<label for="Emailtestitem" style="font-size:x-small">Use a semi-colon (;) to separate email addresses.</label> 
+
+<script>
+    function isValidEmailAddress() {
+        emails = this.value().split(';');
+        for (i = 0; i < emails.length; i++) {
+            checkemailaddress(emails[i]);
+        }
+   }
+    function checkemailaddress(emailadd) {
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if (!pattern.test(emailadd)) {
+
+            alert(emailadd + " - Email address is not valid");
+        }
+    }
+
+
+    $(document).ready(function () {
+        $("#EmailButton").kendoTooltip({
+            content: "Email Report",
+            position: "Top"
+        });
+
+    });
+
+</script>
+

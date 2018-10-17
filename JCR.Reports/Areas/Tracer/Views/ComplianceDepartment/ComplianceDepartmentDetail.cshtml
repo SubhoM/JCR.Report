@@ -1,0 +1,125 @@
+﻿<div id="divdetailcomplianceDept">
+    <div id="divtiebreakermessage" align="center" style="background-color: #f2dede; color: #a94442;"></div>
+    <div>
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.ComplianceQuestionDetail>()
+      .Name("gridCompDept")
+               .ToolBar(tools => tools.Excel())
+                          .Excel(excel => excel
+                              .AllPages(true)
+                                              .FileName("Compliance By Department Report.xlsx")
+                                  .Filterable(true)
+                                          .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                                  )
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.OrgName_Rank3).Width(150);
+          columns.Bound(p => p.OrgName_Rank2).Width(150);
+          columns.Bound(p => p.OrgName_Rank1_Dept).Width(150);
+          columns.Bound(p => p.QuestionText).Title("Question").Width(450).Encoded(false);
+
+          columns.Bound(p => p.TracerCustomName).Title("Tracer").Width(175);
+          columns.Bound(p => p.TracerSection).Title("Tracer Section").Width(150);
+          columns.Bound(p => p.QuesNo).Title("Ques No.").Width(105);
+          columns.Bound(p => p.StandardEPs).Title("Standard EP").Width(150);
+          columns.Bound(p => p.Observation).Width(175);
+
+          columns.Bound(p => p.Num).Width(175)
+         .ClientFooterTemplate("#=sum#").ClientGroupFooterTemplate("#=setNumeratorTotal(sum)#");
+          columns.Bound(p => p.Den).Width(175)
+            .ClientFooterTemplate("#=sum#").ClientGroupFooterTemplate("#=setDenominatorTotal(sum)#");
+
+          columns.Bound(p => p.Compliance).Format("{0:0.0}%").Title("Comp %")
+                         .ClientFooterTemplate("#=kendo.toString((data.Num.sum/data.Den.sum)*100, '0.0')#%")
+                         .ClientGroupFooterTemplate("#= kendo.toString(calculateAggregate(NumeratorTotalValue, DenominatorTotalValue),'0.0') #%")
+                         .Width(125);
+
+          columns.Bound(p => p.ObservationDtString).Title("Observation Date").Width(100);
+          columns.Bound(p => p.UpdatedByName).Title("Updated By").Width(100);
+
+          columns.Bound(p => p.LastUpdatedDtString).Title("Last Updated").Width(100);
+
+          columns.Bound(p => p.QuestionNotes).Title("Question Notes").Width(200);
+
+          columns.Bound(p => p.StaffInterviewed).Width(150);
+          columns.Bound(p => p.MedicalRecordNumber).Width(150);
+          columns.Bound(p => p.EquipmentObserved).Width(150);
+          columns.Bound(p => p.ContractedService).Width(150);
+          columns.Bound(p => p.SurveyTeam).Width(125);
+          columns.Bound(p => p.MedicalStaffInvolved).Width(150);
+          columns.Bound(p => p.Location).Width(125);
+          columns.Bound(p => p.TracerNote).Width(200);
+
+          columns.Bound(p => p.TotalNumerator).Width(100).Title("Total Num");
+          columns.Bound(p => p.TotalDenominator).Width(100).Title("Total Den");
+          columns.Bound(p => p.OverallCompliance).Title("Overall Comp %").Format("{0:0.0}%").Width(100);
+          columns.Bound(p => p.QID);
+          columns.Bound(p => p.LimitDepartment).Hidden(true);
+
+      })
+              .Sortable()
+            .Scrollable(scrollbar => scrollbar.Height(700))
+              .HtmlAttributes(new { style = "font-size:12px;line-height:em" })
+              .DataSource(dataSource => dataSource
+              .Ajax()
+              .ServerOperation(false)
+                      .Read(read => read.Action("_ComplianceDepartmentExcel", "ComplianceDepartment").Data("additionalData")) // Set the action method which will return the data in JSON format
+                       .Aggregates(aggregates =>
+                       {
+                           aggregates.Add(p => p.Num).Sum();
+                           aggregates.Add(p => p.Den).Sum();
+                           aggregates.Add(p => p.Compliance).Average();
+                       })
+                        //.Group(groups =>
+                        //    {
+                        //        groups.Add(p => p.TracerCustomName);
+                        //        groups.Add(p => p.TracerQuestionNumber);
+                        //    })
+                        //.Sort(sort =>
+                        //{
+                        //    sort.Add(p => p.TracerCustomName);
+                        //    sort.Add(p => p.TracerQuestionNumber);
+                        //    sort.Add(p => p.TracerResponseTitle);
+                        //})
+                        .PageSize(20))
+                        .AutoBind(false)
+                        
+                      .Events(e => e.ExcelExport("excelExport").DataBound("dataBoundtiebreaker"))
+              .ColumnMenu(columnsmenu => columnsmenu
+                         .Columns(true))
+              .Filterable(filter => filter
+                            .Extra(false)
+                            .Operators(operators => operators
+                            .ForString(str => str.Clear()
+                                        .Contains("Contains")
+                            .StartsWith("Starts with")
+                            .IsEqualTo("Is equal to")
+                            .IsNotEqualTo("Is not equal to")
+                            )))
+                .Groupable()
+                .Resizable(r => r.Columns(true))
+                         .Reorderable(reorder => reorder.Columns(true))
+                .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(new int[] { 20, 50, 100 }))
+        )
+    </div>
+
+</div>
+
+<style>
+    #gridCompDept {
+        display: none;
+    }
+
+        #gridCompDept .k-loading-image {
+            background-image: none;
+        }
+
+        #gridCompDept tr td {
+            border-width: 1px 0 0 0px;
+        }
+
+        #gridCompDept .k-grid-content {
+            overflow-y: scroll;
+        }
+</style>

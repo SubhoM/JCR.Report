@@ -1,0 +1,67 @@
+﻿<div id="divdetailcompliance">
+    <div id="divtiebreakermessage" align="center" style="background-color: #f2dede; color: #a94442;"></div>
+    <div>
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.ComplianceQuestionDetail>()
+        .Name("gridCompQuesDetIE8")
+        .ToolBar(tools => tools.Excel())
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.QuestionText).Title("Question").Width(450).Encoded(false);
+            columns.Bound(p => p.TracerCustomName).Title("Tracer").Width(175);
+            columns.Bound(p => p.TracerSection).Title("Tracer Section").Width(150);
+            columns.Bound(p => p.QuesNo).Title("Ques No.").Width(105);
+            columns.Bound(p => p.StandardEPs).Title("Standard EP").Width(150);
+            columns.Bound(p => p.Observation).Width(175);
+            columns.Bound(p => p.Num).Width(175);
+            columns.Bound(p => p.Den).Width(175);
+            columns.Bound(p => p.Compliance).Format("{0:0.0}%").Title("Comp %").Width(125);
+            columns.Bound(p => p.OrgName_Rank3).Width(150);
+            columns.Bound(p => p.OrgName_Rank2).Width(150);
+            columns.Bound(p => p.OrgName_Rank1_Dept).Width(150);
+
+            columns.Bound(p => p.SurveyTeam).Width(125);
+            columns.Bound(p => p.MedicalStaffInvolved).Width(150);
+            columns.Bound(p => p.Location).Width(125);
+            columns.Bound(p => p.MedicalRecordNumber).Width(150);
+            columns.Bound(p => p.EquipmentObserved).Width(150);
+            columns.Bound(p => p.ContractedService).Width(150);
+            columns.Bound(p => p.StaffInterviewed).Width(150);
+            columns.Bound(p => p.TracerNote).Width(200);
+
+            columns.Bound(p => p.UpdatedByName).Title("Updated By").Width(150);
+            columns.Bound(p => p.ObservationDate).Title("Observation Date").Width(150).Format("{0:MM/dd/yyyy}");
+            columns.Bound(p => p.LastUpdated).Title("Last Updated").Width(150).Format("{0:MM/dd/yyyy}");
+            columns.Bound(p => p.QuestionNotes).Title("Question Notes").Width(200);
+            columns.Bound(p => p.TotalNumerator).Width(175).Title("Total Num");
+            columns.Bound(p => p.TotalDenominator).Width(175).Title("Total Den");
+            columns.Bound(p => p.OverallCompliance).Title("Overall Comp %").Format("{0:0.0}%").Width(135);
+        })
+        .AutoBind(false)
+        .Scrollable(scrollable => scrollable.Height(700))
+        .HtmlAttributes(new { style = "font-size:12px;line-height:em" })
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .ServerOperation(false)
+        .Read(read => read.Action("_ComplianceQuestionDetailExcel", "ComplianceQuestion").Data("additionalData")) // Set the action method which will return the data in JSON format
+        .PageSize(20))
+                        .Events(e => e.ExcelExport("excelExportIE8Question").DataBound("dataBoundtiebreaker"))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(new int[] { 20, 50, 100 }))
+        )
+    </div>
+</div>
+
+<style>
+    #gridCompQuesDetIE8 {
+        display: none;
+    }
+
+        #gridCompQuesDetIE8 .k-loading-image {
+            background-image: none;
+        }
+
+        #gridCompQuesDetIE8 tr td {
+            border-width: 1px 0 0 0px;
+        }
+</style>

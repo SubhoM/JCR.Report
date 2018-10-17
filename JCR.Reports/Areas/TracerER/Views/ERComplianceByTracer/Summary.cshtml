@@ -1,0 +1,78 @@
+﻿<div class="panel panel-default " id="divL1tag" style="border-color:#428bca !important; width:100%;">
+    <div id="resultSummary" style="width:97vw;">
+        @(Html.Kendo().Grid<JCR.Reports.Areas.TracerER.ViewModels.CompliaceByTracerSummary>()
+                    .Name("gridSummary")
+                    .ToolBar(tools => tools.Excel())
+                    .Excel(excel => excel
+                                    .AllPages(true)
+                                    .FileName("UHS Tracer Compliance Dashboard-Summary.xlsx")
+                                    .Filterable(true)
+                                    .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                            )
+                    .Columns(col =>
+                    {
+                        col.Bound(p => p.SiteName).Title("Facility").Locked(true).Lockable(false).Width(300).HeaderHtmlAttributes(new { style = "text-align:center" });
+
+                        for (int i = 0; i < ViewBag.Header.Count; i++)
+                        {
+                            string c = ViewBag.Header[i].ToString();
+                            col.Group(g => g.Title(c).HeaderHtmlAttributes(new { style = "text-align:center" }).
+                                Columns(categorywise =>
+                                {
+                                    categorywise.Bound(p => p.SitewiseCategory[i].AverageScheduleCompliance).Width(270).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                                    categorywise.Bound(p => p.SitewiseCategory[i].AverageTracerCompliance).Width(190).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                                }));
+                        }
+                    })
+                    .Sortable()
+                    .AutoBind(true)
+                    .Scrollable(sc => sc.Height("auto"))
+                    .HtmlAttributes(new { style = "font-size:12px;line-height:1em;" })
+                    .DataSource(dataSource => dataSource // Configure the grid data source
+                            .Ajax() // Specify that ajax binding is used
+                            .ServerOperation(false)
+                            .Model(m =>
+                            {
+                                m.Field(p => p.SiteName);
+                                for (int i = 0; i < ViewBag.Header.Count; i++)
+                                {
+                                    m.Field(p => p.SitewiseCategory[i].AverageScheduleCompliance);
+                                    m.Field(p => p.SitewiseCategory[i].AverageTracerCompliance);
+                                }
+                            })
+                            .Events(e => e.Error("error_handler"))
+                            .Read(read => read.Action("TracerComplianceSummary", "ERComplianceByTracer").Data("additionalData")) // Set the action method which will return the data in JSON format
+                            .PageSize(20))
+                    .Reorderable(reorder => reorder.Columns(true))
+                    .Resizable(resizing => resizing.Columns(true))
+                    .Events(e => e.DataBound("onHeatMapDataBound").ExcelExport("SummaryExcelExport"))
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 }))
+        )
+
+    </div>
+
+</div>
+
+<style>
+    #resultSummary {
+        display: block;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var windowHeight = $(window).height() * .75;
+
+        //if(windowHeight > 750)
+        //    $('#gridMTB').addClass("viewHeight");
+        //else
+        //    $('#gridMTB').addClass("setHeight");
+        $(".k-grid-content").css("min-height", "450px");
+        $(".k-grid-content").css("height", windowHeight + "px");
+    });
+
+
+</script>

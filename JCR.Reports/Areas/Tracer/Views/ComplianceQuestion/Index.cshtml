@@ -1,0 +1,165 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.SearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+    Layout = "~/Views/Shared/_TracerLayout.cshtml";
+
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+                <br />
+                @Html.Partial("Search/_ScheduledReportDescription")
+            </div>
+        </div>
+        <div class="row PaddingTop10">
+            <div class="col-xs-12 text-center">
+                <b>Report Type</b>
+                @Html.RadioButtonsForEnum(m => m.ReportTypeExcel)
+
+            </div>
+        </div>
+        <div class="row">
+            @*Column 1*@
+            <div class="col-xs-3 col-md-3 col-lg-3" style="margin-top: -12px; ">
+                <br />
+                <b>Question Selection</b>
+                @Html.Partial("Search/_LeastCompliantQuestions")
+            </div>
+
+            @*Column 2*@
+            <div class="col-xs-3 col-md-3 col-lg-3" style="margin-top:-2px; ">
+                @Html.Partial("Search/_CampusList")
+                @Html.Partial("Search/_BuildingList")
+                @Html.Partial("Search/_DepartmentList")
+                @Html.Partial("Search/_InactiveOrgItemsCheckBox")
+            </div>
+
+            @*Column 3*@
+            <div class="col-xs-3 col-md-3 col-lg-3">
+                <div class="row">
+                    <div class="col-xs-6" style="margin-top:34px">
+                        @Html.Partial("Search/_DateRange")
+                    </div>
+                    <div id="divobsdate" class="col-xs-6" style="margin-top:-10px">
+                        @Html.Partial("Search/_ObservationDate")
+                    </div>
+                </div>
+            </div>
+
+            @*Column 4*@
+            <div class="col-xs-3 col-md-3 col-lg-3">
+                <div>
+                    <h6>
+                        <b>Question Criteria</b>
+                    </h6>
+                </div>
+                @Html.Partial("Search/_MinimumDenominatorValue")
+
+                @Html.Partial("Search/_IncludeHavingCompliance")
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div class="col-xs-12 text-center" id="complianceDetail" style="display:none;">
+            @(Html.Kendo().Button()
+                                .Name("btnBacktoChart")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                            .Content("<span class='glyphicon glyphicon-arrow-left'></span><span>&nbsp;</span><span class='glyphfontsize'>Go Back to Graph</span>")
+            )
+        </div>
+
+        <div id="loadChartView" class="col-md-12">
+
+        </div>
+        <div id="LoadDetailView" class="col-md-12">
+
+        </div>
+    </div>
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    //@Html.Hidden("hdnReportID", AppSession.ReportID)
+     @Html.Hidden("hdnReportActionID", 12)
+}
+@*@Url.Script("~/Scripts/Common/ReportsCommon.js")
+@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Tracer/Views/ComplianceQuestion/ComplianceQuestion.js")
+
+<style type="text/css">
+    /*.ui-progressbar.beginning .ui-progressbar-value {
+        background: #5bb346;
+    }*/
+    .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .k-state-selected .k-progressbar .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    /*.k-progress-status-wrap {
+        background-color: #5bb346;
+    }*/
+    /*.k-grid .k-state-selected {
+        background: none;
+    }*/
+    /*.k-grid table tr.k-state-selected {
+        background: none;
+    }*/
+    /*.progress div {
+        background-color: #0099ff;
+    }*/
+    .progress {
+        margin-bottom: 0px;
+    }
+
+    .k-progress-status-wrap, .k-rtl .k-progressbar-reverse.k-progressbar-horizontal .k-progress-status-wrap {
+        text-align: left;
+        color: white;
+    }
+
+    #gridCompQuesChart tbody tr:hover {
+        background: #c4ddfc;
+    }
+    /*.navbar-static-top {
+    z-index: 0;
+    }*/
+    .modal-header .close {
+        margin-top: 2px;
+    }
+
+    .modal-header {
+        text-align: center;
+    }
+
+    #divdaterange {
+        margin-top: -36px;
+    }
+
+    #divrangeobs {
+        margin-top: -15px;
+    }
+
+</style>
+
+
+
+
+
+

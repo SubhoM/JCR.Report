@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "Content/Tracersite.css",
+    "inputFile": "Content/Tracersite.scss"
+  },
+  {
+    "outputFile": "Content/Site.css",
+    "inputFile": "Content/Site.scss"
+  },
+  {
+    "outputFile": "Content/hMenuStyles.css",
+    "inputFile": "Content/hMenuStyles.scss"
+  },
+  {
+    "outputFile": "Content/ConfirmDialog.css",
+    "inputFile": "Content/ConfirmDialog.scss"
+  }
+]

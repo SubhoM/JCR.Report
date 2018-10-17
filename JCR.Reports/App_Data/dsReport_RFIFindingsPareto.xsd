@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReport_CorporateFindingsPareto" targetNamespace="http://tempuri.org/dsReport_CorporateFindingsPareto.xsd" xmlns:mstns="http://tempuri.org/dsReport_CorporateFindingsPareto.xsd" xmlns="http://tempuri.org/dsReport_CorporateFindingsPareto.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReport_CorporateFindingsPareto" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReport_CorporateFindingsPareto" msprop:Generator_UserDSName="dsReport_CorporateFindingsPareto">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dsReport_CorporateFindingsPareto" msprop:Generator_TableClassName="dsReport_CorporateFindingsParetoDataTable" msprop:Generator_TableVarName="tabledsReport_CorporateFindingsPareto" msprop:Generator_RowChangedName="dsReport_CorporateFindingsParetoRowChanged" msprop:Generator_TablePropName="_dsReport_CorporateFindingsPareto" msprop:Generator_RowDeletingName="dsReport_CorporateFindingsParetoRowDeleting" msprop:Generator_RowChangingName="dsReport_CorporateFindingsParetoRowChanging" msprop:Generator_RowEvHandlerName="dsReport_CorporateFindingsParetoRowChangeEventHandler" msprop:Generator_RowDeletedName="dsReport_CorporateFindingsParetoRowDeleted" msprop:Generator_RowClassName="dsReport_CorporateFindingsParetoRow" msprop:Generator_UserTableName="dsReport_CorporateFindingsPareto" msprop:Generator_RowEvArgName="dsReport_CorporateFindingsParetoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RowID" msprop:Generator_ColumnVarNameInTable="columnRowID" msprop:Generator_ColumnPropNameInRow="RowID" msprop:Generator_ColumnPropNameInTable="RowIDColumn" msprop:Generator_UserColumnName="RowID" type="xs:int" minOccurs="0" />
+              <xs:element name="Label" msprop:Generator_ColumnVarNameInTable="columnLabel" msprop:Generator_ColumnPropNameInRow="Label" msprop:Generator_ColumnPropNameInTable="LabelColumn" msprop:Generator_UserColumnName="Label" type="xs:string" minOccurs="0" />
+              <xs:element name="FindingCount" msprop:Generator_ColumnVarNameInTable="columnFindingCount" msprop:Generator_ColumnPropNameInRow="FindingCount" msprop:Generator_ColumnPropNameInTable="FindingCountColumn" msprop:Generator_UserColumnName="FindingCount" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="RFICount" msprop:Generator_ColumnVarNameInTable="columnRFICount" msprop:Generator_ColumnPropNameInRow="RFICount" msprop:Generator_ColumnPropNameInTable="RFICountColumn" msprop:Generator_UserColumnName="RFICount" type="xs:string" minOccurs="0" />
+              <xs:element name="CumulativePercentage" msprop:Generator_ColumnVarNameInTable="columnCumulativePercentage" msprop:Generator_ColumnPropNameInRow="CumulativePercentage" msprop:Generator_ColumnPropNameInTable="CumulativePercentageColumn" msprop:Generator_UserColumnName="CumulativePercentage" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ChapterID" msprop:Generator_ColumnVarNameInTable="columnChapterID" msprop:Generator_ColumnPropNameInRow="ChapterID" msprop:Generator_ColumnPropNameInTable="ChapterIDColumn" msprop:Generator_UserColumnName="ChapterID" type="xs:string" minOccurs="0" />
+              <xs:element name="StandardTextID" msprop:Generator_ColumnVarNameInTable="columnStandardTextID" msprop:Generator_ColumnPropNameInRow="StandardTextID" msprop:Generator_ColumnPropNameInTable="StandardTextIDColumn" msprop:Generator_UserColumnName="StandardTextID" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

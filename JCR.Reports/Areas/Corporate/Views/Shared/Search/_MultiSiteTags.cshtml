@@ -1,0 +1,46 @@
+﻿@model  IEnumerable<JCR.Reports.DataModel.Tag>
+<div id="multisitetag">
+    <h6><b>Tag*</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+            .Name("MultiSiteTag")
+            .DataTextField("TagCode")
+            .DataValueField("TagID")
+            .Placeholder("Select Tag")
+            .Filter(FilterType.Contains)
+            .HighlightFirst(true)
+            .BindTo(Model)
+            .AutoClose(false)
+            .Events(e =>
+            {
+                e.Change("onTagChange").Select("onTagSelect");
+            })
+            .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("MultiSiteTag");
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

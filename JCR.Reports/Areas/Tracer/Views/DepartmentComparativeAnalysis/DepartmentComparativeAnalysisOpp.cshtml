@@ -1,0 +1,179 @@
+﻿
+<div>
+    <div id="resultDCAOPP">
+        
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.DepartmentComparativeAnalysisOPP>()
+  .Name("gridDCAOPP")
+
+  .DataSource(dataSource => dataSource // Configure the grid data source
+  .Ajax() // Specify that ajax binding is used
+
+  .ServerOperation(false)
+          .Events(e => e.Error("error_handler2").RequestEnd("OnRequestEnd2"))
+  .Read(read => read.Action("_DepartmentComparativeAnalysisOppExcel", "DepartmentComparativeAnalysis").Data("additionalData")) // Set the action method which will return the data in JSON format
+           .Aggregates(aggregates =>
+           {
+               aggregates.Add(p => p.OrgName_Rank1_Dept).Count();
+               aggregates.Add(p => p.Numerator).Sum();
+               aggregates.Add(p => p.Denominator).Sum();
+               aggregates.Add(p => p.CompliancePercent).Average();
+           })
+          .PageSize(20))
+            .ToolBar(tools => tools.Excel())
+                    .Events(e => e
+                                    .ExcelExport("excelExport")
+                                    .DataBound("onDataBound"))
+           .Excel(excel => excel
+                                .AllPages(true)
+                                .Filterable(true)
+                                .FileName("Department Comparative Analysis Details.xlsx")
+                                .ProxyURL(Url.Action("Excel_Export_Save", "Export")))
+                              .Columns(columns =>
+                              {
+                                  columns.Bound(p => p.OrgName_Rank3).Width(150);
+                                  columns.Bound(p => p.OrgName_Rank2).Width(150);
+                                  columns.Bound(p => p.OrgName_Rank1_Dept).Width(250)
+                                        .ClientFooterTemplate("Total Count:")
+                                       .ClientGroupFooterTemplate("Count:");
+                                  columns.Bound(p => p.QuestionText).Width(600);
+
+                                  columns.Bound(p => p.StandardEPs).Width(150);
+                                  columns.Bound(p => p.TracerCustomName).Width(150);
+                                  columns.Bound(p => p.TracerResponseTitle).Width(400);
+                                  columns.Bound(p => p.ObservationDate).Width(150).Format("{0:MM/dd/yyyy}");
+                                  columns.Bound(p => p.Numerator).Width(150).ClientFooterTemplate("#=sum#").ClientGroupFooterTemplate("#=setNumeratorTotal2(sum)#");
+                                  columns.Bound(p => p.Denominator).Width(150).ClientFooterTemplate("#=sum#").ClientGroupFooterTemplate("#=setDenominatorTotal2(sum)#");
+                                  columns.Bound(p => p.CompliancePercent).Format("{0:0.0}%")
+                                                                   .ClientFooterTemplate("#=kendo.toString((data.Numerator.sum/data.Denominator.sum)*100, '0.0')#%")
+                                                                 .ClientGroupFooterTemplate("#= kendo.toString(calculateAggregate2(NumeratorTotalValue2, DenominatorTotalValue2),'0.0') #%")
+                                                                 .Width(150);
+                                  columns.Bound(p => p.TracerQuestionNote).Width(350);
+
+
+                              })
+  .ColumnMenu(columnsmenu => columnsmenu
+             .Columns(true)
+
+   )
+  .Filterable(filter => filter
+                .Extra(false)
+                .Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains("Contains")
+                .StartsWith("Starts with")
+                .IsEqualTo("Is equal to")
+                .IsNotEqualTo("Is not equal to")
+                ))
+
+  )
+                  .HtmlAttributes(new { style = "font-size:12px;line-height:2em" })
+  .Sortable() // Enable sorting
+  .AutoBind(false)
+  .Groupable()
+  .Filterable()
+  .Scrollable(scrollable => scrollable.Height("auto"))
+      .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(new int[] { 20, 50, 100 }))
+      .Reorderable(reorder => reorder.Columns(true))
+      .Resizable(resizing => resizing.Columns(true))
+               .Scrollable(scrollable => scrollable.Height(450))
+
+        )
+
+    </div>
+</div>
+
+<style>
+    #gridDCAOPP {
+        display: none;
+    }
+    #ObservationsHeading {
+        display: none;
+    }
+</style>
+<script>
+    var datalimitmessageflag = false;
+    var datalimitmessage = "No details to display for Department selected."
+    function error_handler2(e) {
+        hasExcel2Data = false;
+        $('#gridDCAOPP').data("kendoGrid").dataSource.data([]);
+    }
+
+    function OnRequestEnd2(e) {
+        if (e.response != null) {
+            if (e.response.Errors === null || e.response.Errors === undefined)//NO errors
+            {
+               
+                hasExcel2Data = true;
+            }
+            else {
+               
+                if (e.response.Errors.indexOf("limit") >= 0) {
+                    datalimitmessageflag = true;
+                }
+                hasExcel2Data = false;
+             
+
+            }
+        }
+     
+    }
+    var NumeratorTotalValue2;
+    var DenominatorTotalValue2;
+    function calculateAggregate2(field, value) {
+        input = (field / value) * 100;
+        return input;
+    }
+    function setNumeratorTotal2(data) {
+        NumeratorTotalValue2 = data;
+        return NumeratorTotalValue2;
+    }
+    function setDenominatorTotal2(data) {
+        DenominatorTotalValue2 = data;
+        return DenominatorTotalValue2;
+    }
+
+    function onDataBound(e) {
+        // Get the number of Columns in the grid
+        var dataSource = $('#gridDCAOPP').data("kendoGrid").dataSource;
+        var colCount = $('#gridDCAOPP').find('.k-grid-header colgroup > col').length;
+        if (datalimitmessageflag) { datalimitmessage = "Maximum limit of records reached. Refine your criteria to narrow the result."; }
+        // If there are no results place an indicator row
+        if (dataSource._view.length == 0) {
+            $('#gridDCAOPP').find('.k-grid-content tbody')
+                .append('<tr class="kendo-data-row"><td id="Observationslimitmessage" colspan="' + colCount + '" style="text-align:left"><b>' + datalimitmessage + '</b></td></tr>');
+
+        }
+        if (reportTracerTypeID === 2) {//CMS
+            $("#gridDCAOPP").data("kendoGrid").columns[4].title = "Tag Standard";
+            $("#gridDCAOPP thead [data-field=StandardEPs] .k-link").html("Tag Standard")
+        }
+        //Horizontal Top Scroll
+        //Synced up with horizontal bottom scroll
+        var dataDiv = e.sender.wrapper.children(".k-grid-content");
+        var scrollPosition = e.sender.wrapper.children(".k-grid-header");
+        $('#gridDCAOPP').find(".topScroll").remove();
+
+        var scrollWidth = kendo.support.scrollbar();
+        var tableWidth = e.sender.tbody.parent().width();
+
+        var topScroll = $("<div class='topScroll' style='height:" + scrollWidth + "px;margin-right:" + scrollWidth + "px;'>" +
+                          "<div style='width:" + tableWidth + "px;'></div>" +
+                          "</div>").insertBefore(scrollPosition);
+        topScroll.scrollLeft(dataDiv.scrollLeft());
+
+        topScroll.on("scroll", function () {
+            dataDiv.scrollLeft(topScroll.scrollLeft());
+        });
+
+        dataDiv.on("scroll", function () {
+            topScroll.scrollLeft(dataDiv.scrollLeft());
+        });
+    }
+</script>
+
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@model JCR.Reports.Models.SearchList
+    <div id="tracercms">
+       <h6><b>Tag*</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("TracersCMS")
+                  .DataTextField("Tag")
+                  .DataValueField("ID")
+                  .Placeholder("Select CMS")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model.CMSTags)
+                  .AutoClose(false)
+                   .Events(e =>
+                    {
+                        e.Change("onCMSChange").Select("onCMSSelect");
+                    })
+                .Value( "-1" )   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracersCMS");
+       // removedeleteoption("TracersCMS");
+    });
+    //function onTracersCMSClose(e) {
+    //    removedeleteoption("TracersCMS");
+    //}
+    //function onTracersCMSOpen(e) {
+    //    Clearmultiselectfilter("TracersCMS");
+    //}
+    function onCMSSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.Tag === "All") {
+            $('#TracersCMS').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") this.value(values);
+        }
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+﻿@model JCR.Reports.Models.SearchList
+<div id="tracerListForCompliance">
+    <h6><b>Tracer Name</b> <i>(required)</i></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+                      .Name("TracersListForCompliance")
+                      .DataTextField("TracerCustomName")
+                      .DataValueField("TracerCustomID")
+                      .Placeholder("Select Tracers")
+                      .HighlightFirst(true)
+                      .Filter(FilterType.Contains)
+                      .BindTo(Model.TracersLists)
+                      .ValuePrimitive(false)
+                      .AutoClose(false)
+                      .Events(e =>
+                      {
+                          e.Select("onListSelect");
+                      })
+                      .MaxSelectedItems(5)
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        //this needs to be re-visit.
+        $('#TracersListForCompliance').data("kendoMultiSelect").open();
+        $('#TracersListForCompliance').data("kendoMultiSelect").close();
+
+        addarrowtomultiselect("TracersListForCompliance");
+
+    });
+
+    function onListSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.TracerCustomName === "All") {
+            $('#TracersListForCompliance').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

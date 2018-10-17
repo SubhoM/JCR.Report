@@ -1,0 +1,59 @@
+﻿
+<div>
+    <div id="resultTCSTD">
+
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.TracerByEPExcel>()
+                    .Name("gridTCSTDIE8")
+                     .ToolBar(tools => tools.Excel())
+                      
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ChapterName).Hidden(true).Width(100);
+                columns.Bound(p => p.StandardLabel).Hidden(false).Width(125);
+                columns.Bound(p => p.StandardText).Hidden(true).Width(500);
+                columns.Bound(p => p.EP).Hidden(false).Width(100);
+                columns.Bound(p => p.EPText).Hidden(true).Width(500);
+                columns.Bound(p => p.TracerCustomName).Width(175);
+                columns.Bound(p => p.TracerResponseTitle).Width(275);
+                columns.Bound(p => p.OrgName_Rank3).Width(200);
+                columns.Bound(p => p.OrgName_Rank2).Width(200);
+                columns.Bound(p => p.OrgName_Rank1_Dept).Width(200);
+                columns.Bound(p => p.QuestionText).Width(300);
+                columns.Bound(p => p.ObservationDate).Format("{0:MM/dd/yyyy}").Width(150);
+                columns.Bound(p => p.UpdatedDate).Format("{0:MM/dd/yyyy}").Width(150);
+                columns.Bound(p => p.UpdatedByUserName).Width(150);
+                columns.Bound(p => p.TracerResponseNote).Width(200);
+                columns.Bound(p => p.TracerQuestionNote).Width(200);
+                columns.Bound(p => p.Numerator).Width(125);
+                columns.Bound(p => p.Denominator).Width(125);
+                columns.Bound(p => p.CompliancePercent).Format("{0:0.0}%").Width(125);
+            })
+            .AutoBind(false)
+            .Scrollable(sc => sc.Height("auto"))
+            .HtmlAttributes(new { style = "font-size:12px;line-height:1em;" })
+            .DataSource(dataSource => dataSource // Configure the grid data source
+                                        .Ajax() // Specify that ajax binding is used
+                                        .Events(e => e.Error("error_handler"))
+                                        .Read(read => read.Action("_TracerByEPGroupByEPExcel", "TracerByEP").Data("additionalData")) // Set the action method which will return the data in JSON format
+                                        .PageSize(20))
+                    .Events(e => e.ExcelExport("excelExportIE8"))
+            .Pageable(pageable => pageable
+                .Refresh(true)
+                .PageSizes(new int[] { 20, 50, 100 }))
+            
+        )
+
+    </div>
+</div>
+
+<style>
+    #gridTCSTDIE8 {
+        display: none;
+    }
+</style>
+
+
+
+
+
+

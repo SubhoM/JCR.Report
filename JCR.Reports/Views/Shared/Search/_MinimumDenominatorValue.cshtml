@@ -1,0 +1,39 @@
+﻿     
+@{
+    string checktext = ViewData["checktext"] == null ? "Include minimal total denominator value of  " : ViewData["checktext"].ToString();
+}
+<div id="includeMinDenCheckbox" class="checkbox" >
+        <label id="mindenomvalue" ><input id="minimaldenomValuebox" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="mindencheckboxChange();">
+                @checktext
+                @(Html.Kendo().NumericTextBox<int>()
+            .Name("mindenvalue")
+            .Min(0)
+            .Max(99999)
+            .HtmlAttributes(new { style = "width:50px;" })
+            .Value(0)
+            .Spinners(false)
+.Decimals(0)
+.Format("#")
+.Enable(false)
+                ) 
+
+</label>
+    </div>
+
+
+
+<script type="text/javascript">
+    function mindencheckboxChange() {
+        var numerictextbox = $("#mindenvalue").data("kendoNumericTextBox");
+
+        if ($('#minimaldenomValuebox').is(':checked')) {
+            numerictextbox.enable(true);
+        }
+        else {
+            numerictextbox.enable(false);
+            numerictextbox.value(0);
+        }
+    }
+</script>
+
+

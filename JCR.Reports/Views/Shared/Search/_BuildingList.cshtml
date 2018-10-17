@@ -1,0 +1,67 @@
+﻿@model JCR.Reports.Models.SearchList
+@{
+
+    // initial level checks
+    bool hasranking2 = Model.hasRanking2;
+    <input type="hidden" name="OrgRanking2Name" id="OrgRanking2Name" value="@Model.OrgRanking2Name" />
+
+}
+<div id="tracerorgbuilding">
+    @{
+        if (@hasranking2)
+        {
+            string ranking2name = Model.OrgRanking2Name;
+
+
+            <h6><b>@ranking2name</b></h6>
+            <div class="margintop">
+
+                @(Html.Kendo().MultiSelect()
+          .Name("OrgBuilding")
+                  .DataTextField("OrganizationTitle")
+                  .DataValueField("OrganizationID")
+          .Placeholder("Select " + @ranking2name)
+          .Filter(FilterType.Contains)
+         // .HighlightFirst(true)
+          .BindTo(Model.BuildingLists)
+          .AutoClose(false)
+                  .Events(e =>
+                            {
+                                e.Change("onlevel2Change").Select("OrgBuildingTypeSelect");
+                            })
+                    .Value("-1")
+                )
+            </div>
+
+        }
+
+    }
+
+</div>
+<script>
+    $(document).ready(function () {
+      
+        if ($("#OrgRanking2Name").val() != "") {
+            addarrowtomultiselect("OrgBuilding");
+           // removedeleteoption("OrgBuilding");
+        }
+
+    });
+    //function onlevel2Close(e) {
+    //     removedeleteoption("OrgBuilding");
+       
+    //}
+    function OrgBuildingTypeSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.OrganizationTitle === "All") {
+            $('#OrgBuilding').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+</script>

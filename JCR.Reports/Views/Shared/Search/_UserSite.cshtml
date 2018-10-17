@@ -1,0 +1,126 @@
+﻿@using JCR.Reports.Common;
+@using System.Linq;
+@{
+       int selectedSite;
+       string selectedSiteName;
+       // check session
+       if (AppSession.HasValidSession)
+       {
+           selectedSite = AppSession.SelectedSiteId;
+           selectedSiteName = AppSession.SelectedSiteName;
+       }
+       else
+       {
+           throw new Exception("Invalid Session");
+       }
+}
+@model IEnumerable<JCR.Reports.Models.UserSite>
+
+@Html.Hidden("UserSite", selectedSite)
+@Html.Hidden("UserSiteName", selectedSiteName)
+@*<div>
+    <div class="container-fluid" >
+        <div class="collapse navbar-collapse">*@
+            <ul class="nav navbar-nav navbar-right navDrpDwn" style="width:100%; padding:0px !important;">
+                <li class="dropdown active" style="width:inherit;height:inherit; line-height: normal;">
+                    <a href="#" class="dropdown-toggle ddheight siteDropdwnHeaderAnchor" data-toggle="dropdown" role="button" aria-expanded="false">
+                        
+                            <span id="litSelectedSite">@Model.FirstOrDefault(item => item.SiteID == selectedSite).SiteFullName</span>
+                        
+                        @if (Model.Count() > 1)
+                        {
+                            <div>
+                                <span id="SpanSitesULCaret" class="caret caret-large"></span>
+                            </div>
+                        }
+                        else
+                        {
+                           <span>&nbsp;</span>                            
+                        }
+
+                    </a>
+                    @if (Model.Count() > 1)
+                    {
+                        <ul class="dropdown-menu scrollable-menu siteDropDown" role="menu" id="SitesUL" >
+                            <li>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="site-search" placeholder="Start typing to Find a Site" onkeydown="if (window.event.keyCode == 13){event.returnValue=false;event.cancel = true;}">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </li>
+                            @foreach (var item in Model)
+                            {
+
+                                var siteObj = new
+                                {
+                                    SiteID = item.SiteID.ToString(),                                    
+                                    IsTracersAccess = item.IsTracersAccess.ToString(),
+                                    IsAMPAccess = item.IsAMPAccess.ToString()
+                                };
+
+                                string strItem = Json.Encode(siteObj);
+
+                                <li class="siteStyle">
+                                    <a data-siteid="@item.SiteID" class="AvailableSites siteLinkStyle" href="#" onclick='onSiteChange("@item.SiteID","@item.SiteFullName","@item.IsAMPAccess","@item.IsTracersAccess")'>
+                                        @item.SiteFullName
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            </ul>
+
+        @*</div>
+    </div>
+</div>*@
+
+
+
+<script type="text/javascript" >
+    //$(document).ready(function () {
+    //    var ulQuickLinks = $("#ulQuickLinks");
+    //    var mainNav = $('#MainNavbar');
+    //    mainNav.on('event', function () {
+    //        mainNav.addClass('affix').trigger('affixAffixed');
+    //    });
+    //    mainNav.on('event', function () {
+    //        mainNav.addClass('affix-top').trigger('affixRemoved');
+    //    });
+
+    //    // in another js file, far, far away
+    //    mainNav.on('affixAffixed', function () {
+    //        //alert('affixAffixed');
+    //    });
+
+    //    mainNav.on('affixRemoved', function () {
+    //        //alert('affixRemoved');
+    //    });
+    //    mainNav.affix({
+    //        offset: $('#MainNavbar').position()
+            
+    //    });
+    //});
+</script>
+
+@{
+    if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        if (Request.Browser.MajorVersion < 9)
+        {
+            <script src="~/Scripts/respond.min.js"></script>
+            <script src="~/Scripts/html5shiv.min.js"></script>
+    
+            <style type="text/css">
+                .ddheight{
+                    height:45px;
+                }
+                .navbar-nav > LI > A{
+                    padding-top:8px;
+                }
+            </style>
+        }
+    }
+}

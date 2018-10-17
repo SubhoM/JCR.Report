@@ -1,0 +1,58 @@
+﻿@using JCR.Reports.Common;
+@{
+    string checktext = ViewData["checktext"] == null ? "Include only questions " : ViewData["checktext"].ToString();
+}
+<div id="includeHavCompCheckbox" class="checkbox" style="margin-left:20px">
+        <input id="havingcompValuebox" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="havcompcheckboxChange();">
+        Include only questions 
+        @(Html.Kendo().DropDownList()
+        .Name("HavingComplianceQuestions")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .Enable(false)
+        .BindTo(new List<SelectListItem>() {
+            new SelectListItem() {
+                Text = "less than",
+                Value = "lt"
+            },
+            new SelectListItem() {
+                Text = "greater than",
+                Value = "gt"
+            }
+        })
+        .HtmlAttributes(new { style = "width:100px;" })
+        .Value("1")
+        )
+        @(Html.Kendo().NumericTextBox<int>()
+        .Name("havcompvalue")
+        .Min(0)
+        .Max(100)
+        .HtmlAttributes(new { style = "width:40px;" })
+        .Value(0)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("#")
+        .Enable(false)
+        ) % compliance
+</div>
+
+
+
+<script type="text/javascript">
+    function havcompcheckboxChange() {
+        var numerictextbox = $("#havcompvalue").data("kendoNumericTextBox");
+        var ddl = $('#HavingComplianceQuestions').data("kendoDropDownList");
+        
+        if ($('#havingcompValuebox').is(':checked')) {
+            numerictextbox.enable(true);
+            ddl.enable(true);
+        }
+        else {
+            ddl.enable(false);
+            numerictextbox.enable(false);
+            numerictextbox.value(0);
+        }
+    }
+</script>
+
+

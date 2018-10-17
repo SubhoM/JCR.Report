@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JCR.Reports.DataModel.AssignedToUser>
+<div id="multisiteAssignmentAssignedTo">
+    <h6><b>Assigned To</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("AssignmentAssignedTo")
+                  .DataTextField("FullName")
+                  .DataValueField("UserID")
+          .Placeholder("Select Assigned To")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+                   .Events(e =>
+                   {
+                       e.Select("onAssignmentAssignedToSelect");
+                   })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("AssignmentAssignedTo");
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

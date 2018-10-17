@@ -1,0 +1,221 @@
+﻿<style type="text/css">
+    /*.tooltip .tooltip-inner {
+        min-width: 350px;
+    }*/
+    .right.tooltip {
+        margin-left: -4px;
+    }
+</style>
+<div id="ObservationDate" style="margin-top:30px;">
+
+    <div class="row margintopadd tracerSchedulemargin">
+        <div class="col-xs-2 verticalAlign">
+            <span style="float: left; margin-top:8px; margin-right:2px; margin-left:-3px;"><b>From:</b></span>
+        </div>
+        <div class="col-xs-10 text-left">
+            <input type="date" id="ObsstartDate" placeholder="mm/dd/yyyy">
+        </div>
+    </div>
+    <div class="row margintopadd ">
+        <div class="col-xs-2 verticalAlign">
+            <span style="float: left; margin-top:8px; margin-right:2px;  margin-left:-3px;"><b>To:</b></span>
+        </div>
+        <div class="col-xs-10 text-left">
+            <input type="date" id="ObsEndDate" placeholder="mm/dd/yyyy">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var skipFutureDateValidation = false;
+    var useStickyDate = false;
+    var lstStickyDates = [];
+    var stickDateDefaultValue = null;
+
+    function DateRangeDefault() {
+        if (jQuery('input[type=radio][name=DateRange]').length) {
+
+            $('input:radio[id*="custom"]').prop('checked', true);
+        }
+    }
+
+    function LoadStickyDate(siteID, successFunctionCallback) {
+
+        if (!useStickyDate)
+            return true;
+
+        siteID = siteID.replace(/\,$/, ''); //Remove the last character if its a comma
+
+        $.ajax({
+            async: false,
+            cache: false,
+            dataType: "json",
+            url: "/Corporate/Home/GetStickyDates",
+            data: {
+                siteID: siteID
+            },
+            success: function (response) {
+                lstStickyDates = response;
+            }
+        });
+
+    }
+
+    function SetStickyDate(programID) {
+
+        if (!useStickyDate)
+            return true;
+
+        programID = programID.replace(/\,$/, ''); //Remove the last character if its a comma
+        var programStickyDate = _.find(lstStickyDates, function (item) {
+            return item.ProgramID == programID;
+        })
+
+        if (programStickyDate != null) {
+            $('input[name=DateRange][value="custom"]').prop('checked', true);
+            $("#ObsstartDate").data("kendoDatePicker").value(programStickyDate.ScoreAnalyzerStartDate);
+            $("#ObsEndDate").data("kendoDatePicker").value(programStickyDate.ScoreAnalyzerEndDate);
+
+        }
+        else {
+
+            if (stickDateDefaultValue != null) {
+                $('input:radio[name="DateRange"][value="' + stickDateDefaultValue + '"]').prop("checked", true);
+                dateRangeRadioChange();
+            }
+            else {
+                $('input[name=DateRange]').prop('checked', false);
+                $("#ObsstartDate").data("kendoDatePicker").value("");
+                $("#ObsEndDate").data("kendoDatePicker").value("");
+
+                $('#divrangeobs input').removeAttr("disabled");
+                $('#ObservationDate input').removeAttr("disabled");
+                $('#ObsstartDate').data('kendoDatePicker').enable(true);
+                $('#ObsEndDate').data('kendoDatePicker').enable(true);
+            }
+        }
+
+    }
+
+    $(document).ready(function () {
+        $("#ObsstartDate").kendoDatePicker({
+            format: "MM/dd/yyyy",
+            parseFormats: ["MM-dd-yyyy", "MM/dd/yyyy", "MM-dd-yy", "MM/dd/yy"],
+            depth: "year",
+            change: function () {
+                DateRangeDefault();
+                ValidateStartDate(4000);
+            }
+        });
+
+        $("#ObsEndDate").kendoDatePicker({
+            format: "MM/dd/yyyy",
+            parseFormats: ["MM-dd-yyyy", "MM/dd/yyyy", "MM-dd-yy", "MM/dd/yy"],
+            depth: "year",
+            change: function () {
+                DateRangeDefault();
+                ValidateEndDate(4000);
+            }
+        });
+
+        $("#ObsstartDate").keypress(function (e) {
+            return AllowNumericOnly(e);
+        });
+        $("#ObsEndDate").keypress(function (e) {
+            return AllowNumericOnly(e);
+        });
+
+        $("#ObsstartDate").on("paste", function (e) {
+            return ValidateClipboardText();
+        });
+        $("#ObsEndDate").on("paste", function (e) {
+            return ValidateClipboardText();
+        });
+
+        $("#ObsstartDate").closest("span.k-datepicker").width(100);
+        $("#ObsEndDate").closest("span.k-datepicker").width(100);
+    });
+
+    //Validates both the Start and End dates
+    function ValidateData(timeDelay) {
+        return ValidateStartDate(timeDelay) && ValidateEndDate(timeDelay);
+    }
+
+    //Validate Start date
+    function ValidateStartDate(timeDelay) {
+        var IsDateValid = true;
+        var ObsStartDateCtrl = $("#ObsstartDate");
+        var startDate = $("#ObsstartDate").val();
+        var endDate = $("#ObsEndDate").val();
+        var today = new Date();
+        var ErrorMessage = "";
+        var dtStartDate = new Date(startDate);
+        var dtEndDate = new Date(endDate);
+        var bValidStartDate = DateValidator(startDate);
+        var bValidEndDate = DateValidator(endDate);
+
+        if (!bValidStartDate && startDate.length > 0) {
+            ErrorMessage = "Enter valid From Date (mm/dd/yyyy)";
+            IsDateValid = false;
+        }
+
+        if (bValidStartDate && bValidEndDate) {
+            if (skipFutureDateValidation == false && dtStartDate > today) {
+                ErrorMessage = "From Date cannot be in the future";
+                IsDateValid = false;
+            }
+            else if (dtStartDate > dtEndDate) {
+                ErrorMessage = "From-date should be before To-date.";
+                IsDateValid = false;
+            }
+        }
+        else if (bValidStartDate && skipFutureDateValidation == false && dtStartDate > today) {
+            ErrorMessage = "From Date cannot be in the future";
+            IsDateValid = false;
+        }
+
+        if (!IsDateValid) {
+            ShowToolTip(ObsStartDateCtrl, ErrorMessage, "top", timeDelay);
+        }
+        return IsDateValid;
+    }
+
+    //Validate End Date
+    function ValidateEndDate(timeDelay) {
+        var IsDateValid = true;
+        var ObsEndDateCtrl = $("#ObsEndDate");
+        var startDate = $("#ObsstartDate").val();
+        var endDate = $("#ObsEndDate").val();
+        var today = new Date();
+        var ErrorMessage = "";
+        var dtStartDate = new Date(startDate);
+        var dtEndDate = new Date(endDate);
+        var bValidStartDate = DateValidator(startDate);
+        var bValidEndDate = DateValidator(endDate);
+
+        if (!bValidEndDate && endDate.length > 0) {
+            ErrorMessage = "Enter valid To Date (mm/dd/yyyy)";
+            IsDateValid = false;
+        }
+
+        if (bValidStartDate && bValidEndDate) {
+            if (skipFutureDateValidation == false && dtEndDate > today) {
+                ErrorMessage = "To Date cannot be in the future";
+                IsDateValid = false;
+            }
+            else if (dtStartDate > dtEndDate) {
+                ErrorMessage = "To Date cannot be before From Date";
+                IsDateValid = false;
+            }
+        }
+        else if (bValidEndDate && skipFutureDateValidation == false && dtEndDate > today) {
+            ErrorMessage = "To Date cannot be in the future";
+            IsDateValid = false;
+        }
+
+        if (!IsDateValid) {
+            ShowToolTip(ObsEndDateCtrl, ErrorMessage, "bottom", timeDelay);
+        }
+        return IsDateValid;
+    }
+
+</script>

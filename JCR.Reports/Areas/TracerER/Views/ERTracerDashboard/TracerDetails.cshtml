@@ -1,0 +1,100 @@
+﻿<div class="panel panel-default " id="divL1tag" style="border-color:#428bca !important; width:100%;">
+    <div id="resultTracerDetails" style="width:97vw;">
+        @(Html.Kendo().Grid<JCR.Reports.Areas.TracerER.ViewModels.CompliaceByTracerDetails>()
+                    .Name("gridTracerDetails")
+                    .ToolBar(tools => tools.Excel())
+                    .Excel(excel => excel
+                                    .AllPages(true)
+                                    .FileName("Tracer Dashboard-Details.xlsx")
+                                    .Filterable(true)
+                                    .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                            )
+                    .Columns(col =>
+                    {
+                        col.Bound(p => p.Tracer).Title("Tracer").Locked().Width(1).Visible(false);
+                        col.Bound(p => p.QuesNo).Title("Q#").Locked().HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" }).Width(50).Groupable(false);
+                        col.Bound(p => p.QuestionText).Title("Question").Locked().HeaderHtmlAttributes(new { style = "text-align:center" }).Width(400).Groupable(false).Encoded(false);
+                        col.Bound(p => p.OverallTracerCompliance).Title("Overall Question Compliance %").Locked().HeaderHtmlAttributes(new { style = "text-align:center;" }).HtmlAttributes(new { style = "text-align:right" }).Width(120).Groupable(false);
+
+                        for (int i = 0; i < ViewBag.Header.Count; i++)
+                        {
+                            string c = ViewBag.Header[i].ToString();
+                            col.Group(g => g.Title(c).HeaderHtmlAttributes(new { style = "text-align:center" }).
+                                Columns(sitewise =>
+                                {
+                                    sitewise.Bound(p => p.QuestionwiseSite[i].Numerator).Width(100).Groupable(false).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                                    sitewise.Bound(p => p.QuestionwiseSite[i].Denominator).Width(105).Groupable(false).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                                    sitewise.Bound(p => p.QuestionwiseSite[i].CompliancePercent).Width(105).Groupable(false).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                                }));
+                            col.Template(@<text>" "</text>).Title(" ").Width(10);
+                        }
+
+
+                    })
+                    .Sortable()
+                    .AutoBind(true)
+                    .Scrollable(sc => sc.Height("auto"))
+                    .HtmlAttributes(new { style = "font-size:12px;line-height:1em;" })
+                    .DataSource(dataSource => dataSource // Configure the grid data source
+                            .Ajax() // Specify that ajax binding is used
+                            .ServerOperation(false)
+                            .Model(m =>
+                            {
+                                m.Field(p => p.Tracer);
+                                m.Field(p => p.QuesNo);
+                                m.Field(p => p.QuestionText);
+                                m.Field(p => p.OverallTracerCompliance);
+                                for (int i = 0; i < ViewBag.Header.Count; i++)
+                                {
+                                    m.Field(p => p.QuestionwiseSite[i].Numerator);
+                                    m.Field(p => p.QuestionwiseSite[i].Denominator);
+                                    m.Field(p => p.QuestionwiseSite[i].CompliancePercent);
+                                }
+                            })
+                            .Sort(sort => sort.Add("QuesNo").Ascending())
+                            .Events(e => e.Error("error_handler"))
+                            .Read(read => read.Action("TracerDetails", "ERTracerDashboard").Data("additionalData")) // Set the action method which will return the data in JSON format
+                            .PageSize(20)
+                            .Group(group => group.Add(p => p.Tracer)))
+                    //.Reorderable(reorder => reorder.Columns(true))
+                    .Resizable(resizing => resizing.Columns(true))
+                    .Groupable()
+                    .Events(e => e.ExcelExport("TracerDetailExcelExport").DataBound("onDetailsDataBound"))
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 }))
+        )
+
+    </div>
+
+</div>
+
+<style>
+    #resultTracerDetails {
+        display: block;
+    }
+
+    #gridTracerDetails .k-grid-header .k-header{
+        white-space: normal;
+        border-right: 1px solid #ccc;
+    }
+    #gridTracerDetails  .k-grid-header  .k-header  .k-link {
+        height: 40px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var windowHeight = $(window).height() * .75;
+
+        //if(windowHeight > 750)
+        //    $('#gridMTB').addClass("viewHeight");
+        //else
+        //    $('#gridMTB').addClass("setHeight");
+        $(".k-grid-content").css("min-height", "450px");
+        $(".k-grid-content").css("height", windowHeight + "px");
+    });
+
+
+</script>

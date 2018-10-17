@@ -1,0 +1,40 @@
+﻿@using JCR.Reports.Common;
+@using System.Linq;
+@{
+    int selectedSite;
+    string selectedSiteName;
+    // check session
+    if (AppSession.HasValidSession)
+    {
+        selectedSite = AppSession.SelectedSiteId;
+        selectedSiteName = AppSession.SelectedSiteName;
+    }
+    else
+    {
+        throw new Exception("Invalid Session");
+    }
+}
+@Html.Hidden("UserSite", selectedSite)
+@Html.Hidden("UserSiteName", selectedSiteName)
+<ul id="siteSelect" class="nav navbar-right navDrpDwn"style="width:100%; padding:0px !important;" >
+    <li class="active" style="height:inherit; line-height: normal;">
+        <a class="dropdown-toggle siteDropdwnHeaderAnchor" data-toggle="dropdown" aria-expanded="false">
+        @*@AppSession.SelectedSiteName<span class="caret caret-large navArrowSpacing"></span>*@
+            <span>@AppSession.SelectedSiteName </span>
+            <div>
+                <span class="caret caret-large"></span>
+            </div>
+        </a>
+
+        <ul id="siteDropDown" class="dropdown-menu scrollable-menu siteDropDown" role="menu" aria-labelledby="dropdownMenu">
+            <li>
+                <div class="input-group" style="max-height:270px; overflow-y: auto;">
+                    <input type="text" id="siteSelectInput" placeholder="Start typing to Find a Site" class="form-control" />
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>

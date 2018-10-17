@@ -1,0 +1,136 @@
+﻿@model JCR.Reports.Models.Search
+<div class="panel panel-primary">
+    <div class="row well marginfull">
+        <button class="export-pdf k-button">
+            <span class="k-icon k-i-pdf"></span> Export to PDF
+        </button>
+    </div>
+
+    <div class="row">
+
+
+        <div class="row" @(string.IsNullOrEmpty(Model.OrgRanking3Header) ? "style=display:none;" : string.Empty)>
+            <div class="col-xs-12 text-center">
+                <strong>
+                    @Model.OrgRanking3Header:
+                    @Model.OrgTypeLevel3Names
+                </strong>
+            </div>
+        </div>
+
+        <div class="row" @(string.IsNullOrEmpty(Model.OrgRanking2Header) ? "style=display:none" : string.Empty)>
+            <div class="col-xs-12 text-center">
+                <strong>
+                    @Model.OrgRanking2Header:
+                    @Model.OrgTypeLevel2Names
+                </strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <strong>
+                    @Model.OrgRanking1Header:
+                    @Model.OrgTypeLevel1Names
+                </strong>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <strong>@Model.ReportDateTitle</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <strong>
+                    Tracers:
+                    @Model.TracerListNames
+                </strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <strong>
+                    Tracers Category:
+                    @Model.TracerCategoryNames
+                </strong>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <strong>Include minimal total denominator value:</strong>
+                @if (Model.IncludeMinimalDenomValue)
+                {
+                    <strong>True (@Model.MinimalDenomValue)</strong>
+                }
+                else
+                {
+                    <strong>False</strong>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div id="resultMTBChart">
+        <div class="row text-center">
+            <br />
+            <strong>Total Compliance: <label id="lblTotalCompliance" />%</strong>
+        </div>
+        <div id="divtiebreakermessage" align="center" style="background-color: #f2dede; color: #a94442;"></div>
+        @(Html.Kendo().Chart<JCR.Reports.Areas.Tracer.Models.MonthlyBreakdownGraph>()
+                    .Name("chartMTB")
+                    .Title("")
+                    .Legend(legend => legend.Position(ChartLegendPosition.Bottom))
+                    .AutoBind(false)
+                    .HtmlAttributes(new { style = "font-size:12px;line-height:1em;" })
+                    .DataSource(dataSource => dataSource
+                                            .ServerOperation(false)
+                                            .Read(read => read.Action("_MonthlyTracerBreakdownChart", "MonthlyTracerBreakdown")
+                                            .Data("additionalData"))
+                                )
+                                .Series(series =>
+                                {
+                                    series.Line(p => p.Compliance).Color("#4A9EE6").Name(string.Empty).Labels(labels => labels.Template("#=generateLabelTemplate(data)#").Visible(true));                                    
+                                })
+                                .CategoryAxis(axis =>
+                                {
+                                    axis.Categories(p => p.Month).Type(ChartCategoryAxisType.Category).Name("Month").Title("Months");
+                                })
+                                .ValueAxis(axis => axis.Numeric().Min(0).Max(110).NarrowRange(false)
+                                .Title("Compliance %")
+                                .Line(line => line.Visible(false))
+                                )
+                                .Tooltip(t => t.Template("#=data.dataItem.Tooltip#").Visible(true))
+                                .Events(e => e.SeriesClick("onSeriesClick").PlotAreaClick("onSeriesClick").DataBound("onChartDataBound"))
+                                .PlotArea(p => p.Margin(10))
+        )
+    </div>
+</div>
+
+<style>
+    .marginfull {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    #resultMTBChart {
+        display: block;
+    }
+</style>
+
+<script type="text/javascript">
+    function generateLabelTemplate(data) {
+        return data.dataItem.Label;
+    }
+
+    function generateTooltopTemplate(data) {
+        return data.dataItem.Tooltip;
+    }
+
+    $(document).ready(function () {
+        $(".export-pdf").click(function () {
+            ExportChartAsPDF('chartMTB');
+        });
+    });
+</script>

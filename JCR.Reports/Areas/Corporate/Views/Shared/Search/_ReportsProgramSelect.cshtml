@@ -1,0 +1,318 @@
+﻿@model IEnumerable<JCR.Reports.DataModel.Programs>
+    @{ 
+        var firstProgram = Model.First();
+
+        int SelectedProgramID = firstProgram.BaseProgramID;
+        string SelectedProgramName = firstProgram.ProgramName;
+
+        var accreditation = Model.Where(item => item.ProductID == 1);
+
+        var firstFive = accreditation.Count() > 5 ? accreditation.Take(5) : accreditation;
+        var accreditationItems = accreditation.Count() > 5 ? accreditation.Where(progs => progs.ProductID == 1 && !firstFive.Contains(progs)) : new List<JCR.Reports.DataModel.Programs>();
+        var certificationItems = Model.Where(item => item.ProductID == 2 && item.AdvCertFlag != "Y");
+        var advancedcertificationItems = Model.Where(item => item.AdvCertFlag == "Y");
+
+        var isAccrediation = accreditationItems.Count() > 0;
+        var isCertification = certificationItems.Count() > 0 || advancedcertificationItems.Count() > 0;
+        var isadvCertification = advancedcertificationItems.Count() > 0;
+        int i = 1;
+    }
+<script type="text/javascript">
+    $('.dropdown-accordion').on('show.bs.dropdown', function (event) {
+        var accordion = $(this).find($(this).data('accordion'));
+        accordion.find('.panel-collapse.in').collapse('hide');
+    });
+
+    // Prevent dropdown to be closed when we click on an accordion link
+    $('.dropdown-accordion').on('click', 'a[data-toggle="collapse"]', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    function AccordionOpenCloseRep(accordion) {
+        
+        var bIsOpen = $($('#' + accordion).attr('data-target')).hasClass("collapse in");
+        if (bIsOpen == true) {
+            $($('#' + accordion).attr('data-target')).removeClass("in");
+            $('#' + accordion + 'Icon').addClass("caretInverse");
+        }
+        else {
+            $($('#' + accordion).attr('data-target')).addClass("in");
+            $('#' + accordion + 'Icon').removeClass("caretInverse");
+        }
+    }
+    
+    function onReportProgramMenuItemSelect(e, pc, programName, isFirstFive) {
+        
+        event.preventDefault();
+        event.stopPropagation();
+
+        $("li[role='presentation']").each(
+            function (index) {
+                $(this).removeClass('active');
+            });
+        if (isFirstFive)
+        {
+            $('#' + pc).addClass('active');
+            $('#morePrograms').html('More Programs');
+        }
+        else
+        {
+            $('#moreProgramsPres').addClass('active');
+            $('#morePrograms').html(programName);
+        }
+
+        onProgramMenuSelect(e, programName);
+        return false;
+    }
+</script>
+    <div id="reportprogram">
+        @Html.Hidden("hdnSelectedProgramID", @SelectedProgramID)
+        @Html.Hidden("hdnSelectedProgramName", @SelectedProgramName)
+
+        <div class="col-xs-12">
+            <ul class="nav nav-pills" id="programSelect">
+
+                @foreach (var firstFiveProgram in firstFive)
+                {
+                    
+                    if (i == 1)
+                    {
+                        i++;
+                        <li role="presentation" class="active" id="@firstFiveProgram.ProgramCode.Trim()">
+                            <a class="disabled-linkb" onclick="onReportProgramMenuItemSelect(@firstFiveProgram.ProgramID, '@firstFiveProgram.ProgramCode.Trim()', '@firstFiveProgram.ProgramName.Trim()', true)">@firstFiveProgram.ProgramName</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li role="presentation" id="@firstFiveProgram.ProgramCode.Trim()">
+                            <a class="disabled-linkb" onclick="onReportProgramMenuItemSelect(@firstFiveProgram.ProgramID, '@firstFiveProgram.ProgramCode.Trim()', '@firstFiveProgram.ProgramName.Trim()', true)">@firstFiveProgram.ProgramName</a>
+                        </li>
+                    }
+                    
+                }
+                @if (isAccrediation || isCertification || isadvCertification)
+                {
+                    <li role="presentation" class="dropdown" id="moreProgramsPres">
+
+                        <a class="dropdown-toggle disabled-linkb" data-toggle="dropdown" aria-expanded="false" >
+                            <span id="morePrograms">More Programs</span><span class="caret navArrowSpacing"></span>
+                        </a>
+
+                        <ul class="dropdown-menu programDropDown" role="menu" aria-labelledby="dLabel">
+                            <li>
+                                <div id="divPrgDropDown" class="dropdown dropdown-accordion" data-accordion="#accordion" style="max-height:450px; overflow-x:hidden; overflow-y:auto; margin-top: -8px;">
+
+                                    <div class="panel-group" id="accordion" >
+                                        @if (isAccrediation)
+                                        {
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-target="#AccredRep" id="AccredHeaderRep" aria-expanded="true" data-toggle="collapse" data-parent="#accordion" href="javascript:void(0);" onclick='AccordionOpenCloseRep("AccredHeaderRep");'>
+                                                            <span id="AccredHeaderRepIcon" class="caret caret-large progSelectArrowSpacing"  aria-hidden="true"></span>Accreditation
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-collapse collapse in" id="AccredRep" aria-expanded="true">
+                                                    <div class="panel-body">
+                                                        @foreach (var program in accreditationItems)
+                                                            {
+                                                                <div class="programElement text-left">
+                                                                    <a class="disabled-linkb" onclick="onReportProgramMenuItemSelect(@program.BaseProgramID, '@program.ProgramCode.Trim()', '@program.ProgramName.Trim()', false)">@program.ProgramName</a>
+                                                                </div>
+                                                            }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                            @if (isCertification || isadvCertification)
+                                        {
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-target="#certRep" id="CertHeaderRep" data-toggle="collapse" data-parent="#accordion" href="javascript:void(0);" onclick='AccordionOpenCloseRep("CertHeaderRep");'>
+                                                        <span id="CertHeaderRepIcon" class="caret caret-large progSelectArrowSpacing"  aria-hidden="true"></span>Certification
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div class="panel-collapse collapse in" id="certRep">
+                                                <div class="panel-body">
+                                                    @foreach (var certprogram in certificationItems)
+                                                        {
+                                                        <div class="programElement text-left">
+                                                            <a class="disabled-linkb" onclick="onReportProgramMenuItemSelect(@certprogram.BaseProgramID, '@certprogram.ProgramCode.Trim()', '@certprogram.ProgramName.Trim()', false)">@certprogram.ProgramName</a>
+                                                        </div>
+                                                        }
+                                                    @if (isadvCertification)
+                                                        {
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a class="advDis" data-target="#advdisRep" id="AdvDisHeaderRep" data-toggle="collapse" data-parent="#accordion" onclick='AccordionOpenCloseRep("AdvDisHeaderRep")'>
+                                                                        <span id="AdvDisHeaderRepIcon" class="caret caret-large caretInverse progSelectArrowSpacing"  aria-hidden="true"></span>Advance Disease
+                                                                    </a>
+                                                                </h4>
+                                                            </div>
+                                                            <div class="panel-collapse collapse" id="advdisRep">
+                                                                <div class="panel-body">
+                                                                    @foreach (var advprogram in advancedcertificationItems)
+                                                                        {
+                                                                        <div class="programElement text-left">
+                                                                            <a class="disabled-linkb-adv" onclick="onReportProgramMenuItemSelect(@advprogram.BaseProgramID, '@advprogram.ProgramCode.Trim()', '@advprogram.ProgramName.Trim()', false)">@advprogram.ProgramName</a>
+                                                                        </div>
+                                                                        }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+<style type="text/css">
+    .k-i-arrow-s, .k-i-arrow-60-down {
+        margin-top: 0px;
+    }
+    .caretInverse{
+        transform: rotate(180deg);
+    }
+
+    .programDropDown {
+  width: 330px;
+  color: #333333;
+  width: -moz-calc(100%+120px);
+  width: -webkit-calc(100%+120px);
+  width: calc(100%+120px);
+  top: 42px;
+  padding: 0;
+  border-color: #c7c8c9;
+  font-size: 14px; }
+  .programDropDown .glyphicon {
+    font-size: 12px;
+    padding-right: 5px; }
+  .programDropDown .panel-title {
+    font-size: 14px;
+    color: #333333; }
+  .programDropDown .programElement {
+    height: 34px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e2e3e3;
+    padding: 0px; }
+    .programDropDown .programElement > a {
+      display: block;
+      height: inherit;
+      padding: 10px 10px 10px 45px; }
+    .programDropDown .programElement > a.disabled-linkb-adv {
+      padding: 10px 0px 10px 55px; }
+  .programDropDown .programElement:hover {
+    background-color: #279ddd; }
+    .programDropDown .programElement:hover > .disabled-linkb, .programDropDown .programElement:hover > .disabled-linkb-adv, .programDropDown .programElement:hover > .disabled-linkb-adv {
+      color: #ffffff; }
+  .programDropDown .panel-footer {
+    padding: 0; }
+  .programDropDown .panel-group {
+    margin-bottom: 0 !important; }
+  .programDropDown .panel-body {
+    padding: 0 !important;
+    margin: 0 !important; }
+  .programDropDown .panel-heading {
+    padding-left: 10px !important;
+    height: 34px; }
+    .programDropDown .panel-heading a {
+      display: block;
+      text-decoration: none; }
+  .programDropDown .panel.noborder {
+    border: none;
+    box-shadow: none; }
+  .programDropDown .panel.panel-default {
+    margin-top: 0px;
+    border-width: 0px; }
+    .programDropDown .panel.panel-default .panel.panel-default > .panel-heading {
+      background-color: #ebebeb; }
+  .programDropDown .panel-group > .panel.panel-default:nth-child(odd) > .panel-heading {
+    background-color: #e9f2f9; }
+  .programDropDown .panel-group > .panel.panel-default:nth-child(even) > .panel-heading {
+    background-color: #e9f2f9; }
+  .programDropDown .panel-heading:hover {
+    background-color: #279ddd !important; }
+    .programDropDown .panel-heading:hover > .panel-title {
+      color: #ffffff; }
+
+.programSelect {
+  position: absolute;
+  z-index: 2;
+  margin: 0 !important;
+  float: left !important;
+  padding: 0 !important; }
+  .programSelect .panel-footer {
+    padding: 0; }
+  .programSelect .panel-group {
+    margin-bottom: 0 !important; }
+  .programSelect .panel-body {
+    padding: 0 !important;
+    margin: 0 !important; }
+  .programSelect .panel-heading {
+    padding-left: 5px !important; }
+  .programSelect .panel.noborder {
+    border: none;
+    box-shadow: none; }
+  .programSelect .programElement {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: lightgray;
+    padding: 10px; }
+
+  [role~="presentation"]{
+      border:1px solid #e6e6e6;
+      cursor:pointer;
+  }
+  .nav-pills>li>a{
+      border-radius:2px;
+  }
+.disabled-linkb, .disabled-linkb:hover, .disabled-linkb-adv:hover, .disabled-linkb-adv {
+  text-decoration: none;
+  color: #333333; }
+
+.disabled-linkb-adv {
+  padding-left: 30px; }
+
+.disabled-linkb-adv:hover {
+  padding-left: 30px; }
+
+.progSelectArrowSpacing{
+    margin-right:10px;
+}
+
+</style>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿<div>
+    <h6><b>Top Findings</b></h6>
+    @(Html.Kendo().DropDownList()
+    .Name("TopFindings")
+    .DataTextField("Text")
+    .DataValueField("Value")
+    .BindTo(new List<SelectListItem>() {
+        new SelectListItem() {
+            Text = "All",
+            Value = "0"
+        },
+        new SelectListItem() {
+            Text = "10",
+            Value = "10"
+        },
+        new SelectListItem() {
+            Text = "20",
+            Value = "20"
+        },
+        new SelectListItem() {
+            Text = "30",
+            Value = "30"
+        },
+        new SelectListItem() {
+            Text = "40",
+            Value = "40"
+        }
+    })
+    .Value("10")
+    )
+</div>

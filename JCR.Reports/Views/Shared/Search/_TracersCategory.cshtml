@@ -1,0 +1,71 @@
+﻿@model JCR.Reports.Models.SearchList
+    <div id="tracercategory">
+       <h6><b>Tracer Category</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("TracersCategory")
+          .DataTextField("TracerCategoryName")
+          .DataValueField("TracerCategoryID")
+          .Placeholder("Select Tracers Category")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model.TracersCategories)
+        .AutoClose(false)
+                   .Events(e =>
+                    {
+                        e.Change("onCatChange").Select("onCatSelect");
+                    })
+                  .Value("-1")   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+    addarrowtomultiselect("TracersCategory");
+   // removedeleteoption("TracersCategory");
+    });
+    //function onCatClose(e) {
+    //  removedeleteoption("TracersCategory");
+    //}
+   
+   
+    function onCatSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+       
+        if (dataItem.TracerCategoryName === "All") {
+            $('#TracersCategory').data("kendoMultiSelect").value([]);
+        
+        } else if (jQuery.inArray("-1", values)) {
+           values = $.grep(values, function (value) {
+               return value !== -1;
+            });
+                  
+            if (values == "") { this.value(values); }
+         }
+       
+      
+    }
+   
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+﻿@model  IEnumerable<JCR.Reports.DataModel.Standard>
+    <div id="ampstandard">
+       <h6><b>Standard*</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("AMPStandard")
+                   .DataTextField("StandardLabel")
+                   .DataValueField("StandardID")
+                  .Placeholder("Select Standard")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model)
+                  .AutoClose(false)
+                   .Events(e =>
+                   {
+                       e.Change("onStdChange").Select("onStdSelect");
+                   })
+                .Value( "-1" )
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {        
+        addarrowtomultiselect("AMPStandard");
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+﻿@model JCR.Reports.Models.SearchList
+<div id="userassignedtodiv">
+    <h6><b>Assigned To</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("UserAssignedTo")
+          .DataTextField("UserName")
+          .DataValueField("UserID")
+          .Placeholder("Select Assigned To")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+                  .BindTo(Model.AssignedTo)
+                          .AutoClose(false)
+         // .ValuePrimitive(false)
+                                   .Events(e =>
+                                    {
+                                        e.Select("onUserAssignedToChangeSelect");
+                                    })
+          .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("UserAssignedTo");
+      //  removedeleteoption("UserAssignedTo");
+    });
+    //function onUserAssignedToClose(e) {
+    //    removedeleteoption("UserAssignedTo");
+    //}
+    function onUserAssignedToChangeSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.UserName === "All") {
+            $('#UserAssignedTo').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+</script>
+
+
+
+
+
+

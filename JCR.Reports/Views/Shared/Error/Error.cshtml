@@ -1,0 +1,113 @@
+﻿@using JCR.Reports.Common;
+@using System.Configuration;
+@{
+    // Error View: Standard error page view without using master _Layout
+    //
+    // Lightweight version of master layout.
+    // Duplicate some of _Layout appearance
+    //
+    
+    // Validate session, but allow to process if it does not exist
+    string username = string.Empty;
+    string role = string.Empty;
+
+    try
+    {
+        if (AppSession.HasValidSession) {
+            username = String.Format("{0} {1}", AppSession.FirstName, AppSession.LastName);
+            role = WebConstants.GetRoleForSelectedSite();
+        }
+    }
+    catch
+    {
+    }
+    finally
+    {
+    }
+    
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Tracers Reporting</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    @* Page View Header, duplicate _Layout header *@
+
+    <header>
+        <div class="container-fluid minSiteWidth">
+            <div class="row minSiteWidth">
+                <div class="col-xs-6 " style="margin-top: 4px; ">
+                    <div style="float: left;">
+                        <img src="~/Images/jcr_logo40.png" />
+                        @if (ViewBag.ERReports == true)
+                        {
+                             <img src="~/Images/EnterpriseReportingTracers.jpg" />
+                        }
+                        else
+                        { 
+                       
+                        <img src="~/Images/Tracers.jpg" />
+                        }
+                        
+                    </div>
+                    <div style="float: left;">
+                        <div style="padding-left:20px; padding-top:10px;">
+                            <b>@username</b>
+                            <br />
+                            @role
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6" align="right" style="margin-top: 4px;">
+                    @if (ViewBag.ERReports == true)
+                    {
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "PaddingRight20" })
+                    @Html.ActionLink("JCR Portal", "Portal", "Transfer", null, new { @class = "PaddingRight20" })
+                    @Html.ActionLink("Logout", "LogoutRedirect", "Transfer")
+                    }
+                    else
+                    {
+                    @Html.ActionLink("JCR Portal", "Portal", "Transfer", null, new { @class = "PaddingRight20" })
+                    @Html.ActionLink("Reports", "Index", "Home", null, new { @class = "PaddingRight20" })
+                    @Html.ActionLink("Logout", "LogoutRedirect", "Transfer")
+                    }
+              
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+     
+        <section>
+            <div class="row ">
+                <div class="col-xs-offset-4 col-xs-8">
+                    <p>
+                        An error occurred within the application...<br />The error was logged and it will be reviewed by the support team.<br />We apologize for the inconvenience.<br />If this error persists, please contact Customer Technical Support at 1-877-223-6866 and choose option 2 or by email at
+                        <br /> <a style='padding:0 0px;color:navy;' href='mailto:support@jcrinc.com'>support@jcrinc.com</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-xs-offset-5 col-xs-6" >
+                    @Html.ActionLink("<< Return to the Reports Home Page", "Index", "Transfer")
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+    <footer>
+        <div align="center">
+            <p>&copy; @DateTime.Now.Year The Joint Commission, &copy; @DateTime.Now.Year Joint Commission Resources</p>
+        </div>
+    </footer>
+  
+
+</body>
+</html>

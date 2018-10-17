@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/JCR.CCM.BusinessController" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/JCR.CCM.BusinessController" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="MailDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AmpUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Attachments" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="CustomText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailBCC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailCC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailTo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErUserScheduleID" type="xs:int" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FailedRecipients" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element minOccurs="0" name="FromEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Guid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MailContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MailSubject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteID" type="xs:int" />
+      <xs:element minOccurs="0" name="TemplateID" type="xs:int" />
+      <xs:element minOccurs="0" name="TxtNewEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserEmailScheduleID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MailDetails" nillable="true" type="tns:MailDetails" />
+</xs:schema>

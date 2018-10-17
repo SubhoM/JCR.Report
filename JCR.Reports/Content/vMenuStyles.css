@@ -1,0 +1,48 @@
+﻿div.ddlSite {
+    float:left;  margin: 5px 0 0 0; cursor: pointer;
+    width:280px; height: 49px;    
+    padding: 5px 5px 5px 5px;
+}
+
+div.ddlProgram {
+    float:right; margin: 5px 20px 0 5px; cursor: pointer;
+    width:180px; height: 49px;
+    padding: 5px 5px 5px 5px;
+}
+
+div.ddlSiteProgram:not(:hover) {
+    background-color: #e9f2f9;  /* Aqua  */ 
+    color:#279ddd;              /* Blue  */
+}
+div.ddlSiteProgram:hover {
+    background-color: #279ddd;  /* Blue  */
+    color:#ffffff;              /* White */
+}
+div.ddlSiteText{
+    width:250px;
+    float:left;
+}
+div.ddlProgramText{
+    width:150px;
+    float:left;
+}
+div.ddlSiteProgram:after {
+    content: ' ▾';
+	font-weight: bold;
+    font-size:16pt;
+	font-family: Calibri, Arial, sans-serif;
+    width: 20px;
+    height:20px;
+    color:#279ddd; 
+    float:right;
+}
+div.ddlSiteProgram:hover:after {
+    color:#ffffff !important;              /* White */
+    content: ' ▾';
+	font-weight: bold;
+    font-size:16pt;
+	font-family: Calibri, Arial, sans-serif;
+    width: 20px;
+    height:20px;
+    float:right;
+}

@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+@using JCR.Reports.Common;
+@using System.Configuration;
+@{
+    // _Layout: Shared Master view that contains session validation,
+    // custome message box, timeout warning, and loading box features
+    string username;
+    string role;
+    int selectedSite;
+    string selectedSiteName;
+    string programName;
+    int? userid;
+    string scheduleAction;
+    // check session
+    if (AppSession.HasValidSession)
+    {
+        username = String.Format("{0} {1}", AppSession.FirstName, AppSession.LastName);
+        role = WebConstants.GetRoleForSelectedSite();
+        selectedSite = AppSession.SelectedSiteId;
+        selectedSiteName = AppSession.SelectedSiteName;
+        programName = AppSession.SelectedProgramName;
+        userid = AppSession.UserID;
+        scheduleAction = Convert.ToString(TempData.Peek("ActionType"));
+    }
+    else
+    {
+        Response.Redirect("~/Transfer/Error");
+        throw new Exception("Invalid Session");
+    }
+    //Tracer role site mamanger is treated as staff member
+    //if (role == "Site Manager") { role = "Staff Member"; }
+
+    // Idle timeout duration
+    int showTimeoutWarningMinutes = 58;
+    if (ConfigurationManager.AppSettings["SessionTimeoutNotificationDuration"] != null)
+    {
+        showTimeoutWarningMinutes = Convert.ToInt32(Session.Timeout) -
+            Convert.ToInt32(ConfigurationManager.AppSettings["SessionTimeoutNotificationDuration"]);
+    }
+    string RoboHelpURL;
+    RoboHelpURL = ConfigurationManager.AppSettings["TracersRoboHelpUrl"].ToString();
+    //Idle timeout variables used in Layout.js
+    @Html.Hidden("hdnTimeOutWarningMinutes", showTimeoutWarningMinutes);
+    @Html.Hidden("hdnRedirectToPortal", Url.Action("TimeoutRedirect", "Transfer"));
+    @Html.Hidden("WebApiReportAcessActionUrl", Url.Action("actionTracking", "Shared", new { area = "" }));
+    @Html.Hidden("WebApiSiteChangeActionUrl", Url.Action("AddSiteLoginApplicationEvent", "EProdApis"));
+    @Html.Hidden("ProgramsUpdate", Url.Action("GetPrograms", "Search"))
+    @Html.Hidden("PreferredProgramUpdate", Url.Action("UpdatePreferredProgram", "Shared"))
+    @Html.Hidden("UpdateProgramsInSession", Url.Action("UpdateProgramsInSession", "Search"))
+    @Html.Hidden("hdnActiveTab", (object)ViewBag.ActiveTab)
+    @Html.Hidden("hdnUserID", userid)
+    @Html.Hidden("hdnUserRole", role)
+    @Html.Hidden("hdnScheduleAction", scheduleAction)
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title - Tracers Report Center</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+    @Scripts.Render("~/bundles/kendoui")
+    @Url.Script("~/Scripts/Layout.js")
+    @Styles.Render("~/Content/css")
+    <style>
+        /*.UserInfo {
+            white-space: wrap;
+        }*/
+        #arrowspan {
+            z-index: 8;
+        }
+    </style>
+</head>
+<body id="pageBody">
+    @* Common Page View Header *@
+
+    <header>
+        <div class="container-fluid minSiteWidth">
+            <div class="row minSiteWidth">
+                <div class="col-xs-6 " style="margin-top: 4px; ">
+                    <div style="float: left;">
+                        <img src="~/Images/jcr_logo40.png" />
+                        <img src="~/Images/Tracers.jpg" />
+                    </div>
+                    <div style="float: left;">
+                        <div style="padding-left:20px; padding-top:10px;">
+                            <b>@username</b>
+                            <br />
+                            @role
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6" align="right" style="margin-top: 4px;">
+                    @Html.ActionLink("Home", "TracersApp", "Transfer", null, new { @class = "PaddingRight20" })
+                    @Html.ActionLink("JCR Portal", "Portal", "Transfer", null, new { @class = "PaddingRight20" })
+                    @Html.ActionLink("Reports", "Index", "Home", null, new { @class = "PaddingRight20" })
+                    <div style="display: inline-block; width: 40px;  text-align: left; "><a href="@RoboHelpURL" target="_blank" id="robolink">Help</a></div>
+                    @Html.ActionLink("Logout", "LogoutRedirect", "Transfer")
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="body" class="container-fluid minSiteWidth">
+        <div class="modal fade" id="TimeOutAlert" role="dialog" aria-hidden="true" style="z-index:1000000000;">
+            <div class="modal-dialog modal-sm t-modal-width">
+                <div class="modal-content">
+                    <div class="modal-header t-modal-header">
+                        <h4 class="modal-title">Your session is about to expire!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span class="glyphicon glyphicon-time" aria-hidden="true">&nbsp;</span>Time remaining: <span id="lblTimerCountdown">120</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnContinueSession">Continue your session</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @RenderSection("featured", required: false)
+        <div id="topNavbar" class="navbar navbar-default navbar-static-top minSiteWidth" role="navigation">
+            <div class="row">
+                <div class="col-xs-5">
+                    <ul class="nav navbar-nav" id="tabstrip">
+                        <li class="active">
+                            @Html.ActionLink("Create Report", "Index", "Home", null, new { id = "lnkReportsHome" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("My Reports", "MyReports", "Home", null, new { id = "lnkMyReports" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Search All Reports", "SearchReports", "Home", null, new { id = "lnkSearchReports" })
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-7">
+                    @if (ViewBag.HideProgram == true)
+                    {
+                        Html.RenderAction("LoadSites", "Shared", null);
+                    }
+                    else
+                    {
+                        <div style="height: auto;">
+                            <div id="divPrograms" style="float: right; margin-left: 10px;">
+                                @{Html.RenderAction("LoadPrograms", "Shared", null);}
+                            </div>
+                            <div id="divSites" style="float: none; width: auto;">
+                                @{Html.RenderAction("LoadSites", "Shared", new { allSites = ViewBag.allSites == null ? true : false});}
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (IsSectionDefined("slidedownsearch"))
+        {
+            <div class="navbar navbar-default navbar-static-top minSiteWidth" role="navigation" @*data-spy="affix"*@ id="MainNavbar" style="margin-top:-5px;">
+
+                <div class="row minSiteWidth marginLeft-5">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left marginLeft-5">
+                        <div id="ulQuickLinks" style="display: none;">
+                            <img src="~/Images/TracersSmall.jpg" style="padding: 0;" />
+                        </div>
+                        <span>
+                            @(Html.Kendo().Button()
+                            .Name("btnSearchCriteria")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm glyphButton focusButton activeTab" })
+                            .Content("<span class='glyphicon glyphicon-filter glyphiconSize'></span><br /><span class='glyphfontsize glyphfontwidth1'>Criteria</span>")
+                            .Events(events =>
+                                    events.Click("OnbtnSearchClick")))
+                        </span>
+                        <span>
+                            @(Html.Kendo().Button()
+                            .Name("btnRecurrence")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-default btn-sm glyphButton focusButton" })
+                            .Content("<span class='glyphicon glyphicon-envelope glyphiconSize'></span><br /><span class='glyphfontsize glyphfontwidth6'>Email</span>")
+                            .Events(events => events.Click("OnbtnRecurrenceClick"))
+                            )
+                        </span>
+                    </div>
+                    <div id="divReporttitle" class="col-xs-7 verticalAlign">
+                        <h4 id="ReportTitle">@ViewBag.Title</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row minSiteWidth">
+                <div id="slideSearch" class="col-xs-12  inlineBlockDisplay absolutePosition nodisplay">
+                    <div class="panel panel-default thickborder fullwidth  pnlSearchBG minSiteWidth">
+                        <div class="panel-body slidewidth pnlSearchBG">
+                            <div class="row">
+                                <div class="col-xs-12 text-left">
+                                    @Html.Partial("Error/_ErrorMessage")
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @RenderSection("slidedownsearch", required: false)
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 2em;">
+                                <div class="col-xs-12 text-center">
+                                    @Html.Partial("Search/_ShowReport")
+                                    @if (ViewBag.HideSaveReport != true)
+                                    {
+                                        <span style="padding-left:10px;">@Html.Partial("Search/_SaveReport")</span>
+                                    }
+                                    <span style="padding-left:10px;">@Html.Partial("Search/_ResetFilters")</span>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-xs-12">
+                                    <h6 id="typeOfObservationAlert"><i>This report only includes <strong>completed</strong> observations.</i>
+                                        @{ if (AppSession.IsCMSProgram == true) {
+                                                <br><br><i>This report only includes TJC Tracers.</i>
+                                            }
+                                        }                                    
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="row text-center" id="divExcelViewWarning" style="display: none;">
+                                <div class="col-xs-12">
+                                    <h6>Advanced features of excel such as grouping, filtering, sorting and hiding are not saved.</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row minSiteWidth">
+                <div id="slideRecurrence" class="col-xs-12  inlineBlockDisplay absolutePosition nodisplay">
+                    <div class="panel panel-default thickborder fullwidth ">
+                        <div class="panel-body slidewidth pnlSearchBG">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.Partial("Search/_ScheduleRecurrence")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="row minSiteWidth">
+            <div class="col-xs-12">
+                <section>
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+        <div class="loading">
+            <img src="~/Images/blue_spinner.gif" />
+
+            <div>Loading</div>
+        </div>
+    </div>
+
+    <footer>
+        <div align="center">
+            <p>&copy; @DateTime.Now.Year The Joint Commission, &copy; @DateTime.Now.Year Joint Commission Resources</p>
+        </div>
+    </footer>
+</body>
+</html>

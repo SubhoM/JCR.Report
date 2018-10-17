@@ -1,0 +1,137 @@
+﻿@using ReportViewerForMvc;
+@{
+    Layout = null;
+}
+@{
+
+    if (!ViewData.ModelState.IsValid)
+    {
+        //If error was added to the model state use the actual message else use a common message.
+        var errortext = "An error has occurred. Please try again.";
+        var IsNoData = "";
+        var IsLimitExceed = "";
+        if (@ViewData.ModelState.ContainsKey("Error"))
+        {
+            errortext = @ViewData.ModelState["Error"].Errors[0].ErrorMessage;
+        }
+        if (errortext.IndexOf("No Data") >= 0)
+        { IsNoData = "true"; }
+        if (errortext.IndexOf("Limit") >= 0)
+        { IsLimitExceed = "true"; }
+
+        <script type="text/javascript">
+      
+            if ("@IsNoData") {
+                if ("@ViewBag.FromEmail") {
+                    ChangeButtonClass("btnSearchCriteria", "slideSearch");
+                    ChangeButtonClass("btnEmail", "slideEmail");
+                    closeSlide("btnEmail", "slideEmail");
+                    RdlcGenerated = false;
+                }
+                $("#error_msg").css("display", "block");
+                $('#showerror_msg').removeClass("alert-danger").addClass("alert-info");
+                $('#showerror_msg').css("display", "block");
+                $('#show_msg').html("@errortext");
+               
+            }
+            else if ("@IsLimitExceed") {
+                if ("@ViewBag.FromEmail") {
+                    ChangeButtonClass("btnSearchCriteria", "slideSearch");
+                    ChangeButtonClass("btnEmail", "slideEmail");
+                    closeSlide("btnEmail", "slideEmail");
+                    RdlcGenerated = false;
+                }
+                $("#error_msg").css("display", "block");
+                $('#showerror_msg').removeClass("alert-danger").addClass("alert-info");
+                $('#showerror_msg').css("display", "block");
+                $('#show_msg').html("@errortext");
+            }
+
+            else {
+                if ("@ViewBag.FromEmail") {
+                    if ("@ViewBag.DataLimit") {
+                       // winLimitPopupopen();
+                        OnLimitissue();
+                    } else {
+                        $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                        $('.emailerror_msg').css("display", "block");
+                        $('.email_msg').html("@errortext");
+                    }
+
+                }
+                else {
+                    if ("@ViewBag.DataLimit") {
+                      //  winLimitPopupopen();
+                        OnLimitissue();
+                    } else {
+                        $("#error_msg").css("display", "block");
+                        $('#showerror_msg').removeClass("alert-info").addClass("alert-danger");
+                        $('#showerror_msg').css("display", "block");
+                        $('#show_msg').html("@errortext");
+                    }
+                }
+
+            }
+            hasRdlcData = false;
+            
+            switch (parseInt($('#hdnReportID').val())) {
+                case epScoringReportID:
+                case taskAssignmentID:
+                case taskReportID:
+                case epAssignmentScoringReportID:
+                case cmsComplianceReportID:
+                case EPsNotScoredinPeriod:
+                case EPScoringReportFinalMockSurvey:
+                case ComprehensiveScoringReport:
+                    EnableDisableEmail(false);
+                    break;
+            }
+
+            //While generating the saved report, open the Search criteria panel when there is no data
+            if ($('#hdnScheduleAction').val() == ScheduleAction.Generate) {
+                openSlide("btnSearchCriteria", "slideSearch");
+            }
+        </script>
+    }
+    else
+    {
+        <script type="text/javascript">
+            if ("@ViewBag.FromEmail") {
+                var messagefromEmail = "@ViewBag.FromEmailSuccess";
+
+                if (messagefromEmail.indexOf("Unable") >= 0)
+                { $('#emailerror_msg').removeClass("alert-info").addClass("alert-danger"); }
+                else
+                { $('#emailerror_msg').removeClass("alert-danger").addClass("alert-info"); }
+
+                $('#emailerror_msg').css("display", "block");
+                $('#email_msg').html(messagefromEmail);
+            }
+
+            RdlcView = true;
+            hasRdlcData = true;
+
+            //Close the Search criteria panel
+            closeSlide("btnSearchCriteria", "slideSearch");
+            
+            switch (parseInt($('#hdnReportID').val())) {
+                case epScoringReportID:
+                case taskAssignmentID:
+                case taskReportID:
+                case epAssignmentScoringReportID:
+                case cmsComplianceReportID:
+                case EPsNotScoredinPeriod:
+                case EPScoringReportFinalMockSurvey:
+                case ComprehensiveScoringReport:
+                    EnableDisableEmail(true);
+                    break;
+            }
+
+        </script>
+        @Html.ReportViewer(Session["MyReportViewer"] as Microsoft.Reporting.WebForms.ReportViewer)
+        //  @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+    }
+
+}
+
+

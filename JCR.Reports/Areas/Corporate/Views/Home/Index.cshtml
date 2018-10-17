@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "AMP Reports";
+}
+@{
+    string divreportid = "";
+    int sCorporateReportGroupID = (int)JCR.Reports.Common.WebConstants.ERReportDisplayGroup.Mock_Survey_Report; //"Mock Survey Report";
+    int i = 0;
+}
+@foreach (var reportGrp in Model)
+{
+    if (reportGrp.GroupID != sCorporateReportGroupID || (reportGrp.GroupID == sCorporateReportGroupID && JCR.Reports.Common.AppSession.IsCorporateSite == true))
+    {
+        <div class="row">
+            <div class="col-xs-2 col-xs-offset-2 margintopadd">
+                <strong>@reportGrp.GroupName</strong>
+            </div>
+            <div class="col-xs-5 margintopadd">
+                @if (i == 0)
+                {
+                    i++;
+                    <strong>Description</strong>
+                }
+            </div>
+        </div>
+        foreach (var report in reportGrp.rptList)
+        {
+            divreportid = "divreport" + report.ERReportID;
+
+            <div class="row margintopadd" id=@divreportid>
+                <div class="col-xs-2 col-xs-offset-2">
+                    <a href="/Corporate/@report.ReportSource/Index/@report.ERReportID">@report.ERReportName</a>
+                    <span style="color: #C61835; font-weight: bold; margin-left: 5px;">@report.ReportChangeStatus</span>
+                </div>
+                <div class="col-xs-6">
+                    @Html.Raw(report.ERReportDescription)
+                </div>
+            </div>
+        }
+     } 
+}
+
+@Html.Hidden("Command")
+@Html.Hidden("SelectedReportName")
+
+<script>
+    $(document).ready(function () {
+        var matchNotFound = false 
+        if (hMenuBuilder.renderBreadCrumbTrail() == matchNotFound) {
+            vMenuBuilder.renderBreadCrumbTrail();
+        }
+    });
+</script>

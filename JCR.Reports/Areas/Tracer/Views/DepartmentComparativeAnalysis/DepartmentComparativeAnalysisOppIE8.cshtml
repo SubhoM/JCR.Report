@@ -1,0 +1,122 @@
+﻿
+<div>
+    <div id="resultDCAOPP">
+
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.DepartmentComparativeAnalysisOPP>()
+      .Name("gridDCAOPPIE8")
+      .DataSource(dataSource => dataSource // Configure the grid data source
+      .Ajax() // Specify that ajax binding is used
+      
+              .Events(e => e.Error("error_handler2").RequestEnd("OnRequestEnd2"))
+      .Read(read => read.Action("_DepartmentComparativeAnalysisOppExcel", "DepartmentComparativeAnalysis").Data("additionalData")) // Set the action method which will return the data in JSON format
+              
+              .PageSize(20))
+                .ToolBar(tools => tools.Excel())
+                                .Events(e => e.ExcelExport("excelExportIE8"))
+             
+                                  .Columns(columns =>
+      {
+          columns.Bound(p => p.OrgName_Rank3).Width(150);
+          columns.Bound(p => p.OrgName_Rank2).Width(150);
+          columns.Bound(p => p.OrgName_Rank1_Dept).Width(250);
+          columns.Bound(p => p.QuestionText).Width(600);
+          columns.Bound(p => p.StandardEPs).Width(150);
+        columns.Bound(p => p.TracerCustomName).Width(150);
+        columns.Bound(p => p.TracerResponseTitle).Width(400);
+        columns.Bound(p => p.ObservationDate).Width(150).Format("{0:MM/dd/yyyy}");
+        columns.Bound(p => p.Numerator).Width(150);
+        columns.Bound(p => p.Denominator).Width(150);
+        columns.Bound(p => p.CompliancePercent).Format("{0:0.0}%")
+                                    .Width(150);
+        columns.Bound(p => p.TracerQuestionNote).Width(350);
+             
+
+      })
+     
+                      .HtmlAttributes(new { style = "font-size:12px;line-height:2em" })
+      
+      .AutoBind(false)
+              .Scrollable(scrollable => scrollable.Height("auto"))
+      .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(new int[] { 20, 50, 100 }))
+     
+  
+        )
+
+    </div>
+</div>
+
+<style>
+    #gridDCAOPPIE8 {
+        display: none;
+    }
+    #ObservationsHeading {
+        display: none;
+    }
+</style>
+<script>
+
+    function error_handler2(e) {
+        hasExcel2Data = false;
+    }
+
+    function OnRequestEnd2(e) {
+        if (e.response != null) {
+            if (e.response.Errors === null || e.response.Errors === undefined)//NO errors
+            {
+               
+                hasExcel2Data = true;
+            }
+            else {
+               
+                hasExcel2Data = false;
+             
+
+            }
+        }
+     
+    }
+    var NumeratorTotalValue2;
+    var DenominatorTotalValue2;
+    function calculateAggregate2(field, value) {
+        input = (field / value) * 100;
+        return input;
+    }
+    function setNumeratorTotal2(data) {
+        NumeratorTotalValue2 = data;
+        return NumeratorTotalValue2;
+    }
+    function setDenominatorTotal2(data) {
+        DenominatorTotalValue2 = data;
+        return DenominatorTotalValue2;
+    }
+    //function onDataBound2(arg) {
+    //    //  var grid = "#gridDCAOPP";
+    //    // Get the number of Columns in the grid
+    //    var dataSource = $('#gridDCAOPPIE8').data("kendoGrid").dataSource;
+    //    var colCount = $('#gridDCAOPPIE8').find('.k-grid-header colgroup > col').length;
+
+    //    // If there are no results place an indicator row
+    //    if (dataSource._view.length == 0) {
+    //        $('#gridDCAOPPIE8').find('.k-grid-content tbody')
+    //            .append('<tr class="kendo-data-row"><td colspan="' + colCount + '" style="text-align:left"><b>No Results Found!</b></td></tr>');
+    //    }
+
+    //    // Get visible row count
+    //    var rowCount = $('#gridDCAOPPIE8').find('.k-grid-content tbody tr').length;
+
+    //    // If the row count is less that the page size add in the number of missing rows
+    //    if (rowCount < dataSource._take) {
+    //        var addRows = dataSource._take - rowCount;
+    //        for (var i = 0; i < addRows; i++) {
+    //            $('#gridDCAOPPIE8').find('.k-grid-content tbody').append('<tr class="kendo-data-row"><td>&nbsp;</td></tr>');
+    //        }
+    //    }
+    //}
+</script>
+
+
+
+
+

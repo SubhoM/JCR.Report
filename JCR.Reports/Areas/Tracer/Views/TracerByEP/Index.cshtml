@@ -1,0 +1,99 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.SearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+    Layout = "~/Views/Shared/_TracerLayout.cshtml";
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+        <div class="row PaddingTop10">
+            <div class="col-xs-12 text-center">
+                <b>Report Type</b>
+                @Html.RadioButtonsForEnum(m => m.ReportType)
+                <span style="padding-left:20px;">
+                    <b>Group By</b>
+                    @Html.RadioButtonsForEnum(m => m.ReportGroupByType)
+                </span>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <table>
+                <tr width="100%">
+
+                    <td width="25%" style="vertical-align:top;">
+                        @Html.Partial("Search/_TracersCategory")
+                        @Html.Partial("Search/_ChaptersList")
+                        @Html.Partial("Search/_StandardsList")
+                        @Html.Partial("Search/_EPsList")
+                        <div class="text-left">
+                            <h6 id="typeOfObservationAlert"><i>*Standards and EPs with only completed observations are displayed.</i></h6>
+                        </div>
+                    </td>
+                    <td width="3%"></td>
+                    <td width="25%" style="vertical-align:top;">
+                        @Html.Partial("Search/_CampusList")
+                        @Html.Partial("Search/_BuildingList")
+                        @Html.Partial("Search/_DepartmentList")
+                        @Html.Partial("Search/_InactiveOrgItemsCheckBox")
+                    </td>
+                    <td width="3%"></td>
+                    <td style="vertical-align:top;" width="11%">
+                        @Html.Partial("Search/_DateRange")
+                    </td>
+                    <td width="13%" style="vertical-align:top;">
+                        @Html.Partial("Search/_ObservationDate")
+                    </td>
+                    <td width="25%" style="vertical-align:top;">
+                        <div><h6><b>Question Criteria</b></h6></div>
+                        @if (!AppSession.IsCertificationProgram) { 
+                            @Html.Partial("Search/_IncludeCMS")
+                            <br />
+                        }
+                        @Html.Partial("Search/_NonCompliantPercentage", new ViewDataDictionary { { "checktext", "Only include less than " } })
+                    </td>
+
+
+                </tr>
+            </table>
+
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div id="loadrdlc" class="col-md-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div id="loadAview" class="col-xs-12">
+
+        </div>
+    </div>
+
+
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("TracersChaptersUpdate", Url.Action("GetTracersChapters", "Search", new { area = "" }))
+    @Html.Hidden("TracersStandardssUpdate", Url.Action("GetTracersStandards", "Search", new { area = "" }))
+    @Html.Hidden("TracersEPsUpdate", Url.Action("GetTracersEPs", "Search", new { area = "" }))
+    @Html.Hidden("GetRDLC", Url.Action("_TracerByEP", "TracerByEP"))
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("hdnReportActionID", 11)
+}
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Tracer/Views/TracerByEP/TracerByEP.js")
+
+<style type="text/css">
+    #divrangeobs {
+        margin-top: -15px;
+    }
+</style>
+

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "My Reports";
+    ViewBag.ActiveTab = "lnkMyReports";
+}
+<div id="divsaveandschedule">
+    @Html.Partial("SavedandScheduledReports")
+</div>
+
+<script>
+    function SetSearchCriteria() {
+ 
+        var searchset = { MyReportsView: true }
+        return searchset;
+    }
+
+    $(document).ready(function () {       
+        savedreportsgridcall();
+        var matchNotFound = false
+        if (hMenuBuilder.renderBreadCrumbTrail() == matchNotFound) {
+            vMenuBuilder.renderBreadCrumbTrail();
+        }
+    });
+
+    function savedreportsgridcall() {
+        $("#gridSavedandScheduledReports").data("kendoGrid").dataSource.data([]);
+        var grid = $("#gridSavedandScheduledReports").data("kendoGrid");
+       
+        grid.dataSource.read();
+        $("#gridSavedandScheduledReports").css("display", "block");
+    }
+
+    function loadrespectiveparameters(siteID, siteName) {       
+        savedreportsgridcall();
+    }
+</script>

@@ -1,0 +1,2511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBMEdition01_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="usmCorpChapterReportCumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmCorpEPReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmCorpProgramReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmCorpStandardReportCumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmERSelectUserbyUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmGetCorpUsersBySite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="UserRoleName" Type="varchar" Mode="In" />
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StatusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmGetProgramsBySite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmGetUserSitesByProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="EProductID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmMSCorporateFindingsReportCumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="MatrixID" Type="int" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="CycleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmMSCorporateFindingsReportSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="MatrixID" Type="int" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="CycleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmMSCorporateFindingsReportSummaryByChapter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="MatrixID" Type="int" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="CycleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmMSCorporateFindingsReportSummaryBySite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="MatrixID" Type="int" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="CycleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmMSGetSaferMap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp" />
+        <Function Name="usmReport_GetStickyDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportComprehensiveScoringDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterID" Type="int" Mode="In" />
+          <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+          <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+          <Parameter Name="IsCorporateAccess" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usmReportEPAssignmentScoringDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+          <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+          <Parameter Name="DocRequired" Type="int" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+          <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+          <Parameter Name="OrgFindings" Type="int" Mode="In" />
+          <Parameter Name="OrgNotes" Type="int" Mode="In" />
+          <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+          <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+          <Parameter Name="EPAssigned" Type="int" Mode="In" />
+          <Parameter Name="EPNotAssigned" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportEPAssignmentScoringSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+          <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EPAssigned" Type="int" Mode="In" />
+          <Parameter Name="EPNotAssigned" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+          <Parameter Name="DocRequired" Type="int" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+          <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+          <Parameter Name="OrgFindings" Type="int" Mode="In" />
+          <Parameter Name="OrgNotes" Type="int" Mode="In" />
+          <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportEPScoringExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoredByList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="NotScoredInPeriodFlag" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+          <Parameter Name="DocRequired" Type="int" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+          <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+          <Parameter Name="OrgFindings" Type="int" Mode="In" />
+          <Parameter Name="OrgNotes" Type="int" Mode="In" />
+          <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+          <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportEPScoringReportFinalMockSurveyDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoredByList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyIDList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+          <Parameter Name="DocRequired" Type="int" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+          <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+          <Parameter Name="OrgFindings" Type="int" Mode="In" />
+          <Parameter Name="OrgNotes" Type="int" Mode="In" />
+          <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+          <Parameter Name="MockSurveyFindings" Type="int" Mode="In" />
+          <Parameter Name="MockSurveyRecommendations" Type="int" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+          <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportEPScoringReportFinalMockSurveySummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+          <Parameter Name="ScoredByList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyIDList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+          <Parameter Name="DocRequired" Type="int" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+          <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+          <Parameter Name="OrgFindings" Type="int" Mode="In" />
+          <Parameter Name="OrgNotes" Type="int" Mode="In" />
+          <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+          <Parameter Name="MockSurveyFindings" Type="int" Mode="In" />
+          <Parameter Name="MockSurveyRecommendations" Type="int" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetAssignmentStatusByUser_ChapterWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="AssignedToID" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+          <Parameter Name="DocRequired" Type="bit" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetAssignmentStatusByUser_EPWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+          <Parameter Name="DocRequired" Type="bit" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+          <Parameter Name="LevelIdentifier" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetAssignmentStatusByUser_StandardWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterID" Type="int" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="AssignedToID" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+          <Parameter Name="DocRequired" Type="bit" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetAssignmentStatusByUser_UserWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+          <Parameter Name="DocRequired" Type="bit" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetChapterRFICumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="PSInclude" Type="bit" Mode="In" />
+          <Parameter Name="FSInclude" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetChaptersBySiteAndProgram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetEPRFI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="PSInclude" Type="bit" Mode="In" />
+          <Parameter Name="FSInclude" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetRFIbyProgram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="PSInclude" Type="bit" Mode="In" />
+          <Parameter Name="FSInclude" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetScoredByUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ChapterList" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ScoreTypeList" Type="varchar(max)" Mode="In" />
+          <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetStandardRFICumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+          <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+          <Parameter Name="PSInclude" Type="bit" Mode="In" />
+          <Parameter Name="FSInclude" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetStandardsByProgramChapters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="ChapterList" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ProgramList" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetUserAssignedToSiteIDAndAssignment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ProgramList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ScoreType" Type="int" Mode="In" />
+          <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+          <Parameter Name="DocRequired" Type="bit" Mode="In" />
+          <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+          <Parameter Name="DateStart" Type="datetime" Mode="In" />
+          <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmSelectMockSurveysBySites" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+          <Parameter Name="SiteList" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StatusId" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportCMSComplianceExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="ComplianceValueList" Type="nvarchar" Mode="In" />
+          <Parameter Name="CoPIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TagIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IdentifiedByIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PlanOfCorrection" Type="int" Mode="In" />
+          <Parameter Name="OrgCMSFindings" Type="int" Mode="In" />
+          <Parameter Name="CMSSurveyorFindings" Type="int" Mode="In" />
+          <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+          <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+          <Parameter Name="IncludeTJC" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetCMSProgramsBySiteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetCMSSitesByProgramID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetCoPsByProgramID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+          <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetIdentifiedUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+          <Parameter Name="SiteIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CoPIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TagIDs" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetTagsByProgramIDAndCoPID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+          <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CopIDs" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usmGetLicenseDetailsForCMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="ProgramID" Type="int" Mode="In" />
+          <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmGetLicenseDetailsForCMSByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetHcoIDs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usmReportGetProgrambySites" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usmSelectSitesByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="DBMEdition01_ModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBMEdition01_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBMEdition01_Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetSelectSitesByUser" ReturnType="Collection(DBMEdition01_Model.Site)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetHcoIDs" ReturnType="Collection(String)">
+          <Parameter Name="SiteIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCorpUsersBySite" ReturnType="Collection(DBMEdition01_Model.CorpUser)">
+            <Parameter Name="UserRoleName" Mode="In" Type="String" />
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="StatusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMockSurveysBySites" ReturnType="Collection(DBMEdition01_Model.MockSurvey)">
+            <Parameter Name="SiteList" Mode="In" Type="String" />
+            <Parameter Name="StatusId" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usmMSCorporateFindingsReportCumulative" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportCumulative_Result)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSaferMatrixData" ReturnType="Collection(DBMEdition01_Model.SaferMatrixData)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usmMSCorporateFindingsReportSummary" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportSummary_Result)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSaferMatrixSummary" ReturnType="Collection(DBMEdition01_Model.SaferMatrixSummary)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usmMSCorporateFindingsReportSummaryBySite" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportSummaryBySite_Result)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSaferMatrixSummaryBySite" ReturnType="Collection(DBMEdition01_Model.SaferMatrixSummaryBySite)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usmMSCorporateFindingsReportSummaryByChapter" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportSummaryByChapter_Result)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSaferMatrixSummaryByChapter" ReturnType="Collection(DBMEdition01_Model.SaferMatrixSummaryByChapter)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="CycleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAssignmentStatusByUser_UserWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_UserData)">
+            <Parameter Name="SiteList" Mode="In" Type="String" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="AssignedToList" Mode="In" Type="String" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+            <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ScoreValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAssignmentStatusByUser_EPWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_EPData)">
+            <Parameter Name="SiteList" Mode="In" Type="String" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="AssignedToList" Mode="In" Type="String" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+            <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ScoreValue" Mode="In" Type="String" />
+            <Parameter Name="LevelIdentifier" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserAssignedToSiteIDAndAssignment" ReturnType="Collection(DBMEdition01_Model.AssignedToUser)">
+            <Parameter Name="SiteList" Mode="In" Type="String" />
+            <Parameter Name="ProgramList" Mode="In" Type="String" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+            <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAssignmentStatusByUser_ChapterWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_ChapterData)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="AssignedToID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+            <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ScoreValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAssignmentStatusByUser_StandardWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_StandardData)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterID" Mode="In" Type="Int32" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+            <Parameter Name="AssignedToID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+            <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ScoreValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usmMSGetSaferMap" ReturnType="Collection(DBMEdition01_Model.usmMSGetSaferMap_Result)" />
+          <FunctionImport Name="GetSafterMap" ReturnType="Collection(DBMEdition01_Model.SafterMap)" />
+          <FunctionImport Name="GetRFIFindingbyProgram" ReturnType="Collection(DBMEdition01_Model.RFIProgramFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetRFIFindingbyChapter" ReturnType="Collection(DBMEdition01_Model.RFIChapterFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetRFIFindingByStandard" ReturnType="Collection(DBMEdition01_Model.RFIStandardFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserInfo" ReturnType="Collection(DBMEdition01_Model.User)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCorpFindingByChapter" ReturnType="Collection(DBMEdition01_Model.CorpChapterFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetCorpFindingByEP" ReturnType="Collection(DBMEdition01_Model.CorpEPFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetCorpFindingByProgram" ReturnType="Collection(DBMEdition01_Model.CorpProgramFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetCorpFindingByStandard" ReturnType="Collection(DBMEdition01_Model.CorpStandardFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+            <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetChapter" ReturnType="Collection(DBMEdition01_Model.Chapter)">
+            <Parameter Name="SiteList" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetProgrambySites" ReturnType="Collection(DBMEdition01_Model.Programs)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetStandardsByProgramsChapters" ReturnType="Collection(DBMEdition01_Model.Standard)">
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="ProgramList" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetScoredByUsers" ReturnType="Collection(DBMEdition01_Model.ScoredByUser)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserSitesByProduct" ReturnType="Collection(DBMEdition01_Model.UserSiteByProduct)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="EProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEPExcelDetails" ReturnType="Collection(DBMEdition01_Model.EpExcelDetails)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+            <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+            <Parameter Name="ScoredByList" Mode="In" Type="String" />
+            <Parameter Name="NotScoredInPeriodFlag" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+            <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+            <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+            <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+            <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+            <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRFIFindingByEP" ReturnType="Collection(DBMEdition01_Model.RFIEPFinding)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="StandardIDs" Mode="In" Type="String" />
+            <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+            <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+            <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetLicenseDetailsForCMS" ReturnType="Collection(Boolean)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCMSSitesByProgramID" ReturnType="Collection(DBMEdition01_Model.CMSSite)">
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCMSProgramsBySiteID" ReturnType="Collection(DBMEdition01_Model.CMSProgram)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCoPsByProgramID" ReturnType="Collection(DBMEdition01_Model.CoP)">
+          <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTagsByProgramIDAndCoPID" ReturnType="Collection(DBMEdition01_Model.Tag)">
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="CopIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetIdentifiedUsers" ReturnType="Collection(DBMEdition01_Model.IdentifiedUser)">
+            <Parameter Name="SiteIDs" Mode="In" Type="String" />
+            <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+            <Parameter Name="CoPIDs" Mode="In" Type="String" />
+            <Parameter Name="TagIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCMSComplianceExcel" ReturnType="Collection(DBMEdition01_Model.CMSComplianceExcel)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ComplianceValueList" Mode="In" Type="String" />
+            <Parameter Name="CoPIDs" Mode="In" Type="String" />
+            <Parameter Name="TagIDs" Mode="In" Type="String" />
+            <Parameter Name="IdentifiedByIDs" Mode="In" Type="String" />
+            <Parameter Name="PlanOfCorrection" Mode="In" Type="Int32" />
+            <Parameter Name="OrgCMSFindings" Mode="In" Type="Int32" />
+            <Parameter Name="CMSSurveyorFindings" Mode="In" Type="Int32" />
+            <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeTJC" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetLicenseDetailsForCMSByUser" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStickyDates" ReturnType="Collection(DBMEdition01_Model.StickyDate)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReportEPScoringReportFinalMockSurveySummary" ReturnType="Collection(DBMEdition01_Model.EPScoringReportFinalMockSurveySummary)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+            <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+            <Parameter Name="ScoredByList" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyIDList" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+            <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+            <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+            <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+            <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+            <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+            <Parameter Name="MockSurveyFindings" Mode="In" Type="Int32" />
+            <Parameter Name="MockSurveyRecommendations" Mode="In" Type="Int32" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReportEPScoringReportFinalMockSurveyDetail" ReturnType="Collection(DBMEdition01_Model.EPScoringReportFinalMockSurveyDetail)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+            <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+            <Parameter Name="ScoredByList" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyIDList" Mode="In" Type="String" />
+            <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+            <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+            <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+            <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+            <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+            <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+            <Parameter Name="MockSurveyFindings" Mode="In" Type="Int32" />
+            <Parameter Name="MockSurveyRecommendations" Mode="In" Type="Int32" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReportEPAssignmentScoringDetail" ReturnType="Collection(DBMEdition01_Model.EPAssignmentScoringDetail)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+            <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+            <Parameter Name="AssignedToList" Mode="In" Type="String" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+            <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+            <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+            <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+            <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+            <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+            <Parameter Name="EPAssigned" Mode="In" Type="Int32" />
+            <Parameter Name="EPNotAssigned" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReportEPAssignmentScoringSummary" ReturnType="Collection(DBMEdition01_Model.EPAssignmentScoringSummary)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterList" Mode="In" Type="String" />
+            <Parameter Name="StandardList" Mode="In" Type="String" />
+            <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+            <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+            <Parameter Name="AssignedToList" Mode="In" Type="String" />
+            <Parameter Name="EPAssigned" Mode="In" Type="Int32" />
+            <Parameter Name="EPNotAssigned" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+            <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+            <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+            <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+            <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+            <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+            <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReportComprehensiveScoringDetail" ReturnType="Collection(DBMEdition01_Model.ComprehensiveScoringDetail)">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+            <Parameter Name="ChapterID" Mode="In" Type="Int32" />
+            <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+            <Parameter Name="IsCorporateAccess" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Site">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <Property Type="Boolean" Name="AMPAccess" Nullable="false" />
+          <Property Type="String" Name="SiteFullName" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="IsCorporateAccess" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFIEPChapterDetails">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="Int32" Name="ProgramServiceID" Nullable="false" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="Int32" Name="StandardTextID" Nullable="false" />
+          <Property Type="Int32" Name="EPTextID" Nullable="false" />
+          <Property Type="Int32" Name="HCO_ID" Nullable="true" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HospitalName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Chapter" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Standard" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EP" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Documentation" Nullable="true" />
+          <Property Type="String" Name="TJCScore" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TJCSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TJCSAFERScoreScope" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="TJCScoreDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PreliminaryScore" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreliminarySAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreliminarySAFERScoreScope" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="PreliminaryScoreDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FinalScore" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FinalSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FinalSAFERScoreScope" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="FinalScoreDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="CorpUser">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="MockSurvey">
+          <Property Type="Int32" Name="MockSurveyID" Nullable="false" />
+          <Property Type="String" Name="MockSurveyName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="StatusId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usmMSCorporateFindingsReportCumulative_Result">
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="203" />
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="Recommendations" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="Int32" Name="CorporateFinalScoreID" Nullable="true" />
+          <Property Type="Int32" Name="CorporateFinalScoredByUserID" Nullable="true" />
+          <Property Type="Int16" Name="StandardSortOrder" Nullable="false" />
+          <Property Type="Int32" Name="FSA" Nullable="false" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="LikeID" Nullable="true" />
+          <Property Type="Int32" Name="ScopeID" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+          <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+          <Property Type="Int16" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="EPLabel" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Program" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="ScoreType" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SaferMatrixData">
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="203" />
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="Recommendations" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="Int32" Name="CorporateFinalScoreID" Nullable="true" />
+          <Property Type="Int32" Name="CorporateFinalScoredByUserID" Nullable="true" />
+          <Property Type="Int16" Name="StandardSortOrder" Nullable="false" />
+          <Property Type="Int32" Name="FSA" Nullable="false" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="LikeID" Nullable="true" />
+          <Property Type="Int32" Name="ScopeID" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+          <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+          <Property Type="Int16" Name="SortOrder" Nullable="false" />
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="EPLabel" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Program" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="ScoreType" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DocumentList" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usmMSCorporateFindingsReportSummary_Result">
+          <Property Type="String" Name="ScoreName" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="VerticalScoreID" Nullable="true" />
+          <Property Type="Int32" Name="HorizontalScoreID" Nullable="true" />
+          <Property Type="Int32" Name="EPs" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SaferMatrixSummary">
+          <Property Type="String" Name="ScoreName" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="VerticalScoreID" Nullable="true" />
+          <Property Type="Int32" Name="HorizontalScoreID" Nullable="true" />
+          <Property Type="Int32" Name="EPs" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usmMSCorporateFindingsReportSummaryBySite_Result">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+          <Property Type="Int32" Name="EPs" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SaferMatrixSummaryBySite">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+          <Property Type="Int32" Name="EPs" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usmMSCorporateFindingsReportSummaryByChapter_Result">
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="ChapterCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="EPs" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SaferMatrixSummaryByChapter">
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="ChapterCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="EPs" Nullable="true" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="AssignmentStatusByUser_UserData">
+          <Property Type="String" Name="AxisKey" Nullable="true" MaxLength="40" />
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="102" />
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="EPCount" Nullable="true" />
+          <Property Type="Int32" Name="ScoreCompleteCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScoreCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ScoreNotCompleteCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScoreNotCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ScorePastDueDateCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScorePastDueDatePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="String" Name="SiteFullName" Nullable="true" MaxLength="403" />
+          <Property Type="String" Name="ReportHCOID" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="AssignedToUser">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="AssignmentStatusByUser_EPData">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="String" Name="Chapter" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EPLabel" Nullable="true" />
+          <Property Type="String" Name="ScoreType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ScoreValue" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="AssignedBy" Nullable="false" MaxLength="102" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="102" />
+          <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EPTextID" Nullable="false" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DocumentList" Nullable="true" />
+          <Property Type="String" Name="EPText" Nullable="true" />
+          <Property Type="String" Name="ScoredBy" Nullable="true" MaxLength="102" />
+        </ComplexType>
+        <ComplexType Name="AssignmentStatusByUser_ChapterData">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="102" />
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EPCount" Nullable="true" />
+          <Property Type="Int32" Name="ScoreCompleteCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScoreCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ScoreNotCompleteCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScoreNotCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ScorePastDueDateCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScorePastDueDatePercentage" Nullable="true" Precision="6" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="AssignmentStatusByUser_StandardData">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="102" />
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EPCount" Nullable="true" />
+          <Property Type="Int32" Name="ScoreCompleteCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScoreCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ScoreNotCompleteCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScoreNotCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="ScorePastDueDateCount" Nullable="true" />
+          <Property Type="Decimal" Name="ScorePastDueDatePercentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Int32" Name="StandardID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usmMSGetSaferMap_Result">
+          <Property Type="Int32" Name="ScoreID" Nullable="false" />
+          <Property Type="Int32" Name="LikeID" Nullable="true" />
+          <Property Type="Int32" Name="ScopeID" Nullable="true" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="SafterMap">
+          <Property Type="Int32" Name="ScoreID" Nullable="false" />
+          <Property Type="Int32" Name="LikeID" Nullable="true" />
+          <Property Type="Int32" Name="ScopeID" Nullable="true" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="RFIProgramFinding">
+          <Property Type="Int32" Name="RowID" Nullable="true" />
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="RFICount" Nullable="false" />
+          <Property Type="Int32" Name="PSCount" Nullable="false" />
+          <Property Type="Int32" Name="FSCount" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="RFIChapterFinding">
+          <Property Type="Int32" Name="RowID" Nullable="false" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="String" Name="Label" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RFICount" Nullable="false" />
+          <Property Type="Int32" Name="PSCount" Nullable="false" />
+          <Property Type="Int32" Name="FSCount" Nullable="false" />
+          <Property Type="Decimal" Name="TotalPercen" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="CumulativePerc" Nullable="true" Precision="6" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="RFIStandardFinding">
+          <Property Type="Int32" Name="RowID" Nullable="true" />
+          <Property Type="Int32" Name="StandardID" Nullable="true" />
+          <Property Type="String" Name="Label" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="RFICount" Nullable="false" />
+          <Property Type="Int32" Name="PSCount" Nullable="false" />
+          <Property Type="Int32" Name="FSCount" Nullable="false" />
+          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="CumulativePerc" Nullable="true" Precision="6" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="User">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserLogonID" Nullable="true" MaxLength="100" />
+          <Property Type="Int16" Name="Status" Nullable="false" />
+          <Property Type="Guid" Name="UserGUID" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="CorpChapterFinding">
+          <Property Type="Int32" Name="RowID" Nullable="true" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="String" Name="Label" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FindingCount" Nullable="false" />
+          <Property Type="Int32" Name="RFICount" Nullable="false" />
+          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="CumulativePercentage" Nullable="true" Precision="6" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="CorpEPFinding">
+          <Property Type="Int32" Name="HCO_ID" Nullable="true" />
+          <Property Type="String" Name="Region_Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Site_State" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="String" Name="Hospital_Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ProgramSettingName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="StandardLabel" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EPLabel" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FSARequired" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TJCScore" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TJCScoreLikelihood" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="TJCScoreScope" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="TJCSurveyDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TJCFinding" Nullable="true" />
+          <Property Type="String" Name="CorpScore" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CorpScoreLikelihood" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="CorpScoreScope" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Mock_Survey_Finding" Nullable="true" />
+          <Property Type="String" Name="Mock_Survey_Recommendation" Nullable="true" />
+          <Property Type="String" Name="MockSurveyDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MSTeamLead" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="ComplaintByDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MSStatus" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+          <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+          <Property Type="Int16" Name="SortOrder" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CorpProgramFinding">
+          <Property Type="Int64" Name="RowID" Nullable="true" />
+          <Property Type="Int32" Name="ProgramID" Nullable="true" />
+          <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="FindingCount" Nullable="false" />
+          <Property Type="Int32" Name="RFICount" Nullable="false" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CorpStandardFinding">
+          <Property Type="Int32" Name="RowID" Nullable="true" />
+          <Property Type="Int32" Name="StandardID" Nullable="true" />
+          <Property Type="String" Name="Label" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="FindingCount" Nullable="false" />
+          <Property Type="Int32" Name="RFICount" Nullable="false" />
+          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="CumulativePercentage" Nullable="true" Precision="6" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="Chapter">
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="133" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Programs">
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="ProgramCode" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="ProgramName" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="ProductID" Nullable="true" />
+          <Property Type="String" Name="AdvCertFlag" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="AdvCertListTypeID" Nullable="true" />
+          <Property Type="String" Name="CertProgramName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="SortOrder" Nullable="true" />
+          <Property Type="Int32" Name="BaseProgramID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Standard">
+          <Property Type="Int32" Name="StandardID" Nullable="false" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="EpExcelDetails">
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="TJCProgramID" Nullable="true" />
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="EPText" Nullable="true" />
+          <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+          <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+          <Property Type="String" Name="ScoreTypeName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ScoreDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="102" />
+          <Property Type="String" Name="FSA" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DocumentList" Nullable="true" />
+          <Property Type="Int32" Name="ChapterID" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+          <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StandardText" Nullable="true" />
+          <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+          <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ChapterName" Nullable="true" />
+          <Property Type="String" Name="ProgramName" Nullable="true" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="SiteName" Nullable="true" />
+          <Property Type="Int32" Name="SiteID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ScoredByUser">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="102" />
+        </ComplexType>
+        <ComplexType Name="UserSiteByProduct">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="Int32" Name="HcoID" Nullable="true" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="86" />
+        </ComplexType>
+        <ComplexType Name="RFIEPFinding">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="Int32" Name="ProgramServiceID" Nullable="false" />
+          <Property Type="Int32" Name="ChapterID" Nullable="false" />
+          <Property Type="Int32" Name="StandardID" Nullable="false" />
+          <Property Type="Int32" Name="EPTextID" Nullable="false" />
+          <Property Type="Int32" Name="HCO_ID" Nullable="true" />
+          <Property Type="String" Name="Program" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HospitalName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Chapter" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Standard" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EP" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="OrgFindings" Nullable="true" />
+          <Property Type="String" Name="PlanOfAction" Nullable="true" />
+          <Property Type="String" Name="CompliantByDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="SustainmentPlan" Nullable="true" />
+          <Property Type="String" Name="InternalNotes" Nullable="true" />
+          <Property Type="String" Name="TJCScore" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TJCSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TJCSAFERScoreScope" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TJCScoreDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TJCFinding" Nullable="true" />
+          <Property Type="String" Name="PreliminaryScore" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreliminarySAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreliminarySAFERScoreScope" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreliminaryScoreDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinalScore" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FinalSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FinalSAFERScoreScope" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FinalScoreDate" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="CoP">
+          <Property Type="Int32" Name="CopID" Nullable="false" />
+          <Property Type="String" Name="CopName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CopSortOrder" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Tag">
+          <Property Type="Int32" Name="TagID" Nullable="false" />
+          <Property Type="String" Name="TagCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TagSortOrder" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="IdentifiedUser">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="102" />
+        </ComplexType>
+        <ComplexType Name="CMSSite">
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CMSProgram">
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CMSComplianceExcel">
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="CmsStandardID" Nullable="false" />
+          <Property Type="Int32" Name="TagID" Nullable="true" />
+          <Property Type="Int32" Name="CopID" Nullable="true" />
+          <Property Type="Int32" Name="ElementID" Nullable="true" />
+          <Property Type="String" Name="TagName" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="CopStandardName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ConcatenatedText" Nullable="true" />
+          <Property Type="String" Name="ComplianceValue" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Degree" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Manner" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="DateIdentified" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="IdentifiedBy" Nullable="true" MaxLength="110" />
+          <Property Type="String" Name="AutoCitationText" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="OrgCMSFindings" Nullable="true" />
+          <Property Type="String" Name="POC" Nullable="true" />
+          <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CSF" Nullable="true" />
+          <Property Type="String" Name="LinkedDocumentList" Nullable="true" />
+          <Property Type="Int32" Name="TagSortOrder" Nullable="true" />
+          <Property Type="Int32" Name="CopSortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ElementSortOrder" Nullable="true" />
+          <Property Type="String" Name="TJCStandard" Nullable="true" />
+          <Property Type="Int32" Name="SiteID" Nullable="false" />
+          <Property Type="Int32" Name="HCOID" Nullable="true" />
+          <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="ProgramCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProgramName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="AutoCitationTagText" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CopStandard" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AutoCitationSortOrder" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="StickyDate">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="ProgramID" Nullable="false" />
+          <Property Type="String" Name="ScoreAnalyzerStartDate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ScoreAnalyzerEndDate" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="EPScoringReportFinalMockSurveySummary">
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+          <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+          <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+          <Property Type="String" Name="MockSurveyName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EPScoringReportFinalMockSurveyDetail">
+          <Property Type="Int32" Name="ProgramID" Nullable="true" />
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="EPText" Nullable="true" />
+          <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterID" Nullable="true" />
+          <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StandardText" Nullable="true" />
+          <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+          <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="FSA" Nullable="true" />
+          <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MockSurveyFindings" Nullable="true" />
+          <Property Type="String" Name="MockSurveyRecommendations" Nullable="true" />
+          <Property Type="String" Name="DocumentList" Nullable="true" />
+          <Property Type="String" Name="COPID" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DeemedService" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="RequirementName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="AssignmentText" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MockSurveyName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="EPAssignmentScoringDetail">
+          <Property Type="Int32" Name="ProgramID" Nullable="true" />
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="EPText" Nullable="true" />
+          <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterID" Nullable="true" />
+          <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StandardText" Nullable="true" />
+          <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+          <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+          <Property Type="String" Name="AssignedToFullName" Nullable="true" MaxLength="113" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="FSA" Nullable="true" />
+          <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DocumentList" Nullable="true" />
+          <Property Type="String" Name="COPID" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DeemedService" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="RequirementName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="AssignmentText" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ScoreTypeSortOrder" Nullable="true" />
+          <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="EPAssignmentScoringSummary">
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+          <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+          <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+          <Property Type="String" Name="AssignedToFullName" Nullable="true" MaxLength="113" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ComprehensiveScoringDetail">
+          <Property Type="Int32" Name="ProgramID" Nullable="true" />
+          <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="EPTextID" Nullable="true" />
+          <Property Type="String" Name="EPText" Nullable="true" />
+          <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+          <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+          <Property Type="Int32" Name="ChapterID" Nullable="true" />
+          <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StandardText" Nullable="true" />
+          <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+          <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="FSA" Nullable="true" />
+          <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Findings" Nullable="true" />
+          <Property Type="String" Name="POA" Nullable="true" />
+          <Property Type="String" Name="MOS" Nullable="true" />
+          <Property Type="String" Name="OrgNotes" Nullable="true" />
+          <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MockSurveyFindings" Nullable="true" />
+          <Property Type="String" Name="MockSurveyRecommendations" Nullable="true" />
+          <Property Type="String" Name="DocumentList" Nullable="true" />
+          <Property Type="String" Name="COPID" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="DeemedService" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="RequirementName" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="AssignmentText" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MockSurveyName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBMEdition01_ModelStoreContainer" CdmEntityContainer="DBMEdition01_Entities" >
+          <FunctionImportMapping FunctionImportName="GetSelectSitesByUser" FunctionName="DBMEdition01_Model.Store.usmSelectSitesByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.Site">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="AMPAccess" ColumnName="AMPAccess" />
+                <ScalarProperty Name="SiteFullName" ColumnName="SiteFullName" />
+                <ScalarProperty Name="IsCorporateAccess" ColumnName="IsCorporateAccess" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetHcoIDs" FunctionName="DBMEdition01_Model.Store.usmReportGetHcoIDs" />
+          <FunctionImportMapping FunctionImportName="GetCorpUsersBySite" FunctionName="DBMEdition01_Model.Store.usmGetCorpUsersBySite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+		  <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportCumulative" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportCumulative">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportCumulative_Result">
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="CorporateFinalScoreID" ColumnName="CorporateFinalScoreID" />
+                <ScalarProperty Name="CorporateFinalScoredByUserID" ColumnName="CorporateFinalScoredByUserID" />
+                <ScalarProperty Name="StandardSortOrder" ColumnName="StandardSortOrder" />
+                <ScalarProperty Name="FSA" ColumnName="FSA" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+                <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="ScoreType" ColumnName="ScoreType" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSaferMatrixData" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportCumulative">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixData">
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="CorporateFinalScoreID" ColumnName="CorporateFinalScoreID" />
+                <ScalarProperty Name="CorporateFinalScoredByUserID" ColumnName="CorporateFinalScoredByUserID" />
+                <ScalarProperty Name="StandardSortOrder" ColumnName="StandardSortOrder" />
+                <ScalarProperty Name="FSA" ColumnName="FSA" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+                <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="ScoreType" ColumnName="ScoreType" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportSummary" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportSummary_Result">
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="VerticalScoreID" ColumnName="VerticalScoreID" />
+                <ScalarProperty Name="HorizontalScoreID" ColumnName="HorizontalScoreID" />
+                <ScalarProperty Name="EPs" ColumnName="EPs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSaferMatrixSummary" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixSummary">
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="VerticalScoreID" ColumnName="VerticalScoreID" />
+                <ScalarProperty Name="HorizontalScoreID" ColumnName="HorizontalScoreID" />
+                <ScalarProperty Name="EPs" ColumnName="EPs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportSummaryBySite" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryBySite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportSummaryBySite_Result">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="EPs" ColumnName="EPs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSaferMatrixSummaryBySite" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryBySite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixSummaryBySite">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="EPs" ColumnName="EPs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usmMSCorporateFindingsReportSummaryByChapter" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryByChapter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.usmMSCorporateFindingsReportSummaryByChapter_Result">
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="EPs" ColumnName="EPs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSaferMatrixSummaryByChapter" FunctionName="DBMEdition01_Model.Store.usmMSCorporateFindingsReportSummaryByChapter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.SaferMatrixSummaryByChapter">
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="EPs" ColumnName="EPs" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_UserWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_UserWise" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_UserData">
+                <ScalarProperty Name="AxisKey" ColumnName="AxisKey" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="EPCount" ColumnName="EPCount" />
+                <ScalarProperty Name="ScoreCompleteCount" ColumnName="ScoreCompleteCount" />
+                <ScalarProperty Name="ScoreCompletePercentage" ColumnName="ScoreCompletePercentage" />
+                <ScalarProperty Name="ScoreNotCompleteCount" ColumnName="ScoreNotCompleteCount" />
+                <ScalarProperty Name="ScoreNotCompletePercentage" ColumnName="ScoreNotCompletePercentage" />
+                <ScalarProperty Name="ScorePastDueDateCount" ColumnName="ScorePastDueDateCount" />
+                <ScalarProperty Name="ScorePastDueDatePercentage" ColumnName="ScorePastDueDatePercentage" />
+                <ScalarProperty Name="SiteFullName" ColumnName="SiteFullName" />
+                <ScalarProperty Name="ReportHCOID" ColumnName="ReportHCOID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+		  
+          <FunctionImportMapping FunctionImportName="GetSafterMap" FunctionName="DBMEdition01_Model.Store.usmMSGetSaferMap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.SafterMap">
+                <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+                <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+                <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserSitesByProduct" FunctionName="DBMEdition01_Model.Store.usmGetUserSitesByProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.UserSiteByProduct">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="HcoID" ColumnName="HcoID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRFIFindingbyProgram" FunctionName="DBMEdition01_Model.Store.usmReportGetRFIbyProgram">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIProgramFinding">
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+                <ScalarProperty Name="PSCount" ColumnName="PSCount" />
+                <ScalarProperty Name="FSCount" ColumnName="FSCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRFIFindingbyChapter" FunctionName="DBMEdition01_Model.Store.usmReportGetChapterRFICumulative">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIChapterFinding">
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+                <ScalarProperty Name="PSCount" ColumnName="PSCount" />
+                <ScalarProperty Name="FSCount" ColumnName="FSCount" />
+                <ScalarProperty Name="TotalPercen" ColumnName="TotalPercen" />
+                <ScalarProperty Name="CumulativePerc" ColumnName="CumulativePerc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRFIFindingByStandard" FunctionName="DBMEdition01_Model.Store.usmReportGetStandardRFICumulative">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIStandardFinding">
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+                <ScalarProperty Name="PSCount" ColumnName="PSCount" />
+                <ScalarProperty Name="FSCount" ColumnName="FSCount" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="CumulativePerc" ColumnName="CumulativePerc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserInfo" FunctionName="DBMEdition01_Model.Store.usmERSelectUserbyUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="UserLogonID" ColumnName="UserLogonID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserGUID" ColumnName="UserGUID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCorpFindingByChapter" FunctionName="DBMEdition01_Model.Store.usmCorpChapterReportCumulative">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpChapterFinding">
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FindingCount" ColumnName="FindingCount" />
+                <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="CumulativePercentage" ColumnName="CumulativePercentage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCorpFindingByEP" FunctionName="DBMEdition01_Model.Store.usmCorpEPReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpEPFinding">
+                <ScalarProperty Name="HCO_ID" ColumnName="HCO_ID" />
+                <ScalarProperty Name="Region_Name" ColumnName="Region_Name" />
+                <ScalarProperty Name="Site_State" ColumnName="Site_State" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="Hospital_Name" ColumnName="Hospital_Name" />
+                <ScalarProperty Name="ProgramSettingName" ColumnName="ProgramSettingName" />
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="FSARequired" ColumnName="FSARequired" />
+                <ScalarProperty Name="TJCScore" ColumnName="TJCScore" />
+                <ScalarProperty Name="TJCScoreLikelihood" ColumnName="TJCScoreLikelihood" />
+                <ScalarProperty Name="TJCScoreScope" ColumnName="TJCScoreScope" />
+                <ScalarProperty Name="TJCSurveyDate" ColumnName="TJCSurveyDate" />
+                <ScalarProperty Name="TJCFinding" ColumnName="TJCFinding" />
+                <ScalarProperty Name="CorpScore" ColumnName="CorpScore" />
+                <ScalarProperty Name="CorpScoreLikelihood" ColumnName="CorpScoreLikelihood" />
+                <ScalarProperty Name="CorpScoreScope" ColumnName="CorpScoreScope" />
+                <ScalarProperty Name="Mock_Survey_Finding" ColumnName="Mock_Survey_Finding" />
+                <ScalarProperty Name="Mock_Survey_Recommendation" ColumnName="Mock_Survey_Recommendation" />
+                <ScalarProperty Name="MockSurveyDate" ColumnName="MockSurveyDate" />
+                <ScalarProperty Name="MSTeamLead" ColumnName="MSTeamLead" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="ComplaintByDate" ColumnName="ComplaintByDate" />
+                <ScalarProperty Name="MSStatus" ColumnName="MSStatus" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCorpFindingByProgram" FunctionName="DBMEdition01_Model.Store.usmCorpProgramReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpProgramFinding">
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="FindingCount" ColumnName="FindingCount" />
+                <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCorpFindingByStandard" FunctionName="DBMEdition01_Model.Store.usmCorpStandardReportCumulative">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CorpStandardFinding">
+                <ScalarProperty Name="RowID" ColumnName="RowID" />
+                <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FindingCount" ColumnName="FindingCount" />
+                <ScalarProperty Name="RFICount" ColumnName="RFICount" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="CumulativePercentage" ColumnName="CumulativePercentage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserAssignedToSiteIDAndAssignment" FunctionName="DBMEdition01_Model.Store.usmReportGetUserAssignedToSiteIDAndAssignment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignedToUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_StandardWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_StandardWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_StandardData">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="EPCount" ColumnName="EPCount" />
+                <ScalarProperty Name="ScoreCompleteCount" ColumnName="ScoreCompleteCount" />
+                <ScalarProperty Name="ScoreCompletePercentage" ColumnName="ScoreCompletePercentage" />
+                <ScalarProperty Name="ScoreNotCompleteCount" ColumnName="ScoreNotCompleteCount" />
+                <ScalarProperty Name="ScoreNotCompletePercentage" ColumnName="ScoreNotCompletePercentage" />
+                <ScalarProperty Name="ScorePastDueDateCount" ColumnName="ScorePastDueDateCount" />
+                <ScalarProperty Name="ScorePastDueDatePercentage" ColumnName="ScorePastDueDatePercentage" />
+                <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_EPWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_EPWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_EPData">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="Chapter" ColumnName="Chapter" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="ScoreType" ColumnName="ScoreType" />
+                <ScalarProperty Name="ScoreValue" ColumnName="ScoreValue" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+                <ScalarProperty Name="EPText" ColumnName="EPText" />
+                <ScalarProperty Name="ScoredBy" ColumnName="ScoredBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAssignmentStatusByUser_ChapterWise" FunctionName="DBMEdition01_Model.Store.usmReportGetAssignmentStatusByUser_ChapterWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.AssignmentStatusByUser_ChapterData">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="EPCount" ColumnName="EPCount" />
+                <ScalarProperty Name="ScoreCompleteCount" ColumnName="ScoreCompleteCount" />
+                <ScalarProperty Name="ScoreCompletePercentage" ColumnName="ScoreCompletePercentage" />
+                <ScalarProperty Name="ScoreNotCompleteCount" ColumnName="ScoreNotCompleteCount" />
+                <ScalarProperty Name="ScoreNotCompletePercentage" ColumnName="ScoreNotCompletePercentage" />
+                <ScalarProperty Name="ScorePastDueDateCount" ColumnName="ScorePastDueDateCount" />
+                <ScalarProperty Name="ScorePastDueDatePercentage" ColumnName="ScorePastDueDatePercentage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetChapter" FunctionName="DBMEdition01_Model.Store.usmReportGetChaptersBySiteAndProgram">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.Chapter">
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProgrambySites" FunctionName="DBMEdition01_Model.Store.usmReportGetProgrambySites">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.Programs">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="AdvCertFlag" ColumnName="AdvCertFlag" />
+                <ScalarProperty Name="AdvCertListTypeID" ColumnName="AdvCertListTypeID" />
+                <ScalarProperty Name="CertProgramName" ColumnName="CertProgramName" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="BaseProgramID" ColumnName="BaseProgramID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStandardsByProgramsChapters" FunctionName="DBMEdition01_Model.Store.usmReportGetStandardsByProgramChapters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.Standard">
+                <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEPExcelDetails" FunctionName="DBMEdition01_Model.Store.usmReportEPScoringExcel">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.EpExcelDetails">
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="TJCProgramID" ColumnName="TJCProgramID" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="EPText" ColumnName="EPText" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="FSA" ColumnName="FSA" />
+                <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+                <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+                <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+                <ScalarProperty Name="CopText" ColumnName="CopText" />
+                <ScalarProperty Name="ChapterName" ColumnName="ChapterName" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRFIFindingByEP" FunctionName="DBMEdition01_Model.Store.usmReportGetEPRFI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.RFIEPFinding">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="ProgramServiceID" ColumnName="ProgramServiceID" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="StandardID" ColumnName="StandardID" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="HCO_ID" ColumnName="HCO_ID" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+                <ScalarProperty Name="Chapter" ColumnName="Chapter" />
+                <ScalarProperty Name="Standard" ColumnName="Standard" />
+                <ScalarProperty Name="EP" ColumnName="EP" />
+                <ScalarProperty Name="OrgFindings" ColumnName="OrgFindings" />
+                <ScalarProperty Name="PlanOfAction" ColumnName="PlanOfAction" />
+                <ScalarProperty Name="CompliantByDate" ColumnName="CompliantByDate" />
+                <ScalarProperty Name="SustainmentPlan" ColumnName="SustainmentPlan" />
+                <ScalarProperty Name="InternalNotes" ColumnName="InternalNotes" />
+                <ScalarProperty Name="TJCScore" ColumnName="TJCScore" />
+                <ScalarProperty Name="TJCSAFERScoreLikelihood" ColumnName="TJCSAFERScoreLikelihood" />
+                <ScalarProperty Name="TJCSAFERScoreScope" ColumnName="TJCSAFERScoreScope" />
+                <ScalarProperty Name="TJCScoreDate" ColumnName="TJCScoreDate" />
+                <ScalarProperty Name="TJCFinding" ColumnName="TJCFinding" />
+                <ScalarProperty Name="PreliminaryScore" ColumnName="PreliminaryScore" />
+                <ScalarProperty Name="PreliminarySAFERScoreLikelihood" ColumnName="PreliminarySAFERScoreLikelihood" />
+                <ScalarProperty Name="PreliminarySAFERScoreScope" ColumnName="PreliminarySAFERScoreScope" />
+                <ScalarProperty Name="PreliminaryScoreDate" ColumnName="PreliminaryScoreDate" />
+                <ScalarProperty Name="FinalScore" ColumnName="FinalScore" />
+                <ScalarProperty Name="FinalSAFERScoreLikelihood" ColumnName="FinalSAFERScoreLikelihood" />
+                <ScalarProperty Name="FinalSAFERScoreScope" ColumnName="FinalSAFERScoreScope" />
+                <ScalarProperty Name="FinalScoreDate" ColumnName="FinalScoreDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLicenseDetailsForCMS" FunctionName="DBMEdition01_Model.Store.usmGetLicenseDetailsForCMS" />
+          <FunctionImportMapping FunctionImportName="GetCoPsByProgramID" FunctionName="DBMEdition01_Model.Store.usmReportGetCoPsByProgramID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CoP">
+                <ScalarProperty Name="CopID" ColumnName="CopID" />
+                <ScalarProperty Name="CopName" ColumnName="CopName" />
+                <ScalarProperty Name="CopSortOrder" ColumnName="CopSortOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTagsByProgramIDAndCoPID" FunctionName="DBMEdition01_Model.Store.usmReportGetTagsByProgramIDAndCoPID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.Tag">
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+                <ScalarProperty Name="TagSortOrder" ColumnName="TagSortOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCMSProgramsBySiteID" FunctionName="DBMEdition01_Model.Store.usmReportGetCMSProgramsBySiteID">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CMSProgram">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCMSSitesByProgramID" FunctionName="DBMEdition01_Model.Store.usmReportGetCMSSitesByProgramID">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CMSSite">
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetIdentifiedUsers" FunctionName="DBMEdition01_Model.Store.usmReportGetIdentifiedUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.IdentifiedUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCMSComplianceExcel" FunctionName="DBMEdition01_Model.Store.usmReportCMSComplianceExcel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.CMSComplianceExcel">
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="CmsStandardID" ColumnName="CmsStandardID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="CopID" ColumnName="CopID" />
+                <ScalarProperty Name="ElementID" ColumnName="ElementID" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="CopStandardName" ColumnName="CopStandardName" />
+                <ScalarProperty Name="ConcatenatedText" ColumnName="ConcatenatedText" />
+                <ScalarProperty Name="ComplianceValue" ColumnName="ComplianceValue" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Manner" ColumnName="Manner" />
+                <ScalarProperty Name="DateIdentified" ColumnName="DateIdentified" />
+                <ScalarProperty Name="IdentifiedBy" ColumnName="IdentifiedBy" />
+                <ScalarProperty Name="AutoCitationText" ColumnName="AutoCitationText" />
+                <ScalarProperty Name="OrgCMSFindings" ColumnName="OrgCMSFindings" />
+                <ScalarProperty Name="POC" ColumnName="POC" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="CSF" ColumnName="CSF" />
+                <ScalarProperty Name="LinkedDocumentList" ColumnName="LinkedDocumentList" />
+                <ScalarProperty Name="TagSortOrder" ColumnName="TagSortOrder" />
+                <ScalarProperty Name="CopSortOrder" ColumnName="CopSortOrder" />
+                <ScalarProperty Name="ElementSortOrder" ColumnName="ElementSortOrder" />
+                <ScalarProperty Name="TJCStandard" ColumnName="TJCStandard" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="HCOID" ColumnName="HCOID" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="ProgramCode" ColumnName="ProgramCode" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="AutoCitationTagText" ColumnName="AutoCitationTagText" />
+                <ScalarProperty Name="CopStandard" ColumnName="CopStandard" />
+                <ScalarProperty Name="AutoCitationSortOrder" ColumnName="AutoCitationSortOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLicenseDetailsForCMSByUser" FunctionName="DBMEdition01_Model.Store.usmGetLicenseDetailsForCMSByUser" />
+          <FunctionImportMapping FunctionImportName="GetStickyDates" FunctionName="DBMEdition01_Model.Store.usmReport_GetStickyDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.StickyDate">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ScoreAnalyzerStartDate" ColumnName="ScoreAnalyzerStartDate" />
+                <ScalarProperty Name="ScoreAnalyzerEndDate" ColumnName="ScoreAnalyzerEndDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMockSurveysBySites" FunctionName="DBMEdition01_Model.Store.usmSelectMockSurveysBySites">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.MockSurvey">
+                <ScalarProperty Name="MockSurveyID" ColumnName="MockSurveyID" />
+                <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetScoredByUsers" FunctionName="DBMEdition01_Model.Store.usmReportGetScoredByUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.ScoredByUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetReportEPScoringReportFinalMockSurveySummary" FunctionName="DBMEdition01_Model.Store.usmReportEPScoringReportFinalMockSurveySummary" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.EPScoringReportFinalMockSurveySummary">
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetReportEPScoringReportFinalMockSurveyDetail" FunctionName="DBMEdition01_Model.Store.usmReportEPScoringReportFinalMockSurveyDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.EPScoringReportFinalMockSurveyDetail">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="EPText" ColumnName="EPText" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="FSA" ColumnName="FSA" />
+                <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+                <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+                <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="MockSurveyFindings" ColumnName="MockSurveyFindings" />
+                <ScalarProperty Name="MockSurveyRecommendations" ColumnName="MockSurveyRecommendations" />
+                <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+                <ScalarProperty Name="COPID" ColumnName="COPID" />
+                <ScalarProperty Name="DeemedService" ColumnName="DeemedService" />
+                <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+                <ScalarProperty Name="RequirementName" ColumnName="RequirementName" />
+                <ScalarProperty Name="CopText" ColumnName="CopText" />
+                <ScalarProperty Name="AssignmentText" ColumnName="AssignmentText" />
+                <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetReportEPAssignmentScoringDetail" FunctionName="DBMEdition01_Model.Store.usmReportEPAssignmentScoringDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.EPAssignmentScoringDetail">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="EPText" ColumnName="EPText" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AssignedToFullName" ColumnName="AssignedToFullName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="FSA" ColumnName="FSA" />
+                <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+                <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+                <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+                <ScalarProperty Name="COPID" ColumnName="COPID" />
+                <ScalarProperty Name="DeemedService" ColumnName="DeemedService" />
+                <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+                <ScalarProperty Name="RequirementName" ColumnName="RequirementName" />
+                <ScalarProperty Name="CopText" ColumnName="CopText" />
+                <ScalarProperty Name="AssignmentText" ColumnName="AssignmentText" />
+                <ScalarProperty Name="ScoreTypeSortOrder" ColumnName="ScoreTypeSortOrder" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetReportEPAssignmentScoringSummary" FunctionName="DBMEdition01_Model.Store.usmReportEPAssignmentScoringSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.EPAssignmentScoringSummary">
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AssignedToFullName" ColumnName="AssignedToFullName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetReportComprehensiveScoringDetail" FunctionName="DBMEdition01_Model.Store.usmReportComprehensiveScoringDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMEdition01_Model.ComprehensiveScoringDetail">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="EPTextID" ColumnName="EPTextID" />
+                <ScalarProperty Name="EPText" ColumnName="EPText" />
+                <ScalarProperty Name="EPLabel" ColumnName="EPLabel" />
+                <ScalarProperty Name="EP_SortOrder" ColumnName="EP_SortOrder" />
+                <ScalarProperty Name="ChapterSortOrder" ColumnName="ChapterSortOrder" />
+                <ScalarProperty Name="StandardLabel" ColumnName="StandardLabel" />
+                <ScalarProperty Name="StandardTextSortOrder" ColumnName="StandardTextSortOrder" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="ChapterCode" ColumnName="ChapterCode" />
+                <ScalarProperty Name="ChapterText" ColumnName="ChapterText" />
+                <ScalarProperty Name="StandardText" ColumnName="StandardText" />
+                <ScalarProperty Name="ScoreName" ColumnName="ScoreName" />
+                <ScalarProperty Name="ScoreTypeID" ColumnName="ScoreTypeID" />
+                <ScalarProperty Name="ScoreTypeName" ColumnName="ScoreTypeName" />
+                <ScalarProperty Name="Likelihood" ColumnName="Likelihood" />
+                <ScalarProperty Name="Scope" ColumnName="Scope" />
+                <ScalarProperty Name="ScoreDate" ColumnName="ScoreDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="FSA" ColumnName="FSA" />
+                <ScalarProperty Name="dcm_fl" ColumnName="dcm_fl" />
+                <ScalarProperty Name="NewEP" ColumnName="NewEP" />
+                <ScalarProperty Name="esp1_fl" ColumnName="esp1_fl" />
+                <ScalarProperty Name="Findings" ColumnName="Findings" />
+                <ScalarProperty Name="POA" ColumnName="POA" />
+                <ScalarProperty Name="MOS" ColumnName="MOS" />
+                <ScalarProperty Name="OrgNotes" ColumnName="OrgNotes" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="MockSurveyFindings" ColumnName="MockSurveyFindings" />
+                <ScalarProperty Name="MockSurveyRecommendations" ColumnName="MockSurveyRecommendations" />
+                <ScalarProperty Name="DocumentList" ColumnName="DocumentList" />
+                <ScalarProperty Name="COPID" ColumnName="COPID" />
+                <ScalarProperty Name="DeemedService" ColumnName="DeemedService" />
+                <ScalarProperty Name="TagCode" ColumnName="TagCode" />
+                <ScalarProperty Name="RequirementName" ColumnName="RequirementName" />
+                <ScalarProperty Name="CopText" ColumnName="CopText" />
+                <ScalarProperty Name="AssignmentText" ColumnName="AssignmentText" />
+                <ScalarProperty Name="MockSurveyName" ColumnName="MockSurveyName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

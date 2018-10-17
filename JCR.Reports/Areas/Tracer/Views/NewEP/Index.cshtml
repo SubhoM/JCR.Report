@@ -1,0 +1,69 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.SearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+    Layout = "~/Views/Shared/_TracerLayout.cshtml";
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+        <div class="row">
+            <table width="100%">
+                <tr width="100%">
+                    <td width="45%"></td>                                  
+                    <td width="10%" style="vertical-align:top"><div id="divEPMigrationChangeDate"></div></td>
+                    <td width="45%"></td>
+                </tr>
+            @{
+                if (AppSession.IsCMSProgram) {
+                    <tr>
+                        <td style="text-align: center;" colspan="3"><br /><i>This report only includes TJC Tracers</i></td>
+                    </tr>
+                }
+            }
+            </table>
+        </div>    
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div id="loadAview" class="col-md-12"> </div>
+    </div>
+
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("hdnReportActionID", 92)
+}
+
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Tracer/Views/NewEP/NewEP.js")
+
+<script>
+    function onEPMigrationChangeDate(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.CycleName === "All") {
+            $('#onEPMigrationChangeDate').data("kendoMultiSelect").value([]);
+
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+
+            if (values == "") { this.value(values); }
+        }
+    }
+</script>
+
+<style type="text/css">
+    .k-pager-sizes .k-dropdown-wrap .k-input {
+        width: 100px;
+    }
+</style>
+
+

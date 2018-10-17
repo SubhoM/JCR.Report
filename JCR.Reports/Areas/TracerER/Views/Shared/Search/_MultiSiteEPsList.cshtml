@@ -1,0 +1,64 @@
+﻿ @model JCR.Reports.Models.ERSearchList
+    <div id="tracerep">
+       <h6><b>EP*</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("TracersEP")
+                    .DataTextField("StandardLabelAndEPLabel")
+                    .DataValueField("EPTextID")
+                  .Placeholder("Select EP")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model.TracersEPs)
+                  .AutoClose(false)
+                //  .ValuePrimitive(false)
+                   .Events(e =>
+                    {
+                        e.Select("onTracersEPSelect");
+                    })
+                .Value( "-1" )   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracersEP");
+       // removedeleteoption("TracersEP");
+    });
+    //function onTracersEPClose(e) {
+    //    removedeleteoption("TracersEP");
+    //}
+    function onTracersEPSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.StandardLabelAndEPLabel === "All") {
+            $('#TracersEP').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") this.value(values);
+        }
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

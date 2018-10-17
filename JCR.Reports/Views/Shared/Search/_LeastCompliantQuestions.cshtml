@@ -1,0 +1,819 @@
+﻿@using JCR.Reports.Common;
+<div>
+
+    <label id="Selectquestionslbl" style="font-weight:normal">
+        <input id="Selectquestionsradio" style="float: left; margin-top:6px;" type="radio" value="selectQuestionRadio" name="leastandselectradio">
+
+
+    </label>
+    <button id="Selectquestionsbtn" style="margin-top:-12px;" type="button" class="btn btn-primary btn-sm focusButton" data-toggle="modal" data-target="#myModal" data-backdrop="false">Select Tracer Questions</button>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content" style="margin-top:110px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Tracer Questions</h4>
+                </div>
+                <div class="modal-body" style="margin-top:-10px;">
+
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-5">
+                            <div id="divSelectTracersList">
+                            </div>
+                            <div id="divSelectTracerSectionList">
+                                    @Html.Partial("Search/_TracerSectionsList")
+                            </div>
+                        </div>
+                       
+                        
+                        <div class="col-xs-4">
+                            <div style="margin-top:-2px;">
+                                <h6><b>Keyword   </b> <a href="#" onclick="javascript:OpenKeyWordHelp();"><u>Wildcards supported e.g. "pain*"</u></a></h6>
+                            </div>
+                            <div style="margin-top:-9px;">
+                                <textarea id="txtQuestionSearch" class="form-control" spellcheck="false" name="Search Keyword" rows="1" style="width: 85%; height: 30px; overflow: hidden;"></textarea>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-xs-1" style="margin-top:20px;margin-left:-30px;" id="questionsbtns">
+                            @(Html.Kendo().Button()
+                                .Name("btnSearchQuestion")
+                                .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                                .Content("<span class='glyphicon glyphicon-search'></span><span>&nbsp;</span><span class='glyphfontsize'>Search</span>")
+                            )
+
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-9 col-xs-offset-2" align="center" style="margin-left:105px;">
+
+                            
+                            <button type="button" class="btn btn-primary btn-sm focusButton" id="btnAddSelectedQuestions">Add Selected Questions</button><span id="divNoQuestionsSelectedMsg" style="display:none; padding-left:15px; font-size:10pt; color:red; font-weight:bold;">No questions were selected </span>
+                        </div>
+
+                    </div>
+                    <div class="loadingonpopup">
+                        <img src="~/Images/blue_spinner.gif" />
+
+                        <div>Loading</div>
+                    </div>
+                    <div class="row ">
+                        <div class=" col-xs-12">
+                            <div id="question_content">
+                                <div class="row margintopadd">
+                                    <div class="col-xs-offset-4 col-xs-8" id="divSelectAllQuestions">
+                                        
+                                    </div>
+
+                                </div>
+
+                                <div class="left">
+                                    <div id="divQuestionResultsMsg">Search Results</div>
+                                </div>
+
+
+
+                                <div id="AllQuestions" style="overflow: hidden;"></div>
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="divselectedquestionCount" align="left" style="margin-left:21px;display:none;">0 Questions selected</div>
+
+
+<div id="includeleastcompliantquestions" style="padding-top:10px;">
+    <label id="leastcompliantquestionslbl" style="font-weight:normal">
+        <input id="leastcompliantquestionsradio" name="leastandselectradio" style="float: left; margin-top:6px;" type="radio" value="topleast">
+        Use Top
+        @(Html.Kendo().DropDownList()
+    .Name("LeastComplaintQuestions")
+    .DataTextField("Text")
+    .DataValueField("Value")
+    .BindTo(new List<SelectListItem>() {
+        new SelectListItem() {
+            Text = "10",
+            Value = "10"
+        },
+        new SelectListItem() {
+            Text = "20",
+            Value = "20"
+        },
+        new SelectListItem() {
+            Text = "30",
+            Value = "30"
+        },
+        new SelectListItem() {
+            Text = "40",
+            Value = "40"
+        }
+    })
+            .HtmlAttributes(new { style = "width:50px;" })
+    .Value("10")
+        ) least compliant questions
+
+    </label>
+
+    <div id="divTopTracersList" style="padding-left:35px; padding-right:35px;">
+        @Html.Partial("Search/_TracersList")
+    </div>
+    
+    <div id="divTopAllQuestions">
+        <div id="lblChkAllQuestions" style="padding-left:35px; padding-right:35px;padding-top:5px;" >
+            <label id="lblAllQuestionTracers"><input id="AllQuestionTracerscheckbox" type="checkbox" style="float: left; margin-top:1px;" value="" onclick=""><span>&nbsp;</span> Include Questions from all Tracers</label>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="divQuestionDetailspopup">
+    @(Html.Kendo().Window()
+        .Name("QuestionDetailsPopupwindow")
+    .Title("Question Info")
+    .Modal(true)
+    .Content(@<text><div style=" width:99%;">
+            <div class="row margintopadd" style="margin-left:10px;">
+                <table>
+                    <tr>
+                        <td style="width: 14%">
+                            <div id="questionNumberDetail" style="font-weight: bold; ">
+
+                            </div>
+                        </td>
+                        <td>
+                            <div id="questiondetailtext" align="justify" style="margin-left: 10px; margin-right: 20px;">
+
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="margintopadd">
+
+                <div id="Questiondetailgrid" style="overflow: hidden;margin-left:9px;"></div>
+
+            </div>
+        </div>
+    </text>)
+                                                                                                                                .Visible(false)
+                                                                                                                                 .Events(events => events.Close("onQuestionDetailsClose")
+                                                                                                                               ))
+</div>
+
+<div>
+
+    @(Html.Kendo().Window()
+        .Name("WildCardPopupwindow")
+    .Title("Wildcard Support for Search by Keyword")
+    .Modal(true)
+    .Content(@<text>
+        <p>Wildcard '*' can be used with Keyword search.</p>
+        <p>For example, if you search using:</p>
+        <ul>
+            <li><b>pain </b>will return an exact match for questions with the word "pain".</li>
+            <li><b>pain* </b>will return questions with words starting with pain such as "pain","painful","painkiller","paint" etc.</li>
+        </ul>
+        <div align="center">
+            @(Html.Kendo().Button()
+                            .Name("btnCloseWildcard")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                        .Content("<span class='glyphicon glyphicon-remove'></span><span>&nbsp;</span><span class='glyphfontsize'>Close</span>")
+            )
+        </div>
+    </text>)
+                                                                        .Visible(false))
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+    $("input[name=leastandselectradio]:radio").change(leastRadioChange);
+
+    function leastRadioChange() {
+
+        var Leastselected = $('input[name=leastandselectradio]:checked').val();
+
+        if (Leastselected == "topleast") {
+            selectquestions = 340;
+            setLeastCompliantQuestion(true);
+
+            $('#divselectedquestionCount').css("display", "none");
+            $('#showerror_msg').css("display", "none");
+
+        }
+        else {
+            selectquestions = 0;
+            setLeastCompliantQuestion(false);
+
+            $('#divselectedquestionCount').css("display", "block");
+            QuestionText = "";
+
+        }
+        radioTracersChange();
+    }
+    var maxuncheck = true;
+    var AllQuestionsdataSourcedata = 0;
+    function OpenKeyWordHelp() {
+
+        var winwildcard = $("#WildCardPopupwindow").data("kendoWindow");
+        winwildcard.center();
+        winwildcard.open();
+    }
+
+    function resetTracersList() {
+        $("#TracersList").data("kendoMultiSelect").value(-1);
+        $("#TracerSectionsList").data("kendoMultiSelect").value(-1);
+    }
+
+    function radioTracersChange() {
+        var Leastselected = $('input[name=leastandselectradio]:checked').val();
+
+        if (Leastselected == "topleast") {
+            $('#tracerList').appendTo('#divTopTracersList');
+            $('#lblChkAllQuestions').appendTo('#divTopAllQuestions');
+            resetTracersList();
+        }
+        else {
+            $('#tracerList').appendTo('#divSelectTracersList');
+            $('#lblChkAllQuestions').appendTo('#divSelectAllQuestions');
+            //resetTracersList();
+        }
+    }
+
+    function setLeastCompliantQuestion(selectable) {
+        var leastcompliantdropdown = $("#LeastComplaintQuestions").data("kendoDropDownList");
+        leastcompliantdropdown.enable(selectable);
+        leastcompliantdropdown.select(0);
+    }
+
+    $("#QuestionDetailsPopupwindow").kendoWindow({
+        width: "54%"
+    });
+
+    function SetSelectedQuestions(showDivSelecteQuestionCount) {
+        var selectedRowsCount = $(".k-state-selected", "#AllQuestions");
+        var displaycounttext = "0 Question(s) selected";
+
+        if (selectedRowsCount.length > 0) {
+            selectquestions = selectedRowsCount.length;
+            $('#showerror_msg').css("display", "none");
+            var TracerListIDCounts = [];
+            var TracerListNameCounts = [];
+            $('#TracersList :selected').each(function (i, selected) {
+                TracerListIDCounts[i] = $(selected).val();
+                TracerListNameCounts[i] = $(selected).text();
+            });
+            
+            if ($("#AllQuestionTracerscheckbox").is(":checked")) {
+                displaycounttext = selectquestions + " Question(s) selected from All Tracers";
+            }
+            else {
+
+                if (TracerListIDCounts.length > 1) {
+                    displaycounttext = selectquestions + " Question(s) selected from " + TracerListIDCounts.length + " Tracers";
+                }
+                else {
+                    if (TracerListIDCounts.length == 1) {
+
+                        if (TracerListIDCounts[0] == "-1") {
+                            displaycounttext = selectquestions + " Question(s) selected from All Tracers";
+                        } else {
+                            displaycounttext = selectquestions + " Question(s) selected from " + TracerListIDCounts.length + " Tracers";
+                        }
+
+
+                    }
+                    else {
+                        displaycounttext = selectquestions + " Question(s) selected from All Tracers";
+                    }
+                }
+
+            }
+
+
+        }
+        else { selectquestions = 0; }
+
+        $("#divselectedquestionCount").html(displaycounttext);
+        if (showDivSelecteQuestionCount){
+            $('#divselectedquestionCount').css("display", "block");
+        }
+        else
+            $('#divselectedquestionCount').css("display", "none");
+    }
+
+    $('#myModal').on('hidden.bs.modal', function () {
+        onLeastCompliantPopupCloseFunc();
+    });
+    
+    function onLeastCompliantPopupCloseFunc() {
+        $('#MainNavbar').removeClass('overrideNavbarZIndex'); //Remove the z-index override for 'navbar-static-top' bootstrap class
+        $('#topNavbar').removeClass('overrideNavbarZIndex'); //Remove the z-index override for 'navbar-static-top' bootstrap class
+
+        if (AllQuestionsdataSourcedata.length >= 500) {
+            $("#divQuestionResultsMsg").html('<h4 id="maxquestion">Maximum of 500 questions are displayed below. Refine your search criteria to narrow the result.</h4>');
+        }
+        else if (AllQuestionsdataSourcedata.length == 0) {
+            $("#divQuestionResultsMsg").html('<h4 id="noquestion">No Questions Found</h4>');
+            $("#divQuestionResultsMsg").addClass("DivColorAdd");
+        }
+        else {
+            $("#divQuestionResultsMsg").html('Search Results.');
+            $("#divQuestionResultsMsg").removeClass("DivColorAdd");
+        }
+
+        SetSelectedQuestions(true);
+    }
+
+
+    function onQuestionDetailsClose(e) {
+        // to do
+        $("#Questiondetailgrid").html("");
+    }
+
+    //section 2 end
+
+    //on document ready
+    $(function () {
+        // selectquestions = 0;
+        $('#QuestionDetailsPopupwindow_wnd_title').text("Tracers linked to this question");
+        $('#question_content').css("display", "block");
+
+        $("#divNoQuestionsSelectedMsg").css("display", "none");
+        $('input:radio[id*="leastcompliantquestionsradio"]').prop('checked', true);
+
+
+        $("#Selectquestionsbtn").bind("click", function () {
+
+            $("#divNoQuestionsSelectedMsg").css("display", "none");
+            $('#MainNavbar').addClass('overrideNavbarZIndex'); //Overrides the z-index to 0 for 'navbar-static-top' bootstrap class
+            $('#topNavbar').addClass('overrideNavbarZIndex'); //Overrides the z-index to 0 for 'navbar-static-top' bootstrap class
+            $('input:radio[id*="Selectquestionsradio"]').prop('checked', true);
+            setLeastCompliantQuestion(false);
+            $('#divselectedquestionCount').css("display", "block");
+            QuestionText = "";
+            selectquestions = 0;
+            radioTracersChange();
+            //searchClick();
+        });
+
+        $("#btnAddSelectedQuestions").bind("click", function () {
+            var selectedRowsCount = $(".k-state-selected", "#AllQuestions");
+            var displaycounttext = "0 Question(s) selected";
+
+            if (selectedRowsCount.length > 0) {
+                $('#myModal').modal('toggle');
+                $("#divNoQuestionsSelectedMsg").css("display", "none");
+            }
+            else {
+                $("#divNoQuestionsSelectedMsg").css("display", "inline-block");
+            }
+        });
+
+
+        $("#btnSearchQuestion")
+           .bind("click", function () {
+               searchClick();
+           });
+
+        $("#btnCloseWildcard").click(function (e) {
+            $("#WildCardPopupwindow").data("kendoWindow").close();
+        });
+        AllQuestionCreate();
+
+
+    });
+
+    //document ready end
+
+
+    var leastCompliantTracerTypeID = 1;
+    function searchClick() {
+
+        $("#divNoQuestionsSelectedMsg").css("display", "none");
+
+        if (typeof reportTracerTypeID !== 'undefined' && reportTracerTypeID != null)
+            leastCompliantTracerTypeID = reportTracerTypeID;
+
+        checkedIds = {};
+        searchQuestionLoad();
+        $('#question_content').css("display", "block");
+        $(".allselcheckbox").prop('checked', false);
+        maxuncheck = true;
+    }
+
+    function clearKendoGrid() {
+        var allQGrid = $("#AllQuestions").data('kendoGrid');
+        if (typeof allQGrid != 'undefined' && allQGrid.dataSource != null)
+            allQGrid.dataSource.data([]);
+        $("#divQuestionResultsMsg").html('');
+    }
+
+    function leastComplianctTracerChange() {
+        var Leastselected = $('input[name=leastandselectradio]:checked').val();
+
+        if (Leastselected != "topleast") {
+            setTimeout(searchClick, 100);
+        }
+        PreserveSelectedList = false;
+        tracerSectionlistupdate();
+    }
+
+    function leastComplianctTracerSectionChange() {
+        var Leastselected = $('input[name=leastandselectradio]:checked').val();
+
+        if (Leastselected != "topleast") {
+            setTimeout(searchClick, 100);
+        }
+        PreserveSelectedList = false;
+    }
+
+    var AllQuestionsdataSource = "";
+    function datasourcecall() {
+        var TracerCustomsListIDs = [];
+        var TracerQuestionCategoryID = [];
+        $('#TracersList :selected').each(function (i, selected) {
+            TracerCustomsListIDs[i] = $(selected).val();
+
+        });
+        $('#TracerSectionsList :selected').each(function (i, selected) {
+            TracerQuestionCategoryID[i] = $(selected).val();
+
+        });
+        AllQuestionGrid = true;
+
+        return new kendo.data.DataSource({
+            transport: {
+                read: {
+                    // the remote service url
+                    url: "/ComplianceQuestion/Questions_Read",
+
+                    // the request type
+                    type: "get",
+
+                    // the data type of the returned result
+                    dataType: "json",
+                    complete: function (jqXHR, textStatus) {
+                        AllQuestionsdataSourcedata = AllQuestionsdataSource.data();
+                        if (AllQuestionsdataSourcedata.length >= 500) {
+                            $("#divQuestionResultsMsg").html('<h4 id="maxquestion">Maximum of 500 questions are displayed below. Refine your search criteria to narrow the result.</h4>');
+                        }
+                        else if (AllQuestionsdataSourcedata.length == 0) {
+                            $("#divQuestionResultsMsg").html('<h4 id="noquestion">No Questions Found</h4>');
+                            $("#divQuestionResultsMsg").addClass("DivColorAdd");
+                        }
+                        else {
+                            $("#divQuestionResultsMsg").html('Search Results.');
+                            $("#divQuestionResultsMsg").removeClass("DivColorAdd");
+                        }
+                        setTimeout(SetSelectedQuestions, 1000, true);
+                    },
+                   
+                    // additional custom parameters sent to the remote service
+                    data: {
+                        TracerCustomID: TracerCustomsListIDs.toString(),
+                        TracerQuestionCategoryID: TracerQuestionCategoryID.toString(),
+                        SearchKeyword: $("#txtQuestionSearch").val(),
+                        SiteID: $('#UserSite').val(),
+                        ProgramID: $('#UserProgram').val(),
+                        tracerTypeID: reportTracerTypeID
+                    }
+                }
+            },
+            requestEnd: function (e) {
+                SetLoadingImageVisibility(true); //Enables the loading image in Layout.cshtml
+                $('.loadingonpopup').hide();
+            },
+            // describe the result format
+            schema: {
+                // the data, which the data source will be bound to is in the "list" field of the response
+                model: {
+                    id: "RowNumber",
+                    checkboxall: "false", RowNumber: "RowNumber", TracerCustomID: "TracerCustomID", TracerQuestionID: "TracerQuestionID", QuestionText: "QuestionText",
+                    CountTracers: "CountTracers", TracerCustomName: "TracerCustomName", LinkHeader: "LinkHeader", TracerQuestionCategoryID: "TracerQuestionCategoryID", QuestionCategoryName: "QuestionCategoryName"
+                }
+            }
+        });
+    }
+    function searchQuestionLoad() {
+        SetLoadingImageVisibility(false); //Disables the loading image in Layout.cshtml
+        $(".loadingonpopup").show();
+        AllQuestionsdataSource = datasourcecall();
+        AllQuestionsdataSource.sync();
+        AllQuestionCreate();
+
+    }
+
+
+
+    function AllQuestionCreate() {
+        $("#AllQuestions").kendoGrid({
+            dataSource: AllQuestionsdataSource,
+            sortable: true,
+            columns: [{
+                field: "checkboxall",
+                width: 19,
+                sortable: false,
+                template: '<input class="selcheckbox" type="checkbox" />',
+                headerTemplate: '<input class="allselcheckbox" type="checkbox" id="checkAll"/>'
+            },
+             { field: "RowNumber", title: "#", width: 28 },
+             { field: "TracerCustomID", hidden: "true" }, { field: "TracerQuestionID", hidden: "true" },
+             { field: "CountTracers", hidden: "true" }, { field: "TracerCustomName", hidden: "true" },
+             { field: "TracerQuestionCategoryID", hidden: "true" }, { field: "QuestionCategoryName", hidden: "true" },
+             { field: "QuestionText", width: 300, title: "Question", encoded: false}//, { field: "LinkHeader", width: 50, title: "Info" }
+            , { title: "Tracer Name", width: 50, field: 'LinkHeader', template: '<a href="\\#" class="link" style="text-decoration: underline;">#= LinkHeader #</a>' }
+
+            ],
+
+            dataBound: function selectdataBound() {
+              
+                //select check boxes for saved questions.
+   
+                if (savedquestionsid != null && savedquestionsid != "") {
+                    var array = savedquestionsid.split(",");
+                        var grid = this;
+                        $.each(grid.tbody.find('tr'), function () {
+
+                            var model = grid.dataItem(this);
+                            $.each(array, function (i) {
+                             
+                                if (model.TracerQuestionID == array[i]) {//some condition
+                                    $('[data-uid=' + model.uid + ']').addClass("k-state-selected").find(".selcheckbox").attr("checked", "checked");
+                                }
+                            });
+                       
+                        
+                         
+                        });
+
+                    }
+               
+              //  }
+          
+
+                $(".selcheckbox").bind("change", function (e) {
+                    var checked = this.checked,
+                        row = $(this).closest("tr"),
+                        grid = $("#AllQuestions").data("kendoGrid"),
+                        dataItem = grid.dataItem(row);
+                    checkedIds[dataItem.id] = checked;
+                    $(e.target).closest("tr").toggleClass("k-state-selected");
+                    if (AllQuestionsdataSourcedata.length >= 500) {
+                        $("#divQuestionResultsMsg").html('<h4 id="maxquestion">Maximum of 500 questions are displayed below. Refine your search criteria to narrow the result.</h4>');
+                    }
+                    else {
+                        $("#divQuestionResultsMsg").html('Search Results.');
+                        $("#divQuestionResultsMsg").removeClass("DivColorAdd");
+                    }
+                });
+                $(".link").bind("click", function (e) {
+                    showDetails.call($("#AllQuestions").data("kendoGrid"), e);
+                });
+                $('.allselcheckbox').unbind('change');
+                //If header is checked then make all rows selected
+                $(".allselcheckbox").bind("change", function (e) {
+                    var checked = false;
+
+                    if ($(".allselcheckbox").is(':checked') == true) {
+                        var AllQuestionsdataSourcedata = AllQuestionsdataSource.data();
+                        if (AllQuestionsdataSourcedata.length <= 500) {
+                            $('#AllQuestions').data('kendoGrid').tbody.find("tr").addClass('k-state-selected');
+                            $('.selcheckbox').each(function () { //loop through each checkbox
+                                this.checked = true;  //select all checkboxes with class "checkbox1"
+                                var checked = this.checked,
+                       row = $(this).closest("tr"),
+                       grid = $("#AllQuestions").data("kendoGrid"),
+                       dataItem = grid.dataItem(row);
+                                checkedIds[dataItem.id] = checked;
+                            });
+                            maxuncheck = true;
+                        }
+                        else {
+
+                            maxuncheck = false;
+                            $("#divQuestionResultsMsg").html('<h4 id="maxqueselection">Maximum of 500 questions can be selected</h4>');
+                            $(".allselcheckbox").prop('checked', false);
+                        }
+
+
+
+
+                    }
+                    else {
+
+                        if (maxuncheck) {
+                            $('#AllQuestions').data('kendoGrid').tbody.find("tr").removeClass('k-state-selected');
+                            $('.selcheckbox').each(function () { //loop through each checkbox
+                                this.checked = false;  //select all checkboxes with class "checkbox1"
+                            });
+                            checkedIds = {};
+                        }
+                        else { maxuncheck = true; }
+                    }
+
+
+                });
+          
+                var view = this.dataSource.view();
+                for (var i = 0; i < view.length; i++) {
+                    if (checkedIds[view[i].id]) {
+                        this.tbody.find("tr[data-uid='" + view[i].uid + "']")
+                        .addClass("k-state-selected")
+                        .find(".selcheckbox")
+                        .attr("checked", "checked");
+                    }
+                }
+            }
+        })
+
+    }
+
+    var checkedIds = {};
+    var QuestionDetaildataSource = "";
+    function QuestionDetaildatasourcecall(QuestionID, TracerCustomID) {
+
+
+        return new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "/ComplianceQuestion/Questions_Details",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        TracerCustomID: TracerCustomID,
+                        QuestionID: QuestionID,
+                        tracerTypeID: reportTracerTypeID
+                    }
+                }
+            },
+
+            requestStart: function (e) {
+                SetLoadingImageVisibility(false); //Disables the loading image in Layout.cshtml
+                $('.loadingonpopup').show();
+            },
+            requestEnd: function (e) {
+                SetLoadingImageVisibility(true); //Enables the loading image in Layout.cshtml
+                $('.loadingonpopup').hide();
+            },
+            schema: {
+                model: {
+                    TracerCustomID: "TracerCustomID", TracerQuestionID: "TracerQuestionID",// QuestionText: "QuestionText",
+                    QuesNo: "QuesNo", TracerCustomName: "TracerCustomName", StandardEP: "StandardEP", TracerQuestionCategoryID: "TracerQuestionCategoryID", QuestionCategoryName: "QuestionCategoryName"
+                }
+            }
+        });
+    }
+    function QuestionDetailbyTracerCreate() {
+
+
+        var standardEPTitle = leastCompliantTracerTypeID === 1 ? "Standard - EP" : "Tag Standard";
+
+        $("#Questiondetailgrid").kendoGrid({
+            dataSource: QuestionDetaildataSource,
+            columns: [
+
+                 { field: "TracerCustomID", hidden: "true" }, { field: "TracerQuestionCategoryID", hidden: "true" }, { field: "TracerQuestionID", hidden: "true" },
+                  { field: "TracerCustomName", width: 200, title: "Tracer Name" }, { field: "QuesNo", width: 100, title: "Ques No." },
+                // { field: "QuestionText", hidden: "true" },
+                { field: "QuestionCategoryName", width: 200, title: "Tracer Section Name" },
+                 { field: "StandardEP", title: standardEPTitle }]
+        })
+    }
+
+
+    function showDetails(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var win = $("#QuestionDetailsPopupwindow").data("kendoWindow");
+        win.center();
+        win.open();
+
+        $("#questionNumberDetail").html("Question No. " + dataItem.RowNumber + ":")
+        $("#questiondetailtext").html(dataItem.QuestionText);
+        QuestionDetaildataSource = QuestionDetaildatasourcecall(dataItem.TracerQuestionID, dataItem.TracerCustomID);
+        QuestionDetaildataSource.sync();
+        QuestionDetailbyTracerCreate();
+
+    }
+
+
+
+</script>
+
+
+
+<style>
+    #myModal {
+        margin-top: -91px;
+    }
+
+    .modal-header {
+        padding: 2px 15px;
+    }
+
+    #AllQuestions {
+        height: 425px;
+        overflow: hidden;
+    }
+
+    #Questiondetailgrid {
+        height: 150px;
+        overflow: hidden;
+    }
+
+    #AllQuestions .k-grid-content {
+    height: 400px; /* internal bit with the scrollbar */
+    overflow: auto;
+}
+
+
+    u {
+        text-decoration: underline;
+    }
+
+    .k-block > .k-header, .k-window-titlebar {
+        text-align: center;
+    }
+
+    .k-grid tr td {
+        border-width: 0 0 0 0px;
+    }
+
+    /*.DivColorAdd {
+    background-color:red;
+    color:white;
+
+    }*/
+
+    #noquestion {
+        background-color: #f2dede;
+        color: #a94442;
+        max-width: 170px;
+    }
+
+    #maxquestion {
+        background-color: #f2dede;
+        color: #a94442;
+    }
+
+    #maxqueselection {
+        background-color: #f2dede;
+        color: #a94442;
+        max-width: 370px;
+    }
+
+    #AllQuestions .k-loading-image {
+        background-image: none;
+    }
+
+    .loadingonpopup {
+        display: none;
+        position: fixed;
+        top: 300px;
+        left: 55%;
+        /*margin-top: -96px;*/
+        margin-left: -96px;
+        /*background-color: #ccc;*/
+        border-radius: 25px;
+        width: 70px;
+        height: 60px;
+        z-index: 90000001;
+        text-align: center;
+        padding-top: 5px;
+        opacity: 0.85;
+    }
+</style>
+
+
+
+
+
+
+
+
+

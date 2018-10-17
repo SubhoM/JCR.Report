@@ -1,0 +1,175 @@
+﻿<div class="row">
+    <div class="col-xs-5">
+        <div>
+            <div style="text-align:center">Search Results (Max.300)</div>
+ 
+            <div id="grid"></div>
+        </div>
+    </div>
+    <div id="questionselectbuttons" class="col-xs-1 " >
+        @(Html.Kendo().Button()
+                            .Name("btnSelectQuestion")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                                .Content("<span class='glyphicon glyphicon-chevron-right'></span>")
+        )
+        <br />
+
+        @(Html.Kendo().Button()
+                            .Name("btnunSelectQuestion")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                                .Content("<span class='glyphicon glyphicon-chevron-left'></span>")
+        )
+    </div>
+    <div class="col-xs-5 ">
+        <div>
+            <div style="text-align:center">Selected Questions (Max.100)</div>
+         
+            <div id="grid2"></div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+       var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    // the remote service url
+                    url: "/ComplianceQuestion/Questions_Read",
+
+                    // the request type
+                    type: "get",
+
+                    // the data type of the returned result
+                    dataType: "json",
+
+                    // additional custom parameters sent to the remote service
+                    //data: {
+                    //    input1: soemthing,
+                    //    input2: 23,
+                    //    input3: 10
+                    //}
+                }
+            },
+            // describe the result format
+            schema: {
+                // the data, which the data source will be bound to is in the "list" field of the response
+                model: { TracerCustomID: "TracerCustomID", TracerCustomName: "TracerCustomName" }
+            }
+        });
+        var SelecteddataSource = new kendo.data.DataSource({
+           // describe the result format
+            schema: {
+                // the data, which the data source will be bound to is in the "list" field of the response
+                model: { TracerCustomID: "TracerCustomID", TracerCustomName: "TracerCustomName" }
+            }
+        });
+
+
+    function addSelectedListView(TracerCustomID, TracerCustomName) {
+     //   alert(TracerCustomID & TracerCustomName);
+        SelecteddataSource.add({ TracerCustomID: TracerCustomID, TracerCustomName: TracerCustomName });
+        SelecteddataSource.sync();
+
+    }
+
+    function removeSelectedListView(TracerCustomID, TracerCustomName) {
+        //   alert(TracerCustomID & TracerCustomName);
+        dataSource.remove({ TracerCustomID: TracerCustomID, TracerCustomName: TracerCustomName });
+        dataSource.sync();
+
+    }
+  
+  
+    $("#grid").kendoGrid({
+        dataSource: dataSource,
+        selectable:true,
+        columns: [{
+            title: "Select",
+            template: '<input class="checkbox" type="checkbox" />'
+        }, 
+                  { field: "TracerCustomID" },
+                  { field: "TracerCustomName" }],
+        dataBound: function () {
+            $(".checkbox").bind("change", function (e) {
+                $(e.target).closest("tr").toggleClass("k-state-selected");
+            });
+        }
+    })
+      
+    $("#grid2").kendoGrid({
+        dataSource: SelecteddataSource,
+        selectable: true,
+        columns: [{
+            title: "Select",
+            template: '<input class="checkbox" type="checkbox" />'
+        }, { field: "TracerCustomID" },
+                  { field: "TracerCustomName" }],
+        dataBound: function () {
+            $(".checkbox").bind("change", function (e) {
+                $(e.target).closest("tr").toggleClass("k-state-selected");
+            });
+        }
+    })
+
+    $(function () {
+        $("#btnSelectQuestion")
+          .bind("click", function () {
+              var grid = $("#grid").data("kendoGrid");
+              var selectedRows = $(".k-state-selected", "#grid");
+              
+              if (selectedRows.length > 0) {
+                  for (var i = 0; i < selectedRows.length; i++) {
+                      var selectedItem = grid.dataItem(selectedRows[i]);
+                      SelecteddataSource.add({ TracerCustomID: selectedItem.TracerCustomID, TracerCustomName: selectedItem.TracerCustomName });
+
+                    //  var data = dataSource.get(selectedItem.TracerCustomID);
+                      //dataSource.remove(data);
+                     
+                  }
+                  SelecteddataSource.sync();
+                  // dataSource.sync();
+
+                  var items = dataSource.data();
+                  var updated = [];
+
+                  for (var i = 0; i < items.length; i++) {
+                      if (items[i].dirty) {
+                          alert(items[i]);
+                      }
+                  }
+              }
+                
+          });
+    });
+</script>
+<style>
+
+    .checkbox, .radio {
+    
+    display:inline;
+    }
+    #grid {
+        height: 400px;
+        overflow: auto;
+        margin-left: 10px;
+        margin-bottom:10px;
+    }
+
+    #grid2 {
+        height: 400px;
+        overflow: auto;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+    #questionselectbuttons {
+        height: 400px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        text-align: center; 
+        vertical-align:central; 
+    }
+
+</style>

@@ -1,0 +1,49 @@
+﻿@using JCR.Reports.Common;
+<div class="row" id="divScheduledReport">
+    <div class="col-xs-3 col-md-3 col-lg-3 text-right" style="vertical-align:bottom; margin-top:10px;">
+        <b>My Report Name:</b>
+    </div>
+    <div class="col-xs-5">
+        <input type="text" id="txtScheduledReportName" maxlength="100" class="form-control" value="@AppSession.ReportScheduleName" placeholder="Report Name" />
+    </div>
+    @if (AppSession.ReportScheduleID > 0)
+    {
+        <div class="col-xs-2 col-md-2 text-right" style="vertical-align:middle;"><b>Report ID:</b></div>
+        <div class="col-xs-1 text-left"><span id="lblReportScheduleID">@AppSession.ReportScheduleID</span></div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Update report name on the recurrence screen
+        $('#txtScheduledReportName').focusout(function () {
+            if ($('#txtScheduledReportName1').length > 0) {
+                var reportName = $(this).val().trim();
+                if (reportName != null) {
+                    $('#txtScheduledReportName1').val(reportName);
+                }
+            }
+        });
+    });
+
+    function ValidateScheduledReportName(ctrl, tooltipPosition) {
+
+
+
+        var txtCtrl = $('#' + ctrl)
+        var IsNotEmpty = $(txtCtrl).val().length > 0 && $(txtCtrl).val() != $(txtCtrl).attr('placeholder');
+        var Is100Chars = $(txtCtrl).val().length <= 100;
+
+        if (!IsNotEmpty) {
+            ShowToolTip(txtCtrl, 'Enter the report name', tooltipPosition, 6000);
+        }
+        else if (!Is100Chars) {
+            ShowToolTip(txtCtrl, 'Please enter a maximum of 100 characters.', tooltipPosition, 6000);
+        }
+        return IsNotEmpty;
+    }
+</script>
+<style type="text/css">
+    .tooltip-inner {
+        width: 350px;
+    }
+</style>

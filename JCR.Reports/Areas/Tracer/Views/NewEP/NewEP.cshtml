@@ -1,0 +1,69 @@
+﻿
+<div>
+    <div id="resultQuesEP">
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.NewEp>()
+      .Name("gridNEWEPDATA")
+      .DataSource(dataSource => dataSource // Configure the grid data source
+                                         .Ajax() // Specify that ajax binding is used
+                                         .ServerOperation(false)
+                                         .Read(read => read
+                                                            .Action("_NewEPDataExcel", "NewEP")
+                                                            .Data("additionalData")) // Set the action method which will return the data in JSON format
+
+                                          .PageSize(20))
+       .ToolBar(tools => tools.Excel())
+       .Events(e => e.ExcelExport("excelExport"))
+       .Excel(excel => excel
+                            .AllPages(true)
+                            .Filterable(true)
+                                    .FileName("Standards Update - New EPs.xlsx")
+                            .ProxyURL(Url.Action("Excel_Export_Save", "Export")))
+               .Columns(columns =>
+               {
+                   columns.Bound(p => p.StdEffectiveBeginDate).Title("Effective Date").Width(125).Format("{0:MM/dd/yyyy}");
+                   columns.Bound(p => p.StdEP).Title("EP").Width(150);
+                   columns.Bound(p => p.EPText).Title("EP Text");
+            
+               })
+
+      .ColumnMenu(columnsmenu => columnsmenu
+                 .Columns(true))
+      .Filterable(filter => filter
+                    .Extra(false)
+                    .Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains("Contains")
+                    .StartsWith("Starts with")
+                    .IsEqualTo("Is equal to")
+                    .IsNotEqualTo("Is not equal to"))))
+
+      .Sortable() // Enable sorting
+      .AutoBind(false)
+      .Groupable()
+      .Filterable()
+      .Reorderable(reorder => reorder.Columns(true))
+      .Resizable(resizing => resizing.Columns(true))
+      .Scrollable(scrollable => scrollable.Height("700px"))
+      .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 })
+
+                        )
+        )
+    </div>
+</div>
+
+<style>
+    #gridNEWEPDATA {
+        display: none;
+    }
+</style>
+
+
+
+
+
+
+
+
+

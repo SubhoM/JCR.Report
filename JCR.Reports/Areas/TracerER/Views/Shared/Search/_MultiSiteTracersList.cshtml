@@ -1,0 +1,53 @@
+﻿@model JCR.Reports.Models.ERSearchList
+<div id="tracerList">
+    <h6><b>Tracer Name</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+                      .Name("TracersList")
+                      .DataTextField("TracerCustomName")
+                      .DataValueField("TracerCustomID")
+                      .Placeholder("Select Tracers")
+                      .HighlightFirst(true)
+                      .Filter(FilterType.Contains)
+                              .BindTo(Model.TracersLists)
+                     .ValuePrimitive(false)
+                     .AutoClose(false)
+                              .Events(e =>
+                            {
+                                e.Select("onMultiTracersListSelect");
+                            })
+                     .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracersList");
+       // removedeleteoption("TracersList");
+    });
+    //function ontracerlistClose(e) {
+    //    removedeleteoption("TracersList");
+    //}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

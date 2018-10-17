@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.ReportViewer</id>
+    <version>11.0.3366.16</version>
+    <title>MICROSOFT® REPORT VIEWER 2012 RUNTIME</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Microsoft Report Viewer 2012 Runtime redistributable package, includes controls for viewing reports designed using Microsoft reporting technology.</description>
+    <copyright>©2014 Microsoft</copyright>
+    <language>en-US</language>
+    <tags>Microsoft ReportViewer 11</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="Microsoft.SqlServer.Types" version="11.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

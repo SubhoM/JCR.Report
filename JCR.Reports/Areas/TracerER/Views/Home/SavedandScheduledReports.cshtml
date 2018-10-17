@@ -1,0 +1,402 @@
+﻿<div id="divsavedreports">
+    <div>
+
+        @(Html.Kendo().Window()
+        .Name("DeletePopupwindow")
+    .Title("Delete Saved Report")
+    .Modal(true)
+    .Content(@<text>
+        <div id="deletemyreportnamemsg"></div>
+        <br />
+        <br />
+
+        <div align="center">
+            @(Html.Kendo().Button()
+                            .Name("btnOKDelete")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                        .Content("<span class='glyphicon glyphicon-ok'></span><span>&nbsp;</span><span class='glyphfontsize'>OK</span>")
+            )
+            @(Html.Kendo().Button()
+                            .Name("btnCancelDelete")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                        .Content("<span class='glyphicon glyphicon-remove'></span><span>&nbsp;</span><span class='glyphfontsize'>Cancel</span>")
+            )
+        </div>
+    </text>)
+                                                                                                                                        .Visible(false))
+
+    </div>
+    <div>
+        @(Html.Kendo().Grid<JCR.Reports.ViewModels.SaveandScheduledDetails>()
+      .Name("gridSavedandScheduledReports")
+
+      .Columns(columns =>
+      {
+
+          columns.Bound(p => p.ERReportUserScheduleID).Title("Report ID").Width(75);
+          columns.Bound(p => p.ReportNameOverride).Title("My Report Name").Width(200)
+                     .ClientTemplate(@Html.ActionLink("#=ReportNameOverride#", "Index", "#=ReportSource#", new { id = "#=ERReportUserScheduleID#", actionType = 2 }, new { @class = "ActionlinkUnderline" }).ToHtmlString());
+          columns.Bound(p => p.ERScheduleDescription).Visible(false);
+          columns.Bound(p => p.LastRundate).Visible(false);
+          columns.Bound(p => p.LastRunMessage).Visible(false);
+          columns.Bound(p => p.EmailTo).Title("EmailTo").Width(150).Title("Email To");
+          columns.Bound(p => p.CreatedBy).Title("Created By").Width(100);
+          columns.Bound(p => p.UpdatedBy).Visible(true).Title("Updated By").Width(100);
+          columns.Bound(p => p.UpdateDate).Visible(true).Title("Updated On").Format("{0:MM/dd/yyyy}").Width(100);
+          columns.Bound(p => p.ERReportID)
+              .ClientTemplate("<div class='dropdownclass' align='center'></div>")
+              .Title(" ").Width(120).Filterable(false).IncludeInMenu(false);
+          columns.Bound(p => p.ERReportID)
+             .ClientTemplate("<div class='EditLinkAction' align='right'></div>")
+             .Title(" ").Width(25).Filterable(false);
+          columns.Bound(p => p.ReportSource).Visible(false);
+          columns.Bound(p => p.UserID).Visible(false);
+          columns.Bound(p => p.ERReportScheduleStatusDescription).Visible(false);
+
+          columns.Bound(p => p.NextRunScheduled).Visible(false);
+
+      })
+              .Filterable(filter => filter
+                            .Extra(false)
+                            .Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains("Contains")
+                            .StartsWith("Starts with")
+                            .IsEqualTo("Is equal to")
+                            .IsNotEqualTo("Is not equal to")
+                            ))
+
+              )
+              .Sortable()
+              .Selectable()
+                      .ColumnMenu(columnsmenu => columnsmenu
+                                 .Columns(false))
+            .AutoBind(false)
+                             .Events(e => e.DataBound("dataBoundActions"))
+           .Scrollable(scrollable => scrollable.Height("auto"))
+           .HtmlAttributes(new { style = "font-size:12px;line-height:em" })
+              .DataSource(dataSource => dataSource
+              .Ajax()
+              .ServerOperation(false)
+                                              .Read(read => read.Action("_ERSaveandScheduledReportsExcel", "SaveandScheduledReports", new { Area = "" }).Data("additionalData")) // Set the action method which will return the data in JSON format
+              .PageSize(20))
+
+
+
+                .Resizable(r => r.Columns(true))
+                         .Reorderable(reorder => reorder.Columns(true))
+                .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(new int[] { 20, 50, 100 }))
+        )
+    </div>
+
+</div>
+<div id="divMyReportsDetails">
+
+    @(Html.Kendo().Window()
+        .Name("MyReportsDetailPopupwindow")
+    .Title("More Details")
+    .Modal(true)
+   .Width(600)
+    .Content(@<text><div style=" width:99%;">
+
+        <div style="overflow: hidden;margin-left:9px;">
+            <table width="100%">
+                <tr>
+                    <td align="center">
+                        <div id="DetailsReportName" style="font-weight:bold;"></div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td align="center">
+                        <div id="DetailsReportID" style="font-weight:bold;"></div>
+                    </td>
+                </tr>
+            </table>
+
+            <table id="moredetailsgrid" width="98%" class="moredetailscss" style="margin-top:10px;">
+                <colgroup>
+                    <col style="width:110px" />
+                    <col style="width:110px" />
+                    <col style="width:110px" />
+                    <col style="width:100px" />
+                    <col style="width:100px" />
+                    <col style="width:100px" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th data-field="ScheduleStatus">Schedule Status</th>
+                        <th data-field="LastRunStatus">Last Run Status</th>
+                        <th data-field="UpdatedBy">Updated By</th>
+                        <th data-field="UpdatedOn">Updated On</th>
+                        <th data-field="LastRunDate">Last Run Date</th>
+                        <th data-field="NextRunDate">Next Run Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="tdScheduleStatus">None</td>
+                        <td id="tdLastRunStatus">None</td>
+                        <td id="tdUpdatedBy"></td>
+                        <td id="tdUpdatedOn"></td>
+                        <td id="tdLastRunDate"></td>
+                        <td id="tdNextRunDate"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+
+        </div>
+    </div>
+    </text>)
+                                                                                                                                                                .Visible(false)
+                                                                                                                                                                 .Events(events => events.Close("onMyReportDetailsClose")
+                                                                                                                                                               ))
+</div>
+<script>
+    function onMyReportDetailsClose(e) {
+        // to do
+        // $("#moredetailsgrid").html("");
+        //  $("#moredetailsgrid").data("kendoGrid").destroy();
+    }
+    function testmoredetails() {
+       // alert("Hello")
+    }
+    function showDetails(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+        $("#DetailsReportName").html(dataItem.ReportNameOverride);
+        $("#DetailsReportID").html("Report ID: " + dataItem.ERReportUserScheduleID);
+
+        $("#tdScheduleStatus").html(dataItem.ERReportScheduleStatusDescription);
+        $("#tdLastRunStatus").html(dataItem.LastRunMessage);
+        $("#tdUpdatedBy").html(dataItem.UpdatedBy);
+        $("#tdUpdatedOn").html(kendo.toString(dataItem.UpdateDate, "MM/dd/yyyy hh:mm tt"));
+        $("#tdLastRunDate").html(kendo.toString(dataItem.LastRundate, "MM/dd/yyyy hh:mm tt"));
+        $("#tdNextRunDate").html(kendo.toString(dataItem.NextRunScheduled, "MM/dd/yyyy hh:mm tt"));
+        // $("#moredetailsgrid").kendoGrid();
+        var win = $("#MyReportsDetailPopupwindow").data("kendoWindow");
+        win.center();
+        win.open();
+
+
+    }
+
+    function additionalData(e) {
+
+        return { search: SetSearchCriteria() }
+    }
+
+
+
+    var SavedReportActionType = "";
+    var ERReportUserScheduleID = 0;
+    var SavedMyReportName = "";
+
+    function dataBoundActions(e) {
+        var grid = this;
+
+
+        // create DropDownList from input HTML element
+        var valhdnuserID = $('#hdnUserID').val();
+        var valhdnuserRole = $('#hdnUserRole').val();
+        $(".dropdownclass").each(function () {
+            var row = $(this).closest("tr");
+            var model = grid.dataItem(row);
+
+            var data = [];
+            if (valhdnuserID == model.UserID.toString() | valhdnuserRole == "Program Administrator") {
+                data = [
+                                { text: "Select Action Type", value: "-1" },
+                                { text: "Generate", value: model.ReportSource + " Generate " + model.ERReportUserScheduleID + " " + model.ReportNameOverride },
+                                { text: "Copy", value: model.ReportSource + " Copy " + model.ERReportUserScheduleID + " " + model.ReportNameOverride },
+                                { text: "Delete", value: model.ReportSource + " Delete " + model.ERReportUserScheduleID + " " + model.ReportNameOverride }
+                ];
+            }
+            else {
+                data = [
+                                { text: "Select Action Type", value: "-1" },
+                                { text: "Generate", value: model.ReportSource + " Generate " + model.ERReportUserScheduleID + " " + model.ReportNameOverride },
+                                { text: "Copy", value: model.ReportSource + " Copy " + model.ERReportUserScheduleID + " " + model.ReportNameOverride }
+                ];
+
+            }
+            $(this).kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                name: "dropdownactions",
+                dataSource: data,
+                index: 0,
+                close: onChange
+            });
+
+            //$(".k-dropdown").on('mouseover', function () {
+            //    $('#dropdownactions').data("kendoDropDownList").open();
+            //})
+
+        });
+
+        $(".EditLinkAction").each(function () {
+            var row = $(this).closest("tr");
+            var model = grid.dataItem(row);
+
+            if (valhdnuserID == model.UserID.toString() | valhdnuserRole == "Program Administrator") {
+                a = document.createElement('a');
+                a.href = '../' + model.ReportSource + '/Index/' + model.ERReportUserScheduleID + "/1";
+                a.innerHTML = "<u>Edit</u>"
+
+                $(this).html(a);
+            }
+        });
+
+
+
+
+    }
+
+    function onChange(e) {
+
+        var str = e.sender._old;
+
+        if (str != "-1") {
+            var indices = [];
+            for (var i = 0; i < str.length; i++) {
+                if (str[i] === " ") indices.push(i);
+            }
+
+            var firstspace = indices[0];
+            var secondspace = indices[1];
+            var thirdspace = indices[2];
+
+            var reportURLvalue = str.substring(0, firstspace).trim();
+            SavedReportActionType = str.substring(firstspace, secondspace).trim();
+            ERReportUserScheduleID = str.substring(secondspace, thirdspace).trim();
+            SavedMyReportName = str.substring(thirdspace, str.length).trim();
+
+            if (SavedReportActionType == "Delete") {
+                var msg = "Are you sure you want to delete '" + SavedMyReportName + "'?";
+                $("#deletemyreportnamemsg").html(msg);
+                var SavedReportDelete = $("#DeletePopupwindow").data("kendoWindow");
+                SavedReportDelete.center();
+                SavedReportDelete.open();
+                e.sender.select(0);
+            }
+            else {
+                window.location.href = "../" + reportURLvalue + "/Index/" + ERReportUserScheduleID + "/" + GetActionTypeID(SavedReportActionType);
+            }
+        }
+    };
+
+    $(function () {
+
+        $("#gridSavedandScheduledReports").data("kendoGrid").thead.find("[data-index=6]>.k-header-column-menu").remove();
+        $("#gridSavedandScheduledReports").data("kendoGrid").thead.find("[data-index=7]>.k-header-column-menu").remove();
+        $("#btnCancelDelete").click(function (e) {
+            $("#DeletePopupwindow").data("kendoWindow").close();
+        });
+
+
+        //$("#MyReportsDetailPopupwindow").kendoWindow({
+        //    width: "74%"
+        //});
+        $("#btnOKDelete").click(function (e) {
+            //to do call ajax call to delete saved report
+
+            $.ajax({
+                type: "Post",
+                url: "/SaveandScheduledReports/DeleteSavedReport",
+                contentType: "application/json",
+                data: JSON.stringify({ ERReportUserScheduleID: ERReportUserScheduleID })
+
+            }).done(function (e) {
+                var grdmyreports = $("#gridSavedandScheduledReports").data("kendoGrid");
+
+                //WorkAround for last record delete issue: After the last record is deleted, clear the datasouce
+                if (grdmyreports.dataSource.view().length == 1) {
+                    $("#gridSavedandScheduledReports").data('kendoGrid').dataSource.data([]);
+                }
+                else
+                    grdmyreports.dataSource.read();
+            });
+
+
+
+            $("#DeletePopupwindow").data("kendoWindow").close();
+        });
+
+    });
+
+    function GetActionTypeID(actionType) {
+        switch (actionType) {
+            case "Edit":
+                return ScheduleAction.Edit;
+            case "Generate":
+                return ScheduleAction.Generate;
+            case "Copy":
+                return ScheduleAction.Copy;
+            case "Delete":
+                return ScheduleAction.Delete;
+            case "Recurrence":
+                return ScheduleAction.Recurrence;
+        }
+    }
+</script>
+
+<style>
+    .ActionlinkUnderline {
+        padding-right: 12px !important;
+        text-decoration: underline;
+        word-wrap:break-word;
+        display:list-item;
+    }
+
+    #gridSavedandScheduledReports {
+        display: none;
+    }
+
+    .k-block > .k-header, .k-window-titlebar {
+        text-align: center;
+    }
+
+
+    .moredetailscss {
+        border-collapse: collapse;
+    }
+
+        .moredetailscss td, .moredetailscss th {
+            border: 1px solid black;
+        }
+
+        .moredetailscss th {
+            border: 1px solid black;
+            background-color: #428bca;
+            color: white;
+        }
+
+
+    #gridSavedandScheduledReports .k-grid-MoreDetails {
+        text-decoration: underline;
+        border-style: none;
+        color: #337ab7;
+        background-color: white;
+        padding: 0 0 0 0;
+    }
+
+    #gridSavedandScheduledReports .k-alt .k-grid-MoreDetails {
+        text-decoration: underline;
+        border-style: none;
+        color: #337ab7;
+        background-color: #f5f5f5;
+    }
+
+    #gridSavedandScheduledReports table tr.k-state-selected .k-grid-MoreDetails {
+        background-color: #c4ddfc;
+    }
+</style>
+
+

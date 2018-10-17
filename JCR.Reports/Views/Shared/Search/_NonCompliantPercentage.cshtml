@@ -1,0 +1,68 @@
+﻿     
+@{
+    string checktext = ViewData["checktext"] == null ? "Include detail of Question less than " : ViewData["checktext"].ToString();
+}
+<div id="includeDetailCheckbox" class="checkbox" >
+        <label id="complavalue" ><input id="noncompliantcheckbox" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="noncompliantcheckboxChange();">
+                @checktext
+                @(Html.Kendo().NumericTextBox<int>()
+            .Name("noncompliantvalue")
+            .Min(1)
+            .Max(100)
+            .HtmlAttributes(new { style = "width:50px;" })
+            .Value(100)
+            .Spinners(false)
+.Decimals(0)
+.Format("#")
+.Enable(false)
+                ) % Compliant.
+
+</label>
+    </div>
+
+<script>
+    function noncompliantcheckboxChange() {
+        var numerictextbox = $("#noncompliantvalue").data("kendoNumericTextBox");
+
+        if ($('#noncompliantcheckbox').is(':checked')) {
+            numerictextbox.enable(true);
+            if (hasExcelSecondGrid) {
+                if (navigator != undefined && navigator.appVersion != undefined && (navigator.appVersion.indexOf("MSIE 8") != -1)) {
+                    ExcelSecondGridName = "gridDCAOPPIE8";
+                }
+                else {
+                    ExcelSecondGridName = "gridDCAOPP";
+                }
+                
+                tabtoggle();
+            }
+           
+        }
+        else {
+           
+            ExcelSecondGridName = "";
+            numerictextbox.enable(false);
+            numerictextbox.value(100);
+            if (hasExcelSecondGrid) { tabtoggle(); }
+        }
+    }
+
+  
+
+    function tabtoggle() {
+        var tabstrip = $("#tabstripDept").kendoTabStrip().data("kendoTabStrip");
+        if (tabstrip != null)
+        {
+            var tab = tabstrip.tabGroup.children("li").eq(1);
+            tabstrip.enable(tab, tab.hasClass("k-state-disabled"));
+        }
+    }
+
+</script>
+
+
+
+
+
+
+

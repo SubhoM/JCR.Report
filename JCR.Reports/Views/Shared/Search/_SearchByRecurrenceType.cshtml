@@ -1,0 +1,70 @@
+﻿@model JCR.Reports.ViewModels.SearchViewModel
+<div id="divSearchbyRecurrence">
+    <h6><b>Report Recurrence</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+                  .Name("SearchReportRecurrence")
+                          .DataTextField("ERScheduleName")
+                          .DataValueField("ERScheduleTypeID")
+          .Placeholder("Select Recurrence")
+          .Filter(FilterType.Contains)
+                          .BindTo(Model.ScheduleTypes)
+          .AutoClose(false)
+                   .Events(e =>
+                    {
+                        e.Select("onRecurrenceSelect");
+                    })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("SearchReportRecurrence");
+       // removedeleteoption("SearchReportRecurrence");
+    });
+    //function onRecurrenceClose(e) {
+    //    removedeleteoption("SearchReportRecurrence");
+    //}
+
+
+    function onRecurrenceSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+
+        if (dataItem.ERScheduleName === "All") {
+            $('#SearchReportRecurrence').data("kendoMultiSelect").value([]);
+
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+
+            if (values == "") { this.value(values); }
+        }
+
+
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

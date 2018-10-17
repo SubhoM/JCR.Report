@@ -1,0 +1,62 @@
+﻿@model JCR.Reports.Models.ERSearchList
+    <div id="tracerstandard">
+       <h6><b>Standard*</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("TracersStandard")
+                  .DataTextField("Code")
+                  .DataValueField("TracerStandardID")
+                  .Placeholder("Select Standard")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model.TracersStandards)
+                  .AutoClose(false)
+                 // .ValuePrimitive(false)
+                   .Events(e =>
+                    {
+                        e.Change("onStdChange").Select("onStdSelect");
+                    })
+                .Value( "-1" )   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracersStandard");
+       // removedeleteoption("TracersStandard");
+    });
+ 
+    function onStdSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.Code === "All") {
+            $('#TracersStandard').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") this.value(values);
+        }
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

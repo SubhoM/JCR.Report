@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JCR.Reports.Areas.Corporate.ViewModels.AssignedUser>
+<div id="multisiteEPAssignedBy">
+    <h6><b>Assigned By</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("EPAssignedBy")
+                  .DataTextField("FullName")
+                  .DataValueField("UserID")
+          .Placeholder("Select Assigend By")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+         .Events(e =>
+                    {
+                        e.Select("onEPAssignedBySelect");
+                    })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("EPAssignedBy");
+    });
+ 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

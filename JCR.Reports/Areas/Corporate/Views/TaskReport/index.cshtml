@@ -1,0 +1,147 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.CorporateSearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 text-center">
+                <br />
+                <b>Report Type</b>
+                <input type="radio" value="Summary" id="SummaryReport" name="ReportLevelChange"><label for="Summary">Summary</label>
+                <input type="radio" value="Detail" id="DetailReport" name="ReportLevelChange"><label for="Detail">Detail</label>
+                <input type="radio" value="ExcelView" id="ExcelViewReport" name="ReportLevelChange"><label for="ExcelView">Excel View</label>
+            </div>
+        </div>
+        <div class="row">
+            @*Column 1*@
+            <div class="col-xs-3 text-left">
+                <div id="divMultiSiteAssignedTo"></div>
+                <div id="divMultiSiteAssignedBy"></div>
+                <div id="divMultiSiteEmailCcedTo"></div>
+                <div id="divTaskStatus"></div>
+            </div>
+
+            @*Column 2*@
+            <div class="col-xs-2 checkbox text-center" id="divEPScores" style="margin-top:-15px;">
+                <table>
+                    <tr>
+                        <td style="font-weight:bold;text-align:left">Due Date</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="white-space: nowrap;text-align:right">From <input type="date" id="fromDueDate" placeholder="mm/dd/yyyy"></div>
+                        </td><td></td>
+                    </tr>
+                    <br />
+                    <tr>
+                        <td>
+                            <div style="white-space: nowrap;margin-top:15px;text-align:right">To <input type="date" id="toDueDate" placeholder="mm/dd/yyyy"></div>
+                        </td><td></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="font-weight:bold;text-align:left">Assigned Date</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="white-space: nowrap;text-align:right">From <input type="date" id="fromAssiDate" placeholder="mm/dd/yyyy"></div>
+                        </td><td></td>
+                    </tr>
+                    <br />
+                    <tr>
+                        <td>
+                            <div style="white-space: nowrap;margin-top:15px;text-align:right">To <input type="date" id="toAssiDate" placeholder="mm/dd/yyyy"></div>
+                        </td><td></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            @*Column 3*@
+            <div class="col-xs-3 checkbox text-left" id="divEPScoreValues">
+                <div id="divMultiSiteTracers"></div>
+                <div id="divMultiSiteCampus"></div>
+                <div id="divMultiSiteBuildings"></div>
+                <div id="divMultiSiteDepartments"></div>
+            </div>
+                
+            @*Column 4*@
+            <div class="col-xs-3 checkbox text-left" id="divEPScoringFilters">
+                <div id="divMultiSiteChapter"></div>
+                <div id="divMultiSiteStandard"></div>
+                <div id="divMultiSiteEP"></div>
+                <div class="text-left">
+                    <h6 id="typeOfObservationAlert"><i>*Select Chapter to display Standard.<br />*Select Standard to display EP.</i></h6>
+                </div>
+                <div id="CMS">
+                    <h4><b>CMS</b></h4>
+                    <div id="divMultiSiteCoP"></div>
+                    <div id="divMultiSiteTag"></div>
+                    <div class="text-left">
+                        <h6 id="typeOfObservationAlert"><i>*Select CoP to display Tag.</i></h6>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div id="loadrdlc" class="col-md-12" style="padding-left: 0;"></div>
+            <div id="LoadDetailView"></div>
+        </div>
+    </div>
+    
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("hdnReportActionID", 163)
+    @Html.Hidden("GetRDLC", Url.Action("_TaskRdlcReport", "TaskReport"))
+}
+    @Url.Script("~/Scripts/Common/ReportsCommon.js")
+    @*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+    @Url.Script("~/Areas/Corporate/Views/TaskReport/TaskReport.js")
+    <script type="text/javascript">
+        $(window).load(function () {
+            if ($('#hdnSitesCount').val() == 1) {
+                LoadReportParameters($('#hdnSingleSiteID').val());
+            }
+        });
+    </script>
+<style>
+    .ObservationDateTextbox{
+    width:13%;
+    height:30px;
+    float:left;
+    margin-right:5px;
+}
+
+.ObservationDateLabel{
+    margin-right:5px;
+    font-weight:100;
+    float:left
+}
+
+.SinceLabel{
+    font-weight:100;
+}
+
+.RadiobtnAlign{
+    margin-left:5px;
+}
+</style>

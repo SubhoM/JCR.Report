@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReport_EPAssignment_BySite" targetNamespace="http://tempuri.org/dsReport_EPAssignment_BySite.xsd" xmlns:mstns="http://tempuri.org/dsReport_EPAssignment_BySite.xsd" xmlns="http://tempuri.org/dsReport_EPAssignment_BySite.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DBMEdition01_Write" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DBMEdition01_Write (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DBMEdition01_Write.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReport_EPAssignment_BySite" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReport_EPAssignment_BySite" msprop:Generator_UserDSName="dsReport_EPAssignment_BySite">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="usmReport_EPAssignment_BySite" msprop:Generator_TableClassName="usmReport_EPAssignment_BySiteDataTable" msprop:Generator_TableVarName="tableusmReport_EPAssignment_BySite" msprop:Generator_RowChangedName="usmReport_EPAssignment_BySiteRowChanged" msprop:Generator_TablePropName="usmReport_EPAssignment_BySite" msprop:Generator_RowDeletingName="usmReport_EPAssignment_BySiteRowDeleting" msprop:Generator_RowChangingName="usmReport_EPAssignment_BySiteRowChanging" msprop:Generator_RowEvHandlerName="usmReport_EPAssignment_BySiteRowChangeEventHandler" msprop:Generator_RowDeletedName="usmReport_EPAssignment_BySiteRowDeleted" msprop:Generator_RowClassName="usmReport_EPAssignment_BySiteRow" msprop:Generator_UserTableName="usmReport_EPAssignment_BySite" msprop:Generator_RowEvArgName="usmReport_EPAssignment_BySiteRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SiteName" msprop:Generator_ColumnVarNameInTable="columnSiteName" msprop:Generator_ColumnPropNameInRow="SiteName" msprop:Generator_ColumnPropNameInTable="SiteNameColumn" msprop:Generator_UserColumnName="SiteName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="75" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HCOID" msprop:Generator_ColumnVarNameInTable="columnHCOID" msprop:Generator_ColumnPropNameInRow="HCOID" msprop:Generator_ColumnPropNameInTable="HCOIDColumn" msprop:Generator_UserColumnName="HCOID" type="xs:int" minOccurs="0" />
+              <xs:element name="SiteID" msprop:Generator_ColumnVarNameInTable="columnSiteID" msprop:Generator_ColumnPropNameInRow="SiteID" msprop:Generator_ColumnPropNameInTable="SiteIDColumn" msprop:Generator_UserColumnName="SiteID" type="xs:int" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EPCount" msprop:Generator_ColumnVarNameInTable="columnEPCount" msprop:Generator_ColumnPropNameInRow="EPCount" msprop:Generator_ColumnPropNameInTable="EPCountColumn" msprop:Generator_UserColumnName="EPCount" type="xs:int" minOccurs="0" />
+              <xs:element name="AssignedCount" msprop:Generator_ColumnVarNameInTable="columnAssignedCount" msprop:Generator_ColumnPropNameInRow="AssignedCount" msprop:Generator_ColumnPropNameInTable="AssignedCountColumn" msprop:Generator_UserColumnName="AssignedCount" type="xs:int" minOccurs="0" />
+              <xs:element name="NotAssignedCount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNotAssignedCount" msprop:Generator_ColumnPropNameInRow="NotAssignedCount" msprop:Generator_ColumnPropNameInTable="NotAssignedCountColumn" msprop:Generator_UserColumnName="NotAssignedCount" type="xs:int" minOccurs="0" />
+              <xs:element name="AssignedPercent" msprop:Generator_ColumnVarNameInTable="columnAssignedPercent" msprop:Generator_ColumnPropNameInRow="AssignedPercent" msprop:Generator_ColumnPropNameInTable="AssignedPercentColumn" msprop:Generator_UserColumnName="AssignedPercent" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NotAssignedPercent" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNotAssignedPercent" msprop:Generator_ColumnPropNameInRow="NotAssignedPercent" msprop:Generator_ColumnPropNameInTable="NotAssignedPercentColumn" msprop:Generator_UserColumnName="NotAssignedPercent" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PageGroup" msprop:Generator_ColumnVarNameInTable="columnPageGroup" msprop:Generator_ColumnPropNameInRow="PageGroup" msprop:Generator_ColumnPropNameInTable="PageGroupColumn" msprop:Generator_UserColumnName="PageGroup" type="xs:int" default="1" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:usmReport_EPAssignment_BySite" />
+      <xs:field xpath="mstns:SiteName" />
+      <xs:field xpath="mstns:SiteID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

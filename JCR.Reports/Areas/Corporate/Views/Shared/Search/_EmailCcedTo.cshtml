@@ -1,0 +1,29 @@
+﻿@model IEnumerable<JCR.Reports.Areas.Corporate.ViewModels.AssignedUser>
+<div id="multisiteEmailCcedTo">
+    <h6><b>Email Cc'd To</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("EmailCcedTo")
+                  .DataTextField("FullName")
+                  .DataValueField("UserID")
+          .Placeholder("Select Email Cc'd To")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+        .Events(e =>
+                    {
+                        e.Select("onEmailCcedToSelect");
+                    })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("EmailCcedTo");
+     });
+
+</script>

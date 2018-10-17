@@ -1,0 +1,18 @@
+﻿@{
+    List<SelectListItem> lstDaysOfMonth;
+    // check session
+
+    lstDaysOfMonth = new List<SelectListItem>();
+    for (int d = 1; d <= 31; d++)
+    {
+        lstDaysOfMonth.Add(new SelectListItem { Value = d.ToString(), Text = d.ToString() });
+    }
+}
+@(Html.Kendo().DropDownList()
+    .Name("DaysOfMonth")
+    .DataTextField("Text")
+    .DataValueField("Value")
+    .BindTo(lstDaysOfMonth)
+    .HtmlAttributes(new { style = "width: 63px" })
+    .Value("1")
+)

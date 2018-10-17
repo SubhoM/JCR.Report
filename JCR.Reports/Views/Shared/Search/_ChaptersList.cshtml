@@ -1,0 +1,89 @@
+﻿@model JCR.Reports.Models.SearchList
+
+
+    <div id="tracerchapter">
+       <h6><b>Chapter</b></h6>
+        <div class="margintop">
+
+            @{
+                <input type="hidden" name="OrgRanking1Name" id="OrgRanking1Name" value="@Model.OrgRanking1Name" />
+                <input type="hidden" name="OrgRanking2Name" id="OrgRanking2Name" value="@Model.OrgRanking2Name" />
+                <input type="hidden" name="OrgRanking3Name" id="OrgRanking3Name" value="@Model.OrgRanking3Name" />
+
+            }
+
+            @(Html.Kendo().MultiSelect()
+          .Name("TracersChapter")
+          .DataTextField("TracerChapterName")
+          .DataValueField("TracerChapterID")
+       //   .Text("Select Tracers Chapter")
+                           .Placeholder("Select Tracers Chapter")
+          .Filter(FilterType.Contains)
+          .HtmlAttributes(new { style = "width:100%" })
+        //.HighlightFirst(true)
+          .BindTo(Model.TracersChapters)
+        // .ValuePrimitive(false)
+                   .Events(e =>
+                    {
+                        e.Change("onChapChange").Close("onChapterClose").Select("onChapterSelect");
+                    })
+          .Value("-1")
+)
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracersChapter");
+        removedeleteoption("TracersChapter");
+    });
+   
+
+    function onChapterClose(e) {
+        var SelectedChapterNames = [];
+        $('#TracersChapter :selected').each(function (i, selected) {
+               SelectedChapterNames[i] = $(selected).text();
+        });
+        if (SelectedChapterNames.toString() != "") { 
+            $('#' + "TracersChapter" + '_taglist .k-button').html("<span unselectable='on'>" + SelectedChapterNames.toString() + "</span><span>&nbsp;</span>");
+        }
+            }
+ 
+    function onChapterSelect(e) {
+        $('#TracersChapter').data("kendoMultiSelect").value([]);
+    }
+   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBMEdition01_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBMEdition01_Entities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetSelectSitesByUser" ReturnType="Collection(DBMEdition01_Model.Site)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetHcoIDs" ReturnType="Collection(String)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetCorpUsersBySite" ReturnType="Collection(DBMEdition01_Model.CorpUser)">
+      <Parameter Name="UserRoleName" Mode="In" Type="String" />
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="StatusId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetMockSurveysBySites" ReturnType="Collection(DBMEdition01_Model.MockSurvey)">
+      <Parameter Name="SiteList" Mode="In" Type="String" />
+      <Parameter Name="StatusId" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usmMSCorporateFindingsReportCumulative" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportCumulative_Result)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSaferMatrixData" ReturnType="Collection(DBMEdition01_Model.SaferMatrixData)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usmMSCorporateFindingsReportSummary" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportSummary_Result)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSaferMatrixSummary" ReturnType="Collection(DBMEdition01_Model.SaferMatrixSummary)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usmMSCorporateFindingsReportSummaryBySite" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportSummaryBySite_Result)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSaferMatrixSummaryBySite" ReturnType="Collection(DBMEdition01_Model.SaferMatrixSummaryBySite)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usmMSCorporateFindingsReportSummaryByChapter" ReturnType="Collection(DBMEdition01_Model.usmMSCorporateFindingsReportSummaryByChapter_Result)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSaferMatrixSummaryByChapter" ReturnType="Collection(DBMEdition01_Model.SaferMatrixSummaryByChapter)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="EPTextIDs" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="MatrixID" Mode="In" Type="Int32" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="CycleID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAssignmentStatusByUser_UserWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_UserData)">
+      <Parameter Name="SiteList" Mode="In" Type="String" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="AssignedToList" Mode="In" Type="String" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+      <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ScoreValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAssignmentStatusByUser_EPWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_EPData)">
+      <Parameter Name="SiteList" Mode="In" Type="String" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="AssignedToList" Mode="In" Type="String" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+      <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ScoreValue" Mode="In" Type="String" />
+      <Parameter Name="LevelIdentifier" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserAssignedToSiteIDAndAssignment" ReturnType="Collection(DBMEdition01_Model.AssignedToUser)">
+      <Parameter Name="SiteList" Mode="In" Type="String" />
+      <Parameter Name="ProgramList" Mode="In" Type="String" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+      <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetAssignmentStatusByUser_ChapterWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_ChapterData)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="AssignedToID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+      <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ScoreValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetAssignmentStatusByUser_StandardWise" ReturnType="Collection(DBMEdition01_Model.AssignmentStatusByUser_StandardData)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterID" Mode="In" Type="Int32" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreType" Mode="In" Type="Int32" />
+      <Parameter Name="AssignedToID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Boolean" />
+      <Parameter Name="DocRequired" Mode="In" Type="Boolean" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ScoreValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usmMSGetSaferMap" ReturnType="Collection(DBMEdition01_Model.usmMSGetSaferMap_Result)" />
+    <FunctionImport Name="GetSafterMap" ReturnType="Collection(DBMEdition01_Model.SafterMap)" />
+    <FunctionImport Name="GetRFIFindingbyProgram" ReturnType="Collection(DBMEdition01_Model.RFIProgramFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetRFIFindingbyChapter" ReturnType="Collection(DBMEdition01_Model.RFIChapterFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetRFIFindingByStandard" ReturnType="Collection(DBMEdition01_Model.RFIStandardFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserInfo" ReturnType="Collection(DBMEdition01_Model.User)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCorpFindingByChapter" ReturnType="Collection(DBMEdition01_Model.CorpChapterFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetCorpFindingByEP" ReturnType="Collection(DBMEdition01_Model.CorpEPFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetCorpFindingByProgram" ReturnType="Collection(DBMEdition01_Model.CorpProgramFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetCorpFindingByStandard" ReturnType="Collection(DBMEdition01_Model.CorpStandardFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamLeadIDs" Mode="In" Type="String" />
+      <Parameter Name="MSTeamMemberIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="StatusID" Mode="In" Type="Int32" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetChapter" ReturnType="Collection(DBMEdition01_Model.Chapter)">
+      <Parameter Name="SiteList" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetProgrambySites" ReturnType="Collection(DBMEdition01_Model.Programs)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetStandardsByProgramsChapters" ReturnType="Collection(DBMEdition01_Model.Standard)">
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="ProgramList" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetScoredByUsers" ReturnType="Collection(DBMEdition01_Model.ScoredByUser)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserSitesByProduct" ReturnType="Collection(DBMEdition01_Model.UserSiteByProduct)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="EProductID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetEPExcelDetails" ReturnType="Collection(DBMEdition01_Model.EpExcelDetails)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+      <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+      <Parameter Name="ScoredByList" Mode="In" Type="String" />
+      <Parameter Name="NotScoredInPeriodFlag" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+      <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+      <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+      <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+      <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetRFIFindingByEP" ReturnType="Collection(DBMEdition01_Model.RFIEPFinding)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="StandardIDs" Mode="In" Type="String" />
+      <Parameter Name="ChapterIDs" Mode="In" Type="String" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="OnlyFSAEPs" Mode="In" Type="Boolean" />
+      <Parameter Name="RFIInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="PSInclude" Mode="In" Type="Boolean" />
+      <Parameter Name="FSInclude" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetLicenseDetailsForCMS" ReturnType="Collection(Boolean)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCMSSitesByProgramID" ReturnType="Collection(DBMEdition01_Model.CMSSite)">
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCMSProgramsBySiteID" ReturnType="Collection(DBMEdition01_Model.CMSProgram)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCoPsByProgramID" ReturnType="Collection(DBMEdition01_Model.CoP)">
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetTagsByProgramIDAndCoPID" ReturnType="Collection(DBMEdition01_Model.Tag)">
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="CopIDs" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetIdentifiedUsers" ReturnType="Collection(DBMEdition01_Model.IdentifiedUser)">
+      <Parameter Name="SiteIDs" Mode="In" Type="String" />
+      <Parameter Name="ProgramIDs" Mode="In" Type="String" />
+      <Parameter Name="CoPIDs" Mode="In" Type="String" />
+      <Parameter Name="TagIDs" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetCMSComplianceExcel" ReturnType="Collection(DBMEdition01_Model.CMSComplianceExcel)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ComplianceValueList" Mode="In" Type="String" />
+      <Parameter Name="CoPIDs" Mode="In" Type="String" />
+      <Parameter Name="TagIDs" Mode="In" Type="String" />
+      <Parameter Name="IdentifiedByIDs" Mode="In" Type="String" />
+      <Parameter Name="PlanOfCorrection" Mode="In" Type="Int32" />
+      <Parameter Name="OrgCMSFindings" Mode="In" Type="Int32" />
+      <Parameter Name="CMSSurveyorFindings" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeTJC" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetLicenseDetailsForCMSByUser" ReturnType="Collection(Boolean)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="SubscriptionTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetStickyDates" ReturnType="Collection(DBMEdition01_Model.StickyDate)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetReportEPScoringReportFinalMockSurveySummary" ReturnType="Collection(DBMEdition01_Model.EPScoringReportFinalMockSurveySummary)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+      <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+      <Parameter Name="ScoredByList" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyIDList" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+      <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+      <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+      <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+      <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+      <Parameter Name="MockSurveyFindings" Mode="In" Type="Int32" />
+      <Parameter Name="MockSurveyRecommendations" Mode="In" Type="Int32" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetReportEPScoringReportFinalMockSurveyDetail" ReturnType="Collection(DBMEdition01_Model.EPScoringReportFinalMockSurveyDetail)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+      <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+      <Parameter Name="ScoredByList" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyIDList" Mode="In" Type="String" />
+      <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+      <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+      <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+      <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+      <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+      <Parameter Name="MockSurveyFindings" Mode="In" Type="Int32" />
+      <Parameter Name="MockSurveyRecommendations" Mode="In" Type="Int32" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetReportEPAssignmentScoringDetail" ReturnType="Collection(DBMEdition01_Model.EPAssignmentScoringDetail)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+      <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+      <Parameter Name="AssignedToList" Mode="In" Type="String" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+      <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+      <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+      <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+      <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+      <Parameter Name="EPAssigned" Mode="In" Type="Int32" />
+      <Parameter Name="EPNotAssigned" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetReportEPAssignmentScoringSummary" ReturnType="Collection(DBMEdition01_Model.EPAssignmentScoringSummary)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterList" Mode="In" Type="String" />
+      <Parameter Name="StandardList" Mode="In" Type="String" />
+      <Parameter Name="ScoreTypeList" Mode="In" Type="String" />
+      <Parameter Name="ScoreValueList" Mode="In" Type="String" />
+      <Parameter Name="AssignedToList" Mode="In" Type="String" />
+      <Parameter Name="EPAssigned" Mode="In" Type="Int32" />
+      <Parameter Name="EPNotAssigned" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeFSA" Mode="In" Type="Int32" />
+      <Parameter Name="DocRequired" Mode="In" Type="Int32" />
+      <Parameter Name="NewChangedEPs" Mode="In" Type="Int32" />
+      <Parameter Name="PlanOfAction" Mode="In" Type="Int32" />
+      <Parameter Name="OrgFindings" Mode="In" Type="Int32" />
+      <Parameter Name="OrgNotes" Mode="In" Type="Int32" />
+      <Parameter Name="LinkedDocs" Mode="In" Type="Int32" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetReportComprehensiveScoringDetail" ReturnType="Collection(DBMEdition01_Model.ComprehensiveScoringDetail)">
+      <Parameter Name="SiteID" Mode="In" Type="Int32" />
+      <Parameter Name="ProgramID" Mode="In" Type="Int32" />
+      <Parameter Name="ChapterID" Mode="In" Type="Int32" />
+      <Parameter Name="MockSurveyStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="DateStart" Mode="In" Type="DateTime" />
+      <Parameter Name="DateEnd" Mode="In" Type="DateTime" />
+      <Parameter Name="StandardEffBeginDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CertificationItemID" Mode="In" Type="Int32" />
+      <Parameter Name="IncludeCMS" Mode="In" Type="Int32" />
+      <Parameter Name="IsCorporateAccess" Mode="In" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Site">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="Int32" Name="RoleID" Nullable="false" />
+    <Property Type="Boolean" Name="AMPAccess" Nullable="false" />
+    <Property Type="String" Name="SiteFullName" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="IsCorporateAccess" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="RFIEPChapterDetails">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="Int32" Name="ProgramServiceID" Nullable="false" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="Int32" Name="StandardTextID" Nullable="false" />
+    <Property Type="Int32" Name="EPTextID" Nullable="false" />
+    <Property Type="Int32" Name="HCO_ID" Nullable="true" />
+    <Property Type="String" Name="Program" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="HospitalName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Chapter" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Standard" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="EP" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="Documentation" Nullable="true" />
+    <Property Type="String" Name="TJCScore" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TJCSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TJCSAFERScoreScope" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="TJCScoreDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="PreliminaryScore" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PreliminarySAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PreliminarySAFERScoreScope" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="PreliminaryScoreDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FinalScore" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FinalSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FinalSAFERScoreScope" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="FinalScoreDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="CorpUser">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="MockSurvey">
+    <Property Type="Int32" Name="MockSurveyID" Nullable="false" />
+    <Property Type="String" Name="MockSurveyName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="StatusId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usmMSCorporateFindingsReportCumulative_Result">
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="203" />
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="Recommendations" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="Int32" Name="CorporateFinalScoreID" Nullable="true" />
+    <Property Type="Int32" Name="CorporateFinalScoredByUserID" Nullable="true" />
+    <Property Type="Int16" Name="StandardSortOrder" Nullable="false" />
+    <Property Type="Int32" Name="FSA" Nullable="false" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="LikeID" Nullable="true" />
+    <Property Type="Int32" Name="ScopeID" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+    <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+    <Property Type="Int16" Name="SortOrder" Nullable="false" />
+    <Property Type="String" Name="EPLabel" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="Program" Nullable="false" MaxLength="250" />
+    <Property Type="Int32" Name="ScoreType" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="SaferMatrixData">
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="203" />
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="Recommendations" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="Int32" Name="CorporateFinalScoreID" Nullable="true" />
+    <Property Type="Int32" Name="CorporateFinalScoredByUserID" Nullable="true" />
+    <Property Type="Int16" Name="StandardSortOrder" Nullable="false" />
+    <Property Type="Int32" Name="FSA" Nullable="false" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="LikeID" Nullable="true" />
+    <Property Type="Int32" Name="ScopeID" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+    <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+    <Property Type="Int16" Name="SortOrder" Nullable="false" />
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="EPLabel" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="Program" Nullable="false" MaxLength="250" />
+    <Property Type="Int32" Name="ScoreType" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="DocumentList" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usmMSCorporateFindingsReportSummary_Result">
+    <Property Type="String" Name="ScoreName" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="VerticalScoreID" Nullable="true" />
+    <Property Type="Int32" Name="HorizontalScoreID" Nullable="true" />
+    <Property Type="Int32" Name="EPs" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaferMatrixSummary">
+    <Property Type="String" Name="ScoreName" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="VerticalScoreID" Nullable="true" />
+    <Property Type="Int32" Name="HorizontalScoreID" Nullable="true" />
+    <Property Type="Int32" Name="EPs" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usmMSCorporateFindingsReportSummaryBySite_Result">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+    <Property Type="Int32" Name="EPs" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaferMatrixSummaryBySite">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+    <Property Type="Int32" Name="EPs" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usmMSCorporateFindingsReportSummaryByChapter_Result">
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="ChapterCode" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="EPs" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SaferMatrixSummaryByChapter">
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="ChapterCode" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="EPs" Nullable="true" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="AssignmentStatusByUser_UserData">
+    <Property Type="String" Name="AxisKey" Nullable="true" MaxLength="40" />
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="102" />
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+    <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="EPCount" Nullable="true" />
+    <Property Type="Int32" Name="ScoreCompleteCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScoreCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="ScoreNotCompleteCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScoreNotCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="ScorePastDueDateCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScorePastDueDatePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="String" Name="SiteFullName" Nullable="true" MaxLength="403" />
+    <Property Type="String" Name="ReportHCOID" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="AssignedToUser">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="AssignmentStatusByUser_EPData">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="String" Name="Chapter" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EPLabel" Nullable="true" />
+    <Property Type="String" Name="ScoreType" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ScoreValue" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="AssignedBy" Nullable="false" MaxLength="102" />
+    <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="102" />
+    <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="EPTextID" Nullable="false" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="DocumentList" Nullable="true" />
+    <Property Type="String" Name="EPText" Nullable="true" />
+    <Property Type="String" Name="ScoredBy" Nullable="true" MaxLength="102" />
+  </ComplexType>
+  <ComplexType Name="AssignmentStatusByUser_ChapterData">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="102" />
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+    <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EPCount" Nullable="true" />
+    <Property Type="Int32" Name="ScoreCompleteCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScoreCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="ScoreNotCompleteCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScoreNotCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="ScorePastDueDateCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScorePastDueDatePercentage" Nullable="true" Precision="6" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="AssignmentStatusByUser_StandardData">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="SiteName" Nullable="true" MaxLength="300" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="102" />
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+    <Property Type="String" Name="Program" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EPCount" Nullable="true" />
+    <Property Type="Int32" Name="ScoreCompleteCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScoreCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="ScoreNotCompleteCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScoreNotCompletePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="ScorePastDueDateCount" Nullable="true" />
+    <Property Type="Decimal" Name="ScorePastDueDatePercentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Int32" Name="StandardID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usmMSGetSaferMap_Result">
+    <Property Type="Int32" Name="ScoreID" Nullable="false" />
+    <Property Type="Int32" Name="LikeID" Nullable="true" />
+    <Property Type="Int32" Name="ScopeID" Nullable="true" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="SafterMap">
+    <Property Type="Int32" Name="ScoreID" Nullable="false" />
+    <Property Type="Int32" Name="LikeID" Nullable="true" />
+    <Property Type="Int32" Name="ScopeID" Nullable="true" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="RFIProgramFinding">
+    <Property Type="Int32" Name="RowID" Nullable="true" />
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+    <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="RFICount" Nullable="false" />
+    <Property Type="Int32" Name="PSCount" Nullable="false" />
+    <Property Type="Int32" Name="FSCount" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="RFIChapterFinding">
+    <Property Type="Int32" Name="RowID" Nullable="false" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="String" Name="Label" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="RFICount" Nullable="false" />
+    <Property Type="Int32" Name="PSCount" Nullable="false" />
+    <Property Type="Int32" Name="FSCount" Nullable="false" />
+    <Property Type="Decimal" Name="TotalPercen" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Decimal" Name="CumulativePerc" Nullable="true" Precision="6" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="RFIStandardFinding">
+    <Property Type="Int32" Name="RowID" Nullable="true" />
+    <Property Type="Int32" Name="StandardID" Nullable="true" />
+    <Property Type="String" Name="Label" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="RFICount" Nullable="false" />
+    <Property Type="Int32" Name="PSCount" Nullable="false" />
+    <Property Type="Int32" Name="FSCount" Nullable="false" />
+    <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Decimal" Name="CumulativePerc" Nullable="true" Precision="6" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="User">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UserLogonID" Nullable="true" MaxLength="100" />
+    <Property Type="Int16" Name="Status" Nullable="false" />
+    <Property Type="Guid" Name="UserGUID" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="CorpChapterFinding">
+    <Property Type="Int32" Name="RowID" Nullable="true" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="String" Name="Label" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FindingCount" Nullable="false" />
+    <Property Type="Int32" Name="RFICount" Nullable="false" />
+    <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Decimal" Name="CumulativePercentage" Nullable="true" Precision="6" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="CorpEPFinding">
+    <Property Type="Int32" Name="HCO_ID" Nullable="true" />
+    <Property Type="String" Name="Region_Name" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Site_State" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="String" Name="Hospital_Name" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ProgramSettingName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="StandardLabel" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="EPLabel" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="FSARequired" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="TJCScore" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="TJCScoreLikelihood" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="TJCScoreScope" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="TJCSurveyDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="TJCFinding" Nullable="true" />
+    <Property Type="String" Name="CorpScore" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CorpScoreLikelihood" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="CorpScoreScope" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="Mock_Survey_Finding" Nullable="true" />
+    <Property Type="String" Name="Mock_Survey_Recommendation" Nullable="true" />
+    <Property Type="String" Name="MockSurveyDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="MSTeamLead" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="ComplaintByDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="MSStatus" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+    <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+    <Property Type="Int16" Name="SortOrder" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="CorpProgramFinding">
+    <Property Type="Int64" Name="RowID" Nullable="true" />
+    <Property Type="Int32" Name="ProgramID" Nullable="true" />
+    <Property Type="String" Name="ProgramName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="FindingCount" Nullable="false" />
+    <Property Type="Int32" Name="RFICount" Nullable="false" />
+    <Property Type="Int32" Name="TotalCount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="CorpStandardFinding">
+    <Property Type="Int32" Name="RowID" Nullable="true" />
+    <Property Type="Int32" Name="StandardID" Nullable="true" />
+    <Property Type="String" Name="Label" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="FindingCount" Nullable="false" />
+    <Property Type="Int32" Name="RFICount" Nullable="false" />
+    <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="6" Scale="2" />
+    <Property Type="Decimal" Name="CumulativePercentage" Nullable="true" Precision="6" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="Chapter">
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="133" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Programs">
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+    <Property Type="String" Name="ProgramCode" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="ProgramName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="ProductID" Nullable="true" />
+    <Property Type="String" Name="AdvCertFlag" Nullable="true" MaxLength="1" />
+    <Property Type="Int32" Name="AdvCertListTypeID" Nullable="true" />
+    <Property Type="String" Name="CertProgramName" Nullable="true" MaxLength="100" />
+    <Property Type="Int64" Name="SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="BaseProgramID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Standard">
+    <Property Type="Int32" Name="StandardID" Nullable="false" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int16" Name="StandardTextSortOrder" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="EpExcelDetails">
+    <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="TJCProgramID" Nullable="true" />
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="EPText" Nullable="true" />
+    <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+    <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+    <Property Type="String" Name="ScoreTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="ScoreDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Comments" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="102" />
+    <Property Type="String" Name="FSA" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="ProgramCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="DocumentList" Nullable="true" />
+    <Property Type="Int32" Name="ChapterID" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+    <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StandardText" Nullable="true" />
+    <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+    <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="ChapterName" Nullable="true" />
+    <Property Type="String" Name="ProgramName" Nullable="true" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="SiteName" Nullable="true" />
+    <Property Type="Int32" Name="SiteID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ScoredByUser">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="102" />
+  </ComplexType>
+  <ComplexType Name="UserSiteByProduct">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="Int32" Name="HcoID" Nullable="true" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="86" />
+  </ComplexType>
+  <ComplexType Name="RFIEPFinding">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="Int32" Name="ProgramServiceID" Nullable="false" />
+    <Property Type="Int32" Name="ChapterID" Nullable="false" />
+    <Property Type="Int32" Name="StandardID" Nullable="false" />
+    <Property Type="Int32" Name="EPTextID" Nullable="false" />
+    <Property Type="Int32" Name="HCO_ID" Nullable="true" />
+    <Property Type="String" Name="Program" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="HospitalName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Chapter" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Standard" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="EP" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="OrgFindings" Nullable="true" />
+    <Property Type="String" Name="PlanOfAction" Nullable="true" />
+    <Property Type="String" Name="CompliantByDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="SustainmentPlan" Nullable="true" />
+    <Property Type="String" Name="InternalNotes" Nullable="true" />
+    <Property Type="String" Name="TJCScore" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TJCSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TJCSAFERScoreScope" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TJCScoreDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="TJCFinding" Nullable="true" />
+    <Property Type="String" Name="PreliminaryScore" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PreliminarySAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PreliminarySAFERScoreScope" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="PreliminaryScoreDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="FinalScore" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FinalSAFERScoreLikelihood" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FinalSAFERScoreScope" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FinalScoreDate" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="CoP">
+    <Property Type="Int32" Name="CopID" Nullable="false" />
+    <Property Type="String" Name="CopName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CopSortOrder" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Tag">
+    <Property Type="Int32" Name="TagID" Nullable="false" />
+    <Property Type="String" Name="TagCode" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TagSortOrder" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="IdentifiedUser">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="102" />
+  </ComplexType>
+  <ComplexType Name="CMSSite">
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="CMSProgram">
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="CMSComplianceExcel">
+    <Property Type="String" Name="Level" Nullable="false" MaxLength="2" />
+    <Property Type="Int32" Name="CmsStandardID" Nullable="false" />
+    <Property Type="Int32" Name="TagID" Nullable="true" />
+    <Property Type="Int32" Name="CopID" Nullable="true" />
+    <Property Type="Int32" Name="ElementID" Nullable="true" />
+    <Property Type="String" Name="TagName" Nullable="true" MaxLength="60" />
+    <Property Type="String" Name="CopStandardName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ConcatenatedText" Nullable="true" />
+    <Property Type="String" Name="ComplianceValue" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Manner" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="DateIdentified" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="IdentifiedBy" Nullable="true" MaxLength="110" />
+    <Property Type="String" Name="AutoCitationText" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="OrgCMSFindings" Nullable="true" />
+    <Property Type="String" Name="POC" Nullable="true" />
+    <Property Type="String" Name="CompliantDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CSF" Nullable="true" />
+    <Property Type="String" Name="LinkedDocumentList" Nullable="true" />
+    <Property Type="Int32" Name="TagSortOrder" Nullable="true" />
+    <Property Type="Int32" Name="CopSortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ElementSortOrder" Nullable="true" />
+    <Property Type="String" Name="TJCStandard" Nullable="true" />
+    <Property Type="Int32" Name="SiteID" Nullable="false" />
+    <Property Type="Int32" Name="HCOID" Nullable="true" />
+    <Property Type="String" Name="SiteName" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="ProgramCode" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProgramName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="AutoCitationTagText" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="CopStandard" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="AutoCitationSortOrder" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StickyDate">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="Int32" Name="ProgramID" Nullable="false" />
+    <Property Type="String" Name="ScoreAnalyzerStartDate" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ScoreAnalyzerEndDate" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="EPScoringReportFinalMockSurveySummary">
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+    <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+    <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+    <Property Type="String" Name="MockSurveyName" Nullable="true" MaxLength="100" />
+    <Property Type="Int64" Name="RowNumber" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="EPScoringReportFinalMockSurveyDetail">
+    <Property Type="Int32" Name="ProgramID" Nullable="true" />
+    <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="EPText" Nullable="true" />
+    <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterID" Nullable="true" />
+    <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StandardText" Nullable="true" />
+    <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+    <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Comments" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+    <Property Type="Int64" Name="RowNumber" Nullable="true" />
+    <Property Type="Int32" Name="FSA" Nullable="true" />
+    <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="MockSurveyFindings" Nullable="true" />
+    <Property Type="String" Name="MockSurveyRecommendations" Nullable="true" />
+    <Property Type="String" Name="DocumentList" Nullable="true" />
+    <Property Type="String" Name="COPID" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="DeemedService" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="RequirementName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="AssignmentText" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="MockSurveyName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="EPAssignmentScoringDetail">
+    <Property Type="Int32" Name="ProgramID" Nullable="true" />
+    <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="EPText" Nullable="true" />
+    <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterID" Nullable="true" />
+    <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StandardText" Nullable="true" />
+    <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+    <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Comments" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+    <Property Type="String" Name="AssignedToFullName" Nullable="true" MaxLength="113" />
+    <Property Type="Int64" Name="RowNumber" Nullable="true" />
+    <Property Type="Int32" Name="FSA" Nullable="true" />
+    <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="DocumentList" Nullable="true" />
+    <Property Type="String" Name="COPID" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="DeemedService" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="RequirementName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="AssignmentText" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="ScoreTypeSortOrder" Nullable="true" />
+    <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="EPAssignmentScoringSummary">
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+    <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+    <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+    <Property Type="String" Name="AssignedToFullName" Nullable="true" MaxLength="113" />
+    <Property Type="Int64" Name="RowNumber" Nullable="true" />
+    <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="ComprehensiveScoringDetail">
+    <Property Type="Int32" Name="ProgramID" Nullable="true" />
+    <Property Type="String" Name="Level" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="EPTextID" Nullable="true" />
+    <Property Type="String" Name="EPText" Nullable="true" />
+    <Property Type="String" Name="EPLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="EP_SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterSortOrder" Nullable="true" />
+    <Property Type="String" Name="StandardLabel" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="StandardTextSortOrder" Nullable="true" />
+    <Property Type="Int32" Name="ChapterID" Nullable="true" />
+    <Property Type="String" Name="ChapterCode" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ChapterText" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StandardText" Nullable="true" />
+    <Property Type="String" Name="ScoreName" Nullable="true" MaxLength="25" />
+    <Property Type="Int32" Name="ScoreTypeID" Nullable="true" />
+    <Property Type="String" Name="ScoreTypeName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Likelihood" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Scope" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="ScoreDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Comments" Nullable="true" />
+    <Property Type="Int32" Name="UserID" Nullable="true" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="113" />
+    <Property Type="Int64" Name="RowNumber" Nullable="true" />
+    <Property Type="Int32" Name="FSA" Nullable="true" />
+    <Property Type="String" Name="dcm_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="NewEP" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="esp1_fl" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Findings" Nullable="true" />
+    <Property Type="String" Name="POA" Nullable="true" />
+    <Property Type="String" Name="MOS" Nullable="true" />
+    <Property Type="String" Name="OrgNotes" Nullable="true" />
+    <Property Type="DateTime" Name="CompliantDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="MockSurveyFindings" Nullable="true" />
+    <Property Type="String" Name="MockSurveyRecommendations" Nullable="true" />
+    <Property Type="String" Name="DocumentList" Nullable="true" />
+    <Property Type="String" Name="COPID" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="DeemedService" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="TagCode" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="RequirementName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="CopText" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="AssignmentText" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="MockSurveyName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+</Schema>

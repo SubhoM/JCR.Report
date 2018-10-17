@@ -1,0 +1,561 @@
+﻿<!DOCTYPE html>
+@using JCR.Reports.Common;
+@using System.Configuration;
+@{
+    // _Layout: Shared Master view that contains session validation,
+    // custome message box, timeout warning, and loading box features
+    string username;
+    string role;
+    int selectedSite;
+    string selectedSiteName;
+    string programName;
+    int? userid;
+    string scheduleAction;
+    bool ampAccess;
+    bool multiAccess = false;
+    string helpLinkURL;
+    string isCMSControlvisible = "none";
+    bool isShowCMS = false;
+
+    if (AppSession.HasValidSession) {
+        username = String.Format("{0} {1}", AppSession.FirstName, AppSession.LastName);
+        role = WebConstants.GetRoleForSelectedSite();
+        selectedSite = AppSession.SelectedSiteId;
+        selectedSiteName = AppSession.SelectedSiteName;
+        programName = AppSession.SelectedProgramName;
+        userid = AppSession.UserID;
+        scheduleAction = Convert.ToString(TempData.Peek("ActionType"));
+        ampAccess = Security.AmpAccess();
+        helpLinkURL = AppSession.HelpLinkURL;
+
+        // M.Orlando 09/27/2017: Updated for TEN
+        //var paSites = AppSession.Sites.Where(item => item.RoleID.In((int) (WebConstants.Role.ProgramAdministrator),
+        //                                                            (int) (WebConstants.Role.MockSurveyUser),
+        //                                                            (int) (WebConstants.Role.MockSurveyReviewer)));
+
+        //if (paSites != null && paSites.Count() > 0) {
+        //    var programSites = paSites.Where(item => item.Programs.Any(p => p.ProgramID == AppSession.SelectedProgramId));
+        //    if (programSites != null && programSites.Count() > 1) {
+        //        multiAccess = true;
+        //    }
+        //}
+
+        //show the radio button only if CMS license is available for site/program and also for this particular report.
+        isShowCMS = ViewBag.ShowCMSRadio != null && ViewBag.ShowCMSRadio;
+        isCMSControlvisible = AppSession.IsCMSProgram && isShowCMS? "block" : "none";
+    } else {
+        Response.Redirect("../../Transfer/Error");
+        throw new Exception("Invalid Session");
+    }
+
+    //Tracer role site mamanger is treated as staff member
+    //if (role == "Site Manager") { role = "Staff Member"; }
+
+    // Idle timeout duration
+    int showTimeoutWarningMinutes = 58;
+    if (ConfigurationManager.AppSettings["SessionTimeoutNotificationDuration"] != null) {
+        showTimeoutWarningMinutes = Convert.ToInt32(Session.Timeout) -
+            Convert.ToInt32(ConfigurationManager.AppSettings["SessionTimeoutNotificationDuration"]);
+    }
+
+    string RoboHelpURL;
+    RoboHelpURL = ConfigurationManager.AppSettings["TracersRoboHelpUrl"].ToString();
+    //Idle timeout variables used in Layout.js
+    @Html.Hidden("hdnTimeOutWarningMinutes", showTimeoutWarningMinutes);
+    @Html.Hidden("hdnRedirectToPortal", Url.Action("TimeoutRedirect", "Transfer", new { area = "" }));
+    @Html.Hidden("WebApiReportAcessActionUrl", Url.Action("actionTracking", "Shared", new { area = "" }));
+    @Html.Hidden("WebApiSiteChangeActionUrl", Url.Action("AddSiteLoginApplicationEvent", "EProdApis", new { area = "" }));
+    @Html.Hidden("ProgramsUpdate", Url.Action("GetPrograms", "Search", new { area = "" }))
+    @Html.Hidden("PreferredProgramUpdate", Url.Action("UpdatePreferredProgram", "Shared", new { area = "" }))
+    @Html.Hidden("UpdateProgramsInSession", Url.Action("UpdateProgramsInSession", "Search", new { area = "" }))
+    @Html.Hidden("hdnActiveTab", (object)ViewBag.ActiveTab)
+    @Html.Hidden("hdnUserID", userid)
+    @Html.Hidden("hdnUserRole", role)
+    @Html.Hidden("hdnScheduleAction", scheduleAction)
+    @Html.Hidden("hdnTracerApp", true)
+    @Html.Hidden("hdnMultiAccess", multiAccess)
+    @Html.Hidden("hdnIsCMSProgram", Convert.ToString(AppSession.IsCMSProgram))
+    @Html.Hidden("hdnRoleID", AppSession.RoleID);
+    @Html.Hidden("hdnCycleID", AppSession.CycleID);
+    @Html.Hidden("hdnHasTracersAccess", AppSession.HasTracersAccess);
+    @Html.Hidden("hdnIsCorporateSite", AppSession.IsCorporateSite);
+    @Html.Hidden("hdnAuthToken", AppSession.AuthToken);
+    @Html.Hidden("hdnWebApiUrl", AppSession.WebApiUrl);
+    @Html.Hidden("hdnPageID", AppSession.PageID);
+    @Html.Hidden("hdnReportID", AppSession.ReportID);
+    @Html.Hidden("hdnProgramGroupTypeID", AppSession.ProgramGroupTypeID);
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title - Tracers Report Center</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.1.223/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+    @Scripts.Render("~/bundles/kendoui")
+    @Styles.Render("~/Content/Tracercss")
+    @Styles.Render("~/Content/Common")
+    @Scripts.Render("~/bundles/Common")
+    @Url.Script("~/Scripts/Layout.js")
+       
+    <style>
+        /*.UserInfo {
+            white-space: wrap;
+        }*/
+        #arrowspan {
+            z-index: 8;
+        }
+        .dropdown-submenu{position:relative;}
+        .dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+        .dropdown-submenu:hover>.dropdown-menu{display:block;}
+        .dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:black;margin-top:5px;margin-right:-10px;}
+        .dropdown-submenu:hover>a:after{border-left-color:black;}
+        .dropdown-submenu.pull-left{float:none;}
+        .dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+        /*Horizontal Top Scroll bar*/
+        .topScroll
+        {
+            overflow-y: hidden;
+            overflow-x: scroll;
+        }
+        .topScroll > div
+        {
+            height: 1px;
+        }
+    </style>
+</head>
+<body id="pageBody">
+    <input type="hidden" id="refreshed" value="no">
+    
+    @*<div id="body" class="container-fluid minSiteWidth" style="padding-left:0;padding-right:0;overflow-x:hidden">*@
+
+        <div id="pageContent">
+
+            <div class="modal fade" id="TimeOutAlert" role="dialog" aria-hidden="true" style="z-index:1000000000;">
+                <div class="modal-dialog modal-sm t-modal-width">
+                    <div class="modal-content">
+                        <div class="modal-header t-modal-header">
+                            <h4 class="modal-title">Your session is about to expire!</h4>
+                        </div>
+                        <div class="modal-body">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true">&nbsp;</span>Time remaining: <span id="lblTimerCountdown">120</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnContinueSession">Continue your session</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @RenderSection("featured", required: false)
+
+            <div style="padding-bottom: 0px; margin-bottom: 0px; border-bottom-width: 0px; border-bottom-style: none; z-index:501;">
+
+
+                <div class="row" id="topNav">
+
+                    <div class='row rectangle-wide'>
+                    </div>
+
+                    <div class="row">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:50%">
+                                    <div class="text-left">
+                                        <div class="col-sm-12">
+                                            <img class="logoStyle" src="~/Images/jcr_logo.png" />
+                                            <img class="logoStyle" src="~/Images/tracersamp.jpg" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+
+                                    <div class="row input-group" style="margin-top:-30px">
+                                        <span class='triangle-topright'></span>
+                                        <div class='input-group-addon rectangle'>
+
+                                            <div class="container-fluid">
+                                                <div class="row" style="padding-right:20px">
+
+
+                                                    <div class="col-sm-12">
+
+                                                        <table align="right">
+
+                                                            <tr>
+
+                                                                <td rowspan="2">
+                                                                    <div class="input-group mb-3" style="width:200px;">
+                                                                        <input type="text" id="txtSearch" onkeydown="SearchInputKeyPress(event)" class="form-control input-sm" placeholder="Search Standard/EP" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                                        <div class="input-group-addon" onclick="SearchStandard()" style="cursor:pointer">
+                                                                            <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td rowspan="2">
+                                                                    <ul class="nav navbar-right navDrpDwn"
+                                                                        style="padding: 0px !important; width: 90px; float: none !important; background-color: transparent !important;">
+                                                                        <li class="active">
+                                                                            <a class="dropdown-toggle siteDropdwnHeaderAnchor" data-toggle="dropdown" aria-expanded="false" id="setupDropdwnLnk" href="#">
+                                                                                <span>
+                                                                                    Setup
+                                                                                    <i class="caret caret-large"></i>
+                                                                                </span>
+                                                                            </a>
+                                                                            <ul class="dropdown-menu programDropDown"
+                                                                                style="white-space:nowrap;top:34px;" role="menu" aria-labelledby="dLabel">
+                                                                                <li>
+                                                                                    <div id="divSetupDropDown" class="dropdown dropdown-accordion" data-accordion="#accordion"
+                                                                                         style="max-height: 450px; overflow-x: hidden; overflow-y: auto;">
+                                                                                        <div class="panel-group" id="setupAccordion">
+                                                                                            <div class="panel panel-default">
+                                                                                                <div class="panel-collapse collapse in" id="Accred" aria-expanded="true">
+                                                                                                    <div class="panel-body" id="ddl-setup"></div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </td>
+                                                                <td rowspan="2" class="topMenuLink">
+                                                                    <a href="/Transfer/Portal">JCR Portal</a>
+                                                                </td>
+                                                                <td>
+                                                                    <span><b>@username</b></span>
+                                                                </td>
+                                                                <td rowspan="2" class="topMenuLink">
+                                                                    <a href="/Transfer/LogoutRedirect">Sign out</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><span style="font-size:small;line-height:1.1">@role</span></td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                </div>
+
+
+                @*<div class="row topNavRow1" style="margin-bottom:30px">
+                    <div class="col-xs-4 topNavLeftCol">
+                        <div style="float: left;">
+                            <img style="padding-right:10px;" src="~/Images/jcr_logo40.png" />
+                            <img src="~/Images/tracersamp.jpg" style="padding-right:15px" />
+                        </div>
+                        <div style="float: left;">
+                        </div>
+                    </div>
+                    <div class="IEnavRightPadding" align="right" style="margin-top: 4px; float: right;">
+                        <!-- COPY STARTS HERE -->
+                        <table>
+                            <tr>
+                                <td>
+                                    <ul class="nav navbar-left navDrpDwn"
+                                        style="width:100px; padding:0px !important; height:35px; float: none !important; background-color: rgb(233,242,249) !important; width:90px;">
+                                        <li class="active" style="height:inherit; line-height: normal; width:80px;">
+                                            <a class="dropdown-toggle siteDropdwnHeaderAnchor" data-toggle="dropdown" aria-expanded="false" id="setupDropdwnLnk" href="#">
+                                                <span style="font-size: 14px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; width:50px;">Setup</span>
+                                                <div style="margin-left:-15px;">
+                                                    <span class="caret caret-large"></span>
+                                                </div>
+                                            </a>
+                                            <ul class="dropdown-menu programDropDown"
+                                                style="white-space:nowrap; z-index: 90000002; width:300px; top:32px; left:-245px;" role="menu" aria-labelledby="dLabel">
+                                                <li>
+                                                    <div id="divSetupDropDown" class="dropdown dropdown-accordion" data-accordion="#accordion"
+                                                         style="max-height: 450px; overflow-x: hidden; overflow-y: auto;">
+                                                        <div class="panel-group" id="setupAccordion">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-collapse collapse in" id="Accred" aria-expanded="true">
+                                                                    <div class="panel-body" id="ddl-setup"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td style="padding-top:7px;">
+                                    @Html.ActionLink("JCR Portal", "Portal", "Transfer", new { Area = "" }, new { @class = "PaddingRight20 navQuickLinks" })
+                                    <label class="PaddingRight20" style="font-weight:normal">
+                                        <b>@username / </b> @role
+                                    </label>
+                                    @Html.ActionLink("Sign out", "LogoutRedirect", "Transfer", new { Area = "" }, new { @class = "nowrap navQuickLinks" })
+                                </td>
+                                <td style="width:10px;">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- COPY END HERE -->
+                </div>*@
+
+
+
+
+                <div class="navbar navbar-default navbar-static-top" role="navigation" id="topNavbar" data-spy="affix" data-offset-top="70" style="background-color:white">
+
+                    <div class="container-fluid" id="nav-wrap" style="padding:15px 0 0 0;margin-left:-5px">
+                        <div style="width:60%;float:left;margin-top: -2px;">
+                            <div class="navbar-left">
+                                <div class="container-fluid" id="navbarMenu" style="padding:0;">
+                                    <nav id="cbp-hrmenu" class="cbp-hrmenu"></nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topNavRight pull-right" style="width: 40%;margin-top:4px">
+                            <div style="margin-right:1px;width:100%;">
+                                <table id="mainnavdd" style="width: 100%; float:right; border-spacing:0; border-collapse:collapse;">
+                                    <tr>
+                                        @if (ViewBag.HideProgram == true)
+                                    {
+                                <td nowrap>
+                                    <div style="height: auto;">
+                                        @{ Html.RenderAction("LoadSites", "Shared", new { area = "" }); }
+                                    </div>
+                                </td>
+                                    }
+                                    else
+                                    {
+                                <td nowrap style="width:58%;">
+                                    <div id="divSites">
+                                        @{Html.RenderAction("LoadSites", "Shared", new { area = "", allSites = ViewBag.allSites == null ? true : false });}
+                                    </div>
+                                </td>
+                                <td nowrap style="width:42%; padding-left: 10px;">
+                                    <div id="divPrograms">
+                                        @{Html.RenderAction("LoadPrograms", "Shared", new { area = "" });}
+                                    </div>
+                                </td>
+                                    }
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="body-content minSiteWidth" id="mainLayoutBody" style="margin-top:-15px;padding:0">
+
+                <div id="mnuBreadCrumbTrail" class="mnuBreadCrumbTrail"></div>
+
+                <div class="col-xs-12">
+                    @if (IsSectionDefined("slidedownsearch")) {
+                <div class="minSiteWidth" role="navigation" @*data-spy="affix"*@ id="MainNavbar">
+
+                    <div class="row minSiteWidth marginLeft-5">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left marginLeft-5">
+                            <div id="ulQuickLinks" style="display: none;">
+                                <img src="~/Images/TracersSmall.jpg" style="padding: 0;" />
+                            </div>
+                            <span>
+                                @(Html.Kendo().Button()
+                                        .Name("btnSearchCriteria")
+                                        .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm glyphButton focusButton activeTab" })
+                                        .Content("<span class='glyphicon glyphicon-filter glyphiconSize'></span><br /><span class='glyphfontsize glyphfontwidth1'>Criteria</span>")
+                                        .Events(events => events.Click("OnbtnSearchClick"))
+                                )
+                            </span>
+                            <span>
+                                @(Html.Kendo().Button()
+                                        .Name("btnRecurrence")
+                                        .HtmlAttributes(new { type = "button", @class = "btn btn-default btn-sm glyphButton focusButton" })
+                                        .Content("<span class='glyphicon glyphicon-envelope glyphiconSize'></span><br /><span class='glyphfontsize glyphfontwidth6'>Email</span>")
+                                        .Events(events => events.Click("OnbtnRecurrenceClick"))
+                                )
+                            </span>
+                        </div>
+                        <div id="divReporttitle" class="col-xs-7 verticalAlign">
+                            <h4 id="ReportTitle">@ViewBag.Title</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row minSiteWidth">
+                    <div id="slideSearch" class="col-xs-12  inlineBlockDisplay absolutePosition nodisplay">
+                        <div class="panel panel-default thickborder fullwidth  pnlSearchBG minSiteWidth">
+                            <div class="panel-body slidewidth pnlSearchBG criteriaSection">
+                                <div class="row" style="display:@isCMSControlvisible">
+                                    <div class="col-xs-12 ">
+                                        @Html.Partial("Search/_CMSRadioButton")
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-xs-12 text-left">
+                                        @Html.Partial("Error/_ErrorMessage")
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        @RenderSection("slidedownsearch", required: false)
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 2em;">
+                                    <div class="col-xs-12 text-center">
+                                        @Html.Partial("Search/_ShowReport")
+                                        @if (ViewBag.HideSaveReport != true) {
+                                            <span style="padding-left:10px;">@Html.Partial("Search/_SaveReport")</span>
+                                            }
+                                        <span style="padding-left:10px;">@Html.Partial("Search/_ResetFilters")</span>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-xs-12">
+                                        <h6 id="typeOfObservationAlert">
+                                            <i>This report only includes <strong>completed</strong></i>
+
+                                            @{ if (ViewBag.ScheduledTracerReport != null) {
+                                                <i>observations for <strong>scheduled</strong> tracers.</i>
+
+                                                        if (AppSession.IsCMSProgram == true) {
+                                                <br /><br /><i>This report includes both TJC and CMS Tracers.</i>
+                                                @*} else {
+                                                <i>observations.</i>*@
+                                                        }
+                                                    } else {
+                                                <i>observations.</i>
+                                                    }
+                                            }
+
+                                            @{ if (AppSession.IsCMSProgram == true && isShowCMS == false) {
+                                                        if (ViewBag.ScheduledTracerReport == null) {
+                                                <br /><br /><i>This report only includes TJC Tracers.</i>
+                                                        }
+                                                   }
+                                            }
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="row text-center" id="divExcelViewWarning" style="display: none;">
+                                    <div class="col-xs-12">
+                                        <h6>Advanced features of excel such as grouping, filtering, sorting and hiding are not saved.</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row minSiteWidth">
+                    <div id="slideRecurrence" class="col-xs-12  inlineBlockDisplay absolutePosition nodisplay">
+                        <div class="panel panel-default thickborder fullwidth ">
+                            <div class="panel-body slidewidth pnlSearchBG">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        @Html.Partial("Search/_ScheduleRecurrence")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                    <div class="row">
+                        <div class="col-xs-12" style="min-height:650px">
+                            <section>
+                                @RenderBody()
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 text-center">
+                    <br /><span>&copy; @DateTime.Now.Year The Joint Commission, &copy; @DateTime.Now.Year Joint Commission Resources</span>
+                </div>
+
+            </div>
+
+        </div>
+
+   
+
+
+
+        @*<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="modal-btn-yes">Yes</button>
+                        <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div id="confirmModal">
+
+            <div class="modal fade modal-dialog confirmPopupContainer secondaryPopupContainer" id="mi-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="confirmPopupDialog secondaryPopupDialog">
+                    <div class="modal-content secondaryPopupContent">
+                        <div class="modal-header secondaryPopupHeader">
+                            <button type="button" class="secondaryPopupClose close-wingdings" id="closeModalButton" tabindex="-1">&times;</button>
+                            <h4 class="modal-title secondaryPopupTitle" id="myModalHeader">Confirm Navigation</h4>
+                        </div>
+                        <div class="modal-body secondaryPopupBody" style="height: 85px !important" id="myModalLabel"></div>
+                        <div class="modal-footer secondaryPopupFooter">
+                            <button type="button" class="btnStandard" tabindex="1" style="margin-right: 15px;" id="modal-btn-yes" autofocus>Yes</button>
+                            <button type="button" class="btnStandardGray" style="margin-right: 20px;" tabindex="2" id="modal-btn-no">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        
+    
+    @*</div>*@    
+
+
+
+    @*<script src="~/Scripts/cMenuLauncher.js"></script>
+
+    <script src="~/Scripts/hMenuData.js"></script>
+    <script src="~/Scripts/hMenuBuilder.js"></script>
+
+    <script src="~/Scripts/vMenuData.js"></script>
+    <script src="~/Scripts/vMenuBuilder.js"></script>*@
+
+
+
+    @*<script src="~/Areas/Tracer/Scripts/TracerLayout.js"></script>*@
+    @Scripts.Render("~/bundles/Tracers")
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#oneFineDot').css("z-index", 0);
+        });
+    </script>
+
+    <div id="displayloading" style="display: none;" class="Absolute-Center">
+        <div class="spinnerPosition">
+            <img src="~/Images/blue_spinner.gif" />
+            <div style="margin-left: -5px;">Loading</div>
+        </div>
+    </div>
+
+</body>
+</html>

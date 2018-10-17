@@ -1,0 +1,52 @@
+﻿ @model  IEnumerable<JCR.Reports.Models.EP>
+    <div id="ampep">
+       <h6><b>EP*</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("AMPEP")
+                    .DataTextField("StandardLabelAndEPLabel")
+                    .DataValueField("EPTextID")
+                  .Placeholder("Select EP")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model)
+                  .AutoClose(false)
+                //  .ValuePrimitive(false)
+                   .Events(e =>
+                    {
+                        e.Select("onAMPEPSelect");
+                    })
+                .Value( "-1" )   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("AMPEP");
+       // removedeleteoption("TracersEP");
+    });
+    //function onTracersEPClose(e) {
+    //    removedeleteoption("TracersEP");
+    //}
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

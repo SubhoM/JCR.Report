@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Tracers";
+}
+<div class="row">
+    <div class="col-xs-2 col-xs-offset-2">
+        <strong>Corporate Report</strong>
+    </div>
+    <div class="col-xs-5">
+        <strong>Description</strong>
+    </div>
+</div>
+
+@foreach (var reportList in Model.List)
+{
+
+<div class="row margintopadd">
+       <div class="col-xs-2 col-xs-offset-2">
+            <a href="/@reportList.ReportSource/Index/@reportList.ERReportID">@reportList.ERReportName</a>
+            <span style="color: #C61835; font-weight: bold; margin-left: 5px;">@reportList.ReportChangeStatus</span>
+    </div>
+    <div class="col-xs-6">
+            @Html.Raw(reportList.ERReportDescription)
+    </div>
+</div>
+}
+
+@Html.Hidden("Command")
+@Html.Hidden("SelectedReportName")

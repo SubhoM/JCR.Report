@@ -1,0 +1,98 @@
+﻿<div id="divexcelTask">
+    <div id="divtiebreakermessage" align="center" style="background-color: #f2dede; color: #a94442;"></div>
+    <div>
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Corporate.ViewModels.TaskReportExcelView>()
+      .Name("gridTaskRptExcel")
+               .ToolBar(tools => tools.Excel())
+                          .Excel(excel => excel
+                              .AllPages(true)
+                                              .FileName("Task Report Excel.xlsx")
+                                  .Filterable(true)
+                                          .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                                  )
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.StatusName).Title("Status").Width(100);
+          columns.Bound(p => p.TaskID).Title("Task ID").Width(100).HtmlAttributes(new {style = "text-align:right" });
+          columns.Bound(p => p.TaskName).Title("Task Name").Width(150);
+          columns.Bound(p => p.TaskDescription).Title("Task Details").Width(300);
+
+          columns.Bound(p => p.AssignedBy).Title("Assigned By").Width(120);
+          columns.Bound(p => p.AssignedTo).Title("Assigned To").Width(120);
+          columns.Bound(p => p.CcedTo).Title("Email Cc'd To").Width(130);
+
+          columns.Bound(p => p.AssignedDate).Title("Assigned Date").Width(120).Format("{0:MM/dd/yyyy}").HtmlAttributes(new { style = "text-align:right" });
+          columns.Bound(p => p.DueDate).Title("Due Date").Width(120).Format("{0:MM/dd/yyyy}").HtmlAttributes(new { style = "text-align:right" });
+          columns.Bound(p => p.CompleteDate).Title("Completed Date").Width(130).Format("{0:MM/dd/yyyy}").HtmlAttributes(new { style = "text-align:right" });
+
+          columns.Bound(p => p.TaskResolution).Title("Completion Details").Width(150);
+          columns.Bound(p => p.StandardEp).Title("Standard EP").Width(120);
+          columns.Bound(p => p.CmsStandard).Title("CMS Standard").Width(120);
+
+          columns.Bound(p => p.TracerCustomName).Title("Tracer Name").Width(120);
+          columns.Bound(p => p.QuestionText).Title("Tracer Question").Width(300).Encoded(false);
+          columns.Bound(p => p.Observation).Title("Observation").Width(150);
+          columns.Bound(p => p.OrgName_Rank3).Width(100);
+          columns.Bound(p => p.OrgName_Rank2).Width(100);
+          columns.Bound(p => p.OrgName_Rank1_Dept).Width(100);
+      })
+              .Sortable()
+              .Scrollable(scrollbar => scrollbar.Height(700))
+              .HtmlAttributes(new { style = "font-size:12px;line-height:em" })
+              .DataSource(dataSource => dataSource
+              .Ajax()
+              .ServerOperation(false)
+                      .Read(read => read.Action("_TaskReportExcel", "TaskReport").Data("additionalData")) // Set the action method which will return the data in JSON format
+                        .PageSize(20))
+                        .AutoBind(false)
+              .Events(e => e.ExcelExport("ERexcelExportTDS").DataBound("dataBoundExcelView"))
+              .ColumnMenu(columnsmenu => columnsmenu
+                         .Columns(true))
+              .Filterable(filter => filter
+                            .Extra(false)
+                            .Operators(operators => operators
+                            .ForString(str => str.Clear()
+                                        .Contains("Contains")
+                            .StartsWith("Starts with")
+                            .IsEqualTo("Is equal to")
+                            .IsNotEqualTo("Is not equal to")
+                            )))
+                .Groupable()
+                .Resizable(r => r.Columns(true))
+                         .Reorderable(reorder => reorder.Columns(true))
+                .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(new int[] { 20, 50, 100 }))
+        )
+    </div>
+
+</div>
+
+<style>
+    #gridTaskRptExcel {
+        display: none;
+    }
+
+        #gridTaskRptExcel .k-loading-image {
+            background-image: none;
+        }
+
+        #gridTaskRptExcel tr td {
+            border-width: 1px 0 0 0px;
+        }
+
+        #gridTaskRptExcel .k-grid-content {
+            overflow-y: scroll;
+        }
+
+        #gridTaskRptExcel .k-grid-toolbar
+        {
+            padding: .6em 1.3em .6em .4em;
+        }
+</style>
+<script>
+    $(document).ready(function () {
+        $(".k-grid-toolbar", "#gridTaskRptExcel").before("<span style='text-align:center;text-align:top;font-weight:bold;'><h5>Task Report - Excel View</h5></span>");
+    });
+</script>
+

@@ -1,0 +1,118 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.SearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+    Layout = "~/Views/Shared/_TracerLayout.cshtml";
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row PaddingTop10">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+        <div class="row PaddingTop10">
+            <div class="col-xs-12 text-center">
+                <b>Report Type</b>
+                @Html.RadioButtonsForEnum(m => m.ReportType)
+            </div>
+        </div>
+        <div class="row">
+            <table style="border-spacing: 10px;">
+                <tr width="100%">
+                    <td width="20%" style="vertical-align:top">
+                        @Html.Partial("Search/_TracersCategory")
+                        @Html.Partial("Search/_TracersList")
+
+                    </td>
+                    <td width="2%"></td>
+                    <td width="30%" style="vertical-align:top">
+
+                        @Html.Partial("Search/_CampusList")
+                        @Html.Partial("Search/_BuildingList")
+                        @Html.Partial("Search/_DepartmentList")
+                        @Html.Partial("Search/_InactiveOrgItemsCheckBox")
+                    </td>
+                    <td width="2%"></td>
+                    <td width="11%" style="margin-left:20px; vertical-align:top;">
+                        @Html.Partial("Search/_DateRange")
+                    </td>
+                    <td width="12%" style="vertical-align:top">
+                        @Html.Partial("Search/_ObservationDate")
+                    </td>
+                    <td width="23%" style="vertical-align:top">
+                        <div><h6><b>Question Criteria</b></h6></div>
+                        @Html.Partial("Search/_NonCompliantPercentage")
+                        @Html.Partial("Search/_IncludeDeptNoCompObs")
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div id="loadrdlc" class="col-md-12"> </div>
+    </div>
+    <div class="row">
+        @(Html.Kendo().TabStrip()
+          .Name("tabstripDept")
+          .Events(events => events
+                                                
+                           .Select("ontabstripSelect"))
+          .Scrollable(true)
+          .Items(tabstrip =>
+          {
+              tabstrip.Add().Text("Data")
+                  .Selected(true)
+                  .Content(@<text>
+                    @Html.Partial("DepartmentComparativeAnalysisData")
+                </text>);
+
+              tabstrip.Add().Text("Details")
+                  .Enabled(false)
+                  .Content(@<text>
+                    <div id="ObservationsHeading" style="font-size:large;"> </div>
+                     @Html.Partial("DepartmentComparativeAnalysisOpp")
+                </text>);
+          })
+        )
+    </div>
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("GetRDLC", Url.Action("_DepartmentComparativeAnalysis", "DepartmentComparativeAnalysis"))
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("hdnReportActionID", 9)
+}
+
+@*@Url.Script("~/Scripts/Common/ReportsCommon.js")
+@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Tracer/Views/DepartmentComparativeAnalysis/DepartmentComparativeAnalysis.js")
+
+<script>
+    function ontabstripSelect(e) {
+        if ($(e.item).find("> .k-link").text() == "Details") {
+            secondgridview = true;
+        }
+        else { secondgridview = false; }
+    }
+    
+</script>
+<style type="text/css">
+    /*#divdaterange {
+        margin-top: -36px;
+    }
+
+    #divrangeobs {
+        margin-top: -15px;
+    }*/
+    .k-pager-sizes .k-dropdown-wrap .k-input {
+    width:100px;
+    }
+    
+</style>
+
+
+

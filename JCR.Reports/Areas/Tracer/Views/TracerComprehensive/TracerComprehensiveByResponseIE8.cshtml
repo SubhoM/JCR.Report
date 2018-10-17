@@ -1,0 +1,67 @@
+﻿<div>
+    <div id="resultTCRESP">
+
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.TracerComprehensiveExcel>()
+      .Name("gridTCRESPIE8")
+               .ToolBar(tools => tools.Excel())
+                      
+      .Columns(columns =>
+              {
+
+                  columns.Bound(p => p.TracerCustomName).Width(250);
+                  columns.Bound(p => p.TracerResponseTitle).Width(250);
+                  columns.Bound(p => p.TracerQuestionNumber).Width(105);
+                  columns.Bound(p => p.QuestionText).Width(450);
+                  columns.Bound(p => p.StandardEP).Width(200);
+                  columns.Bound(p => p.OrgName_Rank3).Width(150);
+                  columns.Bound(p => p.OrgName_Rank2).Width(150);
+                  columns.Bound(p => p.OrgName_Rank1_Dept).Width(150);
+                  columns.Bound(p => p.SurveyTeam).Width(200);
+                  columns.Bound(p => p.MedicalStaffInvolved).Width(150);
+                  columns.Bound(p => p.Location).Width(200);
+                  columns.Bound(p => p.MedicalRecordNumber).Width(200);
+                  columns.Bound(p => p.EquipmentObserved).Width(200);
+                  columns.Bound(p => p.ContractedService).Width(200);
+                  columns.Bound(p => p.StaffInterviewed).Width(200);
+                  columns.Bound(p => p.TracerNote).Width(200);
+                  columns.Bound(p => p.UpdatedByUserName).Width(200);
+                  columns.Bound(p => p.ObservationDate).Width(200).Format("{0:MM/dd/yyyy}");
+                  columns.Bound(p => p.UpdatedDate).Width(200).Format("{0:MM/dd/yyyy}");
+                  columns.Bound(p => p.Numerator).Width(200);
+                  columns.Bound(p => p.Denominator).Width(200);
+                  columns.Bound(p => p.CompliancePercent).Format("{0:0.0}%").Width(125);
+                  columns.Bound(p => p.TracerQuestionNote).Width(200);
+                
+              })
+              
+              .AutoBind(false)
+                     .Scrollable(scrollable => scrollable.Height("auto"))
+                   .HtmlAttributes(new { style = "font-size:12px;line-height:em" })
+              .DataSource(dataSource => dataSource
+              .Ajax()
+             
+                     .Read(read => read.Action("_TracerComprehensiveDetailByResponseExcel", "TracerComprehensive").Data("additionalData")) // Set the action method which will return the data in JSON format
+                             .PageSize(20)
+                     
+               )
+                       .Events(e => e.ExcelExport("excelExportIE8"))
+
+                .Pageable(pageable => pageable
+                    .Refresh(true)
+                    .PageSizes(new int[] { 20, 50, 100 }))
+              
+
+        )
+    </div>
+</div>
+
+<style>
+    #gridTCRESPIE8 {
+        display: none;
+    }
+</style>
+
+
+
+
+

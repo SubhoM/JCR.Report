@@ -1,0 +1,52 @@
+﻿<div>
+    <h6><b>Template Status</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+            .Name("TracerStatus")
+            .DataTextField("Text")
+            .DataValueField("Value")
+           
+                     .Events(e =>
+                            {
+                                e.Select("onTracerStatusSelect").Change("onTracerStatusChange");
+                            })
+            .BindTo(new List<SelectListItem>() {
+                new SelectListItem() {
+                      Text = "All",
+                      Value = "-1"
+                  },
+                  new SelectListItem() {
+                      Text = "Active",
+                      Value = "1"
+                  },
+                  new SelectListItem() {
+                      Text = "Inactive",
+                      Value = "0"
+                  }
+              })
+            .Value("-1")
+          
+            )
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracerStatus");
+
+    });
+
+    function onTracerStatusSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+         if (dataItem.Text === "All") {
+            $('#TracerStatus').data("kendoMultiSelect").value([]);
+         } else if (jQuery.inArray("-1", values) >= 0) {
+            values = $.grep(values, function (value) {
+                return value !== "-1";
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+
+</script>

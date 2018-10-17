@@ -1,0 +1,49 @@
+﻿@model JCR.Reports.Models.SearchList
+<div id="tracerSelectionList">
+    <h6><b>Tracer Section</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+                      .Name("TracerSectionsList")
+                      .DataTextField("QuestionCategoryName")
+                      .DataValueField("TracerQuestionCategoryID")
+                      .Placeholder("Select Tracer Section")
+                      .HighlightFirst(true)
+                      .Filter(FilterType.Contains)
+                      .BindTo(Model.TracerSectionsLists)
+                     .ValuePrimitive(false)
+                     .AutoClose(false)
+                              .Events(e =>
+                              {
+                                  e.Select("onSectionListSelect").Change("onTracerSectionChange");
+                              })
+                     .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TracerSectionsList");
+    });
+
+    function onSectionListSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.QuestionCategoryName === "All") {
+            $('#TracerSectionsList').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray(-1, values)) {
+            values = $.grep(values, function (value) {
+                return value !== "-1";
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+
+    function onTracerSectionChange(e) {
+        if (typeof leastComplianctTracerSectionChange == 'function') {
+            leastComplianctTracerSectionChange();
+        }
+    }
+
+</script>

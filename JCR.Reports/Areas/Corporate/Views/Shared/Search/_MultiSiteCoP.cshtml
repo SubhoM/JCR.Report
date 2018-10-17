@@ -1,0 +1,47 @@
+﻿@model IEnumerable<JCR.Reports.DataModel.CoP>
+<div id="multisitecop">
+    <h6><b>CoP</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+            .Name("MultiSiteCoP")
+            .DataTextField("CopName")
+            .DataValueField("CopID")
+            .Placeholder("Select CoP")
+            .Filter(FilterType.Contains)
+            .HighlightFirst(true)
+            .BindTo(Model)
+            .AutoClose(false)
+            .Events(e =>
+            {
+                e.Change("onMSCoPChange").Select("onMSCoPSelect");
+            })
+            .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("MultiSiteCoP");
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e6768d38-51eb-4543-b671-0ff5d32b5618" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProcessEmail.xsd" MetadataType="Schema" ID="97dddc27-f19a-4385-94f1-c9efac4a8281" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?xsd=xsd4" />
+    <MetadataFile FileName="ProcessEmail.disco" MetadataType="Disco" ID="170974f8-78ce-42b9-ae90-66c3ab1ef795" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?disco" />
+    <MetadataFile FileName="ProcessEmail1.xsd" MetadataType="Schema" ID="a292db14-4e69-4411-acb0-d678dc3935a8" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?xsd=xsd0" />
+    <MetadataFile FileName="ProcessEmail2.xsd" MetadataType="Schema" ID="ab952d82-3bd7-40e4-9aec-17d0e5e869aa" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?xsd=xsd1" />
+    <MetadataFile FileName="ProcessEmail3.xsd" MetadataType="Schema" ID="5d5d36f9-37bf-4ab3-936b-a3a06df67303" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?xsd=xsd2" />
+    <MetadataFile FileName="ProcessEmail4.xsd" MetadataType="Schema" ID="58be1ff2-daf3-4a5c-8279-dd9ca4b45368" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?xsd=xsd3" />
+    <MetadataFile FileName="ProcessEmail.wsdl" MetadataType="Wsdl" ID="7281e977-c208-4dd8-8053-2a55bb135f95" SourceId="1" SourceUrl="http://ccmsvc.dev.devjcrinc.com/ProcessEmail.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

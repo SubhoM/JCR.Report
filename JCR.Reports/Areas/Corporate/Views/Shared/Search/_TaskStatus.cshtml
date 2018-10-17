@@ -1,0 +1,47 @@
+﻿@model IEnumerable<JCR.Reports.Areas.Corporate.Models.TaskStatus>
+<div id="multisiteTaskStatus">
+    <h6><b>Status</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("TaskStatus")
+                  .DataTextField("TaskStatusName")
+                  .DataValueField("TaskStatusID")
+          .Placeholder("Select Task Status")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+        .Events(e =>
+                    {
+                        e.Select("onTaskStatusSelect");
+                    })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TaskStatus");
+     });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

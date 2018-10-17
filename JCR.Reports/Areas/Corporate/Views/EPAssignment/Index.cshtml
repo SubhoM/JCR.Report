@@ -1,0 +1,156 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.CorporateSearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+        <div class="row PaddingTop10">
+            <div class="col-xs-offset-3 col-xs-3 text-left" style="padding:0;">
+                <b>Report Type:</b>
+                <input type="radio" checked="checked" value="Graph" id="GraphReport" name="ReportTypeChange" onclick="ReportTypeChange('Graph');">Graph
+                <input type="radio" value="ExcelView" id="Excel" name="ReportTypeChange" onclick="ReportTypeChange('Excel');">Excel View
+           
+            </div>
+            <div class="col-xs-4 text-left" style="padding:0;">
+                <b>Group By </b>
+                @Html.RadioButtonsForEnum(m => m.ERGroupBYProgramLevel)
+            </div>
+        </div>
+        <div class="row" style="margin-top:5px;">
+
+            <div class="col-xs-3 text-left" >
+                <div id="divMultiSiteProgram"></div>
+                <div id="divMultiSiteChapter"></div>
+                <div id="divMultiSiteStandard"></div>
+                <div class="text-left">
+                    <h6 id="typeOfObservationAlert"><i>*Select Chapter to display Standard.</i></h6>
+                </div>
+            </div>
+            <div class="col-xs-offset-1 col-xs-2" align="left">
+                <div>
+                    <div><h6><b>Score Type</b></h6></div>
+
+                </div>
+                <div>
+                    <input type="radio" id="stIndividual" name="scoreType" value="Individual" onclick="scoreTypeChange('Individual');">Individual
+                </div>
+                <div >
+                    <input type="radio" id="stPreliminary" name="scoreType" value="Preliminary" checked onclick="scoreTypeChange('Preliminary');">Preliminary
+                </div>
+                <div>
+                    <input type="radio" id="stBoth" name="scoreType" value="Both" onclick="scoreTypeChange('Both');">Both
+                </div>
+            
+            </div>
+
+            <div class="col-xs-3">
+                <div id="divMultiSiteEPAssignedTo"></div>
+                <div id="divMultiSiteEPAssignedBy"></div>
+            </div>
+            <div class="col-xs-3" style="margin-top:7px;">
+                <div><h6><b>Filter By</b></h6></div>
+                <div class="checkbox" >
+                    <label id="IncludeFSA"><input id="chkIncludeFSA" style="float: left; margin-top:2px;" type="checkbox" value="">Only Include FSA EPs</label>
+                </div>
+                <div class="checkbox" >
+                    <label id="docRequired"><input id="chkdocRequired" style="float: left; margin-top:2px;" type="checkbox" value="">Documentation Required</label>
+                </div>
+                <div class="checkbox" >
+                    <label id="NewChangedEps"><input id="chkNewChangedEps" style="float: left; margin-top:2px;" type="checkbox" value="">New/Changed EPs</label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div id="loadChartView" class="col-md-12">
+
+        </div>
+    
+    </div>
+    <div id="divDetail" style="display: none; cursor: default;"></div>
+
+    <script type="text/x-kendo-template" id="DocumentTemplate">
+        <div id="details-container" style="width: 98%;">
+            <dl>
+                <dt class="row text-center"><b>#if (HCOID == null) {# SiteID:#= SiteID ##} else {# HCOID:#= HCOID # #}#/#=ProgramCode#: #= StandardLabel #/EP:#= EPLabel #</b></dt>
+                <dt><br /><u><b>Organizational Findings</b></u>#if (Findings == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=Findings#</span> #}# </dt>
+                <dt><br /><u><b>Plan of Action</b></u>#if (POA == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=POA#</span> #}# </dt>
+                <dt><br /><u><b>Sustainment Plan</b></u>#if (MOS == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=MOS#</span> #}# </dt>
+                <dt><br /><u><b>Internal Notes</b></u>#if (OrgNotes == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=OrgNotes#</span> #}# </dt>
+                <dt><br /><u><b>Plan of Action Compliant Date</b></u>#if (CompliantDate == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=CompliantDate#</span> #}# </dt>
+                <dt><br /><u><b>Linked Documents</b></u>#if (DocumentList == null) {# #=''# #} else {#<br /><span style="font-weight: normal; white-space: pre-wrap;">#= DocumentList #</span> #}# </dt>
+
+                <dt class="row text-center"><button type="button" id="btnPrint" class="btn btn-primary" onclick="javascript: OnPrintDocumentation();"> Print Content </button></dt>
+            </dl>
+        </div>
+    </script>
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("SiteSelector_SelectedHCOIDs")
+    @Html.Hidden("hdnReportActionID", 52)
+
+
+}
+
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Corporate/Views/EPAssignment/EPAssignment.js")
+<script type="text/javascript">
+    $(window).load(function () {
+        if ($('#hdnSitesCount').val() == 1) {
+            LoadReportParameters($('#hdnSingleSiteID').val());
+        }
+    });
+</script>
+
+<style type="text/css">
+  
+    .myHoverClass tbody tr:hover {
+        background: #c4ddfc;
+    }
+
+    .modal-header .close {
+        margin-top: 2px;
+    }
+
+    .modal-header {
+        text-align: center;
+    }
+
+    @@media print {
+        body > * {
+            display: none !important;
+        }
+
+        body > .k-window {
+            display: block !important;
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: auto !important;
+            height: auto !important;
+            border-width: 0;
+            box-shadow: none !important;
+        }
+
+        .k-window .k-window-titlebar, #btnPrint {
+            display: none;
+        }
+    }
+</style>
+
+

@@ -1,0 +1,150 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.ERSearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+        <div class="col-xs-offset-4 col-xs-12 text-left" style="padding:20px;">
+            <b>Report Type</b>
+            <input type="radio" name="grpBy" value="HeatMap" >Heat Map
+            <input type="radio" name="grpBy" value="Summary" >Summary
+            <input type="radio" name="grpBy" value="TracerDetail" checked>Tracer Detail
+        </div>
+        <div class="row PaddingTop10 text-left" style="margin-top:5px;">
+            @*Column 1*@
+            <div class="col-xs-4 text-left" style="margin-top: 12px;">
+               
+                <div id="divMultiSiteTracer"></div>
+                <div id="divSelectAllSite" class="checkbox" style="margin-top:10px">
+                    <label id="IncludeSites"><input id="chkIncludeSites" name="IncludeSites" style="float: left; margin-top:2px;" type="checkbox" checked="checked" value=""><b>Include selected Sites with no Completed Observations</b></label>
+                </div>
+            </div>
+            
+            @*Column 2*@
+            <div class="col-xs-4 text-left" style="margin-top:12px">               
+                <div id="divMultiSiteQuarter"></div>
+            </div>
+
+            @*Columns 3**@
+            <div class="col-xs-4 text-left" style="margin-top:20px;">
+                <div id="tracerCriteria" style="margin-top:0px;">
+                    <b>Tracer Compliance Criteria</b>
+                    @Html.Partial("Search/_IncludeMinimamCompliance")
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div id="loadReport" class="col-md-12">
+
+        </div>
+    </div>
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("SiteSelector_SelectedHCOIDs")
+    @Html.Hidden("hdnReportActionID", 162)
+}
+
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/TracerER/Views/ERComplianceByTracer/ERComplianceByTracer.js")
+
+
+<style type="text/css">
+    .k-grid  .k-grid-header  .k-header  .k-link {
+        height: 50px;
+    }
+  
+    .k-grid  .k-grid-header  .k-header {
+        white-space: normal;
+        border-right: 1px solid #ccc;
+    }
+</style>
+
+<script>
+
+    function onMultiTracersListSelect(e) {
+      
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+
+        if (dataItem.TracerCustomName === "All") {
+            $('#TracersList').data("kendoMultiSelect").value([]);
+
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+
+            if (values == "") { this.value(values); }
+        }
+
+    }
+    function onMultiQuarterListSelect(e) {
+
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        $('#QuartersList').data("kendoMultiSelect").value([]);
+ 
+    }
+    function LoadReportParameters(selectedSiteIDs) {
+        $.ajax({
+            type: "POST",
+            data: { selectedSiteIDs: selectedSiteIDs },
+            url: '/TracerER/TracersByTJCStandard/GetHCOIDsString',
+            success: function (data) {
+                $("#SiteSelector_SelectedHCOIDs").val(data);
+            }
+        });
+        MultiSiteTracerCall(selectedSiteIDs, '2');
+        MultiSiteQuarterCall();
+    }
+
+    function MultiSiteQuarterCall() {
+
+        $.ajax({
+            async: false,
+            dataType: "html",
+            url: '/TracerER/ERSearch/GetQuartersList',
+            success: function (response) {
+                $("#divMultiSiteQuarter").html(response);
+            }
+        });
+    }
+
+
+    function MultiSiteTracerCall(selectedSiteIDs,  selectedProgramIDs) {
+
+        $.ajax({
+            async: false,
+            dataType: "html",
+            url: '/TracerER/ERSearch/GetUHSTracersList',
+            data: {
+                selectedSiteIDs: selectedSiteIDs,
+                selectedProgramIDs: selectedProgramIDs,
+            },
+            success: function (response) {
+                $("#divMultiSiteTracer").html(response);
+            }
+        });
+    }
+
+
+</script>
+
+
+
+
+
+

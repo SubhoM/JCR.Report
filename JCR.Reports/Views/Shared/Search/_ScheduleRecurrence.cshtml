@@ -1,0 +1,1087 @@
+﻿@using JCR.Reports.Common;
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="~/Scripts/Common/Email.js"></script>
+<link href="~/Content/jquery-ui-1.10.4.custom-mod.css" rel="stylesheet" />
+@{
+    string userEmail;
+    int reportID;
+    List<SelectListItem>
+    lstDaysOfMonth;
+    // check session
+    if (AppSession.HasValidSession)
+    {
+        userEmail = AppSession.EmailAddress;
+        reportID = AppSession.ReportID;
+        lstDaysOfMonth = new List<SelectListItem>
+            ();
+        for (int d = 1; d <= 31; d++)
+        {
+            string suffix = string.Empty;
+            int ones = d % 10;
+            int tens = (int)Math.Floor(d / 10M) % 10;
+            if (tens == 1)
+            {
+                suffix = "th";
+            }
+            else
+            {
+                switch (ones)
+                {
+                    case 1:
+                        suffix = "st";
+                        break;
+                    case 2:
+                        suffix = "nd";
+                        break;
+                    case 3:
+                        suffix = "rd";
+                        break;
+                    default:
+                        suffix = "th";
+                        break;
+                }
+            }
+            lstDaysOfMonth.Add(new SelectListItem { Value = d.ToString(), Text = d.ToString() + suffix });
+        }
+    }
+    else
+    {
+        throw new Exception("Invalid Session");
+    }
+}
+
+        <div id="divRecurrence" class="EmailForm">
+            <div class="row " style="margin-right:35px; margin-left:10px;">
+                <div id="recurrence_error_msg" class="email_error_msg">
+                    <div id="recurrenceerror_msg" class=" col-xs-12 alert alert-info alert-dismissible emailerror_msg" role="alert" style="display:none;">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <div id="recurrence_msg" class="email_msg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="row ">
+                        <div class="col-xs-2">
+                        </div>
+                        <div class="col-xs-10">
+                            <span style="font-weight:normal">Use a semi-colon (;) to separate email addresses.</span>
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-3 col-md-3 col-lg-2">
+                            <div class="pull-right">
+                                @Html.Label("Email To:")
+                            </div>
+                        </div>
+                        <div class="col-xs-9 col-md-9 col-lg-10">
+                            <textarea id="EmailToMaskedTextbox1" spellcheck="false" class="form-control EmailToMaskedTextbox RecurrenceEmailFields" name="Email To" rows="1" required data-email-msg='Enter valid "To" addresses separated by semi-colon (;)' placeholder="abc@example.com;xyz@etc.com"></textarea>
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-3 col-md-3 col-lg-2">
+                            <div class="pull-right">
+                                @Html.Label("Cc:")
+                            </div>
+                        </div>
+                        <div class="col-xs-9 col-md-9 col-lg-10">
+                            <textarea id="EmailCCMaskedTextbox1" spellcheck="false" class="form-control EmailCCMaskedTextbox RecurrenceEmailFields" name="EmailCCMaskedTextbox" rows="1" data-email-msg='Enter valid "Cc" addresses separated by semi-colon (;)' placeholder="abc@example.com;xyz@etc.com"></textarea>
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-3 col-md-3 col-lg-2">
+                            <div class="pull-right">
+                                @Html.Label("Bcc: ")
+                            </div>
+                        </div>
+                        <div class="col-xs-9 col-md-9 col-lg-10">
+                            <textarea id="EmailBCCMaskedTextbox1" spellcheck="false" name="EmailBCCMaskedTextbox" class="form-control EmailBCCMaskedTextbox RecurrenceEmailFields" rows="1" data-email-msg='Enter valid "Bcc" addresses separated by semi-colon (;)' placeholder="abc@example.com;xyz@etc.com"></textarea>
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-3 col-md-3 col-lg-2">
+                            <div class="pull-right">
+                                @Html.Label("Subject:")
+                            </div>
+                        </div>
+                        <div class="col-xs-9 col-md-9 col-lg-10">
+                            <textarea id="EmailSubjectMaskedTextbox1" spellcheck="false" class="form-control EmailSubjectMaskedTextbox RecurrenceEmailFields" name="Subject" required rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-3 col-md-3 col-lg-2">
+                            <div class="pull-right">
+                                @Html.Label("Comment:")
+                            </div>
+                        </div>
+                        <div class="col-xs-9 col-md-9 col-lg-10">
+                            <textarea id="EmailCommentMaskedTextbox1" spellcheck="false" class="form-control EmailCommentMaskedTextbox" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6" style="margin-top:17px;">
+                    <div class="row margintopadd">
+                        <div class="col-xs-4">
+                            <div class="text-right PaddingTop10">
+                                @Html.Label("My Report Name:")
+                            </div>
+                            @if (reportID == 11 || reportID == 40 || reportID == 44)
+                            {
+                                <br />
+                                <div class="text-right PaddingTop10">
+                                    @Html.Label("Custom Report Description:")
+                                    <p>(Optional)</p>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-7">
+                            <div>
+                                <input type="text" id="txtScheduledReportName1" maxlength="100" class="form-control" value="@AppSession.ReportScheduleName" placeholder="Report Name" />
+                            </div>
+                            @if (reportID == 11 || reportID == 40 || reportID == 44)
+                            {
+                                <br />
+                                <div>
+                                    <input type="text" id="txtScheduledReportDesc1" maxlength="250" class="form-control" value="@AppSession.ReportScheduleDesc" placeholder="Report Description" />
+                                </div>
+                            }                        
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-4">
+                            <div class="text-right">
+                                @Html.Label("Schedule Recurrence:")
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div id="divRecurrenceType">
+                                <div id="divDaily">
+                                    <input type="radio" name="RecurrenceType" value="Daily" id="Daily">Daily
+                                    <br />
+                                </div>
+                                <div id="divWeekly">
+                                    <input type="radio" name="RecurrenceType" value="Weekly" id="weekly">Weekly
+                                    <br>
+                                    <div id="divDaysOfWeek" class="marginLeft20" style="display: none; vertical-align: text-top;">
+                                        <label>On day(s): </label>
+                                        <input type="checkbox" id="chkDay0" class="chkDaysOfWeek" value="0" />
+                                        <label>Sun</label>
+                                        <input type="checkbox" id="chkDay1" class="chkDaysOfWeek" value="1" />
+                                        <label>Mon</label>
+                                        <input type="checkbox" id="chkDay2" class="chkDaysOfWeek" value="2" />
+                                        <label>Tue</label>
+                                        <input type="checkbox" id="chkDay3" class="chkDaysOfWeek" value="3" />
+                                        <label>Wed</label>
+                                        <input type="checkbox" id="chkDay4" class="chkDaysOfWeek" value="4" />
+                                        <label>Thu</label>
+                                        <input type="checkbox" id="chkDay5" class="chkDaysOfWeek" value="5" />
+                                        <label>Fri</label>
+                                        <input type="checkbox" id="chkDay6" class="chkDaysOfWeek" value="6" />
+                                        <label>Sat</label>
+                                    </div>
+                                </div>
+                                <input type="radio" name="RecurrenceType" value="Monthly">Monthly
+                                <br>
+                                <div id="divDaysOfMonth" class="marginLeft50" style="display: none;">
+                                    <div id="monthday">
+                                        <label>On Day </label>
+                                        @Html.Partial("Search/_DaysOfMonth")
+                                        <label> of every month</label>
+                                    </div>
+                                </div>
+                                <input type="radio" name="RecurrenceType" value="Quarterly">Quarterly
+                                <br>
+                                <div id="divPeriodOfQuarter" class="marginLeft50" style="display: none;">
+                                    <div id="QuarterPeriod">
+                                        <label>On Day </label>
+                                        @Html.Partial("Search/_PeriodsOfQuarter")
+                                        <label> of every quarter</label>
+                                    </div>
+                                </div>
+                                <input type="radio" name="RecurrenceType" value="None" checked="checked">None
+                            </div>
+                        </div>
+                        <div class="row margintopadd"></div>
+                        <div class="row margintopadd"></div>
+                        <div class="row margintopadd" id="divRecurrenceRange">
+                            <div class="col-xs-4">
+                                <div class="text-right">
+                                    @Html.Label("Include Observation Date of:")
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div id="divlast30days" class="RadiobtnAlign">
+                                    <input type="radio" name="RecurrenceRange" value="last30days" style="float:left" id="Daily"><label class="ObservationDateLabel">Last</label> <input type="text" class="form-control ObservationDateTextbox" id="txtLastndays" name="txtObservationDate" value="1" maxlength="3" /> Days
+                                    <img id="imgLastDayInfo" src="~/Images/tracer_infoicon18.png" style="cursor: pointer;" data-toggle="popover"
+                                         data-html="true" data-content='Days – Includes data for number of previous calendar days selected. Does not include data for day report is generated.'
+                                         data-placement="top" data-trigger="hover" />
+                                </div>
+                                <div id="divlastweek" class="RadiobtnAlign">
+                                    <input type="radio" name="RecurrenceRange" value="lastweek" style="float:left" id="Weekly"><label class="ObservationDateLabel">
+                                        Last
+                                    </label><input type="text" class="form-control ObservationDateTextbox" name="txtObservationDate" id="txtLastweek" value="1" maxlength="3" />
+                                    @(Html.Kendo().DropDownList()
+                                    .Name("ddWeek")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .BindTo(new List<SelectListItem>
+                                        () {
+                                        new SelectListItem() {
+                                        Text = "Weeks",
+                                        Value = "1"
+                                        },
+                                        new SelectListItem() {
+                                        Text = "Days",
+                                        Value = "2"
+                                        }
+                                        })
+                                        .HtmlAttributes(new { style = "width:22%;height:30px;" })
+                                        .Value("1")
+                            )
+                            <img id="imgLastWeekInfo" src="~/Images/tracer_infoicon18.png" style="cursor: pointer;" data-toggle="popover"
+                                 data-html="true" data-content='Days/Weeks – Includes data for number of previous calendar days/weeks selected. Does not include data for day/week report is generated.'
+                                 data-placement="top" data-trigger="hover" />
+                        </div>
+                        <div id="divlastmonth" class="RadiobtnAlign">
+                            <input type="radio" name="RecurrenceRange" value="lastmonth" style="float:left" id="Monthly"><label class="ObservationDateLabel">
+                                Last
+                            </label> <input type="text" class="form-control ObservationDateTextbox" id="txtLastmonth" name="txtObservationDate" value="1" maxlength="3" />
+                            @(Html.Kendo().DropDownList()
+                                    .Name("ddMonth")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .BindTo(new List<SelectListItem>
+                                        () {
+                                        new SelectListItem() {
+                                        Text = "Months",
+                                        Value = "1"
+                                        },
+                                        new SelectListItem() {
+                                        Text = "Weeks",
+                                        Value = "2"
+                                        },
+                                        new SelectListItem() {
+                                        Text = "Days",
+                                        Value = "3"
+                                        }
+                                        })
+                                        .HtmlAttributes(new { style = "width:22%;height:30px;" })
+                                        .Value("1")
+                            )
+                            <img id="imgLastMonthInfo" src="~/Images/tracer_infoicon18.png" style="cursor: pointer;" data-toggle="popover"
+                                 data-html="true" data-content='Days/Weeks/Months – Includes data for number of previous calendar days/weeks/months selected. Does not include data for day/week/month report is generated.'
+                                 data-placement="top" data-trigger="hover" />
+                        </div>
+                        <div id="divlastquarter" class="RadiobtnAlign">
+                            <input type="radio" name="RecurrenceRange" value="lastquarter" style="float:left" id="Quarterly"><label class="ObservationDateLabel">
+                                Last
+                            </label> <input type="text" class="form-control ObservationDateTextbox" id="txtLastquarter" name="txtObservationDate" value="1" maxlength="3" />
+                            @(Html.Kendo().DropDownList()
+                                    .Name("ddQuarter")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .BindTo(new List<SelectListItem>
+                                        () {
+                                        new SelectListItem() {
+                                        Text = "Quarters",
+                                        Value = "1"
+                                        },
+                                        new SelectListItem() {
+                                        Text = "Months",
+                                        Value = "2"
+                                        },
+                                        new SelectListItem() {
+                                        Text = "Weeks",
+                                        Value = "3"
+                                        },
+                                        new SelectListItem() {
+                                        Text = "Days",
+                                        Value = "4"
+                                        }
+                                        })
+                                        .HtmlAttributes(new { style = "width:22%;height:30px;" })
+                                        .Value("1")
+                            )
+                            <img id="imgLastQuarterInfo" src="~/Images/tracer_infoicon18.png" style="cursor: pointer;" data-toggle="popover"
+                                 data-html="true" data-content='Days/Weeks/Months/Quarters – Includes data for number of previous calendar days/weeks/months/quarters selected. Does not include data for day/week/month/quarter report is generated.'
+                                 data-placement="top" data-trigger="hover" />
+                        </div>
+                        <div class="row margintopadd"></div>
+                        <div class="row margintopadd"></div>
+                        <div id="divRecurrenceSinceDate" class="RadiobtnAlign">
+                            <input type="radio" name="RecurrenceRange" value="custom" id="since"><label class="SinceLabel">Since</label>
+                            <input type="date" id="RecurrenceSinceDate" placeholder="mm/dd/yyyy">
+                            <img id="imgSinceInfo" src="~/Images/tracer_infoicon18.png" style="cursor: pointer;" data-toggle="popover"
+                                 data-content='Includes data from date selected to date/time report is generated.'
+                                 data-placement="top" data-trigger="hover" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row margintopadd">
+        <div class="col-xs-offset-5 col-xs-7">
+            @(Html.Kendo().Button()
+                    .Name("EmailButton1")
+                    .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton EmailButton" })
+                    .Content("<span class='glyphicon glyphicon-envelope'></span><span>&nbsp;</span><span class='glyphfontsize'>Send</span>")
+            )
+            @if (ViewBag.HideSaveReport != true)
+            {
+                <span style="padding-left:10px;">
+                    @Html.Partial("Search/_SaveReport")
+                </span>
+            }
+            <span style="padding-left:10px;">
+                @(Html.Kendo().Button()
+                        .Name("ResetEmailButton1")
+                        .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton ResetEmailButton" })
+                        .Content("<span class='glyphicon glyphicon-refresh'></span><span>&nbsp;</span><span class='glyphfontsize'>Reset</span>")
+                        .Events(events => events.Click("ResetRecurrenceInputs"))
+                )
+            </span>
+        </div>
+    </div>
+</div>
+@Html.Hidden("SendEmail", Url.Action("SendReportEmail", "Email"))
+@Html.Hidden("SendExcelEmail", Url.Action("SendExcelEmail", "Email"))
+@* style specific to this view *@
+<style>
+    span.k-tooltip {
+        margin-left: 6px;
+    }
+
+    .ui-autocomplete {
+        max-height: 50px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 502;
+    }
+
+    .k-tooltip-validation.k-widget {
+        background-color: black;
+        color: white;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#imgSinceInfo,#imgLastDayInfo,#imgLastWeekInfo,#imgLastMonthInfo,#imgLastQuarterInfo").popover({
+            container: 'body'
+        });
+
+        InitializeKendoValidator();
+
+        $("#EmailToMaskedTextbox1").val("@userEmail" + "; ");
+
+        //Hide weekly recurrence for Monthly Question and Tracer breakdown reports
+        HideWeeklyRecurrence();
+
+        ShowHideDateRangeOptions($("input[name=RecurrenceType]:checked").val());
+        $('input[name*=RecurrenceType]').change(function () {
+            $("#PeriodOfQuarter").data("kendoDropDownList").value("1");
+            $("#DaysOfMonth").data("kendoDropDownList").value("1");
+            $('input[name*=txtObservationDate]').val('1');
+            $("input[name=RecurrenceRange]").removeAttr('checked');
+            $('#divDaysOfWeek :checked').removeAttr('checked');
+            kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(new Date()), "yyyy-MM-dd");
+            $("#ddMonth").data("kendoDropDownList").value("1");
+            $("#ddQuarter").data("kendoDropDownList").value("1");
+            $("#RecurrenceSinceDate").data("kendoDatePicker").value("");
+            var valRecurrence = $(this).val();
+
+            ShowHideDateRangeOptions(valRecurrence);
+            if (valRecurrence == recurrenceTypeObj.Daily) {
+                $('#divDaysOfWeek').slideUp();
+                $('#divDaysOfMonth').slideUp();
+                $('#divPeriodOfQuarter').slideUp();
+            }
+            else if (valRecurrence == recurrenceTypeObj.Weekly) {
+                $('#divDaysOfWeek').slideDown();
+                $('#divDaysOfMonth').slideUp();
+                $('#divPeriodOfQuarter').slideUp();
+            }
+            else if (valRecurrence == recurrenceTypeObj.Monthly) {
+                $('#divDaysOfMonth').slideDown();
+                $('#divDaysOfWeek').slideUp();
+                $('#divPeriodOfQuarter').slideUp();
+            }
+            else if (valRecurrence == recurrenceTypeObj.Quarterly) {
+                $('#divPeriodOfQuarter').slideDown();
+                $('#divDaysOfWeek').slideUp();
+                $('#divDaysOfMonth').slideUp();
+            }
+            else {
+                $('#divDaysOfWeek').slideUp();
+                $('#divDaysOfMonth').slideUp();
+                $('#divPeriodOfQuarter').slideUp();
+            }
+            ResetCriteriaDates();
+            //Disable the criteria date fields once the Recurrence option (other than 'None') is selected
+            EnableDisableCriteriaDate();
+        });
+
+        $('input[name*=RecurrenceRange]').change(function () {
+            ResetRecurrenceRangeOptions();
+            kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(new Date()), "yyyy-MM-dd");
+            $("#RecurrenceSinceDate").data("kendoDatePicker").value("");
+            var valRecurrence = $(this).val();
+            var valRecurrenceRange = $(this).val();
+            //Update the Observation dates in Criteria screen
+            UpdateObservationDates(valRecurrenceRange, kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(), "yyyy-MM-dd"), '');
+        });
+
+
+
+        $('input[name*=txtObservationDate]').focusout(function () {
+            var valRecurrenceRange = $("input[name=RecurrenceRange]:checked").val();
+            if (typeof valRecurrenceRange === 'undefined') {
+                var valRecurrenceType = $("input[name=RecurrenceType]:checked").val();
+                $('input[name=RecurrenceRange][id="' + valRecurrenceType + '"]').prop('checked', true);
+            }
+            UpdateObservationDates(valRecurrenceRange, kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(), "yyyy-MM-dd"), '');
+        });
+
+        $('input[name*=txtObservationDate]').keypress(function () {
+            kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(new Date()), "yyyy-MM-dd");
+            $("#RecurrenceSinceDate").data("kendoDatePicker").value("");
+            var valRecurrenceType = $("input[name=RecurrenceType]:checked").val();
+            $('input[name=RecurrenceRange][id="' + valRecurrenceType + '"]').prop('checked', true);
+        });
+
+        $('#ddQuarter,#ddMonth,#ddWeek').change(function () {
+            kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(new Date()), "yyyy-MM-dd");
+            $("#RecurrenceSinceDate").data("kendoDatePicker").value("");
+            var valRecurrenceType = $("input[name=RecurrenceType]:checked").val();
+            $('input[name=RecurrenceRange][id="' + valRecurrenceType + '"]').prop('checked', true);
+            var valRecurrenceRange = $("input[name=RecurrenceRange]:checked").val();
+            UpdateObservationDates(valRecurrenceRange, kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(), "yyyy-MM-dd"), '');
+        });
+
+        $("#RecurrenceSinceDate").kendoDatePicker({
+            format: "MM/dd/yyyy",
+            parseFormats: ["MM-dd-yyyy", "MM/dd/yyyy", "MM-dd-yy", "MM/dd/yy"],
+            depth: "year",
+            change: function () {
+                SinceDateSelection();
+
+                if (ValidateSinceDate(4000))
+                    UpdateObservationDates($("input[name=RecurrenceRange]:checked").val(), kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(), "yyyy-MM-dd"), '');
+            }
+        });
+
+        $("#RecurrenceSinceDate").keypress(function (e) {
+            return AllowNumericOnly(e);
+        });
+
+        //$('input[name*=txtObservationDate]').keypress(function (e) {
+        //    return ValidateRecurrenceRangeTxt(e);
+        //});
+
+        $("#RecurrenceSinceDate").on("paste", function (e) {
+            if (ValidateClipboardText())
+                UpdateObservationDates($('input[name*=RecurrenceRange]').val(), kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(), "yyyy-MM-dd"), '');
+        });
+
+        $("#RecurrenceSinceDate").closest("span.k-datepicker").width(100);
+
+        //Update report name field on the Criteria screen
+        $('#txtScheduledReportName1').focusout(function () {
+            if ($('#txtScheduledReportName').length > 0) {
+                var reportName = $(this).val().trim();
+                if (reportName != null) {
+                    $('#txtScheduledReportName').val(reportName);
+                }
+            }
+        });
+
+        SetEmailSubject();
+
+        $(".close").click(function () {
+            $("#showerror_msg").hide();
+        });
+
+                $(".EmailButton").click(function () {
+                    loadDataGridAtLoading = true;
+                    $(".loading").show();
+                    create_error_elem();
+                    create_email_error_elem();
+
+            var validator = $(".EmailForm").data("kendoValidator");
+            if (!validator.validate()) {
+                $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                $('.emailerror_msg').css("display", "block");
+                var txtsubject = $("#EmailSubjectMaskedTextbox1").val();
+                var txttoemail = $("#EmailToMaskedTextbox1").val();
+
+                if (txtsubject === "" && txttoemail === "") {
+                    $('.email_msg').html("Email To & Subject are required.");
+                }
+                else if (validator._errors["Email To"] != null && validator._errors["Email To"] != "") {
+                    $('#email_msg').html(validator._errors["Email To"]);
+                }
+                else if (validator._errors.EmailCCMaskedTextbox != null && validator._errors.EmailCCMaskedTextbox != "") {
+                    $('#email_msg').html(validator._errors.EmailCCMaskedTextbox);
+                }
+                else if (validator._errors.EmailBCCMaskedTextbox != null && validator._errors.EmailBCCMaskedTextbox != "") {
+                    $('#email_msg').html(validator._errors.EmailBCCMaskedTextbox);
+                }
+                else if (txtsubject === "") {
+                    $('.email_msg').html("Subject is required.");
+                }
+
+                $(".loading").hide();
+            }
+            else if (selectquestions == 0) {
+                $(".loading").hide();
+                $('#showerror_msg').removeClass("alert-info").addClass("alert-danger");
+                $('#showerror_msg').css("display", "block");
+                $('#show_msg').html("Please select one or more questions");
+                $('#slideSearch').slideDown(750);
+                SetButtonClass("btnSearchCriteria", "btn-primary")
+                closeSlide("btnEmail", "slideEmail");
+                closeSlide("btnRecurrence", "slideRecurrence");
+                setposition();
+            }
+            else if (!ValidateData(8000)) {
+                $('#slideSearch').slideDown(750);
+                SetButtonClass("btnSearchCriteria", "btn-primary")
+                closeSlide("btnEmail", "slideEmail");
+                closeSlide("btnRecurrence", "slideRecurrence");
+                setposition();
+                ValidateData(8000);
+                $(".loading").hide();
+            }
+            else if (typeof ValidateTracerNameSelection == 'function' && !ValidateTracerNameSelection()) { //This check is for Tracer Compliance Summary report
+                $('#slideSearch').slideDown(750);
+                SetButtonClass("btnSearchCriteria", "btn-primary")
+                closeSlide("btnEmail", "slideEmail");
+                closeSlide("btnRecurrence", "slideRecurrence");
+                setposition();
+                $(".loading").hide();
+            }
+            else {
+
+                var AttachmentLocation = [];
+                AttachmentLocation[0] = "";
+                AttachmentLocation[1] = "";
+                var searchset =
+               {
+                   To: $(".EmailToMaskedTextbox").val().substr($(".EmailToMaskedTextbox").val().trim().length - 1).toString() != ";" ? $(".EmailToMaskedTextbox").val() : $(".EmailToMaskedTextbox").val().trim().slice(0, -1),
+                   CC: $(".EmailCCMaskedTextbox").val().substr($(".EmailCCMaskedTextbox").val().trim().length - 1).toString() != ";" ? $(".EmailCCMaskedTextbox").val() : $(".EmailCCMaskedTextbox").val().trim().slice(0, -1),
+                   BCC: $(".EmailBCCMaskedTextbox").val().substr($(".EmailBCCMaskedTextbox").val().trim().length - 1).toString() != ";" ? $(".EmailBCCMaskedTextbox").val() : $(".EmailBCCMaskedTextbox").val().trim().slice(0, -1),
+                   Subject: $(".EmailSubjectMaskedTextbox").val(),
+                   Comments: $(".EmailCommentMaskedTextbox").val(),
+                   Title: $("#ReportTitle").html(),
+                   Attachment: "",
+                   MultipleAttachment: hasExcelSecondGrid == true ? ExcelSecondGridName != "" ? true : false : false,
+                   AttachmentLocation: AttachmentLocation,
+                   ReportName: ExcelGridName
+               }
+                //if selection criteria is for excel view
+                // first check excel view report allready generated or not.
+                //if not generate the excel view
+                SearchSetEmailData(searchset);
+
+                if (ExcelGridName === "gridTCMSChart" || ExcelGridName === "gridCompQuesChart") {
+                    if (!ExcelGenerated) {
+                        $.ajax({
+                            async: false,
+                            url: GenerateReport(false)
+                        }).done(function () {
+                            setTimeout(function () {
+                                if (hasExcelData) {
+                                    fromemail = true;
+                                    //pdf call here
+                                    CreatePDF(ExcelGridName);
+
+                                }
+                                else {
+                                    fromemail = false;
+                                    $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                                    $('.emailerror_msg').css("display", "block");
+                                    $('.email_msg').html("No data found matching your Criteria. Change Criteria and try again.");
+                                }
+
+                            }, 2000);
+                        })
+                    }
+                    else {
+                        if (hasExcelData) {
+                            fromemail = true;
+
+
+                            CreatePDF(ExcelGridName);
+
+                        }
+                        else {
+                            fromemail = false;
+                            $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                            $('.emailerror_msg').css("display", "block");
+                            $('.email_msg').html("No data found matching your Criteria. Change Criteria and try again.");
+                        }
+
+                    }
+                }
+                else {
+                    if (ExcelView) {
+                        if (!ExcelGenerated) {
+
+                            $.ajax({
+                                async: false,
+                                url: GenerateReport(false)
+                            }).done(function () {
+                                setTimeout(function () {
+                                    if (navigator != undefined && navigator.appVersion != undefined && (navigator.appVersion.indexOf("MSIE 8") != -1)) {        //this is for only ie condition ( microsoft internet explore )
+                                        fromemail = true;
+                                        CreateExcel(ExcelGridName);
+                                    }
+                                    else {
+                                        if (hasExcelData) {
+                                            fromemail = true;
+                                            //CreateExcel(ExcelGridName);
+
+                                            if (searchset.MultipleAttachment) {
+                                                setTimeout(function () {
+                                                    if (hasExcel2Data) {
+                                                        $.ajax({
+                                                            async: false,
+                                                            url: CreateExcel(ExcelGridName),
+                                                        }).done(function () {
+                                                            fromemail = true;
+                                                            if (secondAttachmentType === "Excel")
+                                                                CreateExcel(ExcelSecondGridName);
+                                                            else if (secondAttachmentType === "RDLC") {
+                                                                rdlcExport(ExcelSecondGridName);
+                                                            }
+                                                        })
+                                                    } else {
+                                                        searchset.MultipleAttachment = false;
+                                                        SearchSetEmailData(searchset);
+                                                        CreateExcel(ExcelGridName);
+                                                    }
+                                                }, 2000);
+
+                                            } else {
+                                                CreateExcel(ExcelGridName);
+                                            }
+                                        }
+                                        else {
+                                            fromemail = false;
+                                            if (dataLimitIssue === false) {
+                                                $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                                                $('.emailerror_msg').css("display", "block");
+                                                $('.email_msg').html("No data found matching your Criteria. Change Criteria and try again.");
+                                            }
+                                            //else {
+                                            //    $(".loading").hide();
+                                            //    SaveToMyReports(true);
+                                            //}
+                                        }
+                                    }
+                                }, 2000);
+                            })
+                        }
+                        else {
+                            if (hasExcelData) {
+                                fromemail = true;
+
+                                // CreateExcel(ExcelGridName);
+
+                                if (searchset.MultipleAttachment) {
+                                    if (hasExcel2Data) {
+                                        $.ajax({
+                                            url: CreateExcel(ExcelGridName),
+
+                                        }).done(function () {
+
+                                            if (navigator != undefined && navigator.appVersion != undefined && (navigator.appVersion.indexOf("MSIE 8") != -1)) {        //this is for only ie condition ( microsoft internet explore )
+
+                                                if (secondAttachmentType === "RDLC") {
+                                                    rdlcExport(ExcelSecondGridName);
+                                                }
+                                            }
+                                            else {
+                                                fromemail = true;
+                                                if (secondAttachmentType === "Excel")
+                                                    CreateExcel(ExcelSecondGridName);
+                                                else if (secondAttachmentType === "RDLC") {
+                                                    rdlcExport(ExcelSecondGridName);
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        searchset.MultipleAttachment = false;
+                                        SearchSetEmailData(searchset);
+                                        CreateExcel(ExcelGridName);
+                                    }
+                                } else {
+                                    CreateExcel(ExcelGridName);
+                                }
+                            }
+                            else {
+                                fromemail = false;
+                                if (dataLimitIssue === false) {
+                                    $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                                    $('.emailerror_msg').css("display", "block");
+                                    $('.email_msg').html("No data found matching your Criteria. Change Criteria and try again.");
+                                    $(".loading").hide();
+                                }
+                                else {
+                                    $(".loading").hide();
+                                    SaveToMyReports(true);
+                                }
+                            }
+                        }
+                    }
+                        //for rdlc always generate the report and send email until we find a better solution.
+                    else {
+                        if (RdlcGenerated) { GenerateReport(true, searchset); } else { GenerateReport(false, searchset); }
+                    }
+                }
+            }
+        })
+
+        function SearchSetEmailData(searchset) {
+            sessionStorage.setItem('searchsetemailsession', JSON.stringify(searchset));
+        }
+
+        function CreateExcel(GridName) {
+            $("#" + GridName).getKendoGrid().saveAsExcel();
+        }
+
+        function CreatePDF(GridName) {
+            $("#" + GridName).getKendoGrid().saveAsPDF();
+        }
+
+        function CreateandSendEmail(searchset) {
+            if (hasExcelData) {
+                $.ajax({
+                    url: CreateExcelAttachment(false, ExcelGridName),
+
+                }).done(function () {
+                    if (searchset.MultipleAttachment) {
+                        $.ajax({
+                            url: CreateExcelAttachment(false, ExcelSecondGridName),
+
+                        }).done(function () {
+                            ExcelViewEmail(searchset, false);
+                        })
+                    } else {
+                        ExcelViewEmail(searchset, false);
+                    }
+                })
+            }
+            else {
+                $('.emailerror_msg').removeClass("alert-info").addClass("alert-danger");
+                $('.emailerror_msg').css("display", "block");
+                $('.email_msg').html("No data found matching your Criteria. Change Criteria and try again.");
+            }
+        }
+    });
+
+    function ResetRecurrenceRangeOptions() {
+        $("#ddWeek").data("kendoDropDownList").value("1");
+        $("#ddMonth").data("kendoDropDownList").value("1");
+        $("#ddQuarter").data("kendoDropDownList").value("1");
+        $('input[name*=txtObservationDate]').val('1');
+    }
+
+    function InitializeKendoValidator() {
+        var container = $("#divRecurrence");
+        kendo.init(container);
+        container.kendoValidator({
+            rules: {
+                email: function (input) {
+                    if (input.is("[data-email-msg]") && input.val() != "") {
+                        if (input.val().trim() == "") { return false; }
+                        var textval = input.val().trim();
+                        var emails = textval.split(/[;]+/);
+                        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                        for (i = 0; i < emails.length; i++) {
+                            if (!pattern.test(emails[i].trim()) && emails[i].trim() != "") {
+                                return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+            }
+        });
+    }
+
+    //Validate Start date
+    function ValidateSinceDate(timeDelay) {
+        var IsDateValid = true;
+        var ObsStartDateCtrl = $("#RecurrenceSinceDate");
+        var startDate = $("#RecurrenceSinceDate").val();
+        var today = new Date();
+        var ErrorMessage = "";
+        var dtStartDate = new Date(startDate);
+        var bValidStartDate = DateValidator(startDate);
+
+        if (!bValidStartDate && startDate.length > 0) {
+            ErrorMessage = "Enter valid Since Date (mm/dd/yyyy)";
+            IsDateValid = false;
+        }
+
+        if (bValidStartDate && dtStartDate > today) {
+            ErrorMessage = "Since Date cannot be in the future";
+            IsDateValid = false;
+        }
+
+        if (!IsDateValid) {
+            ShowToolTip(ObsStartDateCtrl, ErrorMessage, 'top', timeDelay);
+        }
+        return IsDateValid;
+    }
+
+    function SinceDateSelection() {
+        ResetRecurrenceRangeOptions();
+        if (jQuery('input[type=radio][name=RecurrenceRange]').length > 0) {
+            $('input:radio[id*="since"]').prop('checked', true);
+        }
+    }
+
+            function ShowHideDateRangeOptions(Recurrence) {
+                if (loadparameters == "QuestionEPRelation") {
+                    //Hide all the date range options
+                    $('#divRecurrenceRange').slideUp();
+                } else {
+                    if (Recurrence == recurrenceTypeObj.Daily) {
+                        $('#divRecurrenceRange:hidden').slideDown();
+                        $('#divlast30days:hidden').slideDown();
+                        $('#divRecurrenceSinceDate:hidden').slideDown();
+                        $('#divlastweek').slideUp();
+                        $('#divlastmonth').slideUp();
+                        $('#divlastquarter').slideUp();
+                    }
+                    else if (Recurrence == recurrenceTypeObj.Weekly) {
+                        $('#divRecurrenceRange:hidden').slideDown();
+                        $('#divlastweek:hidden').slideDown();
+                        $('#divRecurrenceSinceDate:hidden').slideDown();
+                        $('#divlast30days').slideUp();
+                        $('#divlastmonth').slideUp();
+                        $('#divlastquarter').slideUp();
+                    }
+                    else if (Recurrence == recurrenceTypeObj.Monthly) {
+                        $('#divRecurrenceRange:hidden').slideDown();
+                        //Hide Since option for Monthly breakdown reports
+                        if (IsMonthlyBreakdownReport()) {
+                            $("#imgLastMonthInfo").removeAttr("data-content");
+                            $('#imgLastMonthInfo').attr('data-content', 'Days/Months – Includes data for number of previous calendar days/months selected. Does not include data for day/month report is generated.');
+                            $('#divRecurrenceSinceDate').hide();
+                            var ddMonth = $("#ddMonth").data("kendoDropDownList");
+                            var ddMonthData = ddMonth.dataSource.data();
+                            for (var i = 0; i < ddMonthData.length; i++) {
+                                var item = ddMonthData[i];
+                                if (item.Text == "Weeks") {
+                                    ddMonth.dataSource.remove(item);
+                                    break;
+                                }
+                            }
+                        }
+                        else { $('#divRecurrenceSinceDate:hidden').slideDown(); }
+
+                $('#divlastmonth:hidden').slideDown();
+                $('#divlast30days').slideUp();
+                $('#divlastquarter').slideUp();
+                $('#divlastweek').slideUp();
+
+            }
+            else if (Recurrence == recurrenceTypeObj.Quarterly) {
+                $('#divRecurrenceRange:hidden').slideDown();
+                //Hide Since option for Monthly breakdown reports
+                if (IsMonthlyBreakdownReport()) {
+                    $("#imgLastQuarterInfo").removeAttr("data-content");
+                    $('#imgLastQuarterInfo').attr('data-content', 'Days/Months/Quarters – Includes data for number of previous calendar days/months/quarters selected. Does not include data for day/month/quarter report is generated.');
+                    $('#divRecurrenceSinceDate').hide();
+                    var ddQuarter = $("#ddQuarter").data("kendoDropDownList");
+                    var ddQuarterData = ddQuarter.dataSource.data();
+                    for (var i = 0; i < ddQuarterData.length; i++) {
+                        var item = ddQuarterData[i];
+                        if (item.Text == "Weeks") {
+                            ddQuarter.dataSource.remove(item);
+                            break;
+                        }
+                    }
+                }
+                else { $('#divRecurrenceSinceDate:hidden').slideDown(); }
+
+                $('#divlastquarter:hidden').slideDown();
+                $('#divlast30days').slideUp();
+                $('#divlastmonth').slideUp();
+                $('#divlastweek').slideUp();
+            }
+            else {
+                //Hide all the date range options
+                $('#divRecurrenceRange').slideUp();
+            }
+        }
+    }
+
+    function HideWeeklyRecurrence() {
+        if (IsMonthlyBreakdownReport()) {
+            $('#divDaily').hide();
+            $('#divWeekly').hide();
+        }
+        else {
+            $('#divDaily').show();
+            $('#divWeekly').show();
+        }
+    }
+
+    //Checks if at least one week day is selected for Weekly recurrence
+    function CheckWeekDaySelection() {
+        var recurrenceType = $("input[name=RecurrenceType]:checked").val();
+        if (recurrenceType === recurrenceTypeObj.Weekly) {
+            var divDaysOfWeek = "#divDaysOfWeek";
+            if ($(divDaysOfWeek + " input:checked").length <= 0) {
+                ShowToolTip(divDaysOfWeek, 'At least one day must be checked.', 'left', 6000);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Checks if Since date field is entered for Since
+    function CheckRecurrenceDateSelection() {
+        var txtObservationValue;
+        var recurrenceValue;
+        var recurrenceType = $("input[name=RecurrenceType]:checked").val();
+        if (recurrenceType == "Daily") {
+            txtObservationValue = $('input[name=txtObservationDate][id=txtLastndays]').val();
+            recurrenceValue = "last30days";
+        }
+        else if (recurrenceType == "Weekly") {
+            txtObservationValue = $('input[name=txtObservationDate][id=txtLastweek]').val();
+            recurrenceValue = "lastweek";
+        }
+        else if (recurrenceType == "Monthly") {
+            txtObservationValue = $('input[name=txtObservationDate][id=txtLastmonth]').val();
+            recurrenceValue = "lastmonth";
+        }
+        else if (recurrenceType == "Quarterly") {
+            txtObservationValue = $('input[name=txtObservationDate][id=txtLastquarter]').val();
+            recurrenceValue = "lastquarter";
+        }
+        if (loadparameters == "QuestionEPRelation") {
+            return true;
+        } else {
+            if (recurrenceType == recurrenceTypeObj.Daily || recurrenceType == recurrenceTypeObj.Weekly || recurrenceType == recurrenceTypeObj.Monthly || recurrenceType == recurrenceTypeObj.Quarterly) {
+                if ($("input[name=RecurrenceRange]:checked").length <= 0) {
+                    if (recurrenceType == "Daily") {
+                        ShowToolTip("input[name=RecurrenceRange][value=last30days]", 'Observation Date is required.', 'top', 6000);
+                    }
+                    else if (recurrenceType == "Weekly") {
+                        ShowToolTip("input[name=RecurrenceRange][value=lastweek]", 'Observation Date is required.', 'top', 6000);
+                    }
+                    else if (recurrenceType == "Monthly") {
+                        ShowToolTip("input[name=RecurrenceRange][value=lastmonth]", 'Observation Date is required.', 'top', 6000);
+                    }
+                    else if (recurrenceType == "Quarterly") {
+                        ShowToolTip("input[name=RecurrenceRange][value=lastquarter]", 'Observation Date is required.', 'top', 6000);
+                    }
+                    return false;
+                }
+                else {
+                    var txtvalue = Number(txtObservationValue);
+                    if (IsMonthlyBreakdownReport()) {
+                        if (recurrenceType == 'Monthly') {
+                            var dropdownValue = $("#ddMonth").data("kendoDropDownList").text().toString().toLowerCase();
+                            if (txtvalue > 12 && dropdownValue == 'months') {
+                                ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", 'Observation Date range cannot exceed 12 months', 'top', 6000);
+                                return false;
+                            }
+                            else if (txtvalue > 365 && dropdownValue == 'days') {
+                                ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", 'Observation Date range cannot exceed 365 days', 'top', 6000);
+                                return false;
+                            }
+                        }
+                        else if (recurrenceType == 'Quarterly') {
+                            var dropdownValue = $("#ddQuarter").data("kendoDropDownList").text().toString().toLowerCase();
+                            if (txtvalue > 4 && dropdownValue == 'quarters') {
+                                ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", 'Observation Date range cannot exceed 4 quarters', 'top', 6000);
+                                return false;
+                            }
+                            else if (txtvalue > 12 && dropdownValue == 'months') {
+                                ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", 'Observation Date range cannot exceed 12 months', 'top', 6000);
+                                return false;
+                            }
+                            else if (txtvalue > 365 && dropdownValue == 'days') {
+                                ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", 'Observation Date range cannot exceed 365 days', 'top', 6000);
+                                return false;
+                            }
+                        }
+                    }
+                    if (txtObservationValue == "0") {
+                        ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", '"0" is not a valid text.', 'top', 6000);
+                        return false;
+                    }
+                    if (txtObservationValue == "") {
+                        ShowToolTip("input[name=RecurrenceRange][value=" + recurrenceValue + "]", 'Enter a valid text.', 'top', 6000);
+                        return false;
+                    }
+                }
+            }
+            var dateRange = $("input[name=RecurrenceRange]:checked").val();
+            if (dateRange === 'custom') {
+                var ctrlSinceDate = '#RecurrenceSinceDate';
+                var recurrenceDate = kendo.parseDate($("#RecurrenceSinceDate").data("kendoDatePicker").value())
+                if (recurrenceDate == null) {
+                    ShowToolTip(ctrlSinceDate, 'Enter a valid date.', 'top', 6000);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+
+    function ResetRecurrenceInputs(sender, e) {
+        create_email_error_elem();
+
+        $("#EmailToMaskedTextbox1").val("@userEmail" + "; ");
+        $("#EmailCCMaskedTextbox1").val("");
+        $("#EmailBCCMaskedTextbox1").val("");
+        $("#EmailCommentMaskedTextbox1").val("");
+
+        SetEmailSubject();
+
+        var resetvalidator = $("#divRecurrence").kendoValidator().data("kendoValidator");
+        resetvalidator.hideMessages();
+        InitializeKendoValidator();
+
+        ResetRecurrenceDateOptions();
+    }
+
+    function ResetRecurrenceDateOptions() {
+        $("input[name=RecurrenceType]").removeAttr('checked');
+        $('#divDaysOfWeek').slideUp();
+        $('#divDaysOfMonth').slideUp();
+        $('#divPeriodOfQuarter').slideUp();
+        $('#divDaysOfWeek :checked').removeAttr('checked');
+        $('#divPeriodOfQuarter :checked').removeAttr('checked');
+        $("input[name=RecurrenceType][value=None]").prop('checked', true);
+        $("#DaysOfMonth").data("kendoDropDownList").value("1");
+        $("#PeriodOfQuarter").data("kendoDropDownList").value("1");
+        $("input[name=RecurrenceRange]").removeAttr('checked');
+        kendo.toString($("#RecurrenceSinceDate").data("kendoDatePicker").value(new Date()), "yyyy-MM-dd")
+        $('#divRecurrenceRange').slideUp();
+        $("#ddQuarter").data("kendoDropDownList").value("1");
+        $("#ddMonth").data("kendoDropDownList").value("1");
+        $("#ddWeek").data("kendoDropDownList").value("1");
+        //Reset the date fields
+        ResetCriteriaDates();
+    }
+
+    function IsMonthlyBreakdownReport() {
+        return loadparameters === "MonthlyQuestionBreakdown" || loadparameters === "MonthlyTracerBreakdown";
+    }
+</script>
+

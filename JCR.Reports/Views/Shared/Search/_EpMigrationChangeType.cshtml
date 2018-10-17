@@ -1,0 +1,83 @@
+﻿<div>
+    <h6><b>EP Change</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+            .Name("EPMigrationChangeType")
+            .DataTextField("Text")
+            .DataValueField("Value")
+           
+            .BindTo(new List<SelectListItem>() {
+                new SelectListItem() {
+                      Text = "All",
+                      Value = "-1"
+                  },
+                  new SelectListItem() {
+                      Text = "Deleted",
+                      Value = "7"
+                  },
+                  new SelectListItem() {
+                      Text = "Modified",
+                      Value = "2"
+                  },
+                  new SelectListItem() {
+                      Text = "Editorial Change",
+                      Value = "1"
+                  },
+                  new SelectListItem() {
+                      Text = "Modified & Moved",
+                      Value = "4"
+                  },
+                  new SelectListItem() {
+                      Text = "Moved",
+                      Value = "3"
+                  },
+
+                  new SelectListItem() {
+                      Text = "Consolidated & Editorial Change",
+                      Value = "8"
+                  },
+
+                  new SelectListItem() {
+                      Text = "Consolidated",
+                      Value = "9"
+                  },
+
+                  new SelectListItem() {
+                      Text = "Split & Editorial Change",
+                      Value = "10"
+                  },
+
+                  new SelectListItem() {
+                      Text = "Split",
+                      Value = "11"
+                  }
+              })
+            .Value("-1")
+             .Events(e =>
+                    {
+                        e.Select("onEPMigrationSelect");
+                    })
+            )
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("EPMigrationChangeType");
+      
+    });
+ 
+    function onEPMigrationSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.Text === "All") {
+            $('#EPMigrationChangeType').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values) >= 0) {
+            values = $.grep(values, function (value) {
+                return value !== "-1";
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+
+</script>

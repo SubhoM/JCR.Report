@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReport_ERTracerByQuestionBySite" targetNamespace="http://tempuri.org/dsReport_ERTracerByQuestionBySite.xsd" xmlns:mstns="http://tempuri.org/dsReport_ERTracerByQuestionBySite.xsd" xmlns="http://tempuri.org/dsReport_ERTracerByQuestionBySite.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DBMEdition01" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DBMEdition01 (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DBMEdition01.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReport_ERTracerByQuestionBySite" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReport_ERTracerByQuestionBySite" msprop:Generator_UserDSName="dsReport_ERTracerByQuestionBySite">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ustERReport_TracerByQuestion_BySite" msprop:Generator_TableClassName="ustERReport_TracerByQuestion_BySiteDataTable" msprop:Generator_TableVarName="tableustERReport_TracerByQuestion_BySite" msprop:Generator_TablePropName="ustERReport_TracerByQuestion_BySite" msprop:Generator_RowDeletingName="ustERReport_TracerByQuestion_BySiteRowDeleting" msprop:Generator_RowChangingName="ustERReport_TracerByQuestion_BySiteRowChanging" msprop:Generator_RowEvHandlerName="ustERReport_TracerByQuestion_BySiteRowChangeEventHandler" msprop:Generator_RowDeletedName="ustERReport_TracerByQuestion_BySiteRowDeleted" msprop:Generator_UserTableName="ustERReport_TracerByQuestion_BySite" msprop:Generator_RowChangedName="ustERReport_TracerByQuestion_BySiteRowChanged" msprop:Generator_RowEvArgName="ustERReport_TracerByQuestion_BySiteRowChangeEvent" msprop:Generator_RowClassName="ustERReport_TracerByQuestion_BySiteRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SiteName" msprop:Generator_ColumnVarNameInTable="columnSiteName" msprop:Generator_ColumnPropNameInRow="SiteName" msprop:Generator_ColumnPropNameInTable="SiteNameColumn" msprop:Generator_UserColumnName="SiteName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="75" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HCOID" msprop:Generator_ColumnVarNameInTable="columnHCOID" msprop:Generator_ColumnPropNameInRow="HCOID" msprop:Generator_ColumnPropNameInTable="HCOIDColumn" msprop:Generator_UserColumnName="HCOID" type="xs:int" minOccurs="0" />
+              <xs:element name="SiteID" msprop:Generator_ColumnVarNameInTable="columnSiteID" msprop:Generator_ColumnPropNameInRow="SiteID" msprop:Generator_ColumnPropNameInTable="SiteIDColumn" msprop:Generator_UserColumnName="SiteID" type="xs:int" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TracerCount" msprop:Generator_ColumnVarNameInTable="columnTracerCount" msprop:Generator_ColumnPropNameInRow="TracerCount" msprop:Generator_ColumnPropNameInTable="TracerCountColumn" msprop:Generator_UserColumnName="TracerCount" type="xs:int" minOccurs="0" />
+              <xs:element name="ObservationCount" msprop:Generator_ColumnVarNameInTable="columnObservationCount" msprop:Generator_ColumnPropNameInRow="ObservationCount" msprop:Generator_ColumnPropNameInTable="ObservationCountColumn" msprop:Generator_UserColumnName="ObservationCount" type="xs:int" minOccurs="0" />
+              <xs:element name="QuestionCount" msprop:Generator_ColumnVarNameInTable="columnQuestionCount" msprop:Generator_ColumnPropNameInRow="QuestionCount" msprop:Generator_ColumnPropNameInTable="QuestionCountColumn" msprop:Generator_UserColumnName="QuestionCount" type="xs:int" minOccurs="0" />
+              <xs:element name="NACount" msprop:Generator_ColumnVarNameInTable="columnNACount" msprop:Generator_ColumnPropNameInRow="NACount" msprop:Generator_ColumnPropNameInTable="NACountColumn" msprop:Generator_UserColumnName="NACount" type="xs:int" minOccurs="0" />
+              <xs:element name="Numerator" msprop:Generator_ColumnVarNameInTable="columnNumerator" msprop:Generator_ColumnPropNameInRow="Numerator" msprop:Generator_ColumnPropNameInTable="NumeratorColumn" msprop:Generator_UserColumnName="Numerator" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Denominator" msprop:Generator_ColumnVarNameInTable="columnDenominator" msprop:Generator_ColumnPropNameInRow="Denominator" msprop:Generator_ColumnPropNameInTable="DenominatorColumn" msprop:Generator_UserColumnName="Denominator" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CompliancePercent" msprop:Generator_ColumnVarNameInTable="columnCompliancePercent" msprop:Generator_ColumnPropNameInRow="CompliancePercent" msprop:Generator_ColumnPropNameInTable="CompliancePercentColumn" msprop:Generator_UserColumnName="CompliancePercent" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NonCompliancePercent" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNonCompliancePercent" msprop:Generator_ColumnPropNameInRow="NonCompliancePercent" msprop:Generator_ColumnPropNameInTable="NonCompliancePercentColumn" msprop:Generator_UserColumnName="NonCompliancePercent" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ustERReport_TracerByQuestion_BySite" />
+      <xs:field xpath="mstns:SiteName" />
+      <xs:field xpath="mstns:SiteID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

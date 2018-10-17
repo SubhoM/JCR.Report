@@ -1,0 +1,234 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.ERSearchList
+@{
+    ViewBag.Title = Model.ReportTitle;
+}
+
+@section slidedownsearch {
+    <div class="slidedownsearch">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                @Html.Partial("Search/_ScheduledReportName")
+            </div>
+        </div>
+    
+        <div class="row PaddingTop10" style="margin-top:5px;">
+            @*Column 1*@
+            <div class="col-xs-4 col-xs-push-1 text-left" style="margin-top: -12px; margin-left: 20px; ">
+                <div id="divMultiSiteProgram"></div>
+                <div id="divMultiSiteTracer"></div>
+                <div id="divMultiSiteDepartment"></div>
+            </div>
+
+            @*Column 2*@
+            <div class="col-xs-3 col-xs-push-2" style="margin-top:34px">
+                @Html.Partial("Search/_DateRange")
+
+            </div>
+
+            @*Column 3*@
+
+            <div id="divobsdate" class="col-xs-3 text-left " style=" margin-top:-10px">
+                @Html.Partial("Search/_ObservationDate")
+            </div>
+            @*Column 4*@
+
+            <div id="fsaselection" style="margin-top:-2px ; margin-left:-30px; display:none;">
+                <div><h6><b>Question Criteria</b></h6></div>
+                @Html.Partial("Search/_IncludeFSA")
+                <div style="margin-top: 15px;">
+                    <i>
+                        * Available for
+                        <a id="lnkAccreditationPrgInfo" style="text-decoration: underline; cursor: pointer;">Accreditation Programs</a>
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div id="loadChartView" class="col-md-12">
+
+        </div>
+        <div id="LoadDetailView" class="col-md-12">
+
+        </div>
+    </div>
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("SiteSelector_SelectedHCOIDs")
+     @Html.Hidden("hdnReportActionID", 119)
+}
+
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/TracerER/Views/ERTracerByQuestion/ERTracerByQuestion.js")
+
+
+<style type="text/css">
+ 
+    #divdaterange {
+        margin-top: -36px;
+    }
+
+    #divrangeobs {
+        margin-top: -15px;
+    }
+    .myHoverClass tbody tr:hover {
+        background: #c4ddfc;
+    }
+
+    #divlevel3chart .k-pager-sizes.k-label {
+        float: left;
+    }
+
+    .chartquestion.k-chart {
+        margin-bottom: -25px;
+        margin-top: -25px;
+    }
+</style>
+
+<script>
+
+    function onMultiTracersListSelect(e) {
+      
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+
+        if (dataItem.TracerCustomName === "All") {
+            $('#TracersList').data("kendoMultiSelect").value([]);
+
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+
+            if (values == "") { this.value(values); }
+        }
+
+    }
+    function LoadReportParameters(selectedSiteIDs) {
+        $.ajax({
+            type: "POST",
+            data: { selectedSiteIDs: selectedSiteIDs },
+            url: '/TracerER/TracersByTJCStandard/GetHCOIDsString',
+            success: function (data) {
+                $("#SiteSelector_SelectedHCOIDs").val(data);
+            }
+        });
+        MultiSiteProgramCall(selectedSiteIDs);
+        MultiSiteTracerCall(selectedSiteIDs, '-1');
+        MultiSiteDepartmentCall(selectedSiteIDs, '-1');
+    }
+    //var MultiSiteProgramUrl = ;
+
+    
+    function MultiSiteProgramCall(selectedSiteIDs) {
+      
+        $.ajax({
+            async: false,
+            dataType: "html",
+            url: '/TracerER/ERSearch/GetMultiSitePrograms',
+            data: {
+                selectedSiteIDs: selectedSiteIDs
+            },
+            success: function (response) {
+                $("#divMultiSiteProgram").html(response);
+            }
+        });
+    }
+
+    function MultiSiteDepartmentCall(selectedSiteIDs, selectedProgramIDs) {
+
+        $.ajax({
+            async: false,
+            dataType: "html",
+            url: '/TracerER/ERSearch/GetMultiSiteDepartments',
+            data: {
+                selectedSiteIDs: selectedSiteIDs,
+                selectedProgramIDs: selectedProgramIDs
+            },
+            success: function (response) {
+                $("#divMultiSiteDepartment").html(response);
+            }
+        });
+    }
+  //  var MultiSiteTracersUrl = ;
+
+
+    function MultiSiteTracerCall(selectedSiteIDs,  selectedProgramIDs) {
+
+        $.ajax({
+            async: false,
+            dataType: "html",
+            url: '/TracerER/ERSearch/GetMultiSiteTracersList',
+            data: {
+                selectedSiteIDs: selectedSiteIDs,
+                selectedProgramIDs: selectedProgramIDs
+            },
+            success: function (response) {
+                $("#divMultiSiteTracer").html(response);
+            }
+        });
+    }
+
+
+    function onMSProgramChange(e) {
+        var MultiSiteProgramIDs = [];
+       
+        $('#MultiSiteProgram :selected').each(function (i, selected) {
+            MultiSiteProgramIDs[i] = $(selected).val();
+        });
+        
+        DisableFSA(MultiSiteProgramIDs.toString());
+        MultiSiteTracerCall(ERSites.getSelectedSites(), MultiSiteProgramIDs.toString());
+        MultiSiteDepartmentCall(ERSites.getSelectedSites(), MultiSiteProgramIDs.toString());
+    }
+
+ 
+    function onMSProgramSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+
+        if (dataItem.ProgramName === "All") {
+            $('#MultiSiteProgram').data("kendoMultiSelect").value([]);
+
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+
+            if (values == "") { this.value(values); }
+        }
+
+
+    }
+
+    function onMultiDepartmentSelect(e) {
+
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+
+        if (dataItem.DepartmentName === "All") {
+            $('#DepartmentList').data("kendoMultiSelect").value([]);
+
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+
+            if (values == "") { this.value(values); }
+        }
+
+    }
+ 
+</script>
+
+
+
+
+
+

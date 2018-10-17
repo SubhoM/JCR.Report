@@ -1,0 +1,114 @@
+﻿<div>
+    <div id="resultTCQUES">
+
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.TracerComprehensiveExcel>()
+      .Name("gridTCQUES")
+               .ToolBar(tools => tools.Excel())
+                          .Excel(excel => excel
+                              .AllPages(true)
+                                              .FileName("Comprehensive Tracer Report.xlsx")
+                                  .Filterable(true)
+                                          .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                                  )
+      .Columns(columns =>
+      {
+
+          columns.Bound(p => p.TracerCustomName).Width(175);
+          columns.Bound(p => p.TracerQuestionNumber).Width(105);
+          columns.Bound(p => p.QuestionText).Width(450).ClientTemplate("#= changeNewLine(QuestionText)#");
+          columns.Bound(p => p.StandardEP).Width(150);
+          columns.Bound(p => p.TracerResponseTitle).Width(175);
+          columns.Bound(p => p.OrgName_Rank3).Width(150);
+          columns.Bound(p => p.OrgName_Rank2).Width(150);
+          columns.Bound(p => p.OrgName_Rank1_Dept).Width(150);
+          columns.Bound(p => p.TotalObservationsCount).Width(150);
+          columns.Bound(p => p.SurveyTeam).Width(125);
+          columns.Bound(p => p.MedicalStaffInvolved).Width(150);
+          columns.Bound(p => p.Location).Width(125);
+          columns.Bound(p => p.MedicalRecordNumber).Width(150);
+          columns.Bound(p => p.EquipmentObserved).Width(150);
+          columns.Bound(p => p.ContractedService).Width(150);
+          columns.Bound(p => p.StaffInterviewed).Width(150);
+          columns.Bound(p => p.TracerNote).Width(200);
+          columns.Bound(p => p.UpdatedByUserName).Width(150);
+          columns.Bound(p => p.ObservationDtString).Width(150);
+          columns.Bound(p => p.UpdatedDtString).Width(150);
+          columns.Bound(p => p.Numerator).Width(175)
+            .ClientFooterTemplate("#=sum#").ClientGroupFooterTemplate("#=setNumeratorTotal(sum)#");
+          columns.Bound(p => p.Denominator).Width(175)
+            .ClientFooterTemplate("#=sum#").ClientGroupFooterTemplate("#=setDenominatorTotal(sum)#");
+
+          columns.Bound(p => p.CompliancePercent).Format("{0:0.0}%")
+                         .ClientFooterTemplate("#=kendo.toString((data.Numerator.sum/data.Denominator.sum)*100, '0.0')#%")
+                         .ClientGroupFooterTemplate("#= kendo.toString(calculateAggregate(NumeratorTotalValue, DenominatorTotalValue),'0.0') #%")
+                         .Width(125);
+          columns.Bound(p => p.TracerQuestionNote).Width(200);
+
+      })
+              .Sortable()
+              .AutoBind(false)
+           .Scrollable(scrollable => scrollable.Height(700))
+           .HtmlAttributes(new { style = "font-size:12px;line-height:em" })
+              .DataSource(dataSource => dataSource
+              .Ajax()
+              .ServerOperation(false)
+              //  .Events(e => e.Error("error_handler_qs"))
+              .Read(read => read.Action("_TracerComprehensiveDetailByQuestionExcel", "TracerComprehensive").Data("additionalData")) // Set the action method which will return the data in JSON format
+                       .Aggregates(aggregates =>
+                       {
+                           aggregates.Add(p => p.Numerator).Sum();
+                           aggregates.Add(p => p.Denominator).Sum();
+                           aggregates.Add(p => p.CompliancePercent).Average();
+                       })
+                        .Group(groups =>
+                        {
+                            groups.Add(p => p.TracerCustomName);
+                            groups.Add(p => p.TracerQuestionNumber);
+                        })
+                        .Sort(sort =>
+                        {
+                            sort.Add(p => p.TracerCustomName);
+                            sort.Add(p => p.TracerQuestionNumber);
+                            sort.Add(p => p.TracerResponseTitle);
+                        })
+                        .PageSize(20))
+              .Events(e => e.ExcelExport("excelExport").DataBound("onDataBoundQues").DataBound("onDataBound"))
+              .ColumnMenu(columnsmenu => columnsmenu
+                         .Columns(true))
+              .Filterable(filter => filter
+                            .Extra(false)
+                            .Operators(operators => operators
+                            .ForString(str => str.Clear()
+                                        .Contains("Contains")
+                            .StartsWith("Starts with")
+                            .IsEqualTo("Is equal to")
+                            .IsNotEqualTo("Is not equal to")
+                            )))
+                .Groupable()
+                .Resizable(r => r.Columns(true))
+                         .Reorderable(reorder => reorder.Columns(true))
+                .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(new int[] { 20, 50, 100 }))
+    )
+    </div>
+</div>
+
+<style>
+    #gridTCQUES {
+        display: none;
+    }
+</style>
+
+<script>
+    function changeNewLine(text) {
+        var regexp = new RegExp('\n', 'g');
+        return text.replace(regexp, '<br>').replace(' & ','&amp');
+    }
+</script>
+
+
+
+
+
+

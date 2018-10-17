@@ -1,0 +1,237 @@
+﻿@{
+    ViewBag.Title = "Search Reports";
+    ViewBag.ActiveTab = "lnkSearchReports";
+}
+
+<div class="row minSiteWidth" id="divpushpintoggle">
+
+    <div id="slideSearch" class="col-xs-12 ">
+        <div class="panel panel-default thickborder  ">
+            <div class="panel-body  ">
+               
+                <div id="divsearchreportsforreset" class="slidedownsearch">
+                    <table style="width:100%;" id="tblSearchReports">
+                        <tr>
+                            <td style="vertical-align:top;" width="30%">
+                                <div style="margin-left:5px;margin-right:5px;">
+                                    @Html.Partial("Search/_SearchByReports")
+
+
+                                </div>
+                                <div style="margin-left:5px;margin-right:5px;">
+
+                                    @Html.Partial("Search/_SearchByMyReports")
+
+                                    <h6><b>Report ID</b></h6>
+                                    <div class="margintop">
+                                        <input type="text" id="SearchByReportID" class="form-control" style="width:100%; height:27px;" placeholder="Enter Report ID" />
+                                    </div>
+                                </div>
+                            </td>
+                           <td width="2%" style="border-top:none;border-bottom:none;"></td>
+                            <td width="23%" style="margin-left: 20px; vertical-align: top; border-right: none;">
+                                <div style="margin-left:5px;">@Html.Partial("Search/_ScoringPeriod")</div>
+
+                            </td>
+                        
+                            <td width="2%" style="border-top:none;border-bottom:none;"></td>
+                            <td style="vertical-align:top" width="21%">
+                                <div style="margin-left:5px;margin-right:5px;">@Html.Partial("Search/_SavedReportsCreatedBy")</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row margintopadd">
+                        <div class="col-xs-12">
+                            <table width="100%">
+                                <tr width="100%">
+                                    <td width="100%">
+                                        @{ Html.RenderAction("ERLevelSites", "Home"); }
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row margintopadd">
+                        <div class="col-xs-12 text-center">
+                            @(Html.Kendo().Button()
+                            .Name("SearchSavedReports")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                                .Content("<span class='glyphicon glyphicon-search'></span><span>&nbsp;</span><span class='glyphfontsize'>Search</span>")
+                            .Events(events => events.Click("ClickSearchSavedReports"))
+                            )
+                            @(Html.Kendo().Button()
+                            .Name("ResetEmailButton")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                        .Content("<span class='glyphicon glyphicon-refresh'></span><span>&nbsp;</span><span class='glyphfontsize'>Reset</span>")
+                            .Events(events => events.Click("resetSearchReportInputs"))
+                            )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divsaveandschedule">
+    @Html.Partial("SavedandScheduledReports")
+</div>
+<script>
+  //  var VarGetCreatedByUsers = $("#HdnGetCreatedByUsers").val();
+   // var VarGetMyReports = $("#HdnGetMyReports").val();
+    $(document).ready(function () {
+        $('#SearchByReportID').keypress(function (e) {
+            var a = [];
+            var k = e.which;
+
+            for (i = 48; i < 58; i++)
+                a.push(i);
+
+            if (!(a.indexOf(k) >= 0))
+                e.preventDefault();
+        });
+
+        // We overwrite the Date Label
+        $('#SPDateLabel').text("Report Creation Date");
+
+        var matchNotFound = false
+        if (hMenuBuilder.renderBreadCrumbTrail() == matchNotFound) {
+            vMenuBuilder.renderBreadCrumbTrail();
+        }
+    });
+
+    //function pushpintoggle(sender, e) {
+
+    //    $("#divsearchreportsforreset").toggle("fast");
+    //    $("#togglespan").html = "Show Options";
+
+    //}
+    function resetSearchReportInputs(sender, e) {
+
+        resetcall();
+
+    }
+
+    function resetcall() {
+        $("#SearchByReportID").val("");
+        ResetSearchParams("divsearchreportsforreset");
+        $("#gridSavedandScheduledReports").hide();
+        var _siteID = $('#UserSite').val();
+        $("#siteitem_" + _siteID).prop('checked', true);
+    }
+    function ClickSearchSavedReports(sender, e) {
+
+
+
+        savedreportsgridcall();
+
+
+    }
+    function savedreportsgridcall() {
+        $("#gridSavedandScheduledReports").data("kendoGrid").dataSource.data([]);
+        var grid = $("#gridSavedandScheduledReports").data("kendoGrid");
+
+        grid.dataSource.read();
+        $("#gridSavedandScheduledReports").css("display", "block");
+    }
+
+    //function loadrespectiveparameters(siteID, siteName) {
+    //    resetcall();
+    //    GetGetMyReports(siteID, siteName);
+    //    GetCreatedByUsers(siteID, siteName);
+    //    // savedreportsgridcall();
+    //}
+    //function GetCreatedByUsers(siteID, siteName) {
+    //    //cat mulitselect update
+    //    $.ajax({
+    //        type: "Post",
+    //        url: VarGetCreatedByUsers,
+    //        data: {
+    //            selectedsiteid: siteID,
+    //            selectedsitename: siteName
+    //        },
+    //        success: function (response) {
+    //            $("#SavedReportCreatedBy").html(response);
+    //        }
+    //    });
+    //}
+
+    //function GetGetMyReports(siteID, siteName) {
+    //    //cat mulitselect update
+    //    $.ajax({
+    //        type: "Post",
+    //        url: VarGetMyReports,
+    //        data: {
+    //            selectedsiteid: siteID,
+    //            selectedsitename: siteName
+    //        },
+    //        success: function (response) {
+    //            $("#divSearchbyMyReports").html(response);
+    //        }
+    //    });
+    //}
+    function SetSearchCriteria() {
+        $("#ReportsCreatedBy").data("kendoMultiSelect").dataSource.filter({});
+       // $("#SearchReportRecurrence").data("kendoMultiSelect").dataSource.filter({});
+        $("#SearchbyReports").data("kendoMultiSelect").dataSource.filter({});
+
+        var ERReportIDs = [];
+        var ERRecurrenceIDs = [];
+        var CreatedByIDs = [];
+        var ERMyReportIDs = [];
+        $('#ReportsCreatedBy :selected').each(function (i, selected) {
+            CreatedByIDs[i] = $(selected).val();
+
+        });
+        $('#SearchReportRecurrence :selected').each(function (i, selected) {
+            ERRecurrenceIDs[i] = $(selected).val();
+
+        });
+        $('#SearchbyReports :selected').each(function (i, selected) {
+            ERReportIDs[i] = $(selected).val();
+
+        });
+        $('#SearchbyMyReports :selected').each(function (i, selected) {
+            ERMyReportIDs[i] = $(selected).val();
+
+        });
+        //Send the list of selected sites if at least one is selected else send all sites in the SitesTree
+        var siteIDs = '';
+        if ($("#SiteSelector_SelectedSiteIDs").val() != null && $("#SiteSelector_SelectedSiteIDs").val() != '') {
+            siteIDs = $("#SiteSelector_SelectedSiteIDs").val().toString();
+        }
+        else { siteIDs = GetAllSites(); }
+
+        var searchset =
+                {
+                    ERReportIDs: ERReportIDs.toString(),
+                    ERMyReportIDs: ERMyReportIDs.toString(),
+                    SearchSelectedSites: siteIDs,
+                    ERRecurrenceIDs: ERRecurrenceIDs.toString(),
+                    CreatedByIDs: CreatedByIDs.toString(),
+                    ReportUserScheduleID: $("#SearchByReportID").val(),
+                    CreateDateFrom: kendo.toString($("#ObsstartDate").data("kendoDatePicker").value(), "yyyy-MM-dd"),
+                    CreateDateTo: kendo.toString($("#ObsEndDate").data("kendoDatePicker").value(), "yyyy-MM-dd"),
+                    MyReportsView: false
+                }
+
+        return searchset;
+    }
+
+</script>
+<style>
+    #tblSearchReports {
+        border: none;
+        border-collapse: collapse;
+    }
+
+        #tblSearchReports td {
+            border: 1px solid #279ddd;
+        }
+
+    #divrangeobs {
+        margin-top: -10px;
+    }
+
+</style>

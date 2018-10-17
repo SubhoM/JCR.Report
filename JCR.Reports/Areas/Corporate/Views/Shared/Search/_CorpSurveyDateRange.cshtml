@@ -1,0 +1,98 @@
+﻿@model JCR.Reports.Models.CorporateSearchList
+
+    <div class="row">
+        <div class="col-xs-12 PaddingBottom10">
+            <h6>
+                <b>
+                    @*Select Mock Survey Date Range*@
+                    <label id="DateLabel">Findings Date Range</label>
+                </b>
+            </h6>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div id="divrangeobs" style="text-align: left; " class="col-xs-4">
+            <input type="radio" name="DateRange" value="custom" id="custom">Custom
+            <br>
+            <input type="radio" name="DateRange" value="last30days">Last 30 days
+            <br>
+            <input type="radio" name="DateRange" value="lastmonth">Last month
+            <br>
+            <input type="radio" name="DateRange" value="lastquarter">Last quarter
+            <br>
+            <input type="radio" name="DateRange" value="lastsixmonths">Last 6 months
+            <br>
+            <input type="radio" name="DateRange" value="last12months">Last 12 months
+        </div>
+
+        <div class="col-xs-8" id="divobsdate">
+            @Html.Partial("Search/_ObservationDate")
+        </div>
+
+    </div>
+
+
+<script>
+
+        $("input[name=DateRange]:radio").change(function () { dateRangeRadioChange(); });
+
+        function dateRangeRadioChange(valDateRange) {
+            var StartDateCtrl = $("#ObsstartDate").data("kendoDatePicker");
+            var EndDateCtrl = $("#ObsEndDate").data("kendoDatePicker");
+            var dateRangeselected = valDateRange || $('input[name=DateRange]:checked').val();
+            switch (dateRangeselected) {
+                case "last30days":
+                    StartDateCtrl.value(moment().subtract(30, 'days').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'days').format('L'));
+                    break;
+                case "lastmonth":
+                    StartDateCtrl.value(moment().subtract(1, 'months').startOf('month').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                    break;
+                case "lastquarter":
+                    StartDateCtrl.value(moment().subtract(1, 'quarters').startOf('quarter').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'quarters').endOf('quarter').format('L'));
+                    break;
+                case "lastsixmonths":
+                    StartDateCtrl.value(moment().subtract(6, 'months').startOf('month').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                    break;
+                case "last12months":
+                    StartDateCtrl.value(moment().subtract(12, 'months').startOf('month').format('L'));
+                    EndDateCtrl.value(moment().subtract(1, 'months').endOf('month').format('L'));
+                    break;
+                default:
+
+            }
+
+        }
+
+        //Resets the date fields
+        function ResetCriteriaDates() {
+            $('input[name=DateRange]').prop('checked', false);
+
+            //added current date to set current date focussed in the calendar picker
+            var currentDate = moment().format('L');
+            $("#ObsstartDate").data("kendoDatePicker").value(currentDate);
+            $("#ObsEndDate").data("kendoDatePicker").value(currentDate);
+
+            $("#ObsstartDate").data("kendoDatePicker").value("");
+            $("#ObsEndDate").data("kendoDatePicker").value("");
+
+            $('#divrangeobs input').removeAttr("disabled");
+            $('#ObservationDate input').removeAttr("disabled");
+            $('#ObsstartDate').data('kendoDatePicker').enable(true);
+            $('#ObsEndDate').data('kendoDatePicker').enable(true);
+        }
+
+        $(document).ready(function () {
+            //  $('input:radio[name*="DateRange"][value*="lastquarter"]').prop('checked', true);
+            setTimeout(dateRangeRadioChange, 100);
+            //dateRangeRadioChange();
+
+        });
+   
+
+</script>

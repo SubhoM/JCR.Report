@@ -1,0 +1,144 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.CorporateSearchList
+
+@{
+    ViewBag.Title = Model.ReportTitle;
+}
+
+<style type="text/css">
+    /*.ui-progressbar.beginning .ui-progressbar-value {
+        background: #5bb346;
+    }*/
+    .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .k-state-selected .k-progressbar .k-progress-status-wrap {
+        background-color: #C61835;
+    }
+
+    .k-state-selected .k-state-selected .k-progress-status-wrap {
+        background-color: #5bb346;
+    }
+
+    .progress {
+        margin-bottom: 0px;
+    }
+
+    .k-progress-status-wrap, .k-rtl .k-progressbar-reverse.k-progressbar-horizontal .k-progress-status-wrap {
+        text-align: left;
+        color: white;
+    }
+
+    .myHoverClass tbody tr:hover {
+        background: #c4ddfc;
+    }
+
+    .modal-header .close {
+        margin-top: 2px;
+    }
+
+    .modal-header {
+        text-align: center;
+    }
+
+    #divdaterange {
+        margin-top: -36px;
+    }
+
+    #divrangeobs {
+        margin-top: -15px;
+    }
+</style>
+
+@section slidedownsearch {
+    <div class="slidedownsearch content-fluid">
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-9 text-center">
+            @Html.Partial("Search/_ScheduledReportName")
+        </div>
+    </div>
+
+    <div class="row PaddingTop10">
+        @*padding-left:60px;*@
+            <div class="col-xs-offset-4 col-xs-4 text-left" style="padding:0;">
+            <b>Group By at Program level</b>
+            @* @Html.RadioButtonsForEnum(m => m.ERGroupBYTracerLevel)*@
+                <input type="radio" name="grpBy" value="Chapter" checked>Chapter
+            <input type="radio" name="grpBy" value="Standard" >Standard
+            
+        </div>
+            <div class="col-xs-2 checkbox text-left" style="padding-left:0;padding-top:0;padding-right:0;margin-top:0">
+                <label id="FSAGraph"><input id="FSAGraphCheckbox" style="float: left;" type="checkbox" value="">Only Include FSA EPs </label>
+
+    </div>
+            <div class="col-xs-2 checkbox" style="margin-top:0">
+                <label id="RFIGraph"><input id="RFIGraphCheckbox" style="float: left;" type="checkbox" value="" checked="checked">Display RFIs in Graph</label>
+            </div>
+
+        </div>
+
+        <div class="row PaddingTop10">
+
+        @*Column 1 col-xs-push-1 col-lg-3 col-lg-push-2*@
+
+            <div class="col-xs-4">
+                @* @Html.Partial("Search/_MockSurveyCriteria")*@
+                <div id="divMockSurveyCriteria"></div>
+        </div>
+
+        @*Column 2 col-lg-2 *@
+            <div class="col-xs-4">
+                @Html.Partial("Search/_CorpSurveyDateRange")
+            </div>
+
+        @*Column 3*@
+            <div class="col-xs-4">
+            <div id="divMultiSiteProgram"></div>
+                <div id="divMultiSiteChapter" ></div>
+            <div id="divMultiSiteStandard"></div>
+
+            <div class="text-left">
+                <h6 id="typeOfObservationAlert"><i>*Select Chapter to display Standard.</i></h6>
+            </div>
+        </div>
+
+  
+    </div>
+
+</div>
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div id="loadChartView" class="col-md-12">
+
+        </div>
+        <div id="LoadDetailView" class="col-md-12">
+
+        </div>
+    </div>
+
+
+    @Html.Partial("Search/_HiddenVariables")
+    @Html.Hidden("hdnReportTitle", Model.ReportTitle)
+    @Html.Hidden("SiteSelector_SelectedHCOIDs")
+    @Html.Hidden("hdnReportActionID", 47)
+}
+@*@Url.Script("~/Scripts/Common/SaveAndSchedule.js")*@
+@Url.Script("~/Areas/Corporate/Views/AMPCorporateSummary/AMPCorporateSummary.js")
+@Url.Script("~/Areas/Corporate/Scripts/CorporateFinding.js")
+
+
+<script type="text/javascript">
+    $(window).load(function () {
+        if ($('#hdnSitesCount').val() == 1)
+        { LoadReportParameters(); }
+    });
+</script>

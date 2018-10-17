@@ -1,0 +1,278 @@
+﻿.glyphButton {
+    width: 50px;
+    height: 45px;
+    padding-left: 0;
+}
+.glyphButtonMedium {
+    width: 80px;
+    height: 45px;
+    padding-left: 0;
+}
+
+.paddingFive {
+    padding-left: 5px;
+}
+
+.absolutePosition {
+    position: absolute;
+    z-index: 500;
+}
+
+.inlineBlockDisplay {
+    display: inline-block;
+}
+
+.nodisplay {
+    display: none;
+}
+
+.slidewidth {
+    /*width: 98vw;*/
+    min-width: 900px;
+    min-height: 200px;
+    padding-left: 35px;
+}
+
+.glyphiconSize {
+    font-size: 14px;
+    padding-left: 8px;
+    text-align: center;
+}
+
+.glyphfontsize {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.glyphfontwidth6 {
+    padding-left: 6px;
+}
+
+.glyphfontwidth1 {
+    padding-left: 2px;
+}
+
+.thickborder {
+    border-width: 2px;
+    border-color: #337ab6;
+}
+
+/*.noclick {
+    border: none;
+}*/
+
+.verticalAlign {
+    vertical-align: middle;
+}
+
+.sitePadding {
+    /*padding-top: 25px;
+    padding-right: 14px;
+    padding-bottom: 5px;
+    padding-left: 50px;*/
+    padding: 25px 14px 5px 50px;
+    margin-left: 4px;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.marginLeft-5 {
+    margin-left: -5px;
+}
+
+.pnlSearchBG {
+    background-color: #F2F6F9;
+}
+
+
+/*User Site Navigation Section*/
+/*#region User Site Navigation Section */
+
+
+/*.dropdown:hover .dropdown-menu {
+    display: block;
+}*/
+
+.navbar-default {
+    /*background-color: #ffffff; /*#428bca;*/
+    /*border-color: #ffffff;*/
+    border-bottom: 0.5px solid #8b2942;
+}
+
+.navbar {
+    border: none;
+    min-height: 30px;
+}
+
+.toppadding {
+    margin-bottom: -2px;
+    padding-top: 5px;
+    max-width: 350px;
+    max-height: 21px;
+    overflow: hidden;
+}
+
+/*.navbar-default .navbar-brand {
+    color: #279ddd;
+}
+
+    .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+        color: #279ddd;
+    }
+
+.navbar-default .navbar-text {
+    color: #279ddd;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #279ddd;
+}
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        color: #ffffff;
+        background-color: #428bca;
+    }
+
+.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #279ddd;
+    background-color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    color: #ffffff;
+    background-color: #279ddd;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: white;
+    background-color: #279ddd;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #FFFFFF;
+}
+
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: #FFFFFF;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #279ddd;
+    }
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+    border-color: #ffffff;
+}
+
+.navbar-default .navbar-link {
+    color: #279ddd;
+}
+
+    .navbar-default .navbar-link:hover {
+        color: #279ddd;
+    }
+
+.nav > li > a {
+    padding: 10px 10px 10px 10px;
+}*/
+
+
+#MainNavbar {
+    margin-bottom: 5px !important;
+}
+
+/*.dropdown:hover .dropdown-menu {
+    display: block;
+}*/
+
+.PaddingTopBottom10 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.PaddingTopBottom5 {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.PaddingTop10 {
+    padding-top: 10px !important;
+}
+
+.PaddingRight20 {
+    padding-right: 12px !important;
+}
+
+.PaddingBottom10 {
+    padding-bottom: 10px !important;
+}
+
+#processingModal .modal-dialog .modal-content {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none !important;
+}
+
+#processingModal > .modal-backdrop {
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    /* IE 5-7 */
+    filter: alpha(opacity=80);
+    /* Netscape */
+    -moz-opacity: 0.8;
+    /* Safari 1.x */
+    -khtml-opacity: 0.8;
+    /* Good browsers */
+    opacity: 0.8;
+    background-color: white;
+}
+
+
+.header-height {
+    height: 70px;
+}
+
+.navbar.affix {
+    top: 0px;
+    width: 100%;
+    z-index: 11;
+}
+
+#ulQuickLinks {
+    padding-top: 5px;
+    padding-right: 5px;
+}
+
+.hidden-class {
+    margin-top: -2px;
+}
+
+.breakhere {
+    page-break-after: always;
+}
+
+.showme {
+    display: inline;
+}
+
+.btn-default {
+    background-color: aliceBlue;
+}
+
+.overrideNavbarZIndex {
+    z-index: 0 !important;
+}
+
+.marginLeft50 {
+    margin-left: 50px;
+}
+.activeTab {
+    background-color: #279ddd !important;
+}
+/*#endregion */

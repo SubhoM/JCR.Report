@@ -1,0 +1,165 @@
+﻿@model JCR.Reports.Models.TracerComplianceDepartmentInput
+
+<style type="text/css">
+
+    #lblL1Data {
+        margin-left: 10px;
+    }
+
+    #gridDepartment .k-icon.k-i-close {
+        display: none;
+    }
+
+    #gridDepartment .k-icon.k-i-sort-asc-sm {
+        display: none;
+    }
+
+    .k-i-arrow-s, .k-i-arrow-60-down {
+        margin-top: 0px;
+    }
+
+    #gridDepartment {
+        padding: 0;
+    }
+
+    .caretInverse {
+        transform: rotate(180deg);
+    }
+
+    .tracerScheduleprogramSelect .panel-body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    [role~="presentation"] {
+        border: 1px solid #e6e6e6;
+        cursor: pointer;
+    }
+
+    .nav-pills > li > a {
+        border-radius: 2px;
+    }
+
+    .nav-pills {
+        display: inline-block;
+    }
+
+    .disabled-linkb, .disabled-linkb:hover, .disabled-linkb-adv:hover, .disabled-linkb-adv {
+        text-decoration: none;
+        color: #333333;
+    }
+
+    .disabled-linkb-adv {
+        padding-left: 30px;
+    }
+
+        .disabled-linkb-adv:hover {
+            padding-left: 30px;
+        }
+
+    .progSelectArrowSpacing {
+        margin-right: 10px;
+    }
+
+    #tracerColumnExtendMsg {
+        color: red;
+        text-align: center;
+    }
+
+    #recordStatusMsg {
+        color: red;
+        text-align: center;
+    }
+
+    .exportoexcelDept {
+        padding: 10px 0 0 10px;
+    }
+</style>
+
+
+<!--[if IE 8]>
+<style>   #lblL1Data {
+        margin-left: 30px;
+    }</style>
+<![endif]-->
+
+<div class="panel panel-default " id="divL1tag" style="border-color:#428bca !important; width:100%;">
+
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 text-left exportoexcelDept">
+                @(Html.Kendo().Button()
+                        .Name("exportoexcelDept")
+                        .HtmlAttributes(new { type = "button", @class = "k-button " })
+                                .Content("<span class='k-icon k-i-excel'></span><span>&nbsp;</span><span class='glyphfontsize'>Export to Excel</span>")
+                                    .Events(e => e.Click("ERExcelExportByDept"))
+                )
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <span id="spanSelParameters2" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters3" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters4" style="font-weight:bold;font-size:small;"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <span id="spanSelParameters5" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <span id="spanSelParameters6" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters7" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters8" style="font-weight:bold;font-size:small"></span>     
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters9" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters10" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters11" style="font-weight:bold;font-size:small"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center ">
+                <span id="spanSelParameters12" style="font-weight:bold;font-size:small;color:red"></span>
+            </div>
+        </div>
+        <br />
+    </div>
+    <div class="row" id="recordStatusMsg"> </div>
+    <div class="row" id="tracerColumnExtendMsg"> </div>
+    <div id="gridDepartment" class="col-xs-12"></div>
+</div>
+
+
+
+

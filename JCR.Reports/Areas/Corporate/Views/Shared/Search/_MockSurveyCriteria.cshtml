@@ -1,0 +1,79 @@
+﻿@model  JCR.Reports.Models.MockSurveyCriteria
+
+<div class="row" style="margin-top:10px;margin-bottom:20px">
+    <div class="col-xs-12">
+        <div class="margintop">
+            <b>  Mock Survey(s):  </b>
+
+            @Html.Partial("Search/_MockSurveyNameList", Model.MockSurveyList)
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top:10px;margin-bottom:20px">
+    <div class="col-xs-12">
+        <div class="margintop">
+            <b> Participated as Team Leader: </b>  
+
+            @(Html.Kendo().MultiSelect()
+                  .Name("mockSurveyLeadList")
+                  .DataTextField("UserName")
+                   .DataValueField("UserID")
+                  .Placeholder("Select Team Lead")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model.TeamLeadList)
+                    .Events(e =>
+                    {
+                        e.Select("onmockSurveyLeadSelect");
+                    })
+                  .AutoClose(false)                 
+                .Value("-1")
+            )
+
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top:10px;margin-bottom:20px">
+    <div class="col-xs-12">
+        <div class="margintop">
+            <b>  Participated as Team Member:  </b>
+
+            @(Html.Kendo().MultiSelect()
+                  .Name("mockSurveyMemberList")
+                  .DataTextField("UserName")
+                   .DataValueField("UserID")
+                  .Placeholder("Select Team Member")
+                  .Filter(FilterType.Contains)
+                  .HighlightFirst(true)
+                  .BindTo(Model.TeamMemberList)
+                  .AutoClose(false)
+                    .Events(e =>
+                    {
+                        e.Select("onmockSurveyMemberSelect");
+                    })
+                .Value("-1")
+            )
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        addarrowtomultiselect("mockSurveyLeadList");
+        addarrowtomultiselect("mockSurveyMemberList");
+
+    });
+
+  
+
+    </script>

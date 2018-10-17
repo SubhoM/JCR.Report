@@ -1,0 +1,394 @@
+﻿@using JCR.Reports.Common;
+@model JCR.Reports.Models.SiteSelectorViewModel
+@{
+    // _SiteSelector: partial view that will dynamically display:
+    //
+    //          level 1 (ie: organizations, if exists)
+    //          level 2 (ie: regions, if exists)
+    //          level 3 (ie: districts, if exists)
+    //
+    // Renders the partial shared view _SiteSelectorSite for the actual site name
+    // displayed in the drilldown process.  Pass a list of site id's to display.
+    //
+
+    // initial level checks
+    bool hasLevel1 = Model.HasLevel1;
+    bool hasLevel2 = Model.HasLevel2;
+    bool hasLevel3 = Model.HasLevel3;
+}
+
+@* main script *@
+<script type="text/javascript">
+
+   
+    $(document).ready(function () {
+    
+      
+        // animation speed when a user clicks an item in the tree
+        var animationDuration = 200;
+
+        // Level 1 checkbox clicks
+        $(".level1check").click(function (event) {
+            var hasLevel2 = $(this).attr("data-haslevel2");
+            if (hasLevel2 == "true") {
+                $(this).siblings(".level2").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+                $(this).siblings(".level2").children(".level3").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+                $(this).siblings(".level2").children(".level3").children(".site").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+                $(this).siblings(".level2").children(".site").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+            }
+            else {
+                $(this).siblings(".site").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+            }
+            event.stopPropagation();
+            SetOutputValues();
+        });
+        $(".level1label").click(function (event) {
+            var hasLevel2 = $(this).attr("data-haslevel2");
+            if (hasLevel2 == "true") {
+                $(this).siblings(".level2").toggle(animationDuration);
+            }
+            else {
+                $(this).siblings(".site").toggle(animationDuration);
+            }
+            TogglePlusMinus($(this).children(".level1status"));
+            event.stopPropagation();
+        });
+
+        // Level 2 checkbox clicks
+        $(".level2check").click(function (event) {
+            var hasLevel3 = $(this).attr("data-haslevel3");
+            if (hasLevel3 == "true") {
+                $(this).siblings(".level3").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+                $(this).siblings(".level3").children(".site").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+            }
+            else {
+                $(this).siblings(".site").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+            }
+            event.stopPropagation();
+
+            // check parent if exists
+            var level1id = $(this).attr("data-level1ID");
+            var id1top = "#level1_" + level1id;
+            var id1 = "#level1item_" + level1id;
+            // we need to know the status of other level 2 checks under this level 1,
+            // and if they are all unchecked, then the level 1 check box should be unchecked also
+            var checked = $(id1top).children(".level2").children("input:checked").length;
+            var checkParent = false;
+            if (checked > 0) {
+                checkParent = true;
+            }
+            // set the level 1 checkbox appropriately
+            $(id1).prop("checked", checkParent);
+            SetOutputValues();
+        });
+        $(".level2label").click(function (event) {
+            var hasLevel3 = $(this).attr("data-haslevel3");
+            if (hasLevel3 == "true") {
+                $(this).siblings(".level3").toggle(animationDuration);
+            }
+            else {
+                $(this).siblings(".site").toggle(animationDuration);
+            }
+            TogglePlusMinus($(this).children(".level2status"));
+            event.stopPropagation();
+        });
+
+        // Level 3 checkbox clicks
+        $(".level3check").click(function (event) {
+            $(this).siblings(".site").children(":input[type=checkbox]").prop("checked", $(this).prop("checked"));
+            event.stopPropagation();
+            SetChecks(this);
+            SetOutputValues();
+        });
+        $(".level3label").click(function (event) {
+            $(this).siblings(".site").toggle(animationDuration);
+            TogglePlusMinus($(this).children(".level3status"));
+            event.stopPropagation();
+        });
+
+        // Site checkbox clicks
+        $(".sitecheck").click(function (event) {
+            event.stopPropagation();
+            SetChecks(this);
+            SetOutputValues();
+        });
+        $(".sitelabel").click(function (event) {
+            event.stopPropagation();
+            var cb = "#" + $(this).attr("data-value");
+            $(cb).click();
+        });
+
+        // display based on levels
+        @if (!hasLevel2 && !hasLevel3) {
+            @:$(".site").css("display", "block");
+                                }
+        @if (!hasLevel2 && hasLevel3) {
+            @:$(".level3").css("display", "block");
+                                }
+
+        // Init view
+        Initialize();
+        $("#NextCriteriaButton").click(function () {
+            ERSearchClick();
+        });
+    });
+
+    // toggle plus/minus (right or down arrow)
+    function TogglePlusMinus(e) {
+        if (e.attr("src") == "@Url.Content("~/")Images/submenuU.gif") {
+            e.attr("src", "@Url.Content("~/")Images/submenuD.gif");
+        }
+        else {
+            e.attr("src", "@Url.Content("~/")Images/submenuU.gif");
+        }
+    }
+
+    // Site - gets checked site id's, sets 'select all'
+    function SetChecks(vthis) {
+        var cls = $(vthis).parent().attr("class");
+        var parentid = $(vthis).parent().attr("id");
+        if (parentid == "level1standalone") return;
+        var checked = $(vthis).parent().parent().children("." + cls).children("input:checked").length;
+        var checkParent = false;
+        if (checked > 0) {
+            checkParent = true;
+        }
+        $(vthis).parent().parent().children("input[type=checkbox]").prop("checked", checkParent);
+        if (cls == "site") { // prevent endless recursion
+            SetChecks($(vthis).parent());
+        }
+        if (cls == "level3") { // prevent endless recursion
+            SetChecks($(vthis).parent());
+        }
+    }
+
+    // set the hidden fields with a list of ID's that were checked
+    function SetOutputValues() {
+        var l2items = "";
+        $(".level2check:checked").each(function () {
+            l2items += $(this).attr("data-value") + ",";
+        });
+        $("#SiteSelector_SelectedLevel2IDs").val(l2items);
+        var l3items = "";
+        $(".level3check:checked").each(function () {
+            l3items += $(this).attr("data-value") + ",";
+        });
+        $("#SiteSelector_SelectedLevel3IDs").val(l3items);
+        var siteitems = "";
+        $(".sitecheck:checked").each(function () {
+            siteitems += $(this).attr("data-value") + ",";
+        });
+        $("#SiteSelector_SelectedSiteIDs").val(siteitems);
+       
+        $('#sites_error_msg').html('');
+    }
+
+    //Gets all the list of Site IDs from the Sites tree control
+    function GetAllSites()
+    {
+        var l2items = "";
+        $(".level2check").each(function () {
+            l2items += $(this).attr("data-value") + ",";
+        });
+        var l3items = "";
+        $(".level3check").each(function () {
+            l3items += $(this).attr("data-value") + ",";
+        });
+        
+        var siteitems = "";
+        $(".sitecheck").each(function () {
+            siteitems += $(this).attr("data-value") + ",";
+        });
+        
+        return (l2items + l3items + siteitems);
+    }
+
+    // Init Site Checkboxes
+    function Initialize() {
+        var items = [@Model.SelectedSiteIds];
+        if (items.length > 0) {
+            for (var i = 0; i < items.length; i++) {
+                var id = "#siteitem_" + items[i];
+                $(id).prop("checked", true);
+                SetChecks($(id));
+            }
+        }
+        SetOutputValues();
+
+        $(".level2").css("display", "block");
+        $("#level1standalone .site").css("display", "block");
+
+    }
+
+</script>
+
+@Html.Hidden("SiteSelector_SelectedLevel2IDs")
+@Html.Hidden("SiteSelector_SelectedLevel3IDs")
+@Html.Hidden("SiteSelector_SelectedSiteIDs")
+<div class="row " style=" margin-right:35px; margin-left:10px;">
+    <div id="sites_error_msg">
+        <div id="siteserror_msg" class=" col-xs-12 alert alert-info alert-dismissible" role="alert" style="display:none;">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <div id="sites_msg"></div>
+        </div>
+    </div>
+</div>
+
+<div style="max-width: 960px; padding: 5px; font-size: 10pt; cursor: pointer; font-family: Verdana, Geneva, sans-serif; color: navy;">
+   
+    @{
+
+        var levelMap = Model.ERLevelMap;
+
+        var level1IDList = levelMap.Select(l => l.ERLevel1ID).Distinct().ToList();
+        foreach (var level1ID in level1IDList)
+        {
+            hasLevel2 = levelMap.Where(l => l.ERLevel1ID == level1ID && l.ERLevel2ID > 0).Count() > 0 ? true : false;
+            hasLevel3 = levelMap.Where(l => l.ERLevel1ID == level1ID && l.ERLevel3ID > 0).Count() > 0 ? true : false;
+
+            // set margins (indents) based on levels available
+            string level2Margin = "20px";
+            string level3Margin = "20px";
+            string siteMargin = "40px";
+            if (!hasLevel1)
+            {
+                level2Margin = "0px";
+            }
+            ViewBag.SiteMargin = siteMargin;
+
+            var idtop1 = "level1_" + level1ID.ToString();
+            @:<div class="level1" id="@idtop1">
+
+
+
+
+            if (level1ID == 0)
+            {
+                <div style="margin-top:10px;">Sites not Grouped</div>
+            }
+            else
+            {
+                var level1 = levelMap.Where(l => l.ERLevel1ID == level1ID).FirstOrDefault().ERLevel1;
+                if (level1.ERLevel1Name != null)
+                {
+                    var id1 = "level1item_" + level1ID.ToString();
+                    <input class="level1check" type="checkbox" data-value="@level1.ERLevel1ID.ToString()"
+                           data-name="@level1.ERLevel1Name" name="@id1" id="@id1" value="@level1.ERLevel1ID.ToString()"
+                           data-haslevel2="@hasLevel2.ToString().ToLower()" />
+                    <span class="level1label" data-haslevel2="@hasLevel2.ToString().ToLower()">
+                        <img src="~/Images/submenuD.gif" class="level1status" />
+                        <label>@level1.ERLevel1Name</label>
+                    </span>
+                }
+            }
+
+            if (level1ID == 0)
+            {
+                <div id="level1standalone">
+                    @{
+                var siteIDList = levelMap.Where(l => l.ERLevel1ID == level1ID).Select(s => s.SiteID).ToList();
+                ViewBag.SiteMargin = "0px;";
+                Html.RenderPartial("Search/_SiteSelectorSite", siteIDList);
+                    }
+                </div>
+            }
+            else if (hasLevel2)
+            {
+                var level2IDList = levelMap.Where(l => l.ERLevel1ID == level1ID).Select(l => l.ERLevel2ID).Distinct().ToList();
+
+                foreach (var level2ID in level2IDList)
+                {
+                    var level2 = levelMap.Where(l => l.ERLevel2ID == level2ID).FirstOrDefault().ERLevel2;
+                    <div class="level2" style="margin-left: @level2Margin; padding:0px;">
+                        @{
+                    var id2 = "level2item_" + level2ID.ToString();
+                    <input class="level2check" type="checkbox" data-value="@level2.ERLevel2ID.ToString()"
+                           data-name="@level2.ERLevel2Name" name="@id2" id="@id2" value="@level2.ERLevel2ID.ToString()"
+                           data-haslevel3="@hasLevel3.ToString().ToLower()"
+                           data-level1id="@level1ID" />
+                            <span class="level2label" data-haslevel3="@hasLevel3.ToString().ToLower()">
+                                <img src="~/Images/submenuU.gif" class="level2status" />
+                                <label>@level2.ERLevel2Name</label>
+                            </span>
+
+                    // LEVEL 3, if available
+                    if (hasLevel3)
+                    {
+                        var level3IDList = levelMap.Where(l => l.ERLevel2ID == level2.ERLevel2ID).Select(l => l.ERLevel3ID).Distinct().ToList();
+                        foreach (var level3ID in level3IDList)
+                        {
+                            var level3 = levelMap.Where(l => l.ERLevel3ID == level3ID).FirstOrDefault().ERLevel3;
+                            <div class="level3" style="margin-left: @level3Margin; padding: 0px; display: none;">
+                                @{
+                            var id3 = "level3item_" + level3ID.ToString();
+                            <input class="level3check" type="checkbox"
+                                   data-value="@level3.ERLevel3ID.ToString()" data-name="@level3.ERLevel3Name"
+                                   name="@id3" id="@id3" value="@level3.ERLevel3ID.ToString()" />
+                                    <span class="level3label">
+                                        <img src="~/Images/submenuU.gif" class="level3status" />
+                                        <label>@level3.ERLevel3Name</label>
+                                    </span>
+                            // SITES Associated with Level 3
+                            var siteIDList = levelMap.Where(l => l.ERLevel3ID == level3.ERLevel3ID).Select(l => l.SiteID).Distinct().ToList();
+                            Html.RenderPartial("Search/_SiteSelectorSite", siteIDList);
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    // no Level 3
+                    {
+                        // SITES Only Associated with Level 2
+                        var siteIDList = levelMap.Where(l => l.ERLevel2ID == level2.ERLevel2ID).Select(l => l.SiteID).Distinct().ToList();
+                        Html.RenderPartial("Search/_SiteSelectorSite", siteIDList);
+                    }
+
+                        }
+                    </div>
+                }
+
+            } // end hasLevel2
+
+            // LEVEL 3 but NO level 2
+            else if (hasLevel3)
+            {
+                // LEVEL 3
+                var level3IDList = levelMap.Where(l => l.ERLevel1ID == AppSession.SessionERLevelInformation.ERLevel1ID).Select(l => l.ERLevel3ID).Distinct().ToList();
+                foreach (var level3ID in level3IDList)
+                {
+                    var level3 = levelMap.Where(l => l.ERLevel3ID == level3ID).FirstOrDefault().ERLevel3;
+                    <div class="level3" style="margin-left: @level3Margin; padding: 0px; display: none;">
+                        @{
+                    var id3 = "level3item_" + level3ID.ToString();
+                    <input class="level3check" type="checkbox" data-value="@level3.ERLevel3ID.ToString()" data-name="@level3.ERLevel3Name" name="@id3" id="@id3" value="@level3.ERLevel3ID.ToString()" />
+                            <span class="level3label">
+                                <img src="~/Images/submenuU.gif" class="level3status" />
+                                <label>@level3.ERLevel3Name</label>
+                            </span>
+
+                    // SITES
+                    var siteIDList = levelMap.Where(l => l.ERLevel3ID == level3.ERLevel3ID).Select(l => l.SiteID).Distinct().ToList();
+                    Html.RenderPartial("Search/_SiteSelectorSite", siteIDList);
+                        }
+                    </div>
+                }
+            } // end level 3
+
+            // SITES ONLY
+            else
+            {
+                var siteIDList = AppSession.Sites.Where(m =>m.IsTracersAccess == 1).Select(m => m.SiteID).ToList();
+                Html.RenderPartial("Search/_SiteSelectorSite", siteIDList);
+            }
+
+
+            @:</div>
+
+
+        } // end level 1
+
+    }
+
+</div>

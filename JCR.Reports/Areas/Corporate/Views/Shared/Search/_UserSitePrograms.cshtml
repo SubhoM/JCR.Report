@@ -1,0 +1,157 @@
+﻿@using JCR.Reports.Common;
+@using System.Linq;
+@using JCR.Reports.DataModel;
+@using JCR.Reports.Models;
+@using JCR.Reports.Services;
+
+@{
+    int selectedSite;
+    string selectedSiteName;
+    List<Program> lstPrograms = new List<Program>();
+    bool bAccredAvl = false, bCertAvl = false, bAdvDisAvl = false;
+
+    // check session
+    if (AppSession.HasValidSession)
+    {
+        selectedSite = AppSession.SelectedSiteId;
+        selectedSiteName = AppSession.SelectedSiteName;
+
+        if(AppSession.ReportID == 42)
+        {
+            //Not applying filter for Task Report
+            lstPrograms = AppSession.Sites.Where(m => m.SiteID == AppSession.SelectedSiteId).FirstOrDefault().Programs;
+        }
+        else
+        {
+            lstPrograms = AppSession.Sites.Where(m => m.SiteID == AppSession.SelectedSiteId && m.IsAMPAccess == 1).FirstOrDefault().Programs;
+        }
+
+
+        bAccredAvl = lstPrograms.Any(x => x.ProductID == (int)WebConstants.ProductEnum.Accreditation);
+        bCertAvl = lstPrograms.Any(x => x.ProductID == (int)WebConstants.ProductEnum.Certification);
+        bAdvDisAvl = lstPrograms.Any(x => x.ProductID == (int)WebConstants.ProductEnum.Certification && x.AdvCertFlag == "Y");
+    }
+    else
+    {
+        throw new Exception("Invalid Session");
+    }
+}
+
+<ul class="nav navbar-right navDrpDwn" style="width:98%;padding:0px !important;" id="programSelect">
+    <li class="active" style="height:inherit; line-height: normal;">
+        <a class="dropdown-toggle siteDropdwnHeaderAnchor" data-toggle="dropdown" aria-expanded="false" id="programDropdwnLnk" href="#">
+        @*@AppSession.SelectedProgramName<span class="caret caret-large navArrowSpacing"></span>*@
+            <span>@AppSession.SelectedProgramName</span>
+            <div>
+                <span class="caret caret-large"></span>
+            </div>
+        </a>
+        <ul class="dropdown-menu programDropDown" style="white-space:nowrap;" role="menu" aria-labelledby="dLabel">
+            <li>
+                <div id="divPrgDropDown" class="dropdown dropdown-accordion" data-accordion="#accordion" style="max-height: 450px; overflow-x: hidden; overflow-y: auto">
+                    <div class="panel-group" id="accordion">
+                        @if (bAccredAvl)
+                            {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-target="#Accred" id="AccredHeader" aria-expanded="true" data-toggle="collapse" data-parent="#accordion" href="javascript:void(0);" onclick='AccordionOpenClose("AccredHeader");'>
+                                            <i class="caret caret-large caretInverse progSelectArrowSpacing" id="AccredHeaderIcon"></i>
+                                            Accreditation
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse in" id="Accred" aria-expanded="true">
+                                    <div class="panel-body">
+                                        @foreach (var item in lstPrograms.Where(prg => prg.ProductID == 1).ToList())
+                                            {
+                                            <div class="programElement text-left">
+                                                <a class="disabled-link" onclick='NavProgramSelect(1, "@item.BaseProgramID", "@item.ProgramName")'>@item.ProgramName</a>
+                                            </div>
+                                            }
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        @if (bCertAvl)
+                            {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-target="#cert" id="CertHeader" data-toggle="collapse" data-parent="#accordion" onclick='AccordionOpenClose("CertHeader");'>
+                                            <i class="caret caret-large caretInverse progSelectArrowSpacing" id="CertHeaderIcon"></i>
+                                            Certification
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse in" id="cert">
+                                    <div class="panel-body">
+                                        @foreach (var item in lstPrograms.Where(prg => prg.ProductID == 2 && prg.AdvCertFlag == null).ToList())
+                                            {
+                                            <div class="programElement text-left">
+                                                <a class="disabled-link" onclick='NavProgramSelect(2, "@item.BaseProgramID", "@item.ProgramName", "@item.AdvCertListTypeID")'>@item.ProgramName</a>
+                                            </div>
+                                            }
+                                        @if (bAdvDisAvl)
+                                            {
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a class="advDis" data-target="#advdis" id="AdvDisHeader" data-toggle="collapse" data-parent="#accordion" onclick="AccordionOpenClose('AdvDisHeader');">
+                                                            <i class="caret caret-large caretInverse progSelectArrowSpacing" id="AdvDisHeaderIcon"></i>
+                                                            Advance Disease
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-collapse collapse" id="advdis">
+                                                    <div class="panel-body">
+                                                        @foreach (var item in lstPrograms.Where(prg => prg.ProductID == 2 && prg.AdvCertFlag == "Y").ToList())
+                                                            {
+                                                            <div class="programElement text-left">
+                                                                <a class="disabled-link-adv" onclick='NavProgramSelect(2, "@item.BaseProgramID", "@item.ProgramName", "@item.AdvCertListTypeID")'>@item.ProgramName</a>
+                                                            </div>
+                                                            }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+    // Collapse accordion every time dropdown is shown
+    $('.dropdown-accordion').on('show.bs.dropdown', function (event) {
+        var accordion = $(this).find($(this).data('accordion'));
+        accordion.find('.panel-collapse.in').collapse('hide');
+    });
+
+    // Prevent dropdown to be closed when we click on an accordion link
+    $('.dropdown-accordion').on('click', 'a[data-toggle="collapse"]', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    })
+
+    function AccordionOpenClose(accordion) {
+        var bIsOpen = $($('#' + accordion).attr('data-target')).hasClass("collapse in");
+        if (bIsOpen == true) {
+            $($('#' + accordion).attr('data-target')).collapse('hide');
+            //$($('#' + accordion).attr('data-target')).removeClass("in");
+            $('#' + accordion + 'Icon').removeClass("caretInverse");
+        }
+        else {
+            $($('#' + accordion).attr('data-target')).collapse('show');
+            //$($('#' + accordion).attr('data-target')).addClass("in");
+            $('#' + accordion + 'Icon').addClass("caretInverse");
+            if (accordion == 'AdvDisHeader')
+                $('#divPrgDropDown').animate({ scrollTop: 600 }, 'fast');
+        }
+    }
+</script>

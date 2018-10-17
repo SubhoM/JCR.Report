@@ -1,0 +1,129 @@
+﻿@model JCR.Reports.Models.SearchList
+@{
+
+    // initial level checks
+    bool hasranking3 = Model.hasRanking3;
+    bool hasranking2 = Model.hasRanking2;
+    bool hasranking1 = Model.hasRanking1;
+   
+}
+
+
+<div id="overalltracerorg">
+    @if (hasranking1)
+    {
+        
+        @Html.Partial("Search/_InactiveOrgItemsCheckBox")
+    }
+    <div id="tracerorgcampus">
+        @{
+            if (@hasranking3)
+            {
+                string ranking3name = Model.OrgRanking3Name;
+
+                <h6><b>@ranking3name</b></h6>
+                <div class="margintop">
+
+
+                    @(Html.Kendo().MultiSelect()
+          .Name("OrgCampus")
+                  .DataTextField("OrganizationTitle")
+                  .DataValueField("OrganizationID")
+          .Placeholder("Select " + @ranking3name)
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model.CampusLists)
+          .Events(e =>
+                    {
+                        e.Change("onlevel3Change").Select("onOrgnizationTypeSelect");
+                    })
+.Value("-1")  
+                    )
+
+
+                </div>
+            }}
+    </div>
+    <div id="orgbottom2levels">
+        <div id="tracerorgbuilding">
+            @{
+            if (@hasranking2)
+            {
+                string ranking2name = Model.OrgRanking2Name;
+
+
+        <h6><b>@ranking2name</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("OrgBuilding")
+                  .DataTextField("OrganizationTitle")
+                  .DataValueField("OrganizationID")
+          .Placeholder("Select " + @ranking2name)
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model.BuildingLists)
+                  .Events(e =>
+                            {
+                                e.Change("onlevel2Change").Select("onOrgnizationTypeSelect");
+                            })
+                    .Value("-1")  
+            )
+        </div>
+
+            }
+
+            }
+
+        </div>
+        <div id="tracerorgdepartment">
+            @{
+
+            if (@hasranking1)
+            {
+                string ranking1name = Model.OrgRanking1Name;
+
+        <h6><b>@ranking1name</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("OrgDepartment")
+                  .DataTextField("OrganizationTitle")
+                  .DataValueField("OrganizationID")
+          .Placeholder("Select " + @ranking1name)
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model.DepartmentLists)
+                     .Events(e =>
+                                    {
+                                        e.Select("onOrgnizationTypeSelect");
+                                    })
+                .Value("-1") 
+        
+            )
+        </div>
+
+            }
+            else {  <script> $("#inactiveCheckbox").html("");</script>
+            }
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function onOrgnizationTypeSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.OrganizationTitle === "All") {
+            this.value("");
+        } else if (values.indexOf(-1) === 0) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            this.value(values);
+        }
+
+    }
+</script>

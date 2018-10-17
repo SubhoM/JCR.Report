@@ -1,0 +1,31 @@
+﻿<div>
+    <h6><b>Observation Status</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+            .Name("ObservationStatus")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .HtmlAttributes(new { style = "width: 147px" })
+                     .Events(e =>
+                            {
+                                e.Close("onObservationClose").Select("onObservationSelect");
+                            })
+            .BindTo(new List<SelectListItem>() {
+                new SelectListItem() {
+                      Text = "All",
+                      Value = "-1"
+                  },
+                  new SelectListItem() {
+                      Text = "Complete",
+                      Value = "8"
+                  },
+                  new SelectListItem() {
+                      Text = "In Progress",
+                      Value = "7"
+                  }
+              })
+            .Value("-1")
+           
+            )
+    </div>
+</div>

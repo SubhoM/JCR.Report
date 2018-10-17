@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBMEdition01_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="usmCorpChapterReportCumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmCorpEPReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmCorpProgramReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmCorpStandardReportCumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamLeadIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MSTeamMemberIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmERSelectUserbyUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmGetCorpUsersBySite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="UserRoleName" Type="varchar" Mode="In" />
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StatusId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmGetProgramsBySite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmGetUserSitesByProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="EProductID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmMSCorporateFindingsReportCumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="MatrixID" Type="int" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="CycleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmMSCorporateFindingsReportSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="MatrixID" Type="int" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="CycleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmMSCorporateFindingsReportSummaryByChapter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="MatrixID" Type="int" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="CycleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmMSCorporateFindingsReportSummaryBySite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="EPTextIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="MatrixID" Type="int" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="StatusID" Type="int" Mode="In" />
+    <Parameter Name="CycleID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmMSGetSaferMap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp" />
+  <Function Name="usmReport_GetStickyDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportComprehensiveScoringDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterID" Type="int" Mode="In" />
+    <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+    <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+    <Parameter Name="IsCorporateAccess" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usmReportEPAssignmentScoringDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+    <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+    <Parameter Name="DocRequired" Type="int" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+    <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+    <Parameter Name="OrgFindings" Type="int" Mode="In" />
+    <Parameter Name="OrgNotes" Type="int" Mode="In" />
+    <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+    <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+    <Parameter Name="EPAssigned" Type="int" Mode="In" />
+    <Parameter Name="EPNotAssigned" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportEPAssignmentScoringSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+    <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EPAssigned" Type="int" Mode="In" />
+    <Parameter Name="EPNotAssigned" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+    <Parameter Name="DocRequired" Type="int" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+    <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+    <Parameter Name="OrgFindings" Type="int" Mode="In" />
+    <Parameter Name="OrgNotes" Type="int" Mode="In" />
+    <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportEPScoringExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoredByList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="NotScoredInPeriodFlag" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+    <Parameter Name="DocRequired" Type="int" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+    <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+    <Parameter Name="OrgFindings" Type="int" Mode="In" />
+    <Parameter Name="OrgNotes" Type="int" Mode="In" />
+    <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+    <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportEPScoringReportFinalMockSurveyDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoredByList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyIDList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+    <Parameter Name="DocRequired" Type="int" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+    <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+    <Parameter Name="OrgFindings" Type="int" Mode="In" />
+    <Parameter Name="OrgNotes" Type="int" Mode="In" />
+    <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+    <Parameter Name="MockSurveyFindings" Type="int" Mode="In" />
+    <Parameter Name="MockSurveyRecommendations" Type="int" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+    <Parameter Name="IncludeCMS" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportEPScoringReportFinalMockSurveySummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreTypeList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoreValueList" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScoredByList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyIDList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="int" Mode="In" />
+    <Parameter Name="DocRequired" Type="int" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="int" Mode="In" />
+    <Parameter Name="PlanOfAction" Type="int" Mode="In" />
+    <Parameter Name="OrgFindings" Type="int" Mode="In" />
+    <Parameter Name="OrgNotes" Type="int" Mode="In" />
+    <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+    <Parameter Name="MockSurveyFindings" Type="int" Mode="In" />
+    <Parameter Name="MockSurveyRecommendations" Type="int" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetAssignmentStatusByUser_ChapterWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="AssignedToID" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+    <Parameter Name="DocRequired" Type="bit" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetAssignmentStatusByUser_EPWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+    <Parameter Name="DocRequired" Type="bit" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+    <Parameter Name="LevelIdentifier" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetAssignmentStatusByUser_StandardWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterID" Type="int" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="AssignedToID" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+    <Parameter Name="DocRequired" Type="bit" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetAssignmentStatusByUser_UserWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="AssignedToList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+    <Parameter Name="DocRequired" Type="bit" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="ScoreValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetChapterRFICumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="PSInclude" Type="bit" Mode="In" />
+    <Parameter Name="FSInclude" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetChaptersBySiteAndProgram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetEPRFI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="PSInclude" Type="bit" Mode="In" />
+    <Parameter Name="FSInclude" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetRFIbyProgram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="PSInclude" Type="bit" Mode="In" />
+    <Parameter Name="FSInclude" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetScoredByUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ChapterList" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ScoreTypeList" Type="varchar(max)" Mode="In" />
+    <Parameter Name="MockSurveyStatusID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetStandardRFICumulative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ChapterIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="OnlyFSAEPs" Type="bit" Mode="In" />
+    <Parameter Name="RFIInclude" Type="bit" Mode="In" />
+    <Parameter Name="PSInclude" Type="bit" Mode="In" />
+    <Parameter Name="FSInclude" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetStandardsByProgramChapters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="ChapterList" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ProgramList" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetUserAssignedToSiteIDAndAssignment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProgramList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ChapterList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StandardList" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ScoreType" Type="int" Mode="In" />
+    <Parameter Name="IncludeFSA" Type="bit" Mode="In" />
+    <Parameter Name="DocRequired" Type="bit" Mode="In" />
+    <Parameter Name="NewChangedEPs" Type="bit" Mode="In" />
+    <Parameter Name="DateStart" Type="datetime" Mode="In" />
+    <Parameter Name="DateEnd" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmSelectMockSurveysBySites" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="amp">
+    <Parameter Name="SiteList" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StatusId" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportCMSComplianceExcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="ComplianceValueList" Type="nvarchar" Mode="In" />
+    <Parameter Name="CoPIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TagIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IdentifiedByIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PlanOfCorrection" Type="int" Mode="In" />
+    <Parameter Name="OrgCMSFindings" Type="int" Mode="In" />
+    <Parameter Name="CMSSurveyorFindings" Type="int" Mode="In" />
+    <Parameter Name="LinkedDocs" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+    <Parameter Name="CertificationItemID" Type="int" Mode="In" />
+    <Parameter Name="IncludeTJC" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetCMSProgramsBySiteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetCMSSitesByProgramID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetCoPsByProgramID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+    <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetIdentifiedUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+    <Parameter Name="SiteIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CoPIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TagIDs" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetTagsByProgramIDAndCoPID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cms">
+    <Parameter Name="ProgramIDs" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CopIDs" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usmGetLicenseDetailsForCMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SiteID" Type="int" Mode="In" />
+    <Parameter Name="ProgramID" Type="int" Mode="In" />
+    <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmGetLicenseDetailsForCMSByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="SubscriptionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetHcoIDs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usmReportGetProgrambySites" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SiteIDs" Type="varchar(max)" Mode="In" />
+    <Parameter Name="StandardEffBeginDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usmSelectSitesByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="DBMEdition01_ModelStoreContainer" />
+</Schema>

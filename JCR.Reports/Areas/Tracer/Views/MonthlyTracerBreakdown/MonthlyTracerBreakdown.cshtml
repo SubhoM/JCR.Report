@@ -1,0 +1,110 @@
+﻿
+<div>
+    <div id="resultMTB" style="width:97vw;">
+        @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.TracerBreakdownExcel>()
+                    .Name("gridMTB")
+                    .ToolBar(tools => tools.Excel())
+                    .Excel(excel => excel
+                                    .AllPages(true)
+                                    .FileName("Monthly Tracer Breakdown.xlsx")
+                                    .Filterable(true)
+                                    .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                            )
+                    .Columns(col =>
+                                {
+                                    col.Bound(p => p.TracerName).Title("Tracer").Locked().Width(400);
+
+                                    for (int i = 0; i < ViewBag.Header.Count; i++)
+                                    {
+                                        string c = ViewBag.Header[i];
+                                        col.Group(g => g.Title(c).HeaderHtmlAttributes(new { style = "text-align:center" }).
+                                            Columns(monthwise =>
+                                                    {
+                                                        monthwise.Bound(p => p.MonthwiseTracer[i].ObservationsCount).Width(147)
+                                                            .ClientFooterTemplate("#=sum#").IncludeInMenu(i == 0);
+                                                        monthwise.Bound(p => p.MonthwiseTracer[i].Numerator).Width(90)
+
+                                                            .ClientFooterTemplate("#=setNumeratorTotal(sum," + i + ")#").IncludeInMenu(i == 0);
+                                                        monthwise.Bound(p => p.MonthwiseTracer[i].Denominator).Width(90)
+
+                                                         .ClientFooterTemplate("#=setDenominatorTotal(sum," + i + ")#").IncludeInMenu(i == 0);
+                                                        monthwise.Bound(p => p.MonthwiseTracer[i].CompliancePercentage).Width(90).Format("{0:0.0}%")
+
+                                                          .ClientFooterTemplate("#= kendo.toString(calculateAggregate(NumeratorTotalValue[" + i + "], DenominatorTotalValue[" + i + "]),'0.0') #%").IncludeInMenu(i == 0);
+                                                    }));
+                                    }
+                                })
+                    .Sortable()
+                    .AutoBind(false)
+                    .Scrollable(sc => sc.Height("auto"))
+                    .HtmlAttributes(new { style = "font-size:12px;line-height:1em;" })
+                    .DataSource(dataSource => dataSource // Configure the grid data source
+                                                .Ajax() // Specify that ajax binding is used
+                                                .ServerOperation(false)
+                                                .Model(m =>
+                                                    {
+                                                        m.Field(p => p.TracerName);
+                                                        for (int i = 0; i < ViewBag.Header.Count; i++)
+                                                        {
+                                                            m.Field(p => p.MonthwiseTracer[i].ObservationsCount);
+                                                            m.Field(p => p.MonthwiseTracer[i].Numerator);
+                                                            m.Field(p => p.MonthwiseTracer[i].Denominator);
+                                                            m.Field(p => p.MonthwiseTracer[i].CompliancePercentage);
+                                                        }
+                                                    })
+                                                .Aggregates(a =>
+                                                    {
+                                                        for (int i = 0; i < ViewBag.Header.Count; i++)
+                                                        {
+                                                            a.Add(p => p.MonthwiseTracer[i].ObservationsCount).Sum();
+                                                            a.Add(p => p.MonthwiseTracer[i].Numerator).Sum();
+                                                            a.Add(p => p.MonthwiseTracer[i].Denominator).Sum();
+                                                            a.Add(p => p.MonthwiseTracer[i].CompliancePercentage).Sum().Average();
+                                                        }
+                                                    })
+                                                .Events(e => e.Error("error_handler"))
+                                                .Read(read => read.Action("MonthlyTracerBreakdownExcel", "MonthlyTracerBreakdown").Data("additionalData")) // Set the action method which will return the data in JSON format
+                                                .PageSize(20))
+                    .Events(e => e.ExcelExport("excelExport").ColumnHide("onColumnHide").ColumnShow("onColumnShow").DataBound("onExcelDataBound"))
+                    .Filterable(filter => filter
+                            .Extra(false)
+                            .Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .StartsWith("Starts with")
+                            .IsEqualTo("Is equal to")
+                            .IsNotEqualTo("Is not equal to")
+                            )))
+                    .ColumnMenu(columnsmenu => columnsmenu.Columns(true))
+                    .Reorderable(reorder => reorder.Columns(true))
+                    .Resizable(resizing => resizing.Columns(true))
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 }))
+        )
+
+    </div>
+
+</div>
+
+<style>
+    #resultMTB {
+        display: block;
+    }
+    
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var windowHeight = $(window).height() * .75;
+
+        //if(windowHeight > 750)
+        //    $('#gridMTB').addClass("viewHeight");
+        //else
+        //    $('#gridMTB').addClass("setHeight");
+        $(".k-grid-content").css("min-height", "450px");
+        $(".k-grid-content").css("height", windowHeight + "px");
+    });
+
+    
+</script>

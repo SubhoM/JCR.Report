@@ -1,0 +1,80 @@
+﻿@model JCR.Reports.ViewModels.SearchViewModel
+    <div id="SavedReportCreatedBy">
+       <h6><b>Created By</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+                  .Name("ReportsCreatedBy")
+                  .DataTextField("FullName")
+                          .DataValueField("UserID")
+          .Placeholder("Select Created By")
+          .Filter(FilterType.Contains)
+                  .BindTo(Model.CreatedByUsers)
+          .AutoClose(false)
+                   .Events(e =>
+                    {
+                        e.Select("onCreatedBySelect");
+                    })
+                  .Value("-1")   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("ReportsCreatedBy");
+      //  removedeleteoption1("ReportsCreatedBy");
+    });
+    //function onCreatedByClose(e) {
+    //    removedeleteoption1("ReportsCreatedBy");
+    //}
+
+    //function removedeleteoption1(multiselectname) {
+
+    //    if ($("#" + multiselectname).data("kendoMultiSelect").value().toString() === "-1") {
+    //        var selectedTCtext = $("#" + multiselectname + " option[value='-1']").text()
+
+    //        if (selectedTCtext === "All ") {
+    //            $('#' + multiselectname + '_taglist .k-button').html("<span unselectable='on'>All</span><span>&nbsp;</span>");
+    //        }
+    //    }
+
+    //}
+    function onCreatedBySelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+       
+        if (dataItem.FullName === "All ") {
+            $('#ReportsCreatedBy').data("kendoMultiSelect").value([]);
+        
+        } else if (jQuery.inArray("-1", values)) {
+           values = $.grep(values, function (value) {
+               return value !== -1;
+            });
+                  
+            if (values == "") { this.value(values); }
+         }
+       
+      
+    }
+   
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

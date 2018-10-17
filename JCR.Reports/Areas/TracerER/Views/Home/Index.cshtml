@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Tracers";
+
+    var offsetClass = ViewBag.IsCMSProgram == true ? "col-xs-offset-1" : "col-xs-offset-2";
+}
+<div class="row">
+    <div class="col-xs-2  @offsetClass">
+        <strong>Tracer Report</strong>
+    </div>
+    @if (ViewBag.IsCMSProgram == true)
+    {
+        <div class="col-xs-1">
+            <strong>Applies To</strong>
+        </div>
+    }
+    <div class="col-xs-6">
+        <strong>Description</strong>
+    </div>
+</div>
+
+@foreach (var reportList in Model.List)
+{
+
+<div class="row margintopadd">
+       <div class="col-xs-2  @offsetClass">
+            <a href="/TracerER/@reportList.ReportSource/Index/@reportList.ERReportID">@reportList.ERReportName</a>
+            <span style="color: #C61835; font-weight: bold; margin-left: 5px;">@reportList.ReportChangeStatus</span>
+    </div>
+    @if (ViewBag.IsCMSProgram == true)
+    {
+        <div class="col-xs-1">
+            <strong>@Html.Raw(reportList.ReportType)</strong>
+        </div>
+    }
+    <div class="col-xs-6">
+            @Html.Raw(reportList.ERReportDescription)
+    </div>
+</div>
+}
+
+@Html.Hidden("Command")
+@Html.Hidden("SelectedReportName")
+
+<script>
+    var matchNotFound = false
+    if (hMenuBuilder.renderBreadCrumbTrail() == matchNotFound) {
+        vMenuBuilder.renderBreadCrumbTrail();
+    }
+</script>

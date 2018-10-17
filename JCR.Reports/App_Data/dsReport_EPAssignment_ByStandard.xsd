@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReport_EPAssignment_ByStandard" targetNamespace="http://tempuri.org/dsReport_EPAssignment_ByStandard.xsd" xmlns:mstns="http://tempuri.org/dsReport_EPAssignment_ByStandard.xsd" xmlns="http://tempuri.org/dsReport_EPAssignment_ByStandard.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DBMEdition01_Write" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DBMEdition01_Write (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DBMEdition01_Write.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReport_EPAssignment_ByStandard" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReport_EPAssignment_ByStandard" msprop:Generator_UserDSName="dsReport_EPAssignment_ByStandard">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="usmReport_EPAssignment_ByStandard" msprop:Generator_TableClassName="usmReport_EPAssignment_ByStandardDataTable" msprop:Generator_TableVarName="tableusmReport_EPAssignment_ByStandard" msprop:Generator_TablePropName="usmReport_EPAssignment_ByStandard" msprop:Generator_RowDeletingName="usmReport_EPAssignment_ByStandardRowDeleting" msprop:Generator_RowChangingName="usmReport_EPAssignment_ByStandardRowChanging" msprop:Generator_RowEvHandlerName="usmReport_EPAssignment_ByStandardRowChangeEventHandler" msprop:Generator_RowDeletedName="usmReport_EPAssignment_ByStandardRowDeleted" msprop:Generator_UserTableName="usmReport_EPAssignment_ByStandard" msprop:Generator_RowChangedName="usmReport_EPAssignment_ByStandardRowChanged" msprop:Generator_RowEvArgName="usmReport_EPAssignment_ByStandardRowChangeEvent" msprop:Generator_RowClassName="usmReport_EPAssignment_ByStandardRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StandardID" msprop:Generator_ColumnVarNameInTable="columnStandardID" msprop:Generator_ColumnPropNameInRow="StandardID" msprop:Generator_ColumnPropNameInTable="StandardIDColumn" msprop:Generator_UserColumnName="StandardID" type="xs:int" />
+              <xs:element name="StandardLabel" msprop:Generator_ColumnVarNameInTable="columnStandardLabel" msprop:Generator_ColumnPropNameInRow="StandardLabel" msprop:Generator_ColumnPropNameInTable="StandardLabelColumn" msprop:Generator_UserColumnName="StandardLabel" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EPCount" msprop:Generator_ColumnVarNameInTable="columnEPCount" msprop:Generator_ColumnPropNameInRow="EPCount" msprop:Generator_ColumnPropNameInTable="EPCountColumn" msprop:Generator_UserColumnName="EPCount" type="xs:int" minOccurs="0" />
+              <xs:element name="AssignedCount" msprop:Generator_ColumnVarNameInTable="columnAssignedCount" msprop:Generator_ColumnPropNameInRow="AssignedCount" msprop:Generator_ColumnPropNameInTable="AssignedCountColumn" msprop:Generator_UserColumnName="AssignedCount" type="xs:int" minOccurs="0" />
+              <xs:element name="NotAssignedCount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNotAssignedCount" msprop:Generator_ColumnPropNameInRow="NotAssignedCount" msprop:Generator_ColumnPropNameInTable="NotAssignedCountColumn" msprop:Generator_UserColumnName="NotAssignedCount" type="xs:int" minOccurs="0" />
+              <xs:element name="AssignedPercent" msprop:Generator_ColumnVarNameInTable="columnAssignedPercent" msprop:Generator_ColumnPropNameInRow="AssignedPercent" msprop:Generator_ColumnPropNameInTable="AssignedPercentColumn" msprop:Generator_UserColumnName="AssignedPercent" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NotAssignedPercent" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNotAssignedPercent" msprop:Generator_ColumnPropNameInRow="NotAssignedPercent" msprop:Generator_ColumnPropNameInTable="NotAssignedPercentColumn" msprop:Generator_UserColumnName="NotAssignedPercent" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PageGroup" msprop:Generator_ColumnVarNameInTable="columnPageGroup" msprop:Generator_ColumnPropNameInRow="PageGroup" msprop:Generator_ColumnPropNameInTable="PageGroupColumn" msprop:Generator_UserColumnName="PageGroup" type="xs:int" default="1" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:usmReport_EPAssignment_ByStandard" />
+      <xs:field xpath="mstns:StandardID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

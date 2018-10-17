@@ -1,0 +1,200 @@
+﻿<div class="panel panel-default " id="divL1tag" style="border-color:#428bca !important; width:100%;">
+    <div class="row ">
+        <div class=" col-xs-12">
+            <table style="width:100%">
+                <tr>
+                    <td style="width:25%;" align="left">
+                        @(Html.Kendo().Button()
+                                            .Name("exporttopdf")
+                                            .HtmlAttributes(new { type = "button", @class = "k-button" })
+                                            .Content("<span class='k-icon k-i-pdf'></span><span>&nbsp;</span><span class='glyphfontsize'>Export to PDF</span>")
+                        )
+                        @(Html.Kendo().Button()
+                                    .Name("exportoexcel")
+                                    .HtmlAttributes(new { type = "button", @class = "k-button" })
+                                            .Content("<span class='k-icon k-i-excel'></span><span>&nbsp;</span><span class='glyphfontsize'>Export to Excel</span>")
+                        )
+
+                    </td>
+                    <td style="width:50%" align="center">
+                        <div id="divL1Viewtag" style=" border-color: black !important;">
+                            <table>
+                                <tr>
+                                    <td style="margin-right:10px;">
+                                        View:
+                                    </td>
+                                    <td style="white-space: nowrap;">
+                                        <label id="lblL1Graph" style="font-weight: normal; margin-top: 10px; margin-left: 10px;">
+                                            <input id="radioL1Graph" style="float: left; margin-right: 5px; " type="radio" value="L1selectGraph" name="L1selectView" checked="checked">
+                                            <label id="inputL1Graph"><span class="glyphicon glyphicon-stats" style="margin-right:3px;"></span>Graph</label>
+                                        </label>
+                                        <label id="lblL1Data" style="font-weight: normal; margin-top: 10px; ">
+                                            <input id="radioL1Data" style="float: left; margin-right: 5px; " type="radio" value="L1selectData" name="L1selectView">
+                                            <label id="inputL1Data"><span class="glyphicon glyphicon-align-justify" style="margin-right:3px;"></span>Data</label>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </td>
+                    <td style="width:25%" align="right">
+                        <div id="divpreviouslevel" style="display:none;">
+                            @(Html.Kendo().Button()
+                            .Name("previousLevelButton")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                            .Content("<span class='glyphicon glyphicon-arrow-left'></span><span>&nbsp;</span><span class='glyphfontsize'>Previous Level</span>")
+                            )
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table style="width:100%">
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters1" style="font-weight:bold;font-size:large;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters2" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters8" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters3" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters6" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters4" style="font-weight:bold;font-size:small;width:30%"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters5" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+              
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters7" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12" id="divtoplevel1">
+            <div id="divlevelchart" style="width: 60%; margin-left: auto; margin-right: auto;" align="center"></div>
+            <div id="divleveldata" style="display: none; cursor: pointer;" class="myHoverClass"></div>
+        </div>
+        <div class="col-xs-12" id="divtoplevel2" style="display: none;">
+            <div id="divlevel2chart" style="width: 80%; margin-left: auto; margin-right: auto;" align="center"></div>
+            <div id="divlevel2data" style="display: none; cursor: pointer;" class="myHoverClass"></div>
+        </div>
+        <div class="col-xs-12" id="divtoplevel3" style="display: none;">
+            <div id="divLevel3ChartHeader" style="width:100%; text-align:center; font-size:16px; font-family: Arial, Helvetica, sans-serif; color: #c61835; padding: 10px 0 10px 0;">
+                Click graph for more details
+            </div>
+            <div id="divlevel3chart" style="cursor: pointer;" align="center" class="myHoverClass"></div>
+            <div id="divlevel3data" style="display: none; cursor: pointer;" class="myHoverClass"></div>
+        </div>
+        <div class="col-xs-12" id="divtoplevel4" style="display: none;">
+            <div id="divlevel4chart" style="width: 80%; margin-left: auto; margin-right: auto;" align="center"></div>
+            <div id="divlevel4data" style="display: none; cursor: pointer;" class="myHoverClass"></div>
+        </div>
+      
+        <div class="col-xs-12" id="divtoplevel5" style="display: none;">
+            <div id="divlevel5data" style="display: none;" class="myHoverClass"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    #lblL1Data {
+        margin-left: 10px;
+    }
+ </style>
+
+<script>
+    $(document).ready(function () {
+        $("#exportoexcel").css("display", "none");
+        //enable chart view or not based on radio button chagne
+        $("input[name=L1selectView]:radio").change(function () {
+            if ($('input[name=L1selectView]:checked').val() === "L1selectGraph") {
+
+                $("#exportoexcel").css("display", "none");
+                $("#exporttopdf").css("display", "block");
+                showlevelGraph();
+            } else {
+                $("#exportoexcel").css("display", "block");
+                $("#exporttopdf").css("display", "none");
+                showlevelData();
+            }
+        })
+
+        $("#previousLevelButton").click(function () {
+            DisplayLevel();
+            $('input:radio[id*="radioL1Graph"]').prop('checked', true);
+
+        });
+        $("#exporttopdf").click(function () {
+            //blockElement("divL1tag");
+            ERPDFExportByLevel();
+        });
+        $("#exportoexcel").click(function () {
+            //blockElement("divL1tag");
+            ERExcelExportByLevel();
+
+        });
+
+    });
+
+
+
+    $(window).resize(function () {
+        switch (LevelIdentifier) {
+            case 1:
+                $("#divlevelchart").data("kendoChart").refresh();
+                break;
+            case 2:
+                $("#divlevel2chart").data("kendoChart").refresh();
+                   
+                break;
+            case 3:
+               //  $("#divlevel3chart").data("kendoChart").refresh();
+                break;
+            case 4:
+                 $("#divlevel4chart").data("kendoChart").refresh();
+                break;
+        }
+    });
+
+
+</script>
+<script id="ComplianceTemplate" type="text/x-kendo-template">
+    <div class='chartquestion' style="height:75px;"></div>
+</script>
+
+
+

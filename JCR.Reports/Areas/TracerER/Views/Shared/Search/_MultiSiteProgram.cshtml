@@ -1,0 +1,45 @@
+﻿@model IEnumerable<JCR.Reports.Models.ProgramVM>
+<div id="multisiteprogram">
+    <h6><b>Program</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+            .Name("MultiSiteProgram")
+            .DataTextField("ProgramName")
+            .DataValueField("ProgramID")
+            .Placeholder("Select Program")
+            .Filter(FilterType.Contains)
+            .HighlightFirst(true)
+            .BindTo(Model)
+            .AutoClose(false)
+            .Events(e =>
+            {
+                e.Change("onMSProgramChange").Select("onMSProgramSelect");
+            })
+            .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("MultiSiteProgram");
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

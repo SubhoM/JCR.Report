@@ -1,0 +1,53 @@
+﻿@using JCR.Reports.Common;
+<div id="setTotalCompletedObsCheckbox" class="checkbox" style="margin-left:20px">
+    <input id="totalcompletedobsValuebox" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="totacomobscheckboxChange();">
+    <span>Set <canvas id='totalcomcolorpicker' width='15' height='15' style='background-color:lightblue;border:1px solid;vertical-align:text-bottom;'></canvas> for</span>
+    @(Html.Kendo().DropDownList()
+        .Name("SetTotalCompletedObs")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .Enable(false)
+        .BindTo(new List<SelectListItem>() {
+            new SelectListItem() {
+                Text = "less than",
+                Value = "lt"
+            },
+            new SelectListItem() {
+                Text = "greater than",
+                Value = "gt"
+            }
+        })
+        .HtmlAttributes(new { style = "width:100px;" })
+        .Value("1")
+    )
+    @(Html.Kendo().NumericTextBox<int>()
+        .Name("totalcompletedobsvalue")
+        .Min(0)
+        .Max(1000000)
+        .HtmlAttributes(new { style = "width:40px;" })
+        .Value(1)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("#")
+        .Enable(false)
+    ) Total Completed Observation
+</div>
+
+
+
+<script type="text/javascript">
+    function totacomobscheckboxChange() {
+        var numerictextbox = $("#totalcompletedobsvalue").data("kendoNumericTextBox");
+        var ddl = $('#SetTotalCompletedObs').data("kendoDropDownList");
+
+        if ($('#totalcompletedobsValuebox').is(':checked')) {
+            numerictextbox.enable(true);
+            ddl.enable(true);
+        }
+        else {
+            ddl.enable(false);
+            numerictextbox.enable(false);
+            //numerictextbox.value(1);
+        }
+    }
+</script>

@@ -1,0 +1,54 @@
+﻿@model JCR.Reports.Models.SearchList
+<div id="taskstatus">
+    <h6><b>Task Status</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("TaskStatus")
+          .DataTextField("TracerStatusName")
+          .DataValueField("TracerStatusID")
+          .Placeholder("Select Status")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model.TracerStatuses)
+          .AutoClose(false)
+          .Events(e =>
+                {
+                    e.Select("onTaskStatusChangeSelect");
+                })
+          .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TaskStatus");
+       // removedeleteoption("TaskStatus");
+    });
+    //function onTaskStatusClose(e) {
+    //    removedeleteoption("TaskStatus");
+    //}
+    function onTaskStatusChangeSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.TracerStatusName === "All") {
+            $('#TaskStatus').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+
+  
+
+</script>
+
+
+
+
+
+

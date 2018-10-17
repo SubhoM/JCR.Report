@@ -1,0 +1,38 @@
+﻿@using JCR.Reports.Common;
+<div class="row" id="divScheduledReportDesc">
+    <div class="col-xs-3 col-md-3 col-lg-3 text-right" style="vertical-align:bottom; margin-top:10px;">
+        <b>Custom Report Description:</b>
+        <p>(Optional)</p>
+    </div>
+    <div class="col-xs-5">
+        <input type="text" id="txtScheduledReportDesc" maxlength="250" class="form-control" value="@AppSession.ReportScheduleDesc" placeholder="Report Description" />
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Update report desc on the recurrence screen
+        $('#txtScheduledReportDesc').focusout(function () {
+            if ($('#txtScheduledReportDesc1').length > 0) {
+                var reportDesc = $(this).val().trim();
+                if (reportDesc != null) {
+                    $('#txtScheduledReportDesc1').val(reportDesc);
+                }
+            }
+        });
+    });
+
+    function ValidateScheduledReportDesc(ctrl, tooltipPosition) {
+        var txtCtrl = $('#' + ctrl)
+        var Is250Chars = $(txtCtrl).val().length <= 250;
+
+        if (!Is250Chars) {
+            ShowToolTip(txtCtrl, 'Please enter a maximum of 100 characters.', tooltipPosition, 6000);
+        }
+        return Is250Chars;
+    }
+</script>
+<style type="text/css">
+    .tooltip-inner {
+        width: 350px;
+    }
+</style>

@@ -1,0 +1,64 @@
+﻿@model JCR.Reports.Models.SearchList
+<div id="tracerFrequency">
+    <h6><b>Tracer Frequency</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+                      .Name("TracersFrequency")
+                      .DataTextField("TracerObsFrequencyTypeName")
+                      .DataValueField("TracerObsFrequencyTypeID")
+                      .Placeholder("Select Tracer Frequency")
+                      .HighlightFirst(true)
+                      .Filter(FilterType.Contains)
+                      .BindTo(Model.TracerFrequencyLists)
+                     .ValuePrimitive(false)
+                     .AutoClose(false)
+                              .Events(e =>
+                              {
+                                  e.Change("tracerlistTracerDepartmentassignment").Select("onFrequencyTypeSelect");
+                                  
+                              })
+                     .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+        addarrowtomultiselect("TracersFrequency");
+      
+    });
+   
+    function onFrequencyTypeSelect(e) {
+        var dataItem = this.dataSource.view()[e.item.index()];
+        var values = this.value();
+        if (dataItem.TracerObsFrequencyTypeName === "All") {
+            $('#TracersFrequency').data("kendoMultiSelect").value([]);
+        } else if (jQuery.inArray("-1", values)) {
+            values = $.grep(values, function (value) {
+                return value !== -1;
+            });
+            if (values == "") { this.value(values); }
+        }
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

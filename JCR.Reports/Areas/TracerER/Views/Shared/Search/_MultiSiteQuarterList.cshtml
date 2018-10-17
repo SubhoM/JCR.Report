@@ -1,0 +1,51 @@
+﻿@model JCR.Reports.Models.ERSearchList
+<div id="tracerList">
+    <h6><b>Quarter</b></h6>
+    <div class="margintop">
+        @(Html.Kendo().MultiSelect()
+                      .Name("QuartersList")
+                      .DataTextField("QuarterPeriodName")
+                      .DataValueField("QuarterPeriodID")
+                      .Placeholder("Select Quarter")
+                      .HighlightFirst(true)
+                      .Filter(FilterType.Contains)
+                              .BindTo(Model.QuartersLists)
+                     .ValuePrimitive(false)
+                     .AutoClose(false)
+                              .Events(e =>
+                            {
+                                e.Select("onMultiQuarterListSelect");
+                            })
+                     .Value("8")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("QuartersList");
+     
+    });
+   
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

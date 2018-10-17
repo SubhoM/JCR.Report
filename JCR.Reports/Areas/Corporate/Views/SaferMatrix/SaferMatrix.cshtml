@@ -1,0 +1,456 @@
+﻿<style type="text/css">
+    @@media print {
+        body > * {
+            display: none !important;
+        }
+
+        body > .k-window {
+            display: block !important;
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: auto !important;
+            height: auto !important;
+            border-width: 0;
+            box-shadow: none !important;
+        }
+
+        .k-window .k-window-titlebar, #btnPrint {
+            display: none;
+        }
+    }
+</style>
+<div class="panel panel-default " id="divL1tag" style="border-color: #428bca !important; width:100%; ">
+    <div class="row ">
+        <div class="col-xs-12">
+            <table style="width:100%">
+                <tr>
+                    <td style="width:25%;" align="left">
+                        @(Html.Kendo().Button()
+                                            .Name("exporttopdf")
+                                            .HtmlAttributes(new { type = "button", @class = "k-button" })
+                                            .Content("<span class='k-icon k-i-pdf'></span><span>&nbsp;</span><span class='glyphfontsize'>Export to PDF</span>")
+                        )
+                        @(Html.Kendo().Button()
+                                    .Name("exportoexcel")
+                                    .HtmlAttributes(new { type = "button", @class = "k-button" })
+                                            .Content("<span class='k-icon k-i-excel'></span><span>&nbsp;</span><span class='glyphfontsize'>Export to Excel</span>")
+                        )
+
+                    </td>
+                    <td style="width:50%" align="center">
+                        <div id="divL1Viewtag" style="border-color: black !important;">
+                            <table>
+                                <tr>
+                                    <td style="margin-right:10px; font-weight:bold;">
+                                        View:
+                                    </td>
+                                    <td style="white-space: nowrap;">
+                                        <label id="lblL1Graph" style="font-weight: normal; margin-top: 10px; margin-left: 10px;">
+                                            <input id="radioL1Graph" style="float: left; margin-right: 5px; " type="radio" value="L1selectGraph" name="L1selectView" checked="checked">
+                                            <label id="inputL1Graph"><span class="glyphicon glyphicon-stats" style="margin-right:3px;"></span>Graph</label>
+                                        </label>
+                                        <label id="lblL1Summary" style="font-weight: normal; margin-top: 10px; ">
+                                            <input id="radioL1Summary" style="float: left; margin-right: 5px; " type="radio" value="L1selectSummary" name="L1selectView">
+                                            <label id="inputL1Summary"><span class="glyphicon glyphicon-th-list" style="margin-right:3px;"></span>Summary</label>
+                                        </label>
+                                        <label id="lblL1Data" style="font-weight: normal; margin-top: 10px; ">
+                                            <input id="radioL1Data" style="float: left; margin-right: 5px; " type="radio" value="L1selectData" name="L1selectView">
+                                            <label id="inputL1Data"><span class="glyphicon glyphicon-align-justify" style="margin-right:3px;"></span>Detail</label>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </td>
+                    <td style="width:25%" align="right">
+                        <div id="divpreviouslevel" style="display:none;">
+                            @(Html.Kendo().Button()
+                            .Name("previousLevelButton")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary btn-sm  focusButton" })
+                            .Content("<span class='glyphicon glyphicon-arrow-left'></span><span>&nbsp;</span><span class='glyphfontsize'>Previous Level</span>")
+                            )
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table style="width:100%">
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters1" style="font-weight:bold;font-size:large;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters6" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters2" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters3" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters4" style="font-weight:bold;font-size:small;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters5" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters7" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters8" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters9" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters10" style="font-weight:bold;font-size:small"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" width="100%">
+                        <span id="spanSelParameters11" style="font-weight:bold;font-size:small;font-style:italic;"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-xs-12" id="divtoplevel1">
+            <div style="width: 100%; margin-left: auto; margin-right: auto;" align="center">
+                <div class="row PaddingTopBottom10" id="proramSelection" >
+                    <div class="col-xs-12 text-center">
+                        <div class="PaddingTopBottom10" style="display:inline-block;">
+                            <div id="divReportProgram"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="error_msgInternal" class="col-xs-12" style="display:none;">
+
+                    </div>
+                </div>
+            </div>
+            <div id="divlevelchartParent" class="text-center" style="width: 60%; margin-left: auto; margin-right: auto;">
+                <div id="divlevelchart">
+                    
+                </div>
+            </div>
+            <div class="col-xs-12 text-center MarginTopBottom10">
+                <div id="divlevelSummary" style="display: none; cursor: default; width:450px;" class="myHoverClass"></div>
+            </div>
+            <div id="divleveldata" style="display: none; cursor: default;" class="myHoverClass"></div>
+            <div id="divDetail" style="display: none; cursor: default;"></div>
+
+        </div>
+        <div class="col-xs-12 text-center" id="divtoplevel2"  style="display: none;">
+            <div id="divlevel2chart" style="width: 80%; margin-left: auto; margin-right: auto;" align="center"></div>
+            <div class="col-xs-12 text-center MarginTopBottom10">
+                <div id="divlevel2Summary" style="display: none; cursor: default; width:450px;" class="myHoverClass"></div>
+            </div>
+            <div id="divlevel2data" style="display: none; cursor: default;" class="myHoverClass"></div>
+        </div>
+        <div class="col-xs-12 text-center" id="divtoplevel3" style="display: none;">
+            <div id="divlevel3chart" style="width: 80%; margin-left: auto; margin-right: auto;" align="center"></div>
+            <div class="col-xs-12 text-center MarginTopBottom10">
+                <div id="divlevel3Summary" style="display: none; cursor: default; width:450px;" class="myHoverClass"></div>
+            </div>
+            <div id="divlevel3data" style="display: none; cursor: default;" class="myHoverClass"></div>
+            
+        </div>
+        <div class="col-xs-12 text-center" id="divtoplevel4" style="display: none;">
+            <div id="divlevel4chart" style="width: 60%; margin-left: auto; margin-right: auto;" align="center"></div>
+            <div class="col-xs-12 text-center MarginTopBottom10">
+                <div id="divlevel4Summary" style="display: none; cursor: default; width:450px;" class="myHoverClass"></div>
+            </div>
+            <div id="divlevel4data" style="display: none; cursor: default;" class="myHoverClass"></div>           
+        </div>
+        <div class="col-xs-12 text-center" id="divtoplevel5" style="display: none;">
+            <div id="divlevel5data" style="display: none; cursor: default; " class="myHoverClass"></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script type="text/x-kendo-template" id="SaferMatrixTemplate">
+    <div id="details-container">
+        <div style="width:950px;">
+            <div class="col-xs-12 text-center">
+                <br /><br /><span class="clickLegend">Click graph for more details</span><br /><br />
+            </div>
+            <div class="row" >
+                <div class="col-xs-1 VerticalText">
+                    <b>Likelihood to Harm a Patient/Visitor/Staff</b>
+                </div>
+                <div class="col-xs-11">
+
+                    <div class="row overFlowHidden" id="immediateThreatRow">
+                        <div class="col-xs-1 middleAlign"><b>ITL</b></div>
+                        <div class="col-xs-9 ImmediateThreat PaddingTop10" onclick='onLevel1SeriesClick("1000")'>#= ImmediateThreat #</div>
+                    </div>
+                    <div class="row overFlowHidden">
+                        <div class="col-xs-1 negativeMargin middleAlign"><b>High</b></div>
+                        <div class="col-xs-3 HighThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1321")'>#= HighLimited #</div>
+                        <div class="col-xs-3 HighThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1322")'>#= HighPattern #</div>
+                        <div class="col-xs-3 HighThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1323")'>#= HighWidespread #</div>
+                    </div>
+
+                    <div class="row overFlowHidden">
+                        <div class="col-xs-1 negativeMargin middleAlign"><b>Moderate</b></div>
+                        <div class="col-xs-3 LowThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1221")'>#= ModerateLimited #</div>
+                        <div class="col-xs-3 ModerateThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1222")'>#= ModeratePattern #</div>
+                        <div class="col-xs-3 ModerateThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1223")'>#= ModerateWidespread #</div>
+                    </div>
+
+                    <div class="row overFlowHidden">
+                        <div class="col-xs-1 middleAlign negativeMargin"><b>Low</b></div>
+                        <div class="col-xs-3 LowLimited negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1121")'>#= LowLimited #</div>
+                        <div class="col-xs-3 LowThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1122")'>#= LowPattern #</div>
+                        <div class="col-xs-3 LowThreat negativeMargin PaddingTop10" onclick='onLevel1SeriesClick("1123")'>#= LowWidespread #</div>
+                    </div>
+                    <div class="row overFlowHidden">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 "><b>Limited</b></div>
+                        <div class="col-xs-3 "><b>Pattern</b></div>
+                        <div class="col-xs-3 "><b>Widespread</b></div>
+                    </div>
+                    <div class="row overFlowHidden">
+
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-9 ">
+                            <div style="display:inline-block; padding-top:5px;">
+                                    <b>Scope</b>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="DocumentTemplate">
+
+    <div id="details-container" style="width: 98%;">
+        <dl>
+
+            <dt class="row text-center"><b>#if (HCOID == null) {# SiteID:#= SiteID ##} else {# HCOID:#= HCOID ##}#/ #= StandardLabel #</b></dt>
+            
+            #if (ScoreType == 4) {# <dt><br /><u><b>Findings</b></u>#if (Findings == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=Findings#</span> #}# </dt> #}#
+            #if (ScoreType == 4) {# <dt><br /><u><b>Recommendations</b></u>#if (Recommendations == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=Recommendations#</span> #}# </dt> #}#
+            #if (ScoreType != 4) {# <dt><br /><u><b>Organizational Findings</b></u>#if (Findings == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=Findings#</span> #}# </dt> #}#
+            <dt><br /><u><b>Plan of Action</b></u>#if (POA == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=POA#</span> #}# </dt>
+            #if (ScoreType != 4) {# <dt><br /><u><b>Sustainment Plan</b></u>#if (MOS == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=MOS#</span> #}# </dt> #}#
+            #if (ScoreType != 4) {# <dt><br /><u><b>Internal Notes</b></u>#if (OrgNotes == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=OrgNotes#</span> #}# </dt> #}#
+            #if (ScoreType != 4) {# <dt><br /><u><b>Plan of Action Compliant Date</b></u>#if (CompliantDate == null) {# #=''# #} else {#<br /><span style="font-weight: normal;">#=CompliantDate#</span> #}# </dt> #}#
+            #if (ScoreType != 4) {# <dt><br /><u><b>Linked Documents</b></u>#if (DocumentList == null) {# #=''# #} else {#<br /><span style="font-weight: normal; white-space: pre-wrap;">#= DocumentList #</span> #}# </dt> #}#
+
+            <dt class="row text-center"><button type="button" id="btnPrint" class="btn btn-primary" onclick="javascript: OnPrintDocumentation();"> Print Content </button></dt>
+        </dl>
+    </div>
+</script>
+
+<style type="text/css">
+    /*#displayloading {
+        top: 50%;
+        left: 50%;
+    }*/
+    #lblL1Data {
+        margin-left: 10px;
+    }
+    #grid tbody tr:hover {
+        cursor: pointer !important;
+    }
+
+    #grid {
+        /* chop the grid's height by 45px */
+        height: calc(100% - 45px);
+    }
+
+        #grid .k-grid-content {
+            /* chop the grid content's height by 25px */
+            height: calc(100% - 25px) !important;
+        }
+        .clickLegend{
+            font:16px Arial,Helvetica,sans-serif; 
+            color:#C61835;
+        }
+        .overFlowHidden{
+            overflow:hidden;
+
+        }
+        .negativeMargin{
+            /*margin-bottom: -99999px;
+    padding-bottom: 99998px;*/
+        }
+        .VerticalText{
+            writing-mode:vertical-lr;
+            writing-mode:bt-lr;
+            transform: rotate(180deg);
+            height: 400px;
+            text-align:center;
+        }
+        .middleAlign{
+            vertical-align:middle;
+                    min-height:120px;
+                    padding-top:40px;
+
+        }
+    .ImmediateThreat{
+        border:1px solid white;
+        background-color:#bc4a3c;
+        min-height:120px;
+        cursor:pointer;
+        color:white;
+    }
+    .HighThreat{
+        border:1px solid white;
+        background-color:#df5e34;
+        min-height:120px;
+        cursor:pointer;
+        color:white;
+    }
+    .ModerateThreat {
+        border:1px solid white;
+        background-color: #fba754;
+        min-height: 120px;
+        cursor:pointer;
+    }
+    .LowThreat{
+        border:1px solid white;
+        background-color:#f7e193;
+        min-height:120px;
+        cursor:pointer;
+    }
+    .LowLimited {
+        border:1px solid white;
+        background-color: #fafab9;
+        min-height: 120px;
+        cursor:pointer;
+    }
+    .MarginTopBottom10{
+        
+    }
+    .inlineBlock{
+        display:inline-block;
+    }
+</style>
+
+
+
+<script src="~/Scripts/matchHeight.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#exportoexcel").css("display", "none");
+        //enable chart view or not based on radio button chagne
+        $("input[name=L1selectView]:radio").change(function () {
+            
+            if ($('input[name=L1selectView]:checked').val() === "L1selectGraph") {
+                LevelTypeIdentifier = 1;
+                $("#exportoexcel").css("display", "none");
+                $("#exporttopdf").css("display", "block");
+                showlevelGraph();
+            } else if ($('input[name=L1selectView]:checked').val() === "L1selectSummary") {
+                $("#exportoexcel").css("display", "block");
+                $("#exporttopdf").css("display", "none");
+                LevelTypeIdentifier = 2;
+                showlevelSummary();
+            }
+            else {
+                $("#exportoexcel").css("display", "block");
+                $("#exporttopdf").css("display", "none");
+                LevelTypeIdentifier = 3;
+                showlevelData();
+            }
+        })
+
+        $("#previousLevelButton").click(function () {
+            DisplayLevel();
+            $('input:radio[id*="radioL1Graph"]').prop('checked', true);
+
+        });
+        $("#exporttopdf").click(function () {
+            //blockElement("divL1tag");
+
+            ShowLoader();
+
+            ERPDFExportByLevel();
+        });
+        $("#exportoexcel").click(function () {
+            //blockElement("divL1tag");
+
+            ShowLoader();
+
+            ERExcelExportByLevel();
+
+        });
+
+    });
+
+
+
+    $(window).resize(function () {
+        switch (LevelIdentifier) {
+            case 1:
+                break;
+            case 2:
+                if (groupbySite) {
+                    $("#divlevel2chart").data("kendoChart").refresh();
+                }
+                else {
+
+                    $("#divlevel3chart").data("kendoChart").refresh();
+                }
+                break;
+            case 3:
+                    $("#divlevel3chart").data("kendoChart").refresh();
+                break;
+            case 4:
+                $("#divlevel4chart").data("kendoChart").refresh();
+                break;
+
+        }
+
+    });
+</script>
+
+

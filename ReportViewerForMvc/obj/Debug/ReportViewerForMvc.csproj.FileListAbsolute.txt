@@ -1,0 +1,16 @@
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\ReportViewerWebForm.aspx
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\ReportViewerWebForm.aspx.cs
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\ReportViewerWebForm.aspx.designer.cs
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\ReportViewerForMvc.dll
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\ReportViewerForMvc.pdb
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\Newtonsoft.Json.dll
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\System.Net.Http.Formatting.dll
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\System.Web.Mvc.dll
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\System.Web.WebPages.dll
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\Newtonsoft.Json.xml
+C:\EProducts\Main\Reports\ReportViewerForMvc\bin\Debug\System.Net.Http.Formatting.xml
+C:\EProducts\Main\Reports\ReportViewerForMvc\obj\Debug\ReportViewerForMvc.dll
+C:\EProducts\Main\Reports\ReportViewerForMvc\obj\Debug\ReportViewerForMvc.pdb
+C:\EProducts\Main\Reports\ReportViewerForMvc\obj\Debug\ReportViewerForMvc.csprojResolveAssemblyReference.cache
+C:\EProducts\Main\Reports\ReportViewerForMvc\obj\Debug\ReportViewerForMvc.csproj.CoreCompileInputs.cache

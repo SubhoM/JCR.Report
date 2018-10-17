@@ -1,0 +1,107 @@
+﻿@model IEnumerable<JCR.Reports.DataModel.Programs>
+<div id="multisiteprogram">
+    <h6><b>Program</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("MultiSiteProgram")
+                  .DataTextField("ProgramName")
+                  .DataValueField("BaseProgramID")
+          .Placeholder("Select Program")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+                   .Events(e =>
+                   {
+                       e.Change("onMSProgramChange").Select("onMSProgramSelect");
+                   })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+
+    var epScoringReportID = 27;
+    var taskAssignmentID = 28;
+    var taskReportID = 42;
+    var epAssignmentScoringReportID = 32;
+    var cmsComplianceReportID = 34;
+    var EPsNotScoredinPeriod = 37;
+    var EPScoringReportFinalMockSurvey = 38;
+    var ComprehensiveScoringReport = 39;
+
+    $(document).ready(function () {
+        addarrowtomultiselect("MultiSiteProgram");
+
+        //if ($('#hdnReportID').val() == epScoringReportID || $('#hdnReportID').val() == taskAssignmentID) {
+        //    var programID = $("#hdnProgramID").val();
+        //    $("#MultiSiteProgram").data("kendoMultiSelect").value(programID);
+        //}
+        LoadDefaultProgramSelect();
+    });
+
+    function LoadDefaultProgramSelect() {
+        
+        var isSingleProgramSelectionMode = IsSingleProgramSelectionMode();
+
+        if (isSingleProgramSelectionMode == true) {
+            var defaultSiteID = $("#hdnSingleSiteID").val();
+            SelectedProgramName = '';
+            SelectedProgramID = '';
+
+            var selectedSiteID = ERSites.getSelectedSites();
+            selectedSiteID = selectedSiteID.replace(/\,$/, ''); //Remove the last character if its a comma
+
+            if (defaultSiteID == selectedSiteID) {
+                SelectedProgramID = $("#hdnProgramID").val();
+                SelectedProgramName = $("#hdnProgramName").val();
+            }
+            else {
+
+                if ($('#hdnReportID').val() == cmsComplianceReportID) {
+                    
+                    var data = $("#MultiSiteProgram").data("kendoMultiSelect").dataSource.data();
+
+                    if(data.length == 1) {
+                        SelectedProgramID = data[0].BaseProgramID;
+                    }
+
+                    if(previousSelectedProgramID != '') {
+                        if (_.where(data, {'BaseProgramID': parseInt(previousSelectedProgramID)}).length > 0) {
+                            SelectedProgramID = previousSelectedProgramID;
+                        }
+                    }
+
+                }
+            }
+
+            if(typeof previousSelectedProgramID != 'undefined') {
+                    previousSelectedProgramID = SelectedProgramID;
+            }
+
+            $("#MultiSiteProgram").data("kendoMultiSelect").value(SelectedProgramID);
+        }
+
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

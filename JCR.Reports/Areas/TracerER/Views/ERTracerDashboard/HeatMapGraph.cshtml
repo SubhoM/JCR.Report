@@ -1,0 +1,81 @@
+﻿<div class="panel panel-default " id="divL1tag" style="border-color:#428bca !important; width:100%;">
+    <div id="resultTracerHeatMap">
+        @(Html.Kendo().Grid<JCR.Reports.Areas.TracerER.ViewModels.CompliaceByTracerHeatMap>()
+            .Name("gridTracerHeatMap")
+            .ToolBar(tools => tools.Excel())
+            .Excel(excel => excel
+                                    .AllPages(true)
+                                    .FileName("Tracer Dashboard Graph.xlsx")
+                                    .Filterable(true)
+                                    .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                            )
+            .Columns(col =>
+            {
+                col.Bound(p => p.SiteName).Title("Site Name").Locked(true).Lockable(false).Width(300).HeaderHtmlAttributes(new { style = "text-align:center" });
+                col.Bound(p => p.HCOID).Title("HCOID").Locked(true).Lockable(false).Width(100).HeaderHtmlAttributes(new { style = "text-align:center" });
+                col.Bound(p => p.OverallTotalCompletedObservation).Title("Overall Total Completed Observations").Locked(true).Lockable(false).Width(150).HeaderHtmlAttributes(new { style = "text-align:left" }).HtmlAttributes(new { style = "text-align:right" });
+                col.Bound(p => p.OverallTracerCompliance).Title("Overall Tracer Compliance %").Locked(true).Lockable(false).Width(120).HeaderHtmlAttributes(new { style = "text-align:left" }).HtmlAttributes(new { style = "text-align:right" });
+                for (int i = 0; i < ViewBag.Header.Count; i++)
+                {
+                    string c = ViewBag.Header[i].ToString();
+                    col.Group(g => g.Title(c).HeaderHtmlAttributes(new { style = "text-align:center" }).
+                        Columns(tracerwise =>
+                        {
+                            tracerwise.Bound(p => p.SitewiseTracer[i].TotalCompletedObservations).Width(150).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                            tracerwise.Bound(p => p.SitewiseTracer[i].TracerCompliance).Title("Tracer Compliance %").Width(150).HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:right" });
+                        }));
+                }
+            })
+            .AutoBind(true)
+                    .DataSource(dataSource => dataSource // Configure the grid data source
+                                                .Ajax() // Specify that ajax binding is used
+                                                .ServerOperation(false)
+                                                .Model(m =>
+                                                {
+                                                    m.Field(p => p.SiteName);
+                                                    m.Field(p => p.HCOID);
+                                                    m.Field(p => p.OverallTotalCompletedObservation);
+                                                    m.Field(p => p.OverallTracerCompliance);
+                                                    for (int i = 0; i < ViewBag.Header.Count; i++)
+                                                    {
+                                                        m.Field(p => p.SitewiseTracer[i].TotalCompletedObservations);
+                                                        m.Field(p => p.SitewiseTracer[i].TracerCompliance);
+                                                    }
+                                                })
+                                                .Events(e => e.Error("error_handler").RequestEnd("OnRequestEnd"))
+                                                .Read(read => read.Action("TracerDashordHeatMap", "ERTracerDashboard").Data("additionalData")) // Set the action method which will return the data in JSON format
+                                                .PageSize(20))
+            .Events(e => e.DataBound("onTracerHeatMapDataBound").ExcelExport("TracerHeatMapExcelExport"))
+            .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 }))
+            .Resizable(resizable => resizable.Columns(true))
+            .Sortable()
+            .Scrollable(sc => sc.Height("auto"))
+        )
+    </div>
+</div>
+
+<style>
+    #resultTracerHeatMap {
+        display: block;
+    }
+
+    #gridTracerHeatMap .k-grid-header .k-header{
+        white-space: normal;
+        border-right: 1px solid #ccc;
+    }
+
+    #gridTracerHeatMap  .k-grid-header  .k-header  .k-link {
+        height: 40px;
+    }
+</style>
+<script type="text/javascript">
+            $(document).ready(function () {
+
+                var windowHeight = $(window).height() * .35;
+                $(".k-grid-content").css("min-height", "450px");
+                $(".k-grid-content").css("height", windowHeight + "px");
+            });
+
+</script>

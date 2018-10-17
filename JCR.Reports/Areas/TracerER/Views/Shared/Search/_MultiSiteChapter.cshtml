@@ -1,0 +1,51 @@
+﻿@model IEnumerable<JCR.Reports.Models.MultiSiteChapters>
+    <div id="multisitechapter">
+       <h6><b>Chapter</b></h6>
+        <div class="margintop">
+
+            @(Html.Kendo().MultiSelect()
+          .Name("MultiSiteChapter")
+                          .DataTextField("ChapterText")
+                          .DataValueField("ChapterID")
+          .Placeholder("Select Chapter")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+                   .Events(e =>
+                    {
+                        e.Change("onMSChapterChange").Select("onMSChapterSelect");
+                    })
+                  .Value("-1")   
+            )
+        </div>
+     </div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("MultiSiteChapter");
+ 
+    });
+ 
+  
+   
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

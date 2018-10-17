@@ -1,0 +1,10 @@
+﻿@*@Html.Hidden("ProgramsUpdate", Url.Action("GetPrograms", "Search"))
+@Html.Hidden("PreferredProgramUpdate", Url.Action("UpdatePreferredProgram", "Shared"))
+@Html.Hidden("UpdateProgramsInSession", Url.Action("UpdateProgramsInSession", "Search"))*@
+@Html.Hidden("TracersCategoriesUpdate", Url.Action("GetTracersCategories", "Search", new { area = "" }))
+@Html.Hidden("TracersListUpdate", Url.Action("GetTracersList", "Search", new { area = "" }))
+@Html.Hidden("TracerSectionsListUpdate", Url.Action("GetTracerSectionsList", "Search", new { area = "" }))
+@Html.Hidden("OrganizationTypeListL3Update", Url.Action("GetOrganizationTypelevel3", "Search", new { area = "" }))
+@Html.Hidden("OrganizationTypeListL2Update", Url.Action("GetOrganizationTypelevel2", "Search", new { area = "" }))
+@Html.Hidden("OrganizationTypeListL1Update", Url.Action("GetOrganizationTypelevel1", "Search", new { area = "" }))
+@Html.Hidden("OrganizationTypeInactive", Url.Action("GetInactivePartial", "Search", new { area = "" }))

@@ -1,0 +1,111 @@
+﻿@model System.Data.DataTable
+<div id="gridGrouByTracerReport">
+    <div id="divtiebreakermessage" align="center" style="background-color: #f2dede; color: #a94442;"></div>
+    <div id="resultGT" style="width:97vw;">
+        @(Html.Kendo().Grid<dynamic>()
+                    .Name("gridGBT")
+                    .ToolBar(tools => tools.Excel())
+                    //.Excel(excel => excel
+                    //                .AllPages(true)
+                    //                .FileName("GroupBy Tracer Breakdown.xlsx")
+                    //                .Filterable(true)
+                    //                .ProxyURL(Url.Action("Excel_Export_Save", "Export"))
+                    //        )
+                    .Columns(columns =>
+                    {
+                        if (Model != null)
+                        {
+                            foreach (System.Data.DataColumn column in Model.Columns)
+                            {
+
+                                switch (column.ColumnName)
+                                {
+                                    case "TracerCustomName":
+                                        columns.Bound(column.ColumnName).Width("300px");
+                                        break;
+                                    case "Organization3Name":
+                                        columns.Bound(column.ColumnName).Width("300px");
+                                        break;
+                                    case "Organization2Name":
+                                        columns.Bound(column.ColumnName).Width("300px");
+                                        break;
+                                    case "Organization1Name":
+                                        columns.Bound(column.ColumnName).Width("300px");
+                                        break;
+                                    case "PlannedObsCount":
+                                        columns.Bound(column.ColumnName).Width("200px");
+                                        break;
+                                    default:
+                                        columns.Bound(column.ColumnName).Width("150px");
+                                        break;
+                                }
+
+
+                            }
+                        }
+                    })
+                    .Sortable()
+                    .AutoBind(false)
+                    .Scrollable(sc => sc.Height("auto"))
+                    .HtmlAttributes(new { style = "font-size:12px;line-height:1em;height:200px" })
+                    .Filterable(filter => filter
+                          .Extra(false)
+                          .Operators(operators => operators
+                          .ForString(str => str.Clear()
+                          .StartsWith("Starts with")
+                          .IsEqualTo("Is equal to")
+                          .IsNotEqualTo("Is not equal to")
+                          )))
+                    .DataSource(dataSource => dataSource // Configure the grid data source
+                                                .Ajax() // Specify that ajax binding is used
+
+                                                .ServerOperation(false)
+                                                 .Events(e => e.Error("error_handler2").RequestEnd("OnRequestEnd2"))
+                                                .Model(model =>
+                                                {
+                                                    if (Model != null)
+                                                    {
+                                                        foreach (System.Data.DataColumn column in Model.Columns)
+                                                        {
+                                                            model.Field(column.ColumnName, column.DataType);
+
+                                                        }
+                                                    }
+                                                })
+
+                                                .Read(read => read.Action("LoadGroupByTracerExcel", "TracerDepartmentAssignment").Data("additionalData")) // Set the action method which will return the data in JSON format
+                                                .PageSize(20))
+                    //.Events(e => e.ExcelExport("excelExport").ColumnHide("onColumnHide").ColumnShow("onColumnShow"))
+                    .Events(e => e.DataBound("onDataTracerDataBound"))
+                    .ColumnMenu(columnsmenu => columnsmenu.Columns(true))
+                    .Reorderable(reorder => reorder.Columns(true))
+                    .Resizable(resizing => resizing.Columns(true))
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 20, 50, 100 }))
+        )
+
+    </div>
+</div>
+
+
+
+
+<style>
+    #gridGrouByTracerReport {
+        display: block;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //var windowHeight = $(window).height() * .75;
+
+        //$("#gridGBT .k-grid-content").css("min-height", "200px");
+        //$("#gridGBT .k-grid-content").css("height", windowHeight + "px");
+
+    });
+
+
+</script>

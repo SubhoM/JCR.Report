@@ -1,0 +1,58 @@
+﻿
+<div>
+    <div id="resultDCADATA">
+     @(Html.Kendo().Grid<JCR.Reports.Areas.Tracer.ViewModels.DepartmentComparativeAnalysisData>()
+      .Name("gridDCADATAIE8")
+      .DataSource(dataSource => dataSource // Configure the grid data source
+                                         .Ajax() // Specify that ajax binding is used
+                                               // .ServerOperation(false)
+                                         .Read(read => read
+                                                            .Action("_DepartmentComparativeAnalysisDataExcel", "DepartmentComparativeAnalysis")
+                                                            .Data("additionalData")) // Set the action method which will return the data in JSON format
+                                     
+                                          .PageSize(20))
+       .ToolBar(tools => tools.Excel())
+               .Events(e => e.ExcelExport("excelExportIE8"))
+       
+               .Columns(columns =>
+               {
+                   columns.Bound(p => p.OrgName_Rank3).Width(200);
+                          columns.Bound(p => p.OrgName_Rank2).Width(200);
+                          columns.Bound(p => p.OrgName_Rank1_Dept).Width(400);
+                          columns.Bound(p => p.TracerCount).Width(150);
+                          columns.Bound(p => p.TracerResponseCount).Width(200);
+                          columns.Bound(p => p.TotalNotApplicableCount).Width(150);
+                          columns.Bound(p => p.NumeratorTotal).Width(150);
+                          columns.Bound(p => p.DenominatorTotal).Width(150);
+
+                          columns.Bound(p => p.NDCompliancePercent).Width(150).Format("{0:0.0}%");
+                  
+                   
+                })
+      
+     
+      .AutoBind(false)
+             .Scrollable(scrollable => scrollable.Height("auto"))
+      .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[]{ 20, 50, 100 })
+                       
+                        )
+     )
+     </div>
+</div>
+
+<style>
+    #gridDCADATAIE8 {
+        display: none;
+    }
+</style>
+
+
+
+
+
+
+
+
+

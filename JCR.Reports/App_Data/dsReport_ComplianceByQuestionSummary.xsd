@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReport_ComplianceByQuestionSummary" targetNamespace="http://tempuri.org/dsReport_ComplianceByQuestionSummary.xsd" xmlns:mstns="http://tempuri.org/dsReport_ComplianceByQuestionSummary.xsd" xmlns="http://tempuri.org/dsReport_ComplianceByQuestionSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="DBMEdition01" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DBMEdition01 (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.DBMEdition01.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReport_ComplianceByQuestionSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReport_ComplianceByQuestionSummary" msprop:Generator_UserDSName="dsReport_ComplianceByQuestionSummary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ustReport_ComplianceByQuestionSummary_ByQuestion" msprop:Generator_TableClassName="ustReport_ComplianceByQuestionSummary_ByQuestionDataTable" msprop:Generator_TableVarName="tableustReport_ComplianceByQuestionSummary_ByQuestion" msprop:Generator_TablePropName="ustReport_ComplianceByQuestionSummary_ByQuestion" msprop:Generator_RowDeletingName="ustReport_ComplianceByQuestionSummary_ByQuestionRowDeleting" msprop:Generator_RowChangingName="ustReport_ComplianceByQuestionSummary_ByQuestionRowChanging" msprop:Generator_RowEvHandlerName="ustReport_ComplianceByQuestionSummary_ByQuestionRowChangeEventHandler" msprop:Generator_RowDeletedName="ustReport_ComplianceByQuestionSummary_ByQuestionRowDeleted" msprop:Generator_UserTableName="ustReport_ComplianceByQuestionSummary_ByQuestion" msprop:Generator_RowChangedName="ustReport_ComplianceByQuestionSummary_ByQuestionRowChanged" msprop:Generator_RowEvArgName="ustReport_ComplianceByQuestionSummary_ByQuestionRowChangeEvent" msprop:Generator_RowClassName="ustReport_ComplianceByQuestionSummary_ByQuestionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Page" msprop:Generator_ColumnVarNameInTable="columnPage" msprop:Generator_ColumnPropNameInRow="Page" msprop:Generator_ColumnPropNameInTable="PageColumn" msprop:Generator_UserColumnName="Page" type="xs:int" default="1" minOccurs="0" />
+              <xs:element name="QuestionText" msprop:Generator_ColumnVarNameInTable="columnQuestionText" msprop:Generator_ColumnPropNameInRow="QuestionText" msprop:Generator_ColumnPropNameInTable="QuestionTextColumn" msprop:Generator_UserColumnName="QuestionText" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalNumerator" msprop:Generator_ColumnVarNameInTable="columnTotalNumerator" msprop:Generator_ColumnPropNameInRow="TotalNumerator" msprop:Generator_ColumnPropNameInTable="TotalNumeratorColumn" msprop:Generator_UserColumnName="TotalNumerator" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalDenominator" msprop:Generator_ColumnVarNameInTable="columnTotalDenominator" msprop:Generator_ColumnPropNameInRow="TotalDenominator" msprop:Generator_ColumnPropNameInTable="TotalDenominatorColumn" msprop:Generator_UserColumnName="TotalDenominator" type="xs:int" minOccurs="0" />
+              <xs:element name="Compliance" msprop:Generator_ColumnVarNameInTable="columnCompliance" msprop:Generator_ColumnPropNameInRow="Compliance" msprop:Generator_ColumnPropNameInTable="ComplianceColumn" msprop:Generator_UserColumnName="Compliance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QuesNo" msprop:Generator_ColumnVarNameInTable="columnQuesNo" msprop:Generator_ColumnPropNameInRow="QuesNo" msprop:Generator_ColumnPropNameInTable="QuesNoColumn" msprop:Generator_UserColumnName="QuesNo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,154 @@
+﻿<div id="setTracerComplianceRange" class="checkbox" style="margin-left:20px">
+    <input id="tracerCompGreaterChecked" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="tracerCompGreaterChange();">
+    Set <canvas id='tracerCompGreaterCanvas' width='15' height='15' style='background-color:green;border:1px solid;vertical-align:text-bottom;'></canvas> for greater than or equal to 
+    @(Html.Kendo().NumericTextBox<int>()
+        .Name("tracerCompGreaterValue")
+        .Min(0)
+        .Max(100)
+        .HtmlAttributes(new { style = "width:40px;" })
+        .Value(100)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("#")
+        .Enable(true)
+        .Events(e=>e.Change("rangeChange"))
+    ) % compliance
+    <br />
+    <br />
+    <input id="tracerCompBetweenChecked" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="tracerCompBetweenChange();">
+    Set <canvas id='tracerCompBetweenCanvas' width='15' height='15' style='background-color:yellow;border:1px solid;vertical-align:text-bottom;'></canvas> for between 
+    @(Html.Kendo().NumericTextBox<int>()
+        .Name("tracerCompBetweeLowValue")
+        .Min(0)
+        .Max(100)
+        .HtmlAttributes(new { style = "width:40px;" })
+        .Value(90)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("#")
+        .Enable(true)
+        .Events(e => e.Change("rangeChange"))
+    ) % and
+    @(Html.Kendo().NumericTextBox<int>()
+        .Name("tracerCompBetweeHighValue")
+        .Min(0)
+        .Max(100)
+        .HtmlAttributes(new { style = "width:40px;" })
+        .Value(100)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("#")
+        .Enable(true)
+        .Events(e => e.Change("rangeChange"))
+    ) % compliance
+    <br />
+    <br />
+    <input id="tracerCompLessChecked" style="float: left; margin-top:8px;" type="checkbox" value="" onclick="tracerCompLessChange();">
+    Set <canvas id='tracerCompLessCanvas' width='15' height='15' style='background-color:#FF3333;border:1px solid;vertical-align:text-bottom;'></canvas> for less than or equal to 
+    @(Html.Kendo().NumericTextBox<int>()
+        .Name("tracerCompLessValue")
+        .Min(0)
+        .Max(100)
+        .HtmlAttributes(new { style = "width:40px;" })
+        .Value(90)
+        .Spinners(false)
+        .Decimals(0)
+        .Format("#")
+        .Enable(true)
+        .Events(e => e.Change("rangeChange"))
+    ) % compliance
+</div>
+
+
+
+<script type="text/javascript">
+    function tracerCompGreaterChange() {
+        var numerictextbox = $("#tracerCompGreaterValue").data("kendoNumericTextBox");
+        if ($('#tracerCompGreaterChecked').is(':checked')) {
+            numerictextbox.enable(true);
+        }
+        else {
+            numerictextbox.enable(false);
+            //numerictextbox.value();
+        }
+    }
+
+    function tracerCompBetweenChange() {
+        var numericLowtextbox = $("#tracerCompBetweeLowValue").data("kendoNumericTextBox");
+        var numericHightextbox = $("#tracerCompBetweeHighValue").data("kendoNumericTextBox");
+        if ($('#tracerCompBetweenChecked').is(':checked')) {
+            numericHightextbox.enable(true);
+            numericLowtextbox.enable(true);
+        }
+        else {
+            numericHightextbox.enable(false);
+            numericLowtextbox.enable(false);
+            //numericHightextbox.value(100);
+            //numericLowtextbox.value(90);
+        }
+    }
+
+    function tracerCompLessChange() {
+        var numericLesstextbox = $("#tracerCompLessValue").data("kendoNumericTextBox");
+        if ($('#tracerCompLessChecked').is(':checked')) {
+            numericLesstextbox.enable(true);
+        }
+        else {
+            numericLesstextbox.enable(false);
+            //numericLesstextbox.value(90);
+        }
+    }
+
+    function rangeChange() {
+        var numericGreatertextbox = $("#tracerCompGreaterValue").data("kendoNumericTextBox");
+        var numericLowtextbox = $("#tracerCompBetweeLowValue").data("kendoNumericTextBox");
+        var numericHightextbox = $("#tracerCompBetweeHighValue").data("kendoNumericTextBox");
+        var numericLesstextbox = $("#tracerCompLessValue").data("kendoNumericTextBox");
+        var greaterCheck = $('#tracerCompGreaterChecked').is(':checked');
+        var betweenCheck = $('#tracerCompBetweenChecked').is(':checked');
+        var lessCheck = $('#tracerCompLessChecked').is(':checked');
+
+        if (betweenCheck) {
+            if (numericHightextbox.value() < numericLowtextbox.value() && numericLesstextbox.value() != null) {
+                numericLowtextbox.value(numericLesstextbox.value());
+            }
+        }
+
+        if (greaterCheck && betweenCheck && lessCheck) {
+            if (numericGreatertextbox.value() < numericHightextbox.value() && numericGreatertextbox.value()!= null) {
+                numericHightextbox.value(numericGreatertextbox.value());
+            }
+            if (numericGreatertextbox.value() < numericLowtextbox.value() && numericHightextbox.value() != null) {
+                numericLowtextbox.value(numericHightextbox.value() - 5);
+            }
+            if (numericLowtextbox.value() < numericLesstextbox.value() && numericLowtextbox.value() != null) {
+                numericLesstextbox.value(numericLowtextbox.value());
+            }
+        }
+
+        else if (greaterCheck && betweenCheck) {
+            if (numericGreatertextbox.value() < numericHightextbox.value() && numericGreatertextbox.value() != null) {
+                numericHightextbox.value(numericGreatertextbox.value());
+            }
+        }
+
+        else if (betweenCheck && lessCheck) {
+            if (numericLowtextbox.value() < numericLesstextbox.value() && numericLowtextbox.value() != null) {
+                numericLesstextbox.value(numericLowtextbox.value());
+            }
+        }
+
+        else if (greaterCheck && lessCheck) {
+            if (numericGreatertextbox.value() < numericLesstextbox.value() && numericGreatertextbox.value() != null) {
+                numericLesstextbox.value(numericGreatertextbox.value() - 1);
+            }
+        }
+
+        else {
+
+        }
+    }
+</script>
+
+
+

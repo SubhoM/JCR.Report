@@ -1,0 +1,2520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A4661CCD-714C-4E21-9886-F88BD918965F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JCR.Reports</RootNamespace>
+    <AssemblyName>JCR.Reports</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="JCR.DB.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\JCR.DB.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Kendo.Mvc, Version=2015.3.1111.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\KENDOUIMVC\2015.3.1111.545\Kendo.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.2012.Runtime.11.0.3452.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Design.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.2012.Runtime.11.0.3452.0\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WebDesign.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.2012.Runtime.11.0.3452.0\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.1\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Data\dsCSaferMatrixByChapter.Designer.cs">
+      <DependentUpon>dsCSaferMatrixByChapter.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Data\dsCSaferMatrixBySite.Designer.cs">
+      <DependentUpon>dsCSaferMatrixBySite.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Data\dsCorporateFindingsReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCorporateFindingsReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsEPNotScoredInPeriodDetail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEPNotScoredInPeriodDetail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsEPScoreConsolidatedDetail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEPScoreConsolidatedDetail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsEPScoreConsolidatedSummary.cs">
+      <DependentUpon>dsEPScoreConsolidatedSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsEPScoreConsolidatedSummary.Designer.cs" />
+    <Compile Include="App_Data\dsReport_ComplianceByQuestionDetail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_ComplianceByQuestionDetail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_RFIFindingsPareto.cs">
+      <DependentUpon>dsReport_RFIFindingsPareto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_RFIFindingsPareto.Designer.cs">
+      <DependentUpon>dsReport_RFIFindingsPareto.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Data\dsReport_RFIFindingsbyProgram1.Designer.cs">
+      <DependentUpon>dsReport_RFIFindingsbyProgram.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Data\dsReport_DepartmentComparativeAnalysisData.Designer.cs">
+      <DependentUpon>dsReport_DepartmentComparativeAnalysisData.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="App_Data\dsReport_MonthlyBreakdown.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_MonthlyBreakdown.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Data\dsReport_MonthlyBreakdownGraph.Designer.cs">
+      <DependentUpon>dsReport_MonthlyBreakdownGraph.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="App_Data\dsReport_Parameters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_Parameters.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TJCStandards.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TJCStandards.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByCMS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByCMS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByCMSChart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByCMSChart.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByTJCStandardBySite.cs">
+      <DependentUpon>dsReport_TracerByTJCStandardBySite.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComplianceSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComplianceSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_OrgFindingsByQuestion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_OrgFindingsByQuestion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsTaskReport.Designer.cs">
+      <DependentUpon>dsTaskReport.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\AmpER\AmpERAreaRegistration.cs" />
+    <Compile Include="Areas\Corporate\Controllers\AMPCorporateSummaryController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\AssignmentStatusByUserController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\CMSComplianceController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\ComprehensiveScoringController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\CorporateReportController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\EPAssignmentController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\EPAssignmentScoringController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\EPNotScoredInPeriodController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\EPScoringController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\EPScoringReportFinalMockSurveyController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\PriorityTjcRFIController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\SaferMatrixController.cs" />
+    <Compile Include="Areas\Corporate\Controllers\TaskReportController.cs" />
+    <Compile Include="Areas\Corporate\CorporateAreaRegistration.cs" />
+    <Compile Include="Areas\Corporate\Models\CorporateSearchList.cs" />
+    <Compile Include="Areas\Corporate\Models\SearchCMSCompliance.cs" />
+    <Compile Include="Areas\Corporate\Models\SearchTaskReport.cs" />
+    <Compile Include="Areas\Corporate\Models\SiteTreeCorporateCheck.cs" />
+    <Compile Include="Areas\Corporate\Services\CMSCompliance.cs" />
+    <Compile Include="Areas\Corporate\Services\ComprehensiveScoring.cs" />
+    <Compile Include="Areas\Corporate\Services\EPAssignmentScoring.cs" />
+    <Compile Include="Areas\Corporate\Services\EPNotScoredInPeriod.cs" />
+    <Compile Include="Areas\Corporate\Services\EPScoringReportFinalMockSurvey.cs" />
+    <Compile Include="Areas\Corporate\Services\TaskReport.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\AssignedUser.cs" />
+    <Compile Include="Areas\Corporate\Services\SaferMatrixService.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPAssignmentbyChapter.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPAssignmentbySite.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPAssignmentbyStandard.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPAssignmentDetails.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EpAssignmentScoringExcel.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPAssignmentSummary.cs" />
+    <Compile Include="Areas\Corporate\Models\MockSurveyCriteria.cs" />
+    <Compile Include="Areas\Corporate\Models\SearchAssignmentStatusByUser.cs" />
+    <Compile Include="Areas\Corporate\Models\SearchCommon.cs" />
+    <Compile Include="Areas\Corporate\Models\SearchCorporateER.cs" />
+    <Compile Include="Areas\Corporate\Models\TaskStatus.cs" />
+    <Compile Include="Areas\Corporate\Services\AssignmentStatusByUserReportService.cs" />
+    <Compile Include="Areas\Corporate\Services\CorporateReportService.cs" />
+    <Compile Include="Areas\Corporate\Services\CorporateSearchInputService.cs" />
+    <Compile Include="Areas\Corporate\Services\EPAssignment.cs" />
+    <Compile Include="Areas\Corporate\Services\EPScoringService.cs" />
+    <Compile Include="Areas\Corporate\Services\RFIReportService.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\CorpEPFindingViewModel.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPNotScoredInPeriodExcel.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPScoringReportExcel.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\EPScoringReportFinalMockSurveyExcel.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\RFIEPFindingViewModel.cs" />
+    <Compile Include="Areas\Corporate\ViewModels\TaskReportExcelView.cs" />
+    <Compile Include="Areas\TracerER\Controllers\ERComplianceByTracerController.cs" />
+    <Compile Include="Areas\TracerER\Controllers\ERTracerByQuestionController.cs" />
+    <Compile Include="Areas\TracerER\Controllers\ERTracerDashboardController.cs" />
+    <Compile Include="Areas\TracerER\Models\ComplianceByCategoryTransform.cs" />
+    <Compile Include="Areas\TracerER\Models\ComplianceBySiteTransform.cs" />
+    <Compile Include="Areas\TracerER\Models\ComplianceByTracerTransform.cs" />
+    <Compile Include="Areas\TracerER\Models\MultiSiteChapters.cs" />
+    <Compile Include="Areas\TracerER\Models\QuestionBySiteInfo.cs" />
+    <Compile Include="Areas\TracerER\Models\SiteByCategoryInfo.cs" />
+    <Compile Include="Areas\TracerER\Models\SiteByTracerInfo.cs" />
+    <Compile Include="Areas\TracerER\Models\SiteTracerCompliance.cs" />
+    <Compile Include="Areas\TracerER\Services\ERComplianceByTracer.cs" />
+    <Compile Include="Areas\TracerER\Services\ERTracerByQuestion.cs" />
+    <Compile Include="Areas\TracerER\Services\ERTracerDashboard.cs" />
+    <Compile Include="Areas\TracerER\TracerERAreaRegistration.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\CompliaceByTracerDetails.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\CompliaceByTracerHeatMap.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\CompliaceByTracerSummary.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyChapterData.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyEPData.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyEPDetails.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyProgramData.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyQuestionData.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyQuestionDetails.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbySiteData.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyStandardData.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ErTracersbyTracerData.cs" />
+    <Compile Include="Areas\Tracer\Controllers\ComplianceDepartmentController.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\HeatMapExcel.cs" />
+    <Compile Include="Areas\Tracer\Controllers\NewEPController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\QuesEPRelationController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerComplianceDepartmentController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerDepartmentAssignmentController.cs" />
+    <Compile Include="Areas\Tracer\Models\Department.cs" />
+    <Compile Include="Areas\Tracer\Models\GroupByDepartmentAssignmentData.cs" />
+    <Compile Include="Areas\Tracer\Models\GroupByTracerAssignmentData.cs" />
+    <Compile Include="Areas\Tracer\Models\MonthlyBreakdownGraph.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerComplianceDepartmentInfo.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerComplianceDepartmentInput.cs" />
+    <Compile Include="Areas\Tracer\Models\Quarters.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerDepartmentAssignmentInput.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerFrequency.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerSections.cs" />
+    <Compile Include="Areas\Tracer\Services\DepartmentAssignmentService.cs" />
+    <Compile Include="Areas\Tracer\Services\NewEP.cs" />
+    <Compile Include="Areas\Tracer\Services\QuestionEPRelation.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerComplianceDepartment.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerDepartmentDashboard.cs" />
+    <Compile Include="Areas\Tracer\TracerAreaRegistration.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\ComplianceByDepartmentGraph.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\GroupByDepartmentExcel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\GroupByTracerExcel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\NewEp.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\QuestionEpRelation.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerComplianceDashboardData.cs" />
+    <Compile Include="Common\AppSession.cs" />
+    <Compile Include="Common\CustomDisplayNameAttribute.cs" />
+    <Compile Include="Common\EmailHelpers.cs" />
+    <Compile Include="Common\EnforceSSLAttribute.cs" />
+    <Compile Include="Common\Excel.cs" />
+    <Compile Include="Common\ExtensionUtility.cs" />
+    <Compile Include="Common\HelperClasses.cs" />
+    <Compile Include="Common\HtmlHelpers.cs" />
+    <Compile Include="Common\ReportsHandleErrorAttribute.cs" />
+    <Compile Include="Common\Security.cs" />
+    <Compile Include="Common\SessionExpireFilter.cs" />
+    <Compile Include="Common\WebApiMethods_Tracer.cs" />
+    <Compile Include="Common\WebApiMethods.cs" />
+    <Compile Include="Common\WebConstants.cs" />
+    <Compile Include="Areas\Tracer\Controllers\ComplianceQuestionController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\EProdApisController.cs" />
+    <Compile Include="Areas\TracerER\Controllers\ERSearchController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
+    <Compile Include="Areas\TracerER\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\MonthlyQuestionBreakdownController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\MonthlyTracerBreakdownController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\OrganizationPriorityFindingsController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\SaveandScheduledReportsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\DepartmentComparativeAnalysisController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TJCPriorityFindingsController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerByCMSController.cs" />
+    <Compile Include="Areas\TracerER\Controllers\TracerComplianceSummaryController.cs" />
+    <Compile Include="Areas\TracerER\Controllers\TracersByTJCStandardController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerTeamStatusController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerByEPController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerComplianceController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerComprehensiveController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerControlChartController.cs" />
+    <Compile Include="Areas\Tracer\Controllers\TracerObservationStatusController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
+    <Compile Include="App_Data\dsReport_DepartmentComparativeAnalysisOpportunities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_DepartmentComparativeAnalysisOpportunities.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComprehensiveDetailByQuestion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComprehensiveDetailByQuestion.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComprehensiveDetailByResponseExport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComprehensiveDetailByResponseExport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComprehensiveDetailByResponse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComprehensiveDetailByResponse.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComprehensiveDetailByQuestionExport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComprehensiveDetailByQuestionExport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComprehensiveSummaryByQuestion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComprehensiveSummaryByQuestion.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComprehensiveSummaryByResponse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComprehensiveSummaryByResponse.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByEPGroupByEP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByEPGroupByEP.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByEPGroupByEPDept.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByEPGroupByEPDept.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByEPGroupByEPQuestion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByEPGroupByEPQuestion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByEPGroupByStandard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByEPGroupByStandard.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerControlChart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerControlChart.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerObservationStatusByMonth.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerObservationStatusByMonth.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerObservationStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerObservationStatus.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerTeamStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerTeamStatus.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_ComplianceByQuestionSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_ComplianceByQuestionSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByTJCStandardByProgram.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByTJCStandardByProgram.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByTJCStandardByChapter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByTJCStandardByChapter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByTJCStandardByEP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByTJCStandardByEP.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByTJCStandardBySite.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByTJCStandardBySite.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerByTJCStandardByStandard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerByTJCStandardByStandard.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComplianceSummaryByProgram.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComplianceSummaryByProgram.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComplianceSummaryByQuestion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComplianceSummaryByQuestion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComplianceSummaryBySite.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComplianceSummaryBySite.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_TracerComplianceSummaryByTracer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_TracerComplianceSummaryByTracer.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AMPDBEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMPDBEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AMPDBEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMPDBEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AMPDBEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AMPDBEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AMPFinding.cs" />
+    <Compile Include="DataModel\AssignedToUser.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AssignmentService.cs" />
+    <Compile Include="DataModel\AssignmentStatusByUser_ChapterData.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AssignmentStatusByUser_EPData.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AssignmentStatusByUser_StandardData.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AssignmentStatusByUser_UserData.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Chapter.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CMSComplianceExcel.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CMSProgram.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CMSSite.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\ComprehensiveScoringDetail.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CoP.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CorpChapterFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CorpEPFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CorporateFinding.cs" />
+    <Compile Include="DataModel\CorpProgramFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CorpStandardFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\CorpUser.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\DBMEdition.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBMEdition.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\DBMEdition.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\DBMEdition.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBMEdition.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EPAssignmentScoringDetail.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EPAssignmentScoringSummary.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EpExcelDetails.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EPScoringReport.cs" />
+    <Compile Include="DataModel\EPScoringReportFinalMockSurveyDetail.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\EPScoringReportFinalMockSurveySummary.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\IdentifiedUser.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\MockSurvey.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Programs.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\RFIChapterFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\RFIEPChapterDetails.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\RFIEPFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\RFIProgramFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\RFIStandardFinding.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SaferMatrix.cs" />
+    <Compile Include="DataModel\SaferMatrixData.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SaferMatrixSummary.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SaferMatrixSummaryByChapter.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SaferMatrixSummaryBySite.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SafterMap.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\ScoredByUser.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Site.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Standard.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\StandardData.cs" />
+    <Compile Include="DataModel\StickyDate.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Tag.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TJCRFIFinding.cs" />
+    <Compile Include="DataModel\User.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserCustom.cs" />
+    <Compile Include="App_Data\dsReport_CorporateFindingsPareto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_CorporateFindingsPareto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_CorporateFindingsByProgram.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_CorporateFindingsByProgram.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserSiteByProduct.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\usmMSCorporateFindingsReportCumulative_Result.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\usmMSCorporateFindingsReportSummaryByChapter_Result.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\usmMSCorporateFindingsReportSummaryBySite_Result.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\usmMSCorporateFindingsReportSummary_Result.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\usmMSGetSaferMap_Result.cs">
+      <DependentUpon>DBMEdition.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_EPAssignment_BySite.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_EPAssignment_BySite.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_EPAssignment_ByChapter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_EPAssignment_ByChapter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_EPAssignment_ByStandard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_EPAssignment_ByStandard.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_AssignmentStatusByUser_UserLevel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_AssignmentStatusByUser_UserLevel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_AssignmentStatusByUser_ChapterLevel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_AssignmentStatusByUser_ChapterLevel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_AssignmentStatusByUser_StandardLevel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_AssignmentStatusByUser_StandardLevel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_ERTracerByQuestionByProgram.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_ERTracerByQuestionByProgram.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_ERTracerByQuestionByQuestion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_ERTracerByQuestionByQuestion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_ERTracerByQuestionBySite.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_ERTracerByQuestionBySite.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsReport_ERTracerByQuestionByTracer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport_ERTracerByQuestionByTracer.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsCMSComplianceSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCMSComplianceSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsCMSComplianceDetail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCMSComplianceDetail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="App_Data\dsEPNotScoredInPeriodSummaryView.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsEPNotScoredInPeriodSummaryView.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationCode.cs" />
+    <Compile Include="Models\AccessToken.cs" />
+    <Compile Include="Areas\TracerER\Models\ERLevelMap.cs" />
+    <Compile Include="Areas\Tracer\Models\MonthlyBreakDownData.cs" />
+    <Compile Include="Models\ApplicationPage.cs" />
+    <Compile Include="Models\CycleInfo.cs" />
+    <Compile Include="Models\MenuState.cs" />
+    <Compile Include="Models\ProgramVM.cs" />
+    <Compile Include="Models\Recurrence.cs" />
+    <Compile Include="Models\MyReportDetail.cs" />
+    <Compile Include="Models\ReportGroup.cs" />
+    <Compile Include="Models\ReportDetail.cs" />
+    <Compile Include="Models\ReportList.cs" />
+    <Compile Include="Areas\TracerER\Models\ReportUserScheduleSiteMap.cs" />
+    <Compile Include="Models\SaferMatrixMap.cs" />
+    <Compile Include="Models\ScheduleReportParameter.cs" />
+    <Compile Include="Models\ReportUserScheduleParameter.cs" />
+    <Compile Include="Models\SaveAndSchedule.cs" />
+    <Compile Include="Models\ScheduleType.cs" />
+    <Compile Include="Areas\TracerER\Models\SearchER.cs" />
+    <Compile Include="Areas\TracerER\Models\SearchListER.cs" />
+    <Compile Include="Models\SearchSavedReportsInput.cs" />
+    <Compile Include="Areas\TracerER\Models\SiteSelectorViewModel.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersCategorySearchBy.cs" />
+    <Compile Include="Models\ApplicationEvent.cs" />
+    <Compile Include="Areas\Tracer\Models\CMSTags.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Areas\Tracer\Models\MonthwiseTracerInfo.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerByMonthTransform.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerComplianceQuestionInput.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerQuestionDetail.cs" />
+    <Compile Include="Areas\Tracer\Models\TracerQuestions.cs" />
+    <Compile Include="Models\Program.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersEP.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersStatus.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersUser.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersStandards.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersChapters.cs" />
+    <Compile Include="Models\EP.cs" />
+    <Compile Include="Models\Authentication.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserPreference.cs" />
+    <Compile Include="Service References\CCMService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ActionTracking.cs" />
+    <Compile Include="Services\CMSService.cs" />
+    <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\EprodWebApi.cs" />
+    <Compile Include="Areas\TracerER\Services\ERSearchInputService.cs" />
+    <Compile Include="Areas\Tracer\Services\OrganizationPriorityFindings.cs" />
+    <Compile Include="Services\globalvariable.cs" />
+    <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\SaveAndScheduleService.cs" />
+    <Compile Include="Services\SaveandScheduledReports.cs" />
+    <Compile Include="Services\SearchFormat.cs" />
+    <Compile Include="Models\ExceptionLog.cs" />
+    <Compile Include="Areas\Tracer\Models\OrgnizationType.cs" />
+    <Compile Include="Areas\Tracer\Services\TJCPriorityFindings.cs" />
+    <Compile Include="Areas\Tracer\Services\MonthlyBreakdownService.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerByCMS.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerComplianceQuestion.cs" />
+    <Compile Include="Areas\TracerER\Services\TracersComplianceSummary.cs" />
+    <Compile Include="Areas\TracerER\Services\TracersByTJCStandard.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerTeamStatus.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerByEP.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerCompliance.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerControlChart.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerObservationStatus.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Areas\TracerER\ViewModels\ERTracersResponseSummary.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\ComplianceQuestionChart.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\ComplianceQuestionDetail.cs" />
+    <Compile Include="ViewModels\FileResult.cs" />
+    <Compile Include="ViewModels\Email.cs" />
+    <Compile Include="ViewModels\RadioButtonList.cs" />
+    <Compile Include="Areas\Tracer\Models\Search.cs" />
+    <Compile Include="Areas\Tracer\Models\TracersCategory.cs" />
+    <Compile Include="Areas\Tracer\Models\Tracers.cs" />
+    <Compile Include="Areas\Tracer\Models\SearchList.cs" />
+    <Compile Include="Models\UserSite.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Areas\Tracer\Services\DepartmentComparativeAnalysis.cs" />
+    <Compile Include="Services\ExceptionService.cs" />
+    <Compile Include="Services\SearchInputService.cs" />
+    <Compile Include="Services\ServiceEnums.cs" />
+    <Compile Include="Areas\Tracer\Services\TracerComprehensive.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\DepartmentComparativeAnalysisData.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\DepartmentComparativeAnalysisOPP.cs" />
+    <Compile Include="ViewModels\SaveandScheduledDetails.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerBreakdownExcel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerByCMSExcel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerByCMSGraph.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerByEPExcel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerComprehensiveExcel.cs" />
+    <Compile Include="Areas\Tracer\ViewModels\TracerOrganization.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_DepartmentComparativeAnalysisData.xsc">
+      <DependentUpon>dsReport_DepartmentComparativeAnalysisData.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_ComplianceByQuestionDetail.xsc">
+      <DependentUpon>dsReport_ComplianceByQuestionDetail.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsEPScoreConsolidatedDetail.xsc">
+      <DependentUpon>dsEPScoreConsolidatedDetail.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsCorporateFindingsReport.xsc">
+      <DependentUpon>dsCorporateFindingsReport.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsCSaferMatrixBySite.xsc">
+      <DependentUpon>dsCSaferMatrixBySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsCSaferMatrixByChapter.xsc">
+      <DependentUpon>dsCSaferMatrixByChapter.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsCSaferMatrixByChapter.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCSaferMatrixByChapter.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsCSaferMatrixByChapter.xss">
+      <DependentUpon>dsCSaferMatrixByChapter.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsCSaferMatrixBySite.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCSaferMatrixBySite.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsCSaferMatrixBySite.xss">
+      <DependentUpon>dsCSaferMatrixBySite.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsCorporateFindingsReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCorporateFindingsReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsCorporateFindingsReport.xss">
+      <DependentUpon>dsCorporateFindingsReport.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsEPScoreConsolidatedDetail.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEPScoreConsolidatedDetail.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsEPScoreConsolidatedDetail.xss">
+      <DependentUpon>dsEPScoreConsolidatedDetail.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsEPScoreConsolidatedSummary.xsc">
+      <DependentUpon>dsEPScoreConsolidatedSummary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsEPScoreConsolidatedSummary.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEPScoreConsolidatedSummary.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsEPScoreConsolidatedSummary.xss">
+      <DependentUpon>dsEPScoreConsolidatedSummary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_ComplianceByQuestionDetail.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_ComplianceByQuestionDetail.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_ComplianceByQuestionDetail.xss">
+      <DependentUpon>dsReport_ComplianceByQuestionDetail.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_RFIFindingsbyProgram.xsc">
+      <DependentUpon>dsReport_RFIFindingsbyProgram.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_RFIFindingsPareto.xsc">
+      <DependentUpon>dsReport_RFIFindingsPareto.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_RFIFindingsPareto.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_RFIFindingsPareto.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_RFIFindingsPareto.xss">
+      <DependentUpon>dsReport_RFIFindingsPareto.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_RFIFindingsbyProgram.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_RFIFindingsbyProgram1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_RFIFindingsbyProgram.xss">
+      <DependentUpon>dsReport_RFIFindingsbyProgram.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_DepartmentComparativeAnalysisData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_DepartmentComparativeAnalysisData.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_DepartmentComparativeAnalysisData.xss">
+      <DependentUpon>dsReport_DepartmentComparativeAnalysisData.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_MonthlyBreakdownGraph.xsc">
+      <DependentUpon>dsReport_MonthlyBreakdownGraph.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_MonthlyBreakdownGraph.xss">
+      <DependentUpon>dsReport_MonthlyBreakdownGraph.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptComprehensiveScoring_Detail.rdlc" />
+    <Content Include="Areas\Corporate\Scripts\RFIFindingData.js" />
+    <Content Include="Areas\Corporate\Scripts\CorporateFinding.js" />
+    <Content Include="Areas\Corporate\Scripts\CorporateLayout.js" />
+    <Content Include="Areas\Corporate\Scripts\EPScoringData.js" />
+    <Content Include="Areas\Corporate\Views\AMPCorporateSummary\AMPCorporateSummary.js" />
+    <Content Include="Areas\Corporate\Views\CMSCompliance\CMSCompliance.js" />
+    <Content Include="Areas\Corporate\Views\ComprehensiveScoring\ComprehensiveScoring.js" />
+    <Content Include="Areas\Corporate\Views\EPAssignmentScoring\EPAssignmentScoring.js" />
+    <Content Include="Areas\Corporate\Views\EPAssignment\EPAssignment.js" />
+    <Content Include="Areas\Corporate\Views\AssignmentStatusByUser\AssignmentStatusByUser.js" />
+    <Content Include="Areas\Corporate\Views\EPNotScoredInPeriod\EPNotScoredInPeriod.js" />
+    <Content Include="Areas\Corporate\Views\EPScoringReportFinalMockSurvey\EPScoringReportFinalMockSurvey.js" />
+    <Content Include="Areas\Corporate\Views\EPScoring\EPScoring.js" />
+    <Content Include="Areas\Corporate\Views\PriorityTjcRFI\PriorityTjcRFI.js" />
+    <Content Include="Areas\Corporate\Views\SaferMatrix\SaferMatrix.js" />
+    <Content Include="Areas\Corporate\Views\TaskReport\TaskReport.js" />
+    <Content Include="Areas\TracerER\Scripts\TracerERLayout.js" />
+    <Content Include="Areas\TracerER\Views\ERComplianceByTracer\ERComplianceByTracer.js" />
+    <Content Include="Areas\TracerER\Views\ERTracerByQuestion\ERTracerByQuestion.js" />
+    <Content Include="Areas\TracerER\Views\ERTracerDashboard\ERTracerDashboard.js" />
+    <Content Include="Areas\Tracer\Scripts\TracerLayout.js" />
+    <Content Include="Areas\Tracer\Views\ComplianceDepartment\ComplianceDepartment.js" />
+    <Content Include="Areas\Tracer\Views\NewEP\NewEP.js" />
+    <Content Include="Areas\Tracer\Views\QuesEPRelation\QuesEPRelation.js" />
+    <Content Include="Areas\Tracer\Views\TracerComplianceDepartment\TracerComplianceDepartment.js" />
+    <Content Include="Areas\Tracer\Views\TracerDepartmentAssignment\TracerDepartmentAssignment.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Areas\Tracer\Views\TracerComplianceDepartment\index.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComplianceDepartment\TracerComplianceDepartmentDetail.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComplianceDepartment\TracerComplianceDepartmentGraph.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERTracerDashboard\Index.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERTracerDashboard\TracerDetails.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERTracerDashboard\HeatMapGraph.cshtml" />
+    <Content Include="Images\UpdatesToApplication.png" />
+    <Content Include="Views\Shared\Search\_IncludeMinimamCompliance.cshtml" />
+    <None Include="Content\ConfirmDialog.scss" />
+    <Content Include="Content\ConfirmDialog.css">
+      <DependentUpon>ConfirmDialog.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\ConfirmDialog.min.css">
+      <DependentUpon>ConfirmDialog.css</DependentUpon>
+    </Content>
+    <Content Include="Content\hMenuStyles.css">
+      <DependentUpon>hMenuStyles.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\hMenuStyles.min.css">
+      <DependentUpon>hMenuStyles.css</DependentUpon>
+    </Content>
+    <Content Include="Content\jquery-ui-1.10.4.custom-mod.css" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\editor.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\imagebrowser.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\indeterminate.gif" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\loading-image.gif" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\loading.gif" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\loading_2x.gif" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\markers.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\markers_2x.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\slider-h.gif" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\slider-v.gif" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\sprite.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\sprite_2x.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\sprite_kpi.png" />
+    <Content Include="Content\kendo\2017.1.223\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\editor.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\indeterminate.gif" />
+    <Content Include="Content\kendo\2017.1.223\Default\loading-image.gif" />
+    <Content Include="Content\kendo\2017.1.223\Default\loading.gif" />
+    <Content Include="Content\kendo\2017.1.223\Default\loading_2x.gif" />
+    <Content Include="Content\kendo\2017.1.223\Default\markers.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\markers_2x.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\slider-h.gif" />
+    <Content Include="Content\kendo\2017.1.223\Default\slider-v.gif" />
+    <Content Include="Content\kendo\2017.1.223\Default\sprite.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\sprite_2x.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\sprite_kpi.png" />
+    <Content Include="Content\kendo\2017.1.223\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\WebComponentsIcons.svg" />
+    <Content Include="Content\kendo\2017.1.223\images\back.png" />
+    <Content Include="Content\kendo\2017.1.223\images\kendoui.svg" />
+    <Content Include="Content\kendo\2017.1.223\images\wp8_icons.png" />
+    <Content Include="Content\kendo\2017.1.223\images\wp8_inverseicons.png" />
+    <Content Include="Content\kendo\2017.1.223\kendo.bootstrap.min.css" />
+    <Content Include="Content\kendo\2017.1.223\kendo.common-bootstrap.min.css" />
+    <Content Include="Content\kendo\2017.1.223\kendo.dataviz.bootstrap.min.css" />
+    <Content Include="Content\kendo\2017.1.223\kendo.dataviz.min.css" />
+    <Content Include="Content\kendo\2017.1.223\kendo.mobile.all.min.css" />
+    <Content Include="Content\kendo\2017.1.223\textures\brushed-metal.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots1.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots10.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots11.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots12.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots13.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots2.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots3.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots4.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots5.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots6.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots7.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots8.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\dots9.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\glass-lighter.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\glass.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\highlight.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\hsv-gradient.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\hue.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\leather1.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\leather2.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\noise.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\stripe1.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\stripe2.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\stripe3.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\stripe4.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\stripe5.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\stripe6.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\transparency.png" />
+    <Content Include="Content\kendo\2017.1.223\textures\transtexture.png" />
+    <None Include="Content\hMenuStyles.scss" />
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
+    <Content Include="Content\TracerSearchCriteria.css" />
+    <Content Include="Content\SearchCriteria.css" />
+    <Content Include="Content\CorporateLayout.css" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Content\Tracersite.scss" />
+    <Content Include="Content\Tracersite.css">
+      <DependentUpon>Tracersite.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Tracersite.min.css">
+      <DependentUpon>Tracersite.css</DependentUpon>
+    </Content>
+    <Content Include="Content\vMenuStyles.css" />
+    <Content Include="DataModel\DBMEdition.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBMEdition.edmx</DependentUpon>
+      <LastGenOutput>DBMEdition.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\DBMEdition.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBMEdition.edmx</DependentUpon>
+      <LastGenOutput>DBMEdition.cs</LastGenOutput>
+    </Content>
+    <Content Include="EmailTemplates\EmailReport.htm" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\AMP.png" />
+    <Content Include="Images\AMPLogo42pxHeight.png" />
+    <Content Include="Images\blue_spinner.gif" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\EnterpriseReportingTracers.jpg" />
+    <Content Include="Images\glyphicons-90-alt-building.png" />
+    <Content Include="Images\glyphicons-90-building.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <None Include="Content\Site.scss" />
+    <Content Include="Images\jcr_logo.png" />
+    <Content Include="Images\jcr_logo40.png" />
+    <Content Include="Images\submenuD.gif" />
+    <Content Include="Images\submenuU.gif" />
+    <Content Include="Images\Tracers.jpg" />
+    <Content Include="Images\tracersamp.jpg" />
+    <Content Include="Images\TracersSmall.jpg" />
+    <Content Include="Images\tracer_infoicon18.png" />
+    <Content Include="References\ClosedXML.dll" />
+    <Content Include="References\DocumentFormat.OpenXml.dll" />
+    <Content Include="References\EntityFramework.dll" />
+    <Content Include="References\EntityFramework.SqlServer.dll" />
+    <Content Include="References\JCR.DB.Domain.dll" />
+    <Content Include="References\System.Web.Mvc.dll" />
+    <Content Include="References\System.Web.WebPages.dll" />
+    <Content Include="ReportExportFiles\ReportExportFiles.txt" />
+    <Content Include="Areas\Tracer\Reports\rptReportTracerControlChart.rdlc" />
+    <Content Include="App_Data\dsReport_DepartmentComparativeAnalysisOpportunities.xsc">
+      <DependentUpon>dsReport_DepartmentComparativeAnalysisOpportunities.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_DepartmentComparativeAnalysisOpportunities.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_DepartmentComparativeAnalysisOpportunities.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_DepartmentComparativeAnalysisOpportunities.xss">
+      <DependentUpon>dsReport_DepartmentComparativeAnalysisOpportunities.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByQuestion.xsc">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByQuestion.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByQuestion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComprehensiveDetailByQuestion.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByQuestion.xss">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByQuestion.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByResponseExport.xsc">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByResponseExport.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_OrgFindingsByQuestion.xsc">
+      <DependentUpon>dsReport_OrgFindingsByQuestion.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComplianceSummary.xsc">
+      <DependentUpon>dsReport_TracerComplianceSummary.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TJCStandards.xsc">
+      <DependentUpon>dsReport_TJCStandards.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_Parameters.xsc">
+      <DependentUpon>dsReport_Parameters.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_MonthlyBreakdown.xsc">
+      <DependentUpon>dsReport_MonthlyBreakdown.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_MonthlyBreakdown.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_MonthlyBreakdown.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_MonthlyBreakdown.xss">
+      <DependentUpon>dsReport_MonthlyBreakdown.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_MonthlyBreakdownGraph.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_MonthlyBreakdownGraph.Designer.cs</LastGenOutput>
+    </Content>
+    <None Include="App_Data\dsReport_Parameters.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_Parameters.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_Parameters.xss">
+      <DependentUpon>dsReport_Parameters.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TJCStandards.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsReport_TJCStandards.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TJCStandards.xss">
+      <DependentUpon>dsReport_TJCStandards.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByCMS.xsc">
+      <DependentUpon>dsReport_TracerByCMS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByCMS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByCMS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByCMS.xss">
+      <DependentUpon>dsReport_TracerByCMS.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByCMSChart.xsc">
+      <DependentUpon>dsReport_TracerByCMSChart.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByCMSChart.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByCMSChart.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByCMSChart.xss">
+      <DependentUpon>dsReport_TracerByCMSChart.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComplianceSummary.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComplianceSummary.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComplianceSummary.xss">
+      <DependentUpon>dsReport_TracerComplianceSummary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_OrgFindingsByQuestion.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsReport_OrgFindingsByQuestion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_OrgFindingsByQuestion.xss">
+      <DependentUpon>dsReport_OrgFindingsByQuestion.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComprehensiveDetailByResponseExport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComprehensiveDetailByResponseExport.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByResponseExport.xss">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByResponseExport.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByResponse.xsc">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByResponse.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByResponse.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComprehensiveDetailByResponse.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByResponse.xss">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByResponse.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByQuestionExport.xsc">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByQuestionExport.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComprehensiveDetailByQuestionExport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComprehensiveDetailByQuestionExport.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComprehensiveDetailByQuestionExport.xss">
+      <DependentUpon>dsReport_TracerComprehensiveDetailByQuestionExport.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveSummaryByQuestion.xsc">
+      <DependentUpon>dsReport_TracerComprehensiveSummaryByQuestion.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveSummaryByQuestion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComprehensiveSummaryByQuestion.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveSummaryByQuestion.xss">
+      <DependentUpon>dsReport_TracerComprehensiveSummaryByQuestion.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveSummaryByResponse.xsc">
+      <DependentUpon>dsReport_TracerComprehensiveSummaryByResponse.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveSummaryByResponse.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComprehensiveSummaryByResponse.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComprehensiveSummaryByResponse.xss">
+      <DependentUpon>dsReport_TracerComprehensiveSummaryByResponse.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByEP.xsc">
+      <DependentUpon>dsReport_TracerByEPGroupByEP.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByEPGroupByEP.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByEPGroupByEP.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByEP.xss">
+      <DependentUpon>dsReport_TracerByEPGroupByEP.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByEPDept.xsc">
+      <DependentUpon>dsReport_TracerByEPGroupByEPDept.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByEPGroupByEPDept.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByEPGroupByEPDept.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByEPDept.xss">
+      <DependentUpon>dsReport_TracerByEPGroupByEPDept.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByEPQuestion.xsc">
+      <DependentUpon>dsReport_TracerByEPGroupByEPQuestion.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByEPGroupByEPQuestion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByEPGroupByEPQuestion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByEPQuestion.xss">
+      <DependentUpon>dsReport_TracerByEPGroupByEPQuestion.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByStandard.xsc">
+      <DependentUpon>dsReport_TracerByEPGroupByStandard.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByEPGroupByStandard.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByEPGroupByStandard.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByEPGroupByStandard.xss">
+      <DependentUpon>dsReport_TracerByEPGroupByStandard.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerControlChart.xsc">
+      <DependentUpon>dsReport_TracerControlChart.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerControlChart.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerControlChart.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerControlChart.xss">
+      <DependentUpon>dsReport_TracerControlChart.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerObservationStatusByMonth.xsc">
+      <DependentUpon>dsReport_TracerObservationStatusByMonth.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerObservationStatusByMonth.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerObservationStatusByMonth.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerObservationStatusByMonth.xss">
+      <DependentUpon>dsReport_TracerObservationStatusByMonth.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerObservationStatus.xsc">
+      <DependentUpon>dsReport_TracerObservationStatus.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerObservationStatus.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerObservationStatus.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerObservationStatus.xss">
+      <DependentUpon>dsReport_TracerObservationStatus.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerTeamStatus.xsc">
+      <DependentUpon>dsReport_TracerTeamStatus.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerTeamStatus.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerTeamStatus.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerTeamStatus.xss">
+      <DependentUpon>dsReport_TracerTeamStatus.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_ComplianceByQuestionSummary.xsc">
+      <DependentUpon>dsReport_ComplianceByQuestionSummary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_ComplianceByQuestionSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_ComplianceByQuestionSummary.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_ComplianceByQuestionSummary.xss">
+      <DependentUpon>dsReport_ComplianceByQuestionSummary.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByProgram.xsc">
+      <DependentUpon>dsReport_TracerByTJCStandardByProgram.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByTJCStandardByProgram.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByTJCStandardByProgram.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByProgram.xss">
+      <DependentUpon>dsReport_TracerByTJCStandardByProgram.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardBySite.xsc">
+      <DependentUpon>dsReport_TracerByTJCStandardBySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByChapter.xsc">
+      <DependentUpon>dsReport_TracerByTJCStandardByChapter.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByTJCStandardByChapter.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByTJCStandardByChapter.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByChapter.xss">
+      <DependentUpon>dsReport_TracerByTJCStandardByChapter.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByEP.xsc">
+      <DependentUpon>dsReport_TracerByTJCStandardByEP.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByTJCStandardByEP.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByTJCStandardByEP.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByEP.xss">
+      <DependentUpon>dsReport_TracerByTJCStandardByEP.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByTJCStandardBySite.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByTJCStandardBySite.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardBySite.xss">
+      <DependentUpon>dsReport_TracerByTJCStandardBySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByStandard.xsc">
+      <DependentUpon>dsReport_TracerByTJCStandardByStandard.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerByTJCStandardByStandard.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerByTJCStandardByStandard.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerByTJCStandardByStandard.xss">
+      <DependentUpon>dsReport_TracerByTJCStandardByStandard.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryByProgram.xsc">
+      <DependentUpon>dsReport_TracerComplianceSummaryByProgram.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComplianceSummaryByProgram.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComplianceSummaryByProgram.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryByProgram.xss">
+      <DependentUpon>dsReport_TracerComplianceSummaryByProgram.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryBySite.xsc">
+      <DependentUpon>dsReport_TracerComplianceSummaryBySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryByQuestion.xsc">
+      <DependentUpon>dsReport_TracerComplianceSummaryByQuestion.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComplianceSummaryByQuestion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComplianceSummaryByQuestion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryByQuestion.xss">
+      <DependentUpon>dsReport_TracerComplianceSummaryByQuestion.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComplianceSummaryBySite.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComplianceSummaryBySite.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryBySite.xss">
+      <DependentUpon>dsReport_TracerComplianceSummaryBySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryByTracer.xsc">
+      <DependentUpon>dsReport_TracerComplianceSummaryByTracer.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_TracerComplianceSummaryByTracer.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_TracerComplianceSummaryByTracer.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_TracerComplianceSummaryByTracer.xss">
+      <DependentUpon>dsReport_TracerComplianceSummaryByTracer.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\TracerER\Views\web.config" />
+    <Content Include="Areas\TracerER\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Corporate\Views\web.config" />
+    <Content Include="Areas\Tracer\Views\web.config" />
+    <Content Include="Areas\Tracer\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Corporate\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Corporate\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\Home\IndexER.cshtml" />
+    <Content Include="Areas\Corporate\Views\Home\MyReports.cshtml" />
+    <Content Include="Areas\Corporate\Views\Home\SavedandScheduledReports.cshtml" />
+    <Content Include="Areas\Corporate\Views\Home\SearchReports.cshtml" />
+    <Content Include="Areas\Corporate\Views\AMPCorporateSummary\index.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_SiteSelectorSite.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_SitesTree.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MultiSiteEPsList.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MultiSiteStandardsList.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_CorpSurveyDateRange.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MultiSiteChapter.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MultiSiteProgram.cshtml" />
+    <EntityDeploy Include="DataModel\AMPDBEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AMPDBEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataModel\AMPDBEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AMPDBEntity.edmx</DependentUpon>
+      <LastGenOutput>AMPDBEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\AMPDBEntity.edmx.diagram">
+      <DependentUpon>AMPDBEntity.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataModel\AMPDBEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AMPDBEntity.edmx</DependentUpon>
+      <LastGenOutput>AMPDBEntity.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MockSurveyCriteria.cshtml" />
+    <Content Include="Areas\Corporate\Views\AMPCorporateSummary\AMPCorporateSummary.cshtml" />
+    <Content Include="App_Data\dsReport_CorporateFindingsPareto.xsc">
+      <DependentUpon>dsReport_CorporateFindingsPareto.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_CorporateFindingsPareto.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_CorporateFindingsPareto.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_CorporateFindingsPareto.xss">
+      <DependentUpon>dsReport_CorporateFindingsPareto.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_CorporateFindingsByProgram.xsc">
+      <DependentUpon>dsReport_CorporateFindingsByProgram.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_CorporateFindingsByProgram.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_CorporateFindingsByProgram.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_CorporateFindingsByProgram.xss">
+      <DependentUpon>dsReport_CorporateFindingsByProgram.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Tracer\Views\MonthlyQuestionBreakdown\MonthlyQuestionBreakdownChart.cshtml" />
+    <Content Include="Areas\Tracer\Views\MonthlyTracerBreakdown\MonthlyTracerBreakdownChart.cshtml" />
+    <Content Include="Areas\Tracer\Views\QuesEPRelation\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\QuesEPRelation\QuestionEPRelation.cshtml" />
+    <Content Include="Areas\Tracer\Views\NewEP\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\NewEP\NewEP.cshtml" />
+    <Content Include="connectionStrings.config">
+      <TransformOnBuild>true</TransformOnBuild>
+    </Content>
+    <Content Include="Areas\Corporate\Views\EPScoring\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_SitesTreeForEPScoring.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_SiteSelectorForEPScoring.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_ScoringPeriod.cshtml" />
+    <Content Include="Areas\Corporate\Views\PriorityTjcRFI\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\PriorityTjcRFI\PriorityTjcRFI.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_EpScoredBy.cshtml" />
+    <Content Include="Areas\Corporate\Views\SaferMatrix\index.cshtml" />
+    <Content Include="Areas\Corporate\Views\SaferMatrix\SaferMatrix.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_TaskAssignedTo.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_TaskAssignedBy.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_TaskStatus.cshtml" />
+    <Content Include="App_Data\dsTaskReport.xsc">
+      <DependentUpon>dsTaskReport.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsTaskReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTaskReport.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\Corporate\Views\Shared\Search\_SingleSelectForProgram.cshtml" />
+    <Content Include="Areas\Corporate\Views\EPAssignment\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\EPAssignment\EPAssignment.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_EPAssignedBy.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_EPAssignedTo.cshtml" />
+    <Content Include="Areas\Corporate\Views\AssignmentStatusByUser\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\AssignmentStatusByUser\AssignmentStatusByUser.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_AssignmentAssignedTo.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_ReportsProgramSelect.cshtml" />
+    <Content Include="Areas\Corporate\Reports\rptReportAssignmentStatusByUser_UserLevel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Views\Shared\Search\_UserSites.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_UserSitePrograms.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerDepartmentAssignment\_TracerDepartmentAssignment.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerDepartmentAssignment\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerDepartmentAssignment\_GrouByTracerReports.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerDepartmentAssignment\_GroupByDepartmentReports.cshtml" />
+    <Content Include="Areas\Corporate\Views\EPAssignmentScoring\Index.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERTracerByQuestion\ERTracerByQuestionReport.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERTracerByQuestion\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\CMSCompliance\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MultiSiteCoP.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MultiSiteTags.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_IdentifiedBy.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteDepartment.cshtml" />
+    <Content Include="Areas\Corporate\Views\EPNotScoredInPeriod\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\EPScoringReportFinalMockSurvey\Index.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_MockSurveyNameList.cshtml" />
+    <Content Include="Areas\Corporate\Views\ComprehensiveScoring\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceDepartment\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceDepartment\ComplianceDepartmentDetail.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceDepartment\ComplianceDepartmentPivot.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERComplianceByTracer\Index.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERComplianceByTracer\HeatMap.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteQuarterList.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERComplianceByTracer\Summary.cshtml" />
+    <Content Include="Areas\TracerER\Views\ERComplianceByTracer\TracerResults.cshtml" />
+    <Content Include="Areas\Corporate\Views\TaskReport\index.cshtml" />
+    <Content Include="Areas\Corporate\Views\Shared\Search\_EmailCcedTo.cshtml" />
+    <Content Include="Areas\Corporate\Views\TaskReport\TaskReportExcelView.cshtml" />
+    <Content Include="App_Data\dsTaskReport.xss">
+      <DependentUpon>dsTaskReport.xsd</DependentUpon>
+    </Content>
+    <None Include="connectionStrings.Deploy.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="connectionStrings_Production.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="connectionStrings_UAT.config" />
+    <Content Include="ReportViewerWebForm.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.min.js" />
+    <Content Include="Scripts\Common\CofirmNotification.js" />
+    <Content Include="Scripts\Common\SaveAndSchedule.js" />
+    <Content Include="Areas\TracerER\Views\TracerComplianceSummary\TracerComplianceSummary.js" />
+    <Content Include="Scripts\Common\Email.js" />
+    <Content Include="Areas\TracerER\Views\TracersByTJCStandard\TracersByTJCStandard.js" />
+    <Content Include="Areas\Tracer\Views\MonthlyTracerBreakdown\MonthlyTracerBreakdown.js" />
+    <Content Include="Areas\Tracer\Views\MonthlyQuestionBreakdown\MonthlyQuestionBreakdown.js" />
+    <Content Include="Areas\Tracer\Views\ComplianceQuestion\ComplianceQuestion.js" />
+    <Content Include="Areas\Tracer\Views\DepartmentComparativeAnalysis\DepartmentComparativeAnalysis.js" />
+    <Content Include="Scripts\Common\FileSaver.js" />
+    <Content Include="Areas\Tracer\Views\OrganizationPriorityFindings\OrgPriorityFindings.js" />
+    <Content Include="Areas\Tracer\Views\TracerByCMS\TracerByCMS.js" />
+    <Content Include="Areas\Tracer\Views\TracerObservationStatus\TracerObservationStatus.js" />
+    <Content Include="Areas\Tracer\Views\TJCPriorityFindings\TJCPriorityFindings.js" />
+    <Content Include="Areas\Tracer\Views\TracerTeamStatus\TracerTeamStatus.js" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEP.js" />
+    <Content Include="Areas\Tracer\Views\TracerCompliance\TracerCompliance.js" />
+    <Content Include="Areas\Tracer\Views\TracerComprehensive\TracerComprehensive.js" />
+    <Content Include="Areas\Tracer\Views\TracerControlChart\TracerControlChart.js" />
+    <Content Include="Scripts\Common\ReportsCommon.js" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
+    <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+    <EntityDeploy Include="DataModel\DBMEdition.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBMEdition.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataModel\DBMEdition.edmx.diagram">
+      <DependentUpon>DBMEdition.edmx</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_EPAssignment_BySite.xsc">
+      <DependentUpon>dsReport_EPAssignment_BySite.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_EPAssignment_BySite.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_EPAssignment_BySite.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_EPAssignment_BySite.xss">
+      <DependentUpon>dsReport_EPAssignment_BySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_EPAssignment_ByChapter.xsc">
+      <DependentUpon>dsReport_EPAssignment_ByChapter.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_EPAssignment_ByChapter.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_EPAssignment_ByChapter.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_EPAssignment_ByChapter.xss">
+      <DependentUpon>dsReport_EPAssignment_ByChapter.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_EPAssignment_ByStandard.xsc">
+      <DependentUpon>dsReport_EPAssignment_ByStandard.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_EPAssignment_ByStandard.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_EPAssignment_ByStandard.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_EPAssignment_ByStandard.xss">
+      <DependentUpon>dsReport_EPAssignment_ByStandard.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_AssignmentStatusByUser_UserLevel.xsc">
+      <DependentUpon>dsReport_AssignmentStatusByUser_UserLevel.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_AssignmentStatusByUser_UserLevel.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_AssignmentStatusByUser_UserLevel.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_AssignmentStatusByUser_UserLevel.xss">
+      <DependentUpon>dsReport_AssignmentStatusByUser_UserLevel.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_AssignmentStatusByUser_ChapterLevel.xsc">
+      <DependentUpon>dsReport_AssignmentStatusByUser_ChapterLevel.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_AssignmentStatusByUser_ChapterLevel.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_AssignmentStatusByUser_ChapterLevel.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_AssignmentStatusByUser_ChapterLevel.xss">
+      <DependentUpon>dsReport_AssignmentStatusByUser_ChapterLevel.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_AssignmentStatusByUser_StandardLevel.xsc">
+      <DependentUpon>dsReport_AssignmentStatusByUser_StandardLevel.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_AssignmentStatusByUser_StandardLevel.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_AssignmentStatusByUser_StandardLevel.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsReport_AssignmentStatusByUser_StandardLevel.xss">
+      <DependentUpon>dsReport_AssignmentStatusByUser_StandardLevel.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionByProgram.xsc">
+      <DependentUpon>dsReport_ERTracerByQuestionByProgram.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_ERTracerByQuestionByProgram.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_ERTracerByQuestionByProgram.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionByProgram.xss">
+      <DependentUpon>dsReport_ERTracerByQuestionByProgram.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionByQuestion.xsc">
+      <DependentUpon>dsReport_ERTracerByQuestionByQuestion.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_ERTracerByQuestionByQuestion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_ERTracerByQuestionByQuestion.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionByQuestion.xss">
+      <DependentUpon>dsReport_ERTracerByQuestionByQuestion.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionBySite.xsc">
+      <DependentUpon>dsReport_ERTracerByQuestionBySite.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_ERTracerByQuestionBySite.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_ERTracerByQuestionBySite.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionBySite.xss">
+      <DependentUpon>dsReport_ERTracerByQuestionBySite.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionByTracer.xsc">
+      <DependentUpon>dsReport_ERTracerByQuestionByTracer.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsReport_ERTracerByQuestionByTracer.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport_ERTracerByQuestionByTracer.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\dsReport_ERTracerByQuestionByTracer.xss">
+      <DependentUpon>dsReport_ERTracerByQuestionByTracer.xsd</DependentUpon>
+    </Content>
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\WebComponentsIcons.eot" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Content\kendo\2017.1.223\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Content\kendo\2017.1.223\images\kendoui.ttf" />
+    <Content Include="Content\kendo\2017.1.223\images\kendoui.woff" />
+    <Content Include="App_Data\dsCMSComplianceSummary.xsc">
+      <DependentUpon>dsCMSComplianceSummary.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsCMSComplianceSummary.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCMSComplianceSummary.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsCMSComplianceSummary.xss">
+      <DependentUpon>dsCMSComplianceSummary.xsd</DependentUpon>
+    </Content>
+    <Content Include="App_Data\dsCMSComplianceDetail.xsc">
+      <DependentUpon>dsCMSComplianceDetail.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsCMSComplianceDetail.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCMSComplianceDetail.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsCMSComplianceDetail.xss">
+      <DependentUpon>dsCMSComplianceDetail.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsEPNotScoredInPeriodDetail.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEPNotScoredInPeriodDetail.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsEPNotScoredInPeriodSummaryView.xsc">
+      <DependentUpon>dsEPNotScoredInPeriodSummaryView.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\dsEPNotScoredInPeriodSummaryView.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsEPNotScoredInPeriodSummaryView.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Data\dsEPNotScoredInPeriodSummaryView.xss">
+      <DependentUpon>dsEPNotScoredInPeriodSummaryView.xsd</DependentUpon>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\cMenuLauncher.js" />
+    <Content Include="Scripts\html5shiv.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.blockUI.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\kendo.modernizr.custom.js" />
+    <Content Include="Scripts\kendoExcelGrid.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\jquery-2.2.0.min.map" />
+    <Content Include="Scripts\kendo\2017.1.223\jquery.min.js" />
+    <Content Include="Scripts\kendo\2017.1.223\jszip.min.js" />
+    <Content Include="Scripts\kendo\2017.1.223\kendo.all.min.js" />
+    <Content Include="Scripts\kendo\2017.1.223\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\Layout.js" />
+    <Content Include="Scripts\matchHeight.js" />
+    <Content Include="Scripts\vMenuBuilder.js" />
+    <Content Include="Scripts\hMenuBuilder.js" />
+    <Content Include="Scripts\vMenuData.js" />
+    <Content Include="Scripts\hMenuData.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-timezone-2010-2020.js" />
+    <Content Include="Scripts\moment-timezone.min.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="build\pdf.worker.js" />
+    <Content Include="Scripts\placeholders.min.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Service References\CCMService\JCR.Reports.CCMService.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CCMService\JCR.Reports.CCMService.SendAdhocEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CCMService\JCR.Reports.CCMService.SendEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CCMService\JCR.Reports.CCMService.SendEREmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CCMService\JCR.Reports.CCMService.SendGeneralEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CCMService\JCR.Reports.CCMService.SendTracerDeptAssignmentEmailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\CCMService\ProcessEmail.disco" />
+    <None Include="Service References\CCMService\configuration91.svcinfo" />
+    <None Include="Service References\CCMService\configuration.svcinfo" />
+    <None Include="Service References\CCMService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Shared\Search\_ObservationDate.cshtml" />
+    <Content Include="Views\Shared\Search\_TracersCategory.cshtml" />
+    <Content Include="Views\Shared\Search\_TracersList.cshtml" />
+    <Content Include="Views\Shared\ReportHelp\_ReportHelp.cshtml" />
+    <Content Include="Views\Shared\_ReportViewer.cshtml" />
+    <Content Include="Views\Shared\Search\_DepartmentList.cshtml" />
+    <Content Include="Views\Shared\Search\_ShowReport.cshtml" />
+    <Content Include="Views\Shared\Search\_UserSite.cshtml" />
+    <Content Include="Areas\Tracer\Views\DepartmentComparativeAnalysis\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_NonCompliantPercentage.cshtml" />
+    <Content Include="Views\Shared\Search\_SelectedSiteName.cshtml" />
+    <Content Include="Views\Shared\Search\_CampusList.cshtml" />
+    <Content Include="Views\Shared\Search\_BuildingList.cshtml" />
+    <Content Include="Views\Shared\Search\_OrganizationType.cshtml" />
+    <Content Include="Views\Shared\Search\_InactiveOrgItemsCheckBox.cshtml" />
+    <Content Include="Views\Shared\Search\_EmailInput.cshtml" />
+    <Content Include="Views\Shared\Search\_ResetFilters.cshtml" />
+    <Content Include="Areas\Tracer\Views\DepartmentComparativeAnalysis\DepartmentComparativeAnalysisData.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComprehensive\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_IncludeFollowup.cshtml" />
+    <Content Include="Views\Shared\Search\_IncludeNA.cshtml" />
+    <Content Include="Views\Shared\Search\_IncludeFSA.cshtml" />
+    <Content Include="Views\Shared\Error\Error.cshtml" />
+    <Content Include="Areas\Tracer\Views\DepartmentComparativeAnalysis\DepartmentComparativeAnalysisOpp.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComprehensive\TracerComprehensiveByQuestion.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComprehensive\TracerComprehensiveByResponse.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\OrganizationPriorityFindings\Index.cshtml" />
+    <Content Include="Views\Shared\Error\_ErrorMessage.cshtml" />
+    <Content Include="Views\Shared\Search\_ChaptersList.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerCompliance\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_EPsList.cshtml" />
+    <Content Include="Views\Shared\Search\_StandardsList.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerTeamStatus\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_TopFindings.cshtml" />
+    <Content Include="Views\Shared\Search\_IncludeCMS.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerControlChart\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByEP.cshtml" />
+    <Content Include="Areas\Tracer\Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Email\_EmailForm.cshtml" />
+    <Content Include="Views\Shared\Search\_TracerObservationEnteredBy.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerObservationStatus\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\TJCPriorityFindings\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_UserAssignedTo.cshtml" />
+    <Content Include="Views\Shared\Search\_TaskStatus.cshtml" />
+    <Content Include="Views\Shared\Search\_ObservationStatus.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByStandard.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByEPQues.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByEPDept.cshtml" />
+    <Content Include="Views\Shared\Search\_HiddenVariables.cshtml" />
+    <Content Include="Views\Shared\Search\_TracersListForComplianceSummary.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByEPDeptIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByEPIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByEPQuesIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByEP\TracerByEPGroupByStandardIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComprehensive\TracerComprehensiveByQuestionIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerComprehensive\TracerComprehensiveByResponseIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\DepartmentComparativeAnalysis\DepartmentComparativeAnalysisDataIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\DepartmentComparativeAnalysis\DepartmentComparativeAnalysisOppIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceQuestion\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_LeastCompliantQuestions.cshtml" />
+    <Content Include="Views\Shared\Search\_DateRange.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceQuestion\ComplianceQuestionGraph.cshtml" />
+    <Content Include="Areas\Tracer\Views\MonthlyQuestionBreakdown\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\MonthlyTracerBreakdown\Index.cshtml" />
+    <Content Include="Views\Shared\Search\_QuestionListView.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceQuestion\ComplianceQuestionDetail.cshtml" />
+    <Content Include="Areas\Tracer\Views\MonthlyTracerBreakdown\MonthlyTracerBreakdown.cshtml" />
+    <Content Include="Views\Shared\Search\_Programs.cshtml" />
+    <Content Include="Areas\Tracer\Views\MonthlyQuestionBreakdown\MonthlyQuestionBreakdown.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByCMS\Index.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByCMS\TracerByCMS.cshtml" />
+    <Content Include="Views\Shared\Search\_CMSTagsList.cshtml" />
+    <Content Include="Areas\Tracer\Views\ComplianceQuestion\ComplianceQuestionDetailIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByCMS\TracerByCMSGraph.cshtml" />
+    <Content Include="Areas\Tracer\Views\TracerByCMS\TracerByCMSIE8.cshtml" />
+    <Content Include="Areas\Tracer\Views\Home\MyReports.cshtml" />
+    <Content Include="Areas\Tracer\Views\Home\SearchReports.cshtml" />
+    <Content Include="Views\Shared\Search\_SaveReport.cshtml" />
+    <Content Include="Views\Shared\Search\_ScheduledReportName.cshtml" />
+    <Content Include="Areas\Tracer\Views\Home\SavedandScheduledReports.cshtml" />
+    <Content Include="Views\Shared\Search\_SearchByReports.cshtml" />
+    <Content Include="Views\Shared\Search\_SavedReportsCreatedBy.cshtml" />
+    <Content Include="Views\Shared\Search\_SearchByRecurrenceType.cshtml" />
+    <Content Include="Views\Shared\Search\_ScheduleRecurrence.cshtml" />
+    <Content Include="Views\Shared\Search\_DaysOfMonth.cshtml" />
+    <Content Include="Views\Shared\Search\_SearchByMyReports.cshtml" />
+    <Content Include="Areas\TracerER\Views\Home\Index.cshtml" />
+    <Content Include="Areas\TracerER\Views\Home\MyReports.cshtml" />
+    <Content Include="Areas\TracerER\Views\Home\SavedandScheduledReports.cshtml" />
+    <Content Include="Areas\TracerER\Views\Home\SearchReports.cshtml" />
+    <Content Include="Areas\TracerER\Views\TracersByTJCStandard\Index.cshtml" />
+    <Content Include="Views\Shared\_TracerERLayout.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteChapter.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteProgram.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_SiteSelectorSite.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_SitesTree.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteStandardsList.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteEPsList.cshtml" />
+    <Content Include="Areas\TracerER\Views\TracersByTJCStandard\TracersbyTJCStandardReport.cshtml" />
+    <Content Include="Areas\TracerER\Views\TracerComplianceSummary\Index.cshtml" />
+    <Content Include="Areas\TracerER\Views\Shared\Search\_MultiSiteTracersList.cshtml" />
+    <Content Include="Areas\TracerER\Views\TracerComplianceSummary\ComplianceSummaryReport.cshtml" />
+    <Content Include="Views\Shared\_CorporateLayout.cshtml" />
+    <Content Include="Views\Shared\_TracerLayout.cshtml" />
+    <Content Include="Views\Shared\Search\_IncludeDeptNoCompObs.cshtml" />
+    <Content Include="Views\Shared\Search\_MinimumDenominatorValue.cshtml" />
+    <Content Include="Views\Shared\Search\_TracerStatus.cshtml" />
+    <Content Include="Views\Shared\Search\_EpMigrationChangeType.cshtml" />
+    <Content Include="Views\Shared\Search\_EPMigrationChangeDate.cshtml" />
+    <Content Include="Views\Shared\Search\_TracerFrequency.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Shared\Search\_CMSRadioButton.cshtml" />
+    <Content Include="Scripts\kendo\2017.1.223\jquery.min.map" />
+    <Content Include="Scripts\kendo\2017.1.223\kendo.all.min.js.map" />
+    <Content Include="Scripts\kendo\2017.1.223\kendo.aspnetmvc.min.js.map" />
+    <None Include="Service References\CCMService\ProcessEmail.wsdl" />
+    <None Include="Service References\CCMService\ProcessEmail.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CCMService\ProcessEmail1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CCMService\ProcessEmail2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CCMService\ProcessEmail3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CCMService\ProcessEmail4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Shared\Search\_TemplateStatus.cshtml" />
+    <Content Include="Views\Shared\Search\_TemplatesList.cshtml" />
+    <Content Include="Views\Shared\Search\_EpMigrationChangeTypeGlobalAdmin.cshtml" />
+    <Content Include="Views\Shared\Search\_PeriodsOfQuarter.cshtml" />
+    <Content Include="Views\Shared\Search\_IncludeHavingCompliance.cshtml" />
+    <Content Include="Views\Shared\Search\_TracerSectionsList.cshtml" />
+    <Content Include="Views\Shared\Search\_ScheduledReportDescription.cshtml" />
+    <Content Include="Views\Shared\Email\_EmailWithTaskSchedule.cshtml" />
+    <Content Include="Views\Shared\Search\_SetTotalCompletedObs.cshtml" />
+    <Content Include="Views\Shared\Search\_SetTracerComplianceRange.cshtml" />
+    <None Include="Web.Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Corporate\Views\CorporateSearch\" />
+    <Folder Include="Areas\Corporate\Views\TJCRFISummary\" />
+    <Folder Include="Areas\Tracer\Views\Shared\" />
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptReportDepartmentComparativeAnalysis.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByEPGroupByEP.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByEPGroupByEPDept.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByEPGroupByEPQuestion.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByEPGroupByStandard.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComprehensiveByQuestionsDetail.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComprehensiveByQuestionsSummary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComprehensiveByResponsesDetail.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComprehensiveByResponsesSummary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptReportOrgFindingsByQuestion.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerObservationStatus.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerObservationStatusByMonth.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComplianceSummary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerTeamStatus.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerTJCStandardswithGraph.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptReportComplianceByQuestionSummary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptMonthlyBreakdownExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportComplianceByQuestionDetailExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportDepartmentComparativeDataExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportDepartmentComparativeDetailsExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByCMSChartExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByCMSExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByEPGroupByEPExcel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComprehensiveByQuestionsDetailExport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerComprehensiveByResponsesDetailExport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerByTJCStandard_ByProgram.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerByTJCStandard_BySite.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerByTJCStandard_ByChapter.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerByTJCStandard_ByEP.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerByTJCStandard_ByStandard.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerComplianceSummary_ByProgram.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerComplianceSummary_ByQuestion.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerComplianceSummary_BySite.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportTracerComplianceSummary_ByTracer.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptReportTracerByCMSChart.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptReportCorporateFindingsByProgram.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptReportCorporateFindingsPareto.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Tracer\Reports\rptMonthlyBreakdownGraph.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReportViewerForMvc\ReportViewerForMvc.csproj">
+      <Project>{b7f6a951-ece3-4bdd-be20-0f7ffd944695}</Project>
+      <Name>ReportViewerForMvc</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptReportRFIFindingsByProgram.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptReportRFIFindingsPareto.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptEP_Scoring_Consolidated_Summary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptEP_Scoring_Consolidated_Detail.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptReportAssignmentStatusByUser_ChapterLevel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptReportAssignmentStatusByUser_StandardLevel.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptEPAssignment_ByChapter.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptEPAssignment_BySite.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptEPAssignment_ByStandard.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptSaferMatrix_ByChapter.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptSaferMatrix_BySite.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptCorporate_Findings.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptEP_Assignment_Scoring_Summary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptEP_Assignment_Scoring_Detail.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptCMSCompliance_Summary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptCMSCompliance_Detail.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\TracerER\Reports\rptReportERTracerByQuestion_ByProgram.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportERTracerByQuestion_ByQuestion.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportERTracerByQuestion_BySite.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\TracerER\Reports\rptReportERTracerByQuestion_ByTracer.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CCMService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptEP_Not_Scored_In_Period_Detail.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptEP_Not_Scored_In_Period_Summary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptEP_Scoring_Report_Final_Mock_Survey_Detail.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptEP_Scoring_Report_Final_Mock_Survey_Summary.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Corporate\Reports\rptTaskReportDetail.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Corporate\Reports\rptTaskReportSummary.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Deploy|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Label="SlowCheetah">
+    <SlowCheetahToolsPath>$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\SlowCheetah.2.5.15\tools\))</SlowCheetahToolsPath>
+    <SlowCheetah_EnableImportFromNuGet Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='' ">true</SlowCheetah_EnableImportFromNuGet>
+    <SlowCheetah_NuGetImportPath Condition=" '$(SlowCheetah_NuGetImportPath)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\Properties\SlowCheetah\SlowCheetah.Transforms.targets ))</SlowCheetah_NuGetImportPath>
+    <SlowCheetahTargets Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='true' and Exists('$(SlowCheetah_NuGetImportPath)') ">$(SlowCheetah_NuGetImportPath)</SlowCheetahTargets>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49179</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49179/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties UseCdnSupport="False" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" Label="SlowCheetah" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

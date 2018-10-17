@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JCR.Reports.Areas.Corporate.ViewModels.AssignedUser>
+<div id="multisiteTaskAssignedBy">
+    <h6><b>Assigned By</b></h6>
+    <div class="margintop">
+
+        @(Html.Kendo().MultiSelect()
+          .Name("TaskAssignedBy")
+                  .DataTextField("FullName")
+                  .DataValueField("UserID")
+          .Placeholder("Select Assigned By")
+          .Filter(FilterType.Contains)
+          .HighlightFirst(true)
+          .BindTo(Model)
+        .AutoClose(false)
+         .Events(e =>
+                    {
+                        e.Select("onTaskAssignedBySelect");
+                    })
+                  .Value("-1")
+        )
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        addarrowtomultiselect("TaskAssignedBy");
+    });
+ 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

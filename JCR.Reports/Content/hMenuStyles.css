@@ -1,0 +1,295 @@
+﻿@charset "UTF-8";
+.navmenutab > a:hover {
+  /*background: #47a3da;*/
+  color: maroon; }
+
+div.mnuClear {
+  clear: both; }
+
+div.mnuHeader {
+  width: 100%;
+  background-color: #f3f7fa;
+  height: 70px;
+  z-index: 10; }
+
+div.mnuBreadCrumbTrail {
+  margin-left: 15px; }
+
+div.mnuH4 {
+  /* This style renders horizontal rule between menu and breadcrumb trail.*/
+  background-color: #1277ae;
+  height: 2px;
+  width: 100%;
+  /* width:1140px; */
+  margin-top: -3px !important;
+  /* Needs to be less than -20px;*/ }
+
+span.breadCrumbSubheader {
+  color: #015f85;
+  font-family: Arial Narrow;
+  font-size: 28px;
+  font-weight: bold; }
+
+span.breadCrumbMenuLink {
+  color: #777777;
+  font-family: Arial Narrow;
+  font-size: 24px; }
+
+.cbp-hrmenu {
+  width: 100%;
+  /*font-size: 100%; 	padding: 0; margin: 0;*/ }
+
+/* general ul style */
+.cbp-hrmenu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+/* first level ul style */
+.cbp-hrmenu > ul,
+.cbp-hrmenu .cbp-hrsub-inner {
+  width: 100%;
+  max-width: 90em;
+  /**margin: 0 auto;**/
+  padding: 0 .875em; }
+
+.cbp-hrmenu > ul > li {
+  display: inline-block; }
+
+.cbp-hrmenu > ul > li > a {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  /*font-weight: 700;*/
+  padding: 1em .81em;
+  color: #848282;
+  font-weight: bold;
+  display: inline-block;
+  /*border-top: 3px solid #fff;*/
+  text-decoration: none;
+  cursor: pointer; }
+
+.cbp-hrmenu > ul > li > a:hover {
+  /*background: #47a3da;*/
+  color: #8b2942; }
+
+/* This One */
+.cbp-hrmenu-active {
+  /*content: ' ▾';*/
+  border-bottom: 3px solid #8b2942 !important;
+  font-weight: bold;
+  color: #8b2942 !important;
+  margin-bottom: -3px; }
+
+/* This One */
+.cbp-hrmenu > ul > li:after {
+  clear: both;
+  display: block;
+  content: "";
+  position: relative;
+  width: 0;
+  left: 50%;
+  height: 3px;
+  -moz-transition: width 0.5s, left 0.5s;
+  -o-transition: width 0.5s, left 0.5s;
+  -webkit-transition: width 0.5s, left 0.5s;
+  transition: width 0.5s, left 0.5s; }
+
+.cbp-hrmenu > ul > li:hover:after, .cbp-hrmenu > ul > li:focus:after {
+  width: 100%;
+  left: 0;
+  margin-top: -51px; }
+
+/*--------------*/
+.cbp-hrmenu > ul > li.cbp-hropen a,
+.cbp-hrmenu > ul > li.cbp-hropen > a:hover {
+  color: maroon; }
+
+.navmenutab > a:hover {
+  color: maroon !important; }
+
+/*.cbp-hrmenu > ul > li.cbp-hropen a,
+    .cbp-hrmenu > ul > li.cbp-hropen > a:hover:after {
+        color: #fff;        
+    }*/
+.cbp-hrmenu .cbp-hrsub {
+  /* This style changes width and poistion of the dropdown menu when the hover takes effect. */
+  display: none;
+  position: absolute;
+  border: 1px solid maroon;
+  background: white;
+  margin-top: 4px;
+  /*background: #47a3da;
+	width: 100%;
+	left: 0;
+	box-shadow: 0 5px 10px #888888;*/ }
+
+.cbp-hropen .cbp-hrsub {
+  display: block;
+  padding-bottom: 1em;
+  color: maroon !important; }
+
+.cbp-hrmenu .cbp-hrsub-inner > div {
+  /*width:33%;*/
+  float: left;
+  padding: 0 2em 0; }
+
+.cbp-hrmenu .cbp-hrsub-inner:before,
+.cbp-hrmenu .cbp-hrsub-inner:after {
+  content: " ";
+  display: table; }
+
+.cbp-hrmenu .cbp-hrsub-inner:after {
+  clear: both; }
+
+.cbp-hrmenu .cbp-hrsub-inner > div a {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  padding-bottom: 5px; }
+
+.cbp-hrmenu .cbp-hrsub-inner > div a:hover {
+  color: maroon;
+  text-decoration: underline; }
+
+.cbp-hrsub h4 {
+  color: maroon;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  padding-bottom: 10px; }
+
+/* Examples for media queries */
+@media screen and (max-width: 52.75em) {
+  .cbp-hrmenu {
+    font-size: 80%; } }
+
+@media screen and (max-width: 43em) {
+  .cbp-hrmenu {
+    font-size: 120%;
+    border: none; }
+  .cbp-hrmenu > ul,
+  .cbp-hrmenu .cbp-hrsub-inner {
+    width: 100%;
+    padding: 0; }
+  .cbp-hrmenu .cbp-hrsub-inner {
+    padding: 0 2em;
+    font-size: 75%; }
+  .cbp-hrmenu .cbp-hrsub-inner > div {
+    width: 100%;
+    float: left; }
+  .cbp-hrmenu .cbp-hrsub {
+    position: absolute;
+    background: #47a3da;
+    width: 100%;
+    left: 0;
+    box-shadow: 0 5px 10px #888888; }
+  .cbp-hrmenu > ul > li {
+    display: block; }
+  .cbp-hrmenu > ul > li > a {
+    display: block; }
+  .cbp-hrmenu .cbp-hrsub {
+    position: relative; }
+  .cbp-hrsub h4 {
+    padding-top: 0.2em; } }
+
+@media screen and (max-width: 36em) {
+  .cbp-hrmenu .cbp-hrsub-inner > div {
+    width: 100%;
+    float: none;
+    padding: 0 2em; } }
+
+span.disabledLink {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  cursor: not-allowed;
+  color: gray;
+  margin: 0;
+  line-height: 20px; }
+
+div.newspaperLeft {
+  padding-right: 25px;
+  float: left; }
+
+div.newspaperRight {
+  padding-right: 25px;
+  float: right; }
+
+span.mnuMessage {
+  display: block;
+  /*height:40px;
+    line-height: 40px; 
+    background-color:#47A3C5;*/
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  color: #842323;
+  padding-top: 5px;
+  padding-left: 35px; }
+
+a.mnuWhatsNew {
+  color: #FFCC00 !important;
+  text-decoration: none;
+  cursor: pointer; }
+
+a.mnuLink {
+  cursor: pointer;
+  text-decoration: none;
+  color: black !important; }
+
+a.mnuLink:hover {
+  color: maroon !important; }
+
+div.verticalRule {
+  border-left: solid 1px #5b81b0;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 30px; }
+
+div.submenu {
+  margin-top: 15px;
+  margin-left: -25px; }
+
+h4.isSibling {
+  margin-top: 10px; }
+
+div.mockSurveyTitle {
+  float: right;
+  margin-right: 30px;
+  color: #015f85;
+  font-family: 'Arial Narrow';
+  font-size: x-large;
+  font-weight: normal; }
+
+.navArrowSpacing {
+  margin-left: 10px; }
+
+.glyphicon.glyphicon-one-fine-dot:before {
+  content: "●";
+  font-size: 13px;
+  position: relative;
+  top: -7px;
+  color: #166b8d;
+  /* Deep blue */
+  line-height: 10px;
+  /* color: #47a3da; Light blue */ }
+
+.cbp-hrsub:after, .cbp-hrsub:before {
+  bottom: 100%;
+  left: 5%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none; }
+
+.cbp-hrsub:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: white;
+  border-width: 10px;
+  margin-left: -10px; }
+
+.cbp-hrsub:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: #380202;
+  border-width: 11px;
+  margin-left: -11px; }
+

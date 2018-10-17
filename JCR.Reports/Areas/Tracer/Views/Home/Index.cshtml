@@ -1,0 +1,88 @@
+﻿@using JCR.Reports.Common;
+@{
+    ViewBag.Title = "Tracers";
+
+    var offsetClass = ViewBag.IsCMSProgram == true ? "col-xs-offset-1" : "col-xs-offset-2";
+}
+<div class="row">
+    <div class="col-xs-3 @offsetClass">
+        <strong>Tracer Report</strong>
+    </div>
+    @if (ViewBag.IsCMSProgram == true)
+    {
+        <div class="col-xs-1">
+            <strong>Applies To</strong>
+        </div>
+    }
+    <div class="col-xs-6">
+        <strong>Description</strong>
+    </div>
+</div>
+@{ string divreportid = ""; }
+@foreach (var reportList in Model.List)
+{
+    if(string.IsNullOrEmpty(reportList.ReportRoles) || reportList.ReportRoles.Contains(AppSession.RoleID.ToString()))
+    {
+        divreportid = "divreport" + reportList.ERReportID;
+
+        <div class="row margintopadd"   id=@divreportid>
+
+            <div class="col-xs-3 @offsetClass" >
+                <a href="/Tracer/@reportList.ReportSource/Index/@reportList.ERReportID">@reportList.ERReportName</a>
+                <span style="color: #C61835; font-weight: bold; margin-left: 5px;">@reportList.ReportChangeStatus</span>
+            </div>
+            @if (ViewBag.IsCMSProgram == true)
+            {
+                <div class="col-xs-1">
+                    <strong>@Html.Raw(reportList.ReportType)</strong>
+                </div>
+            }
+            <div class="col-xs-6" >
+                @Html.Raw(reportList.ERReportDescription)
+            </div>
+        </div>
+    }
+}
+@if (AppSession.RoleID != 5)
+{
+    <div class="row margintopadd" id=42>
+        <div class="col-xs-3 @offsetClass">
+            <a href="/Corporate/TaskReport/Index/42">Task Report</a>
+            <span style="color: #C61835; font-weight: bold; margin-left: 5px;">New</span>
+        </div>
+        @if (ViewBag.IsCMSProgram == true)
+        {
+            <div class="col-xs-1">
+                <strong>@Html.Raw("TJC & CMS")</strong>
+            </div>
+        }
+        <div class="col-xs-6">
+            @Html.Raw("Displays a summary or detailed view of Task Assignments (Open and/or Complete)")
+        </div>
+</div>
+}
+
+@if (ViewBag.ShowCMSReport == false)
+{
+    <script>
+    $("#divreport10").css("display", "none");
+    </script>
+}
+else
+{ 
+    <script>
+        $("#divreport10").css("display", "block");
+    </script>
+}
+
+@Html.Hidden("Command")
+@Html.Hidden("SelectedReportName")
+
+<script>
+    $(document).ready(function () {
+        var matchNotFound = false
+        if (hMenuBuilder.renderBreadCrumbTrail() == matchNotFound) {
+            vMenuBuilder.renderBreadCrumbTrail();
+        }
+    });
+</script>
